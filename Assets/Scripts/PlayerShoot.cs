@@ -1,13 +1,15 @@
 using UnityEngine;
+using Zenject;
 
 public class PlayerShoot : ManagedBehaviour
 {
+    [Inject] private BulletPool _bulletPool;
     [SerializeField] private float cooldown = 0.2f;
     [SerializeField] private float instantiateOffset = 0.2f;
     [SerializeField] private GameObject bulletPrefab;
     private float _lastTime;
     private bool _mayShoot;
-    public override void ManagedUpdate()
+    protected override void ManagedUpdate()
     {
         _lastTime += Time.deltaTime;
         if ((Input.GetMouseButtonDown(0) || Input.GetMouseButton(0)) && _lastTime >= cooldown)
@@ -19,7 +21,9 @@ public class PlayerShoot : ManagedBehaviour
 
     private void Shoot()
     {
+        var obj = _bulletPool.Get();
         Vector2 spawnPos = (Vector2)transform.position + (Vector2)transform.up * instantiateOffset;
-        var obj = Instantiate(bulletPrefab,spawnPos,transform.localRotation);
+        obj.transform.position = spawnPos;
+        obj.transform.rotation = transform.localRotation;
     }
 }

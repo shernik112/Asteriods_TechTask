@@ -4,11 +4,12 @@ using UnityEngine;
 public class AsteroidBehaviour : BaseEnemy
 {
     [SerializeField] private float multiplierBoost;
-    private float _moveSpeed;
+    [SerializeField] private float moveSpeed;
+    private float _currentSpeed;
     private int _sizeLevel = 1;
-    public override void InitParams()
+    public override void InitParams(int size)
     {
-        
+        _currentSpeed = moveSpeed * multiplierBoost * size;
     }
 
     protected override void HitBullet()

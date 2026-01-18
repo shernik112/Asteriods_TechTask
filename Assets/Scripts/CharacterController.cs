@@ -17,14 +17,14 @@ public class CharacterController : ManagedBehaviour
         _rg = GetComponent<Rigidbody2D>();
     }
 
-    public override void ManagedUpdate()
+    protected override void ManagedUpdate()
     {
         if(Input.GetKeyDown(KeyCode.E)) _astroSpawn.CreateAsteroid(1);
         _input = new Vector2(Input.GetAxisRaw("Horizontal"), Mathf.Clamp01(Input.GetAxisRaw("Vertical")));
         _input.Normalize(); 
     }
     
-    public override void  ManagedFixedUpdate()
+    protected override void  ManagedFixedUpdate()
     {
         _rg.angularVelocity = Mathf.MoveTowards(_rg.angularVelocity, -_input.x * rotateSpeed, rotateAcceleration * Time.fixedDeltaTime);
         Vector2 targetVelocity = transform.up * _input.y * moveSpeed;

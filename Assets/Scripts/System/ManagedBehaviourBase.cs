@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class ManagedBehaviourBasee : MonoBehaviour
+public class ManagedBehaviourBase : MonoBehaviour
 {
-    public virtual void Update(){}
-    public virtual void LateUpdate() {}
-    public virtual void  FixedUpdate(){}
+    protected virtual void Update(){}
+    protected virtual void LateUpdate() {}
+    protected virtual void  FixedUpdate(){}
     public virtual void Awake(){}
 }
