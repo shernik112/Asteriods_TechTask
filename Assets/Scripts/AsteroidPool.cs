@@ -1,13 +1,14 @@
 using UnityEngine;
 using Zenject;
 
-public class BulletPool : ObjectPool
+public class AsteroidPool : ObjectPool
 {
-    [Inject] private GameObject _bulletPrefab;
+    [Inject] private GameObject _asteroidPrefab;
 
     public override void ManagedInintialize()
     {
-        _poolPrefab = _bulletPrefab;
+        _poolPrefab = _asteroidPrefab;
         base.ManagedInintialize();
     }
 }
+

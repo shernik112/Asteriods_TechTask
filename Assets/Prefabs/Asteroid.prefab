@@ -210,3 +210,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   multiplierBoost: 1.5
+  moveSpeed: 10

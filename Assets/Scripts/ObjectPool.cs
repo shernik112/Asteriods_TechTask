@@ -6,7 +6,7 @@ public class ObjectPool : ManagedBehaviour
 {
     private PrefabInstaller _installer;
     private int _startCount = 5;
-    protected GameObject PoolPrefab;
+    protected GameObject _poolPrefab;
     private Queue<GameObject> _pool = new Queue<GameObject>();
 
     public override void ManagedInintialize()
@@ -18,7 +18,7 @@ public class ObjectPool : ManagedBehaviour
 
     private void CreateObject()
     {
-        var obj = Instantiate(PoolPrefab, transform);
+        var obj = Instantiate(_poolPrefab, transform);
         if(_installer != null)  _installer.InjectGo(obj);
         obj.SetActive(false);
         _pool.Enqueue(obj);

@@ -11,12 +11,16 @@ public class PrefabInstaller : MonoInstaller
     public override void InstallBindings()
     {
         Container.Bind<CharacterController>().FromComponentInNewPrefab(playerPrefab).AsSingle().NonLazy();
-        Container.Bind<GameObject>().FromInstance(asteroidPrefab).WhenInjectedInto<AsteroidsSpawner>();
+        
         Container.Bind<AsteroidsSpawner>().FromNewComponentOnNewGameObject().UnderTransform(rootHandlers)
             .AsSingle().NonLazy();
         
         Container.Bind<GameObject>().FromInstance(bulletPrefab).WhenInjectedInto<BulletPool>();
         Container.Bind<BulletPool>().FromNewComponentOnNewGameObject().UnderTransform(rootHandlers)
+            .AsSingle().NonLazy();
+
+        Container.Bind<GameObject>().FromInstance(asteroidPrefab).WhenInjectedInto<AsteroidPool>();
+        Container.Bind<AsteroidPool>().FromNewComponentOnNewGameObject().UnderTransform(rootHandlers)
             .AsSingle().NonLazy();
     }
 

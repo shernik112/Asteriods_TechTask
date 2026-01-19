@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using Zenject;
 
@@ -17,9 +16,10 @@ public class Bullet : ManagedBehaviour
         _rg.linearVelocity = transform.up * moveSpeed;
     }
 
-    private void OnCollisionEnter(Collision other)
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        
+        Debug.Log($"{typeof(Bullet)} bullet hit enemy");
+        _bulletPool.Return(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D other)

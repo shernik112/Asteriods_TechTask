@@ -5,7 +5,7 @@ using Random = UnityEngine.Random;
 public class AsteroidsSpawner : ManagedBehaviour
 {
         [Inject]
-        private GameObject _prefabAsteroid;
+        private AsteroidPool _pool;
 
         private readonly float _rotateOffset = 30f;
         private readonly float _posOffset = 0.5f;
@@ -36,7 +36,8 @@ public class AsteroidsSpawner : ManagedBehaviour
                 for (int i = 0; i < count; i++)
                 {
                         var pos = GetRandomPos();
-                        var obj = Instantiate(_prefabAsteroid);
+                        var obj =  _pool.Get();
+                        obj.transform.localScale = Vector3.one;
                         obj.transform.position = pos;
                         RotateAsteroid(obj);
                 }

@@ -4,7 +4,6 @@ public abstract class BaseEnemy : ManagedBehaviour
 {
     protected abstract void HitBullet();
     protected abstract void HitLaser();
-    public abstract void InitParams(int size);
     private void OnCollisionEnter(Collision other)
     {
         if(other.gameObject.CompareTag("PlayerBullet")) HitBullet();
