@@ -37,7 +37,7 @@ public class AsteroidsSpawner : ManagedBehaviour
                 {
                         var pos = GetRandomPos();
                         var obj =  _pool.Get();
-                        obj.transform.localScale = Vector3.one;
+                        obj.GetComponent<AsteroidBehaviour>().SetDefaultParametrs();    
                         obj.transform.position = pos;
                         RotateAsteroid(obj);
                 }
