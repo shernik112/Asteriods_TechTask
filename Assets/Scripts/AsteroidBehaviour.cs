@@ -8,9 +8,10 @@ public class AsteroidBehaviour : BaseEnemy
     private static bool _firstAstroidHit;
     [Inject] private AsteroidPool _pool;
     [SerializeField] private float createRotate;
+    private readonly float _lowerRotate = 40f;
     public float multiplierBoost;
     private MoveForward _moveForward;
-    public int _sizeLevel = 1;
+    private int _sizeLevel = 1;
     private Vector3 _intialScale;
     public override void ManagedInintialize()
     {
@@ -38,8 +39,9 @@ public class AsteroidBehaviour : BaseEnemy
     }
 
     private void IniteAsteroid()
-    {   
-        var randomRotate = Random.Range(-createRotate, createRotate);
+    {
+        var mag = Random.Range(_lowerRotate, createRotate);
+        var randomRotate = Random.value < 0.5f ? mag : -mag;
         var obj = _pool.Get();
         obj.GetComponent<AsteroidBehaviour>().InitParams(_sizeLevel + 1);
         obj.transform.position = transform.position;
@@ -54,6 +56,7 @@ public class AsteroidBehaviour : BaseEnemy
     {
         _moveForward._currentSpeed = _moveForward.defaultSpeed;
         transform.localScale = Vector3.one;
+        transform.rotation = Quaternion.Euler(0f, 0f, 0f);
         _sizeLevel = 1;
     }
 }
