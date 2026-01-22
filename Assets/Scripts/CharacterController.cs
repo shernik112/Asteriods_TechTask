@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Zenject;
 
@@ -11,7 +12,8 @@ public class CharacterController : ManagedBehaviour
     [SerializeField] private float rotateAcceleration;
     private Vector2 _input;
     private Rigidbody2D _rg;
-
+    public event Action OnHitPlayer;
+    
     public override void ManagedInintialize()
     {
         _rg = GetComponent<Rigidbody2D>();
@@ -23,7 +25,13 @@ public class CharacterController : ManagedBehaviour
         _input = new Vector2(Input.GetAxisRaw("Horizontal"), Mathf.Clamp01(Input.GetAxisRaw("Vertical")));
         _input.Normalize(); 
     }
-    
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if(other.gameObject.CompareTag("Enemy"))
+            OnHitPlayer.Invoke();
+    }
+
     protected override void  ManagedFixedUpdate()
     {
         _rg.angularVelocity = Mathf.MoveTowards(_rg.angularVelocity, -_input.x * rotateSpeed, rotateAcceleration * Time.fixedDeltaTime);
