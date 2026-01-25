@@ -2,7 +2,7 @@
 public class ManagedBehaviour : ManagedBehaviourBase
 {
     public static ReferenseSetToggle PauseAll = new ReferenseSetToggle();
-    public virtual bool UpdateWhenPause { get { return false; } }
+    protected virtual bool UpdateWhenPause => false;
     private bool _initialized = false;
     protected virtual void ManagedUpdate(){}
     protected virtual void ManagedLateUpdate(){}
