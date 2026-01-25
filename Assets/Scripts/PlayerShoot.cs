@@ -4,9 +4,8 @@ using Zenject;
 public class PlayerShoot : ManagedBehaviour
 {
     [Inject] private BulletPool _bulletPool;
-    [SerializeField] private float cooldown = 0.2f;
-    [SerializeField] private float instantiateOffset = 0.2f;
-    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private float cooldown = default;
+    [SerializeField] private float instantiateOffset = default;
     private float _lastTime;
     private bool _mayShoot;
     protected override void ManagedUpdate()

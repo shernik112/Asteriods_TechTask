@@ -5,11 +5,11 @@ using Zenject;
 [RequireComponent(typeof(Rigidbody2D))]
 public class CharacterController : ManagedBehaviour
 {
-    [Inject] private AsteroidsSpawner _astroSpawn;
-    [SerializeField] private float moveSpeed;
-    [SerializeField] private float speedAcceleration;
-    [SerializeField] private float rotateSpeed;
-    [SerializeField] private float rotateAcceleration;
+    [Inject] private EnemiesSpawner _astroSpawn;
+    [SerializeField] private float moveSpeed = default;
+    [SerializeField] private float speedAcceleration = default;
+    [SerializeField] private float rotateSpeed = default;
+    [SerializeField] private float rotateAcceleration = default;
     private Vector2 _input;
     private Rigidbody2D _rg;
     public event Action OnHitPlayer;
@@ -29,7 +29,7 @@ public class CharacterController : ManagedBehaviour
     private void OnCollisionEnter2D(Collision2D other)
     {
         if(other.gameObject.CompareTag("Enemy"))
-            OnHitPlayer.Invoke();
+            OnHitPlayer?.Invoke();
     }
 
     protected override void  ManagedFixedUpdate()

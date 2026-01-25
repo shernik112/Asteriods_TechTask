@@ -3,7 +3,7 @@ using UnityEngine;
 public class MoveForward : ManagedBehaviour
 {
     public float defaultSpeed = 1.2f;
-    public float _currentSpeed;
+    [HideInInspector]public float _currentSpeed;
     public override void ManagedInintialize()
     {
         _currentSpeed = defaultSpeed;

@@ -4,7 +4,7 @@ using Zenject;
 public class Bullet : ManagedBehaviour
 {
     [Inject] private BulletPool _bulletPool;
-    [SerializeField] private float moveSpeed;
+    [SerializeField] private float moveSpeed = default;
     private Rigidbody2D _rg;
     public override void ManagedInintialize()
     {

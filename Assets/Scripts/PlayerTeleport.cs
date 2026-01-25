@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerTeleport : ManagedBehaviour
 {
-    [SerializeField] private bool isHorizonWall;
+    [SerializeField] private bool isHorizonWall = default;
     private readonly float _tpOffset = 0.35f;
     protected virtual void OnTriggerEnter2D(Collider2D other)
     {

@@ -4,16 +4,18 @@ using Zenject;
 
 public class PrefabInstaller : MonoInstaller
 {
-    [SerializeField] private GameObject playerPrefab;
-    [SerializeField] private GameObject asteroidPrefab;
-    [SerializeField] private GameObject bulletPrefab;
-    [SerializeField] private Transform rootHandlers;
+    [SerializeField] private GameObject playerPrefab = default;
+    [SerializeField] private GameObject asteroidPrefab = default;
+    [SerializeField] private GameObject ufoPrefab = default;
+    [SerializeField] private GameObject bulletPrefab = default;
+    [SerializeField] private Transform rootHandlers = default;
 
     private Type[] _singleBehaviours = new Type[]
     {
-        typeof(AsteroidsSpawner),
+        typeof(EnemiesSpawner),
         typeof(BlockCursor),
         typeof(BulletPool),
+        typeof(UFOPool),
         typeof(AsteroidPool),
         typeof(HandlerGameCondition)
     };
@@ -30,17 +32,8 @@ public class PrefabInstaller : MonoInstaller
         
         Container.Bind<GameObject>().FromInstance(bulletPrefab).WhenInjectedInto<BulletPool>();
         Container.Bind<GameObject>().FromInstance(asteroidPrefab).WhenInjectedInto<AsteroidPool>();
-        
-        // Container.Bind<AsteroidsSpawner>().FromNewComponentOnNewGameObject().UnderTransform(rootHandlers)
-        //     .AsSingle().NonLazy();
-        // Container.Bind<BlockCursor>().FromNewComponentOnNewGameObject().UnderTransform(rootHandlers)
-        //     .AsSingle().NonLazy();
-        //
-        // Container.Bind<BulletPool>().FromNewComponentOnNewGameObject().UnderTransform(rootHandlers)
-        //     .AsSingle().NonLazy();
-        //
-        // Container.Bind<AsteroidPool>().FromNewComponentOnNewGameObject().UnderTransform(rootHandlers)
-        //     .AsSingle().NonLazy();
+        Container.Bind<GameObject>().FromInstance(ufoPrefab).WhenInjectedInto<UFOPool>();
+
     }
 
     public void InjectGo(GameObject obj)

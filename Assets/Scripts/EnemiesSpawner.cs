@@ -2,10 +2,10 @@ using UnityEngine;
 using Zenject;
 using Random = UnityEngine.Random;
 
-public class AsteroidsSpawner : ManagedBehaviour
+public class EnemiesSpawner : ManagedBehaviour
 {
-        [Inject]
-        private AsteroidPool _pool;
+        [Inject] private AsteroidPool _asteroidPool;
+        [Inject] private UFOPool _ufoPool;
 
         private readonly float _rotateOffset = 30f;
         private readonly float _posOffset = 0.5f;
@@ -26,17 +26,21 @@ public class AsteroidsSpawner : ManagedBehaviour
                 }
         }
 
-        public void CreateAsteroid(int count)
-        {
-                SetPointCreate(count);
-        }
+        public void CreateAsteroid(int count) => SetPointCreate(count);
 
+        public void CreateUFO()
+        {
+                var pos = GetRandomPos();
+                var obj = _ufoPool.Get();
+                obj.transform.position = pos;
+        }
+        
         private void SetPointCreate(float count)
         {
                 for (int i = 0; i < count; i++)
                 {
                         var pos = GetRandomPos();
-                        var obj =  _pool.Get();
+                        var obj =  _asteroidPool.Get();
                         obj.GetComponent<AsteroidBehaviour>().SetDefaultParametrs();    
                         obj.transform.position = pos;
                         RotateAsteroid(obj);
