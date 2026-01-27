@@ -81,7 +81,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.8490566, g: 0.8490566, b: 0.8490566, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -103,7 +103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98f311f4de2e8ad469f34e456f45cc8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultSpeed: 1.2
+  defaultSpeed: 2
   _currentSpeed: 0
 --- !u!60 &-6926955192968814444
 PolygonCollider2D:
@@ -211,5 +211,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f2a043e372aa334c8df09c2433d6656, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  createRotate: 80
-  multiplierBoost: 1.2
+  multiplierBoost: 1.1
+  countStage: 2

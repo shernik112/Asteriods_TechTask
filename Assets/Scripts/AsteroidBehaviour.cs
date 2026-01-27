@@ -5,11 +5,11 @@ using Vector3 = UnityEngine.Vector3;
 
 public class AsteroidBehaviour : BaseEnemy
 {
-    private static bool _firstAstroidHit;
+    [SerializeField] private float multiplierBoost = default;
+    [SerializeField] private int countStage = default;
     [Inject] private AsteroidPool _pool;
     private float _createRotate = 50f;
     private readonly float _lowerRotate = 20f;
-    public float multiplierBoost;
     private MoveForward _moveForward;
     private int _sizeLevel = 1;
     private Vector3 _intialScale;
@@ -22,13 +22,13 @@ public class AsteroidBehaviour : BaseEnemy
     public void InitParams(int size)
     {
         _sizeLevel = size;
-        _moveForward._currentSpeed = _moveForward.defaultSpeed * multiplierBoost * size;
+        _moveForward._currentSpeed = _moveForward.defaultSpeed + multiplierBoost * size;
         transform.localScale =  _intialScale / size;
     }
 
     protected override void HitBullet()
     {
-        if (_sizeLevel >= 3)
+        if (_sizeLevel >= countStage)
         {
             _pool.Return(gameObject); 
             return;

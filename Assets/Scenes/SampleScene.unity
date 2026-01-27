@@ -809,6 +809,7 @@ GameObject:
   - component: {fileID: 744602025}
   - component: {fileID: 744602024}
   - component: {fileID: 744602026}
+  - component: {fileID: 744602027}
   m_Layer: 5
   m_Name: GameOverPanel
   m_TagString: Untagged
@@ -886,6 +887,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ecb3b7b9be12424994a18b4f2675c24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  showTime: 0.4
+--- !u!225 &744602027
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 744602022}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &789198230
 GameObject:
   m_ObjectHideFlags: 0
@@ -1429,7 +1443,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1310764852
 MonoBehaviour:
   m_ObjectHideFlags: 0
