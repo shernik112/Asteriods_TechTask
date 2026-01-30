@@ -8,21 +8,21 @@ public enum GameCondition
 public class HandlerGameCondition : ManagedBehaviour
 {
     [Inject] private BlockCursor _blockCursor;
-    private GameCondition _currentGameCondition = GameCondition.Game;
 
     public GameCondition GetGameCondition
     {
-        get { return _currentGameCondition; }
+        get { return _currenGameCondition; }
         set
         {
-            if (_currentGameCondition != value)
+            if (_currenGameCondition != value)
             {
-                _currentGameCondition = value;
+                _currenGameCondition = value;
                 HandleNewCondition();
             }
             
         }
     }
+    private GameCondition _currenGameCondition = GameCondition.Game;
 
     private void Start()
     {
@@ -31,7 +31,7 @@ public class HandlerGameCondition : ManagedBehaviour
 
     private void HandleNewCondition()
     {
-        if (_currentGameCondition == GameCondition.Game)
+        if (_currenGameCondition == GameCondition.Game)
             _blockCursor.LockCursor.Add(this);
         else
             _blockCursor.LockCursor.Remove(this);

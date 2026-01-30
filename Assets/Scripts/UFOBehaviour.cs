@@ -1,12 +1,14 @@
 using UnityEngine;
+using Zenject;
 
-public class UfoBehaviour : BaseEnemy<UFOPool>
+public class UFOBehaviour : BaseEnemy<UFOPool>
 {
+    [Inject] private CharacterController _chController;
+    [Inject] private UFOPool _ufoPool;
     [SerializeField] private float speed = default;
-    
     protected override void ManagedUpdate()
     {
-        Vector2 posPlayer = ChController.gameObject.transform.position;
+        Vector2 posPlayer = _chController.gameObject.transform.position;
         var targetDir = posPlayer - (Vector2)transform.position;
         targetDir.Normalize();
         transform.Translate(targetDir * speed * Time.deltaTime, Space.World);
@@ -14,11 +16,11 @@ public class UfoBehaviour : BaseEnemy<UFOPool>
 
     protected override void HitBullet()
     {
-        Pool.Return(gameObject);
+        _ufoPool.Return(gameObject);
     }
 
     protected override void HitLaser()
     {
-        Pool.Return(gameObject);
+        _ufoPool.Return(gameObject);
     }
 }

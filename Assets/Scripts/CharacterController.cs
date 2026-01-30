@@ -44,6 +44,7 @@ public class CharacterController : ManagedBehaviour
 
     private void SetDefaultValues()
     {
+        gameObject.SetActive(false);
         transform.position = new Vector2(0, 0);
         transform.rotation = Quaternion.Euler(0, 0, 0);
     }
