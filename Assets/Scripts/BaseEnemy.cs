@@ -25,6 +25,7 @@ public abstract class BaseEnemy<Tpool> : ManagedBehaviour
 
     private void ReturnSelf()
     {
+        Debug.Log($"{typeof(BaseEnemy<>)} ReturnSelf ");
         Pool.Return(gameObject);
     }
     private void OnCollisionEnter2D(Collision2D other)

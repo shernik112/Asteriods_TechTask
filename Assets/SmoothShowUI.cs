@@ -14,14 +14,18 @@ public class SmoothShowUI : ManagedBehaviour
         _cg = GetComponent<CanvasGroup>();
     }
 
-    private void OnEnable() => _chController.OnHitPlayer += SmoothShow;
+    private void OnEnable() => _chController.OnHitPlayer += ShowOnHitPlayer;
 
-    private void OnDisable() => _chController.OnHitPlayer -= SmoothShow;
+    private void OnDisable() => _chController.OnHitPlayer -= ShowOnHitPlayer;
 
+    private void ShowOnHitPlayer()
+    {
+        _isShowNow = true;
+        SmoothShow();
+    }
     private void SmoothShow()
     {
         Debug.Log($"{typeof(SmoothShowUI)} SmoothShow");
-        _isShowNow = !_isShowNow;
         var startAlpha = _cg.alpha;
         var targetAlpha = _isShowNow ? 1f : 0f;
         _cg.interactable = _isShowNow;

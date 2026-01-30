@@ -17,10 +17,16 @@ public class PrefabInstaller : MonoInstaller
         typeof(BulletPool),
         typeof(UFOPool),
         typeof(AsteroidPool),
-        typeof(HandlerGameCondition)
+        typeof(HandlerGameCondition),
+        typeof(PauseHandler)
     };
     public override void InstallBindings()
     {
+        Container.Bind<CharacterController>().FromComponentInNewPrefab(playerPrefab).AsSingle().NonLazy();
+        
+        Container.Bind<GameObject>().FromInstance(bulletPrefab).WhenInjectedInto<BulletPool>();
+        Container.Bind<GameObject>().FromInstance(asteroidPrefab).WhenInjectedInto<AsteroidPool>();
+        Container.Bind<GameObject>().FromInstance(ufoPrefab).WhenInjectedInto<UFOPool>();
         for(var i = 0; i < _singleBehaviours.Length; i++)
         {
             var behaviour = _singleBehaviours[i];
@@ -28,11 +34,6 @@ public class PrefabInstaller : MonoInstaller
                 .AsSingle().NonLazy();
         }
         
-        Container.Bind<CharacterController>().FromComponentInNewPrefab(playerPrefab).AsSingle().NonLazy();
-        
-        Container.Bind<GameObject>().FromInstance(bulletPrefab).WhenInjectedInto<BulletPool>();
-        Container.Bind<GameObject>().FromInstance(asteroidPrefab).WhenInjectedInto<AsteroidPool>();
-        Container.Bind<GameObject>().FromInstance(ufoPrefab).WhenInjectedInto<UFOPool>();
 
     }
 

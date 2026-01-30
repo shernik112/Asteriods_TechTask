@@ -866,7 +866,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 100
 --- !u!222 &744602025
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -887,7 +887,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ecb3b7b9be12424994a18b4f2675c24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showTime: 0.4
+  showTime: 0.25
 --- !u!225 &744602027
 CanvasGroup:
   m_ObjectHideFlags: 0

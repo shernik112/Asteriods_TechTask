@@ -104,7 +104,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDamping: 0.1
+  m_LinearDamping: 0.2
   m_AngularDamping: 0.3
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -198,4 +198,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldown: 0.25
   instantiateOffset: 0.6
-  bulletPrefab: {fileID: 1061576356628838479, guid: 03167c7ca000e5e459ef335ed3caf741, type: 3}

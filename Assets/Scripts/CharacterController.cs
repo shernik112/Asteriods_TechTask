@@ -27,8 +27,12 @@ public class CharacterController : ManagedBehaviour
     private void OnCollisionEnter2D(Collision2D other)
     {
         Debug.Log($"{typeof(CharacterController)} OnCollisionEnter");
-        if(other.gameObject.CompareTag("Enemy"))
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            Debug.Log($"Invoke OnHitPlayer; subscribers = {(OnHitPlayer == null ? 0 : OnHitPlayer.GetInvocationList().Length)}");
             OnHitPlayer?.Invoke();
+            SetDefaultValues();
+        } 
     }
 
     protected override void  ManagedFixedUpdate()
@@ -36,5 +40,11 @@ public class CharacterController : ManagedBehaviour
         _rg.angularVelocity = Mathf.MoveTowards(_rg.angularVelocity, -_input.x * rotateSpeed, rotateAcceleration * Time.fixedDeltaTime);
         Vector2 targetVelocity = transform.up * _input.y * moveSpeed;
         _rg.linearVelocity = Vector2.MoveTowards(_rg.linearVelocity, targetVelocity, speedAcceleration * Time.fixedDeltaTime);
+    }
+
+    private void SetDefaultValues()
+    {
+        transform.position = new Vector2(0, 0);
+        transform.rotation = Quaternion.Euler(0, 0, 0);
     }
 }
