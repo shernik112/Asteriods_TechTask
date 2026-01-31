@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 public class PrefabInstaller : MonoInstaller
@@ -9,6 +10,7 @@ public class PrefabInstaller : MonoInstaller
     [SerializeField] private GameObject ufoPrefab = default;
     [SerializeField] private GameObject bulletPrefab = default;
     [SerializeField] private Transform rootHandlers = default;
+    [SerializeField] private RestartInvoke restartButton = default;
 
     private Type[] _singleBehaviours = new Type[]
     {
@@ -23,7 +25,7 @@ public class PrefabInstaller : MonoInstaller
     public override void InstallBindings()
     {
         Container.Bind<CharacterController>().FromComponentInNewPrefab(playerPrefab).AsSingle().NonLazy();
-        
+        Container.Bind<RestartInvoke>().FromInstance(restartButton).AsSingle().NonLazy();
         Container.Bind<GameObject>().FromInstance(bulletPrefab).WhenInjectedInto<BulletPool>();
         Container.Bind<GameObject>().FromInstance(asteroidPrefab).WhenInjectedInto<AsteroidPool>();
         Container.Bind<GameObject>().FromInstance(ufoPrefab).WhenInjectedInto<UFOPool>();
