@@ -8,13 +8,11 @@ public class PlayerShoot : ManagedBehaviour
     [SerializeField] private float instantiateOffset = default;
     private float _lastTime;
     private bool _mayShoot;
-    private SpriteRenderer _spriteRenderer;
-    public override void ManagedInintialize() => _spriteRenderer = GetComponent<SpriteRenderer>();
 
     protected override void ManagedUpdate()
     {
         _lastTime += Time.deltaTime;
-        if ((Input.GetMouseButtonDown(0) || Input.GetMouseButton(0)) && _lastTime >= cooldown && _spriteRenderer.enabled)
+        if ((Input.GetMouseButtonDown(0) || Input.GetMouseButton(0)) && _lastTime >= cooldown)
         {
             Shoot();
             _lastTime = 0f;

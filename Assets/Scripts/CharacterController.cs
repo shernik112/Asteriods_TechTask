@@ -27,11 +27,8 @@ public class CharacterController : ManagedBehaviour
 
     protected override void ManagedUpdate()
     {
-        if (_spriteRenderer.enabled)
-        {
-            _input = new Vector2(Input.GetAxisRaw("Horizontal"), Mathf.Clamp01(Input.GetAxisRaw("Vertical")));
-            _input.Normalize(); 
-        }
+        _input = new Vector2(Input.GetAxisRaw("Horizontal"), Mathf.Clamp01(Input.GetAxisRaw("Vertical")));
+        _input.Normalize(); 
     }
 
     private void OnCollisionEnter2D(Collision2D other)

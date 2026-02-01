@@ -39,7 +39,7 @@ public class HandlerGameCondition : ManagedBehaviour
         }
         else
         {
-            PauseAll.Remove(this);
+            PauseAll.Add(this);
             _blockCursor.LockCursor.Remove(this);
         }
     }

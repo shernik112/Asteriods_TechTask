@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Zenject;
 using Random = UnityEngine.Random;
@@ -14,8 +15,9 @@ public class FloatRange
 
 public class EnemiesSpawner : ManagedBehaviour
 {
-        [Inject] private AsteroidPool _asteroidPool;
-        [Inject] private UFOPool _ufoPool;
+        private AsteroidPool _asteroidPool;
+        private UFOPool _ufoPool;
+        private RestartInvoke _restartInvoke;
         private FloatRange _rangeTimeAsteroid = new FloatRange(5f,20f);
         private FloatRange _rangeTimeUfo = new FloatRange(10f,25f);
 
@@ -31,6 +33,27 @@ public class EnemiesSpawner : ManagedBehaviour
 
         private float _currentRangeAsteroid;
         private float _currentRangeUfo;
+
+        [Inject]
+        public void Construct(AsteroidPool asteroidPool, UFOPool ufoPool, RestartInvoke restartInvoke)
+        {
+                _asteroidPool = asteroidPool;
+                _ufoPool = ufoPool;
+                _restartInvoke = restartInvoke;
+        }
+
+        private void OnEnable() => _restartInvoke.OnRestartGame += StartCreate;
+        private void OnDisable() => _restartInvoke.OnRestartGame -= StartCreate;
+
+        private void StartCreate()
+        {
+                SetPointCreate(_startCountAsteroids);
+                _lastTimeAsteroid = default;
+                _lastTimeUfo = default;
+                _currentRangeAsteroid = GetFloatRange(_rangeTimeAsteroid);
+                _currentRangeUfo = GetFloatRange(_rangeTimeUfo);
+        }
+
         private void Start()
         {
                 var cam = Camera.main;
@@ -41,9 +64,7 @@ public class EnemiesSpawner : ManagedBehaviour
                         _halfHeight += _posOffset;
                         _halfWidth += _posOffset;
                 }
-                SetPointCreate(_startCountAsteroids);
-                _currentRangeAsteroid = GetFloatRange(_rangeTimeAsteroid);
-                _currentRangeUfo = GetFloatRange(_rangeTimeUfo);
+                StartCreate();
         }
 
         protected override void ManagedUpdate()
