@@ -2,11 +2,24 @@ using Zenject;
 
 public class PauseHandler : ManagedBehaviour
 {
-    [Inject] private CharacterController _chController;
+    private CharacterController _chController;
+    private RestartInvoke _restartInvoke;
 
-    private void OnEnable() => _chController.OnHitPlayer += SetPause;
+    public void Construct(CharacterController chController, RestartInvoke restartInvoke)
+    {
+        _chController = chController;
+        _restartInvoke = restartInvoke;
+    }
 
-    private void OnDisable() => _chController.OnHitPlayer -= SetPause;
+    private void OnEnable()
+    {
+        _chController.OnHitPlayer += SetPause;
+    }
+
+    private void OnDisable()
+    {
+        _chController.OnHitPlayer -= SetPause;
+    }
 
     private void SetPause() => PauseAll.Add(this);
 

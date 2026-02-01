@@ -9,7 +9,7 @@ public class HandlerGameCondition : ManagedBehaviour
 {
     [Inject] private BlockCursor _blockCursor;
 
-    public GameCondition GetGameCondition
+    public GameCondition GameCondition
     {
         get { return _currenGameCondition; }
         set
@@ -22,6 +22,7 @@ public class HandlerGameCondition : ManagedBehaviour
             
         }
     }
+    
     private GameCondition _currenGameCondition = GameCondition.Game;
 
     private void Start()
@@ -32,8 +33,14 @@ public class HandlerGameCondition : ManagedBehaviour
     private void HandleNewCondition()
     {
         if (_currenGameCondition == GameCondition.Game)
+        {
+            PauseAll.Remove(this);
             _blockCursor.LockCursor.Add(this);
+        }
         else
+        {
+            PauseAll.Remove(this);
             _blockCursor.LockCursor.Remove(this);
+        }
     }
 }
