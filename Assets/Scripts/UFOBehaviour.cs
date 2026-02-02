@@ -14,6 +14,7 @@ public class UFOBehaviour : BaseEnemy<UFOPool>
 
     protected override void HitBullet()
     {
+        
         Pool.Return(gameObject);
     }
 

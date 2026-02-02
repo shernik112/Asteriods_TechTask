@@ -5,6 +5,7 @@ using Vector3 = UnityEngine.Vector3;
 
 public class AsteroidBehaviour : BaseEnemy<AsteroidPool>
 {
+    // [Inject] private HandlerScore _handlerScore;
     [SerializeField] private float multiplierBoost = default;
     [SerializeField] private int countStage = default;
     private float _createRotate = 50f;
@@ -27,6 +28,7 @@ public class AsteroidBehaviour : BaseEnemy<AsteroidPool>
 
     protected override void HitBullet()
     {
+        // _handlerScore.CountDefeatedEnemy(typeof(AsteroidBehaviour));
         if (_sizeLevel >= countStage)
         {
             Pool.Return(gameObject); 

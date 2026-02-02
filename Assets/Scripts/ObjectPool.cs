@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using System.ComponentModel;
 using UnityEngine;
+using Zenject;
 
 public class ObjectPool : ManagedBehaviour
 {
@@ -28,7 +28,6 @@ public class ObjectPool : ManagedBehaviour
     {
         if(_pool.Count == 0)
             CreateObject();
-        
         var obj = _pool.Dequeue();
         obj.SetActive(true);
         return obj;

@@ -1,9 +1,11 @@
 using System;
 using TMPro;
 using UnityEngine;
+using Zenject;
 
 public class HandlerScore : ManagedBehaviour
 {
+    [Inject] private CharacterController _chController;
     [SerializeField] private int countAsteroid;
     [SerializeField] private int countUfo;
     private int _count;
@@ -16,14 +18,28 @@ public class HandlerScore : ManagedBehaviour
     public void CountDefeatedEnemy( Type enemyType)
     {
         if (typeof(AsteroidBehaviour) == enemyType)
+        {
+            Debug.Log($"{typeof(HandlerScore)} GetAsteroidScore");
             AddToCount(countAsteroid);
-        else if(typeof(UFOBehaviour) == enemyType)
-            AddToCount(countUfo);
+        }
+        else if (typeof(UFOBehaviour) == enemyType)
+        {
+            Debug.Log($"{typeof(HandlerScore)} GetAsteroidScore");
+            AddToCount(countAsteroid);
+        }
     }
 
+    private void OnEnable() => _chController.OnHitPlayer += ResetCount;
+    private void OnDisable() => _chController.OnHitPlayer -= ResetCount;
+
+    private void ResetCount()
+    {
+        _count = default;
+        _text.text = default;
+    }
     private void AddToCount(int countEnemy)
     {
-        _count = countEnemy;
+        _count += countEnemy;
         _text.text = _count.ToString();
     }
 }

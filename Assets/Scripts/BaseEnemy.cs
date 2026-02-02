@@ -37,7 +37,11 @@ where TPool : ObjectPool
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-         if(other.gameObject.CompareTag("PlayerBullet") || other.gameObject.CompareTag("Laser")) 
+        if (other.gameObject.CompareTag("PlayerBullet") || other.gameObject.CompareTag("Laser"))
+        {
+            if(this is AsteroidBehaviour) _handlerScore.CountDefeatedEnemy(typeof(AsteroidBehaviour));
+            if(this is UFOBehaviour) _handlerScore.CountDefeatedEnemy(typeof(UFOBehaviour));
+        }
         if(other.gameObject.CompareTag("PlayerBullet")) HitBullet();
         else if(other.gameObject.CompareTag("Laser")) HitLaser();
     }
