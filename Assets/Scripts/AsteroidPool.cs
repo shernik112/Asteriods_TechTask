@@ -11,7 +11,7 @@ public class AsteroidPool : ObjectPool
         _poolPrefab = _asteroidPrefab;
         base.ManagedInintialize();
     }
-    
+
     public override void Return(GameObject obj)
     {
         obj.GetComponent<AsteroidBehaviour>().SetDefaultParametrs();

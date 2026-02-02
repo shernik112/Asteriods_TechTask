@@ -5,17 +5,26 @@ using Zenject;
 public abstract class BaseEnemy<TPool> : ManagedBehaviour
 where TPool : ObjectPool
 { 
-    private TPool Pool;
-    private CharacterController ChController;
+    protected TPool Pool;
+    protected CharacterController _chController;
+    private HandlerScore _handlerScore;
     [Inject]
-    public void Construct(TPool pool, CharacterController chController)
+    public void Construct(TPool pool, CharacterController chController, HandlerScore handlerScore)
     {
         Pool = pool;
-        ChController = chController;
-        ChController.OnHitPlayer += ReturnSelf;
+        _chController = chController;
+        _handlerScore = handlerScore;
     }
 
-    private void OnDestroy() => ChController.OnHitPlayer -= ReturnSelf;
+    private void OnEnable()
+    {
+        if (_chController != null) _chController.OnHitPlayer += ReturnSelf;
+    }
+
+    private void OnDisable()
+    {
+        if (_chController != null) _chController.OnHitPlayer -= ReturnSelf;
+    }
 
     protected abstract void HitBullet();
     protected abstract void HitLaser();
@@ -28,7 +37,8 @@ where TPool : ObjectPool
 
     private void OnCollisionEnter2D(Collision2D other)
     {
+         if(other.gameObject.CompareTag("PlayerBullet") || other.gameObject.CompareTag("Laser")) 
         if(other.gameObject.CompareTag("PlayerBullet")) HitBullet();
-        if(other.gameObject.CompareTag("Laser")) HitLaser();
+        else if(other.gameObject.CompareTag("Laser")) HitLaser();
     }
 }

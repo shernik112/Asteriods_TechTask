@@ -3,8 +3,6 @@ using Zenject;
 
 public class UFOBehaviour : BaseEnemy<UFOPool>
 {
-    [Inject] private CharacterController _chController;
-    [Inject] private UFOPool _ufoPool;
     [SerializeField] private float speed = default;
     protected override void ManagedUpdate()
     {
@@ -16,11 +14,11 @@ public class UFOBehaviour : BaseEnemy<UFOPool>
 
     protected override void HitBullet()
     {
-        _ufoPool.Return(gameObject);
+        Pool.Return(gameObject);
     }
 
     protected override void HitLaser()
     {
-        _ufoPool.Return(gameObject);
+        Pool.Return(gameObject);
     }
 }
