@@ -5,7 +5,7 @@ using UnityEngine;
 public class ObjectPool : ManagedBehaviour
 {
     private PrefabInstaller _installer;
-    private int _startCount = 5;
+    protected virtual int _startCount => 5;
     protected GameObject _poolPrefab;
     private Queue<GameObject> _pool = new Queue<GameObject>();
 
@@ -34,7 +34,7 @@ public class ObjectPool : ManagedBehaviour
         return obj;
     }
 
-    public void Return(GameObject obj)
+    public virtual void Return(GameObject obj)
     {
         obj.SetActive(false);
         _pool.Enqueue(obj);

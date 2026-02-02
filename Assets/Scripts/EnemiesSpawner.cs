@@ -104,7 +104,6 @@ public class EnemiesSpawner : ManagedBehaviour
                 {
                         var pos = GetRandomPos();
                         var obj = _asteroidPool.Get();
-                        obj.GetComponent<AsteroidBehaviour>().SetDefaultParametrs();
                         obj.transform.position = pos;
                         RotateAsteroid(obj);
                 }

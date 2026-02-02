@@ -54,9 +54,17 @@ public class AsteroidBehaviour : BaseEnemy<AsteroidPool>
 
     public void SetDefaultParametrs()
     {
-        _moveForward._currentSpeed = _moveForward.defaultSpeed;
-        transform.localScale = Vector3.one;
-        transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+        if (_moveForward != null)
+            _moveForward._currentSpeed = _moveForward.defaultSpeed;
+
+        transform.localScale = _intialScale;
+        transform.rotation = Quaternion.identity;
         _sizeLevel = 1;
+        var rb = GetComponent<Rigidbody2D>();
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector2.zero;
+            rb.angularVelocity = 0f;
+        }
     }
 }
