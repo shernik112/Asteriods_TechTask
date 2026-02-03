@@ -19,7 +19,8 @@ public class PrefabInstaller : MonoInstaller
         typeof(BulletPool),
         typeof(UFOPool),
         typeof(AsteroidPool),
-        typeof(HandlerGameCondition)
+        typeof(HandlerGameCondition),
+        typeof(HandlerShootLaser)
     };
     public override void InstallBindings()
     {

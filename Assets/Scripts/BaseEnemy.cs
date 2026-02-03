@@ -37,12 +37,23 @@ where TPool : ObjectPool
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("PlayerBullet") || other.gameObject.CompareTag("Laser"))
+        Debug.Log($"Hit object: {other.gameObject.name}, tag={other.gameObject.tag}, root={other.transform.root.name}");
+        if (other.gameObject.CompareTag("PlayerBullet"))
         {
             if(this is AsteroidBehaviour) _handlerScore.CountDefeatedEnemy(typeof(AsteroidBehaviour));
             if(this is UFOBehaviour) _handlerScore.CountDefeatedEnemy(typeof(UFOBehaviour));
         }
         if(other.gameObject.CompareTag("PlayerBullet")) HitBullet();
-        else if(other.gameObject.CompareTag("Laser")) HitLaser();
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log($"{typeof(BaseEnemy<>)} Laser Trigger");
+        if (other.gameObject.CompareTag("Laser"))
+        {
+            if(this is AsteroidBehaviour) _handlerScore.CountDefeatedEnemy(typeof(AsteroidBehaviour));
+            if(this is UFOBehaviour) _handlerScore.CountDefeatedEnemy(typeof(UFOBehaviour));
+            HitLaser();
+        }
     }
 }

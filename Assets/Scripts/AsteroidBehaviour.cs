@@ -51,6 +51,7 @@ public class AsteroidBehaviour : BaseEnemy<AsteroidPool>
     
     protected override void HitLaser()
     {
+        Pool.Return(gameObject);
     }
 
     public void SetDefaultParametrs()
