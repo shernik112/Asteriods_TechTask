@@ -11,6 +11,7 @@ public class PrefabInstaller : MonoInstaller
     [SerializeField] private Transform rootHandlers = default;
     [SerializeField] private RestartInvoke restartButton = default;
     [SerializeField] private HandlerScore handlerScore = default;
+    [SerializeField] private CountLaserShots countLaserShots = default;
 
     private Type[] _singleBehaviours = new Type[]
     {
@@ -20,7 +21,7 @@ public class PrefabInstaller : MonoInstaller
         typeof(UFOPool),
         typeof(AsteroidPool),
         typeof(HandlerGameCondition),
-        typeof(HandlerShootLaser)
+        typeof(HandlerShootLaser),
     };
     public override void InstallBindings()
     {
@@ -28,6 +29,7 @@ public class PrefabInstaller : MonoInstaller
         
         Container.Bind<RestartInvoke>().FromInstance(restartButton).AsSingle().NonLazy();
         Container.Bind<HandlerScore>().FromInstance(handlerScore).AsSingle().NonLazy();
+        Container.Bind<CountLaserShots>().FromInstance(countLaserShots).AsSingle().NonLazy();
         
         Container.Bind<GameObject>().FromInstance(bulletPrefab).WhenInjectedInto<BulletPool>();
         Container.Bind<GameObject>().FromInstance(asteroidPrefab).WhenInjectedInto<AsteroidPool>();

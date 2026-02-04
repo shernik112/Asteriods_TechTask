@@ -1,19 +1,10 @@
 using System;
-using TMPro;
 using UnityEngine;
-using Zenject;
 
-public class HandlerScore : ManagedBehaviour
+public class HandlerScore : BaseCounter
 {
-    [Inject] private CharacterController _chController;
     [SerializeField] private int countAsteroid;
     [SerializeField] private int countUfo;
-    private int _count;
-    private TMP_Text _text;
-    public override void ManagedInintialize()
-    {
-        _text = GetComponent<TMP_Text>();
-    }
 
     public void CountDefeatedEnemy( Type enemyType)
     {
@@ -28,18 +19,9 @@ public class HandlerScore : ManagedBehaviour
             AddToCount(countAsteroid);
         }
     }
-
-    private void OnEnable() => _chController.OnHitPlayer += ResetCount;
-    private void OnDisable() => _chController.OnHitPlayer -= ResetCount;
-
-    private void ResetCount()
+    protected override void AddToCount(int countEnemy)
     {
-        _count = default;
-        _text.text = default;
-    }
-    private void AddToCount(int countEnemy)
-    {
-        _count += countEnemy;
-        _text.text = _count.ToString();
+        Count += countEnemy;
+        Text.text = Count.ToString();
     }
 }
