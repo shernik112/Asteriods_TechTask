@@ -18,8 +18,8 @@ public class EnemiesSpawner : ManagedBehaviour
         private AsteroidPool _asteroidPool;
         private UFOPool _ufoPool;
         private RestartInvoke _restartInvoke;
-        private FloatRange _rangeTimeAsteroid = new FloatRange(5f,20f);
-        private FloatRange _rangeTimeUfo = new FloatRange(10f,25f);
+        private FloatRange _rangeTimeAsteroid = new FloatRange(5f,10f);
+        private FloatRange _rangeTimeUfo = new FloatRange(5f,15f);
 
         private readonly float _rotateOffset = 30f;
         private readonly float _posOffset = 0.5f;
@@ -75,7 +75,7 @@ public class EnemiesSpawner : ManagedBehaviour
                 {
                         _lastTimeAsteroid = 0f;
                         _currentRangeAsteroid = GetFloatRange(_rangeTimeAsteroid);
-                        CreateAsteroid(Random.Range(1,3));
+                        CreateAsteroid(Random.Range(2,3));
                 }
 
                 if (_lastTimeUfo >= _currentRangeUfo)

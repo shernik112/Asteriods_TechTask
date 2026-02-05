@@ -12,6 +12,7 @@ public class PrefabInstaller : MonoInstaller
     [SerializeField] private RestartInvoke restartButton = default;
     [SerializeField] private HandlerScore handlerScore = default;
     [SerializeField] private CountLaserShots countLaserShots = default;
+    [SerializeField] private GetFinalScore getFinalScore = default;
 
     private Type[] _singleBehaviours = new Type[]
     {
@@ -30,6 +31,7 @@ public class PrefabInstaller : MonoInstaller
         Container.Bind<RestartInvoke>().FromInstance(restartButton).AsSingle().NonLazy();
         Container.Bind<HandlerScore>().FromInstance(handlerScore).AsSingle().NonLazy();
         Container.Bind<CountLaserShots>().FromInstance(countLaserShots).AsSingle().NonLazy();
+        Container.Bind<GetFinalScore>().FromInstance(getFinalScore).AsSingle().NonLazy();
         
         Container.Bind<GameObject>().FromInstance(bulletPrefab).WhenInjectedInto<BulletPool>();
         Container.Bind<GameObject>().FromInstance(asteroidPrefab).WhenInjectedInto<AsteroidPool>();

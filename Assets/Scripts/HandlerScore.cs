@@ -1,11 +1,12 @@
 using System;
 using UnityEngine;
+using Zenject;
 
 public class HandlerScore : BaseCounter
 {
+    [Inject] private GetFinalScore _getFinalScore;
     [SerializeField] private int countAsteroid;
     [SerializeField] private int countUfo;
-
     public void CountDefeatedEnemy( Type enemyType)
     {
         if (typeof(AsteroidBehaviour) == enemyType)
@@ -19,6 +20,13 @@ public class HandlerScore : BaseCounter
             AddToCount(countAsteroid);
         }
     }
+
+    protected override void ResetCount()
+    {
+        _getFinalScore.ShowFinalScore(Count);
+        base.ResetCount();
+    }
+
     protected override void AddToCount(int countEnemy)
     {
         Count += countEnemy;

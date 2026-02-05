@@ -12,7 +12,7 @@ public class CharacterController : ManagedBehaviour
     [Inject] private RestartInvoke _restartInvoke;
     private SpriteRenderer _spriteRenderer;
     private Vector2 _input;
-    private Rigidbody2D _rb;
+    public Rigidbody2D rb;
     public event Action OnHitPlayer;
 
     private void OnEnable() => _restartInvoke.OnRestartGame += SetActive;
@@ -21,7 +21,7 @@ public class CharacterController : ManagedBehaviour
 
     public override void ManagedInintialize()
     {
-        _rb = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
@@ -37,8 +37,8 @@ public class CharacterController : ManagedBehaviour
         if (other.gameObject.CompareTag("Enemy"))
         {
             Debug.Log($"Invoke OnHitPlayer; subscribers = {(OnHitPlayer == null ? 0 : OnHitPlayer.GetInvocationList().Length)}");
-            _rb.linearVelocity = Vector2.zero;
-            _rb.angularVelocity = default;
+            rb.linearVelocity = Vector2.zero;
+            rb.angularVelocity = default;
             OnHitPlayer?.Invoke();
             SetDefaultValues();
         } 
@@ -46,9 +46,9 @@ public class CharacterController : ManagedBehaviour
 
     protected override void  ManagedFixedUpdate()
     {
-        _rb.angularVelocity = Mathf.MoveTowards(_rb.angularVelocity, -_input.x * rotateSpeed, rotateAcceleration * Time.fixedDeltaTime);
+        rb.angularVelocity = Mathf.MoveTowards(rb.angularVelocity, -_input.x * rotateSpeed, rotateAcceleration * Time.fixedDeltaTime);
         Vector2 targetVelocity = transform.up * _input.y * moveSpeed;
-        _rb.linearVelocity = Vector2.MoveTowards(_rb.linearVelocity, targetVelocity, speedAcceleration * Time.fixedDeltaTime);
+        rb.linearVelocity = Vector2.MoveTowards(rb.linearVelocity, targetVelocity, speedAcceleration * Time.fixedDeltaTime);
     }
 
     private void SetDefaultValues()
