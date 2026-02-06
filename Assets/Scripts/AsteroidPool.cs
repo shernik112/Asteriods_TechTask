@@ -14,7 +14,8 @@ public class AsteroidPool : ObjectPool
 
     public override void ReturnToPool(GameObject obj)
     {
-        obj.GetComponent<AsteroidBehaviour>().SetDefaultParameters();
+        var asteroid = obj.GetComponent<AsteroidBehaviour>();
+        asteroid.SetDefaultParameters();
         base.ReturnToPool(obj);
     }
 }

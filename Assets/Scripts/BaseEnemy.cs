@@ -1,12 +1,17 @@
 using UnityEngine;
 using Zenject;
 
-public abstract class BaseEnemy<TPool> : ManagedBehaviour
+public interface IEnemy
+{
+    bool IsFirstEnterToTeleport { get ; set; }
+}
+public abstract class BaseEnemy<TPool> : ManagedBehaviour, IEnemy
 where TPool : ObjectPool
 { 
     protected TPool Pool;
     protected CharacterController ChController { get; private set; }
     private HandlerScore _handlerScore;
+    public bool IsFirstEnterToTeleport { get; set; } = false;
     
     [Inject]
     public void Construct(TPool pool, CharacterController chController, HandlerScore handlerScore)

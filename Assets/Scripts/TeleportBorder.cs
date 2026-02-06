@@ -1,11 +1,21 @@
 using UnityEngine;
 
-public class PlayerTeleport : ManagedBehaviour
+public class TeleportBorder : ManagedBehaviour
 {
     [SerializeField] private bool isHorizonWall = default;
     private readonly float _tpOffset = 0.35f;
     protected virtual void OnTriggerEnter2D(Collider2D other)
     {
+        if (other.CompareTag("Enemy"))
+        {
+            var enemy = other.gameObject.GetComponent<IEnemy>();
+            if (other.gameObject.GetComponent<IEnemy>().IsFirstEnterToTeleport)
+            {
+                enemy.IsFirstEnterToTeleport = false;
+                return;
+            }
+            TeleportationObject(other);
+        }
         if (other.CompareTag("Player"))
             TeleportationObject(other);
         

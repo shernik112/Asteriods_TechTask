@@ -93,6 +93,7 @@ public class EnemiesSpawner : ManagedBehaviour
         {
                 var pos = GetRandomPos();
                 var obj = _ufoPool.Get();
+                ActiveBoolFieldForTeleportation(obj);
                 obj.transform.position = pos;
         }
 
@@ -104,6 +105,7 @@ public class EnemiesSpawner : ManagedBehaviour
                 {
                         var pos = GetRandomPos();
                         var obj = _asteroidPool.Get();
+                        ActiveBoolFieldForTeleportation(obj);
                         obj.transform.position = pos;
                         RotateAsteroid(obj);
                 }
@@ -122,6 +124,8 @@ public class EnemiesSpawner : ManagedBehaviour
                 };
         }
 
+        private void ActiveBoolFieldForTeleportation(GameObject obj) =>
+                obj.GetComponent<IEnemy>().IsFirstEnterToTeleport = true;
         private void RotateAsteroid(GameObject obj)
         {
                 var direction = _lookTarget - (Vector2)obj.transform.position;
