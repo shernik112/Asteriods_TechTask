@@ -1,7 +1,7 @@
 using UnityEngine;
 using Zenject;
 
-public class UFOBehaviour : BaseEnemy<UFOPool>
+public class UfoBehaviour : BaseEnemy<UfoPool>
 {
     [SerializeField] private float speed = default;
     protected override void ManagedUpdate()
@@ -15,11 +15,11 @@ public class UFOBehaviour : BaseEnemy<UFOPool>
     protected override void HitBullet()
     {
         
-        Pool.Return(gameObject);
+        Pool.ReturnToPool(gameObject);
     }
 
     protected override void HitLaser()
     {
-        Pool.Return(gameObject);
+        Pool.ReturnToPool(gameObject);
     }
 }

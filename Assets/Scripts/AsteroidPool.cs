@@ -12,10 +12,10 @@ public class AsteroidPool : ObjectPool
         base.ManagedInintialize();
     }
 
-    public override void Return(GameObject obj)
+    public override void ReturnToPool(GameObject obj)
     {
-        obj.GetComponent<AsteroidBehaviour>().SetDefaultParametrs();
-        base.Return(obj);
+        obj.GetComponent<AsteroidBehaviour>().SetDefaultParameters();
+        base.ReturnToPool(obj);
     }
 }
 

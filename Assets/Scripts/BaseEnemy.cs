@@ -32,7 +32,7 @@ where TPool : ObjectPool
     private void ReturnSelf()
     {
         Debug.Log($"{typeof(BaseEnemy<>)} ReturnSelf ");
-        Pool.Return(gameObject);
+        Pool.ReturnToPool(gameObject);
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -41,7 +41,7 @@ where TPool : ObjectPool
         if (other.gameObject.CompareTag("PlayerBullet"))
         {
             if(this is AsteroidBehaviour) _handlerScore.CountDefeatedEnemy(typeof(AsteroidBehaviour));
-            if(this is UFOBehaviour) _handlerScore.CountDefeatedEnemy(typeof(UFOBehaviour));
+            if(this is UfoBehaviour) _handlerScore.CountDefeatedEnemy(typeof(UfoBehaviour));
         }
         if(other.gameObject.CompareTag("PlayerBullet")) HitBullet();
     }
@@ -52,7 +52,7 @@ where TPool : ObjectPool
         if (other.gameObject.CompareTag("Laser"))
         {
             if(this is AsteroidBehaviour) _handlerScore.CountDefeatedEnemy(typeof(AsteroidBehaviour));
-            if(this is UFOBehaviour) _handlerScore.CountDefeatedEnemy(typeof(UFOBehaviour));
+            if(this is UfoBehaviour) _handlerScore.CountDefeatedEnemy(typeof(UfoBehaviour));
             HitLaser();
         }
     }

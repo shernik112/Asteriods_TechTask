@@ -19,7 +19,7 @@ public class PrefabInstaller : MonoInstaller
         typeof(EnemiesSpawner),
         typeof(BlockCursor),
         typeof(BulletPool),
-        typeof(UFOPool),
+        typeof(UfoPool),
         typeof(AsteroidPool),
         typeof(HandlerGameCondition),
         typeof(HandlerShootLaser),
@@ -35,7 +35,7 @@ public class PrefabInstaller : MonoInstaller
         
         Container.Bind<GameObject>().FromInstance(bulletPrefab).WhenInjectedInto<BulletPool>();
         Container.Bind<GameObject>().FromInstance(asteroidPrefab).WhenInjectedInto<AsteroidPool>();
-        Container.Bind<GameObject>().FromInstance(ufoPrefab).WhenInjectedInto<UFOPool>();
+        Container.Bind<GameObject>().FromInstance(ufoPrefab).WhenInjectedInto<UfoPool>();
         for(var i = 0; i < _singleBehaviours.Length; i++)
         {
             var behaviour = _singleBehaviours[i];

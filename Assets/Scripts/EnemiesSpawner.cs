@@ -16,7 +16,7 @@ public class FloatRange
 public class EnemiesSpawner : ManagedBehaviour
 {
         private AsteroidPool _asteroidPool;
-        private UFOPool _ufoPool;
+        private UfoPool _ufoPool;
         private RestartInvoke _restartInvoke;
         private FloatRange _rangeTimeAsteroid = new FloatRange(5f,10f);
         private FloatRange _rangeTimeUfo = new FloatRange(5f,15f);
@@ -35,7 +35,7 @@ public class EnemiesSpawner : ManagedBehaviour
         private float _currentRangeUfo;
 
         [Inject]
-        public void Construct(AsteroidPool asteroidPool, UFOPool ufoPool, RestartInvoke restartInvoke)
+        public void Construct(AsteroidPool asteroidPool, UfoPool ufoPool, RestartInvoke restartInvoke)
         {
                 _asteroidPool = asteroidPool;
                 _ufoPool = ufoPool;

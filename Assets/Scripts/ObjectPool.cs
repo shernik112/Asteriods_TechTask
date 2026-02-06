@@ -33,7 +33,7 @@ public class ObjectPool : ManagedBehaviour
         return obj;
     }
 
-    public virtual void Return(GameObject obj)
+    public virtual void ReturnToPool(GameObject obj)
     {
         obj.SetActive(false);
         _pool.Enqueue(obj);

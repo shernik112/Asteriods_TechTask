@@ -1,5 +1,4 @@
 using UnityEngine;
-using Zenject;
 using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
 
@@ -28,18 +27,17 @@ public class AsteroidBehaviour : BaseEnemy<AsteroidPool>
 
     protected override void HitBullet()
     {
-        // _handlerScore.CountDefeatedEnemy(typeof(AsteroidBehaviour));
         if (_sizeLevel >= countStage)
         {
-            Pool.Return(gameObject); 
+            Pool.ReturnToPool(gameObject); 
             return;
         }
-       IniteAsteroid(1);
-       IniteAsteroid(2);
-       Pool.Return(gameObject);
+       InitAsteroid(1);
+       InitAsteroid(2);
+       Pool.ReturnToPool(gameObject);
     }
 
-    private void IniteAsteroid(int side)
+    private void InitAsteroid(int side)
     {
         var mag = Random.Range(_lowerRotate, _createRotate);
         var randomRotate = side == 1 ? mag : -mag;
@@ -51,10 +49,10 @@ public class AsteroidBehaviour : BaseEnemy<AsteroidPool>
     
     protected override void HitLaser()
     {
-        Pool.Return(gameObject);
+        Pool.ReturnToPool(gameObject);
     }
 
-    public void SetDefaultParametrs()
+    public void SetDefaultParameters()
     {
         if (_moveForward != null)
             _moveForward._currentSpeed = _moveForward.defaultSpeed;

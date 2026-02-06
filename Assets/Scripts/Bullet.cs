@@ -19,12 +19,12 @@ public class Bullet : ManagedBehaviour
     private void OnCollisionEnter2D(Collision2D other)
     {
         Debug.Log($"{typeof(Bullet)} bullet hit enemy");
-        _bulletPool.Return(gameObject);
+        _bulletPool.ReturnToPool(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log($"{typeof(Bullet)} bullet entered trigger");
-        _bulletPool.Return(gameObject);
+        _bulletPool.ReturnToPool(gameObject);
     }
 }

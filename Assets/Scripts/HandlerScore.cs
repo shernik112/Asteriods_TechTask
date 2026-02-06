@@ -14,7 +14,7 @@ public class HandlerScore : BaseCounter
             Debug.Log($"{typeof(HandlerScore)} GetAsteroidScore");
             AddToCount(countAsteroid);
         }
-        else if (typeof(UFOBehaviour) == enemyType)
+        else if (typeof(UfoBehaviour) == enemyType)
         {
             Debug.Log($"{typeof(HandlerScore)} GetAsteroidScore");
             AddToCount(countAsteroid);

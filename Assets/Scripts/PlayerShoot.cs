@@ -22,7 +22,7 @@ public class PlayerShoot : ManagedBehaviour
     private void Shoot()
     {
         var obj = _bulletPool.Get();
-        Vector2 spawnPos = (Vector2)transform.position + (Vector2)transform.up * instantiateOffset;
+        var spawnPos = (Vector2)transform.position + (Vector2)transform.up * instantiateOffset;
         obj.transform.position = spawnPos;
         obj.transform.rotation = transform.localRotation;
     }
