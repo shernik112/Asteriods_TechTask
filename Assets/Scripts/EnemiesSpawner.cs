@@ -1,7 +1,7 @@
-using System;
 using UnityEngine;
 using Zenject;
 using Random = UnityEngine.Random;
+
 public class FloatRange
 {
         public float Min;
@@ -67,7 +67,7 @@ public class EnemiesSpawner : ManagedBehaviour
                 StartCreate();
         }
 
-        protected override void ManagedUpdate()
+        protected override void OnUpdate()
         {
                 _lastTimeAsteroid += Time.deltaTime;
                 _lastTimeUfo += Time.deltaTime;

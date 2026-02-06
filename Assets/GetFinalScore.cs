@@ -7,7 +7,7 @@ public class GetFinalScore : ManagedBehaviour
 {
     protected TMP_Text Text;
 
-    public override void ManagedInintialize()
+    private void Awake()
     {
         Text = GetComponent<TMP_Text>();
     }

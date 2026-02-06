@@ -4,9 +4,9 @@ using Zenject;
 public class UfoPool : ObjectPool
 {
     [Inject] private GameObject _ufoPrefab;
-    public override void ManagedInintialize()
+    protected override void Awake()
     {
-        _poolPrefab = _ufoPrefab;
-        base.ManagedInintialize();
+        PoolPrefab = _ufoPrefab;
+        base.Awake();
     }
 }

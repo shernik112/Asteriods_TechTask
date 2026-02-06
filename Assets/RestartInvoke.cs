@@ -6,7 +6,8 @@ public class RestartInvoke: ManagedBehaviour
 {
     public event Action OnRestartGame;
     private Button _button;
-    public override void ManagedInintialize()
+    
+    private void Awake()
     {
         _button = GetComponent<Button>();
     }

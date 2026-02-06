@@ -6,12 +6,13 @@ public class Bullet : ManagedBehaviour
     [Inject] private BulletPool _bulletPool;
     [SerializeField] private float moveSpeed = default;
     private Rigidbody2D _rg;
-    public override void ManagedInintialize()
+
+    private void Awake()
     {
         _rg = GetComponent<Rigidbody2D>();
     }
 
-    protected override void ManagedFixedUpdate()
+    protected override void OnFixedUpdate()
     { 
         _rg.linearVelocity = transform.up * moveSpeed;
     }

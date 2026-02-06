@@ -3,14 +3,15 @@ using UnityEngine;
 public class MoveForward : ManagedBehaviour
 {
     public float defaultSpeed = 1.2f;
-    [HideInInspector]public float _currentSpeed;
-    public override void ManagedInintialize()
+    [HideInInspector]public float currentSpeed;
+
+    private void Awake()
     {
-        _currentSpeed = defaultSpeed;
+        currentSpeed = defaultSpeed;
     }
 
-    protected override void ManagedUpdate()
+    protected override void OnUpdate()
     {
-        transform.Translate(Vector2.right * _currentSpeed * Time.deltaTime, Space.Self);
+        transform.Translate(Vector2.right * currentSpeed * Time.deltaTime, Space.Self);
     }
 }

@@ -9,12 +9,13 @@ public class ShowIndicators : ManagedBehaviour
     [Inject] private HandlerShootLaser _handlerShootLaser;
     private TMP_Text _text;
     private StringBuilder _sb = new StringBuilder();
-    public override void ManagedInintialize()
+    
+    private void Awake()
     {
         _text = GetComponent<TMP_Text>();
     }
 
-    protected override void ManagedUpdate()
+    protected override void OnUpdate()
     {
         _sb.Clear();
         _sb.AppendLine(GetPlayerTranform());
@@ -43,5 +44,5 @@ public class ShowIndicators : ManagedBehaviour
     }
 
     private string GetCountLaserShot() => $"Count Laser Shots({_handlerShootLaser.CurrentCountShоtLaser})";
-    private string GetRechargeTime() => $"Recharge Time({Mathf.Max(0,_handlerShootLaser.RechargeDuration - _handlerShootLaser._lastRechargeTime)})";
+    private string GetRechargeTime() => $"Recharge Time({Mathf.Max(0,_handlerShootLaser.RechargeDuration - _handlerShootLaser.lastRechargeTime)})";
 }

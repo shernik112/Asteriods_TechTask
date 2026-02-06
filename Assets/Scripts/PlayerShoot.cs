@@ -9,7 +9,7 @@ public class PlayerShoot : ManagedBehaviour
     private float _lastTime;
     private bool _mayShoot;
 
-    protected override void ManagedUpdate()
+    protected override void OnUpdate()
     {
         _lastTime += Time.deltaTime;
         if ((Input.GetMouseButtonDown(0) || Input.GetMouseButton(0)) && _lastTime >= cooldown)

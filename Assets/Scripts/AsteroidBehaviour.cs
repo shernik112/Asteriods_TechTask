@@ -4,25 +4,25 @@ using Vector3 = UnityEngine.Vector3;
 
 public class AsteroidBehaviour : BaseEnemy<AsteroidPool>
 {
-    // [Inject] private HandlerScore _handlerScore;
     [SerializeField] private float multiplierBoost = default;
     [SerializeField] private int countStage = default;
-    private float _createRotate = 50f;
+    private readonly float _createRotate = 50f;
     private readonly float _lowerRotate = 20f;
     private MoveForward _moveForward;
     private int _sizeLevel = 1;
-    private Vector3 _intialScale;
-    public override void ManagedInintialize()
+    private Vector3 _initialScale;
+    
+    private void Awake()
     {
         _moveForward = GetComponent<MoveForward>();
-        _intialScale = transform.localScale;
+        _initialScale = transform.localScale;
     }
-
+    
     public void InitParams(int size)
     {
         _sizeLevel = size;
-        _moveForward._currentSpeed = _moveForward.defaultSpeed + multiplierBoost * size;
-        transform.localScale =  _intialScale / size;
+        _moveForward.currentSpeed = _moveForward.defaultSpeed + multiplierBoost * size;
+        transform.localScale =  _initialScale / size;
     }
 
     protected override void HitBullet()
@@ -55,9 +55,9 @@ public class AsteroidBehaviour : BaseEnemy<AsteroidPool>
     public void SetDefaultParameters()
     {
         if (_moveForward != null)
-            _moveForward._currentSpeed = _moveForward.defaultSpeed;
+            _moveForward.currentSpeed = _moveForward.defaultSpeed;
 
-        transform.localScale = _intialScale;
+        transform.localScale = _initialScale;
         transform.rotation = Quaternion.identity;
         _sizeLevel = 1;
         var rb = GetComponent<Rigidbody2D>();

@@ -22,7 +22,7 @@ public class SmoothShowUI : ManagedBehaviour
     private bool _isShowNow;
     private CanvasGroup _cg;
 
-    public override void ManagedInintialize()
+    private void Awake()
     {
         _cg = GetComponent<CanvasGroup>();
     }

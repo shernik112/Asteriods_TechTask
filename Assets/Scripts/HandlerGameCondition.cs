@@ -5,6 +5,7 @@ public enum GameCondition
     Game,
     Menu  
 }
+
 public class HandlerGameCondition : ManagedBehaviour
 {
     [Inject] private BlockCursor _blockCursor;

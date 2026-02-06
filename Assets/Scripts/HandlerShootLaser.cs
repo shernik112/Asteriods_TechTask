@@ -26,8 +26,7 @@ public class HandlerShootLaser : ManagedBehaviour
     private GameObject _playerLaser;
     private float _cooldownDuration = 0.5f;
     private Quaternion _initialLaserRotation;
-    
-    public float _lastRechargeTime;
+    [HideInInspector] public float lastRechargeTime;
     private float _lastShootTime;
 
     private void OnEnable()
@@ -40,7 +39,7 @@ public class HandlerShootLaser : ManagedBehaviour
         _restartInvoke.OnRestartGame -= Restart;
     }
 
-    public override void ManagedInintialize()
+    private void Awake()
     {
         _playerLaser = _chController.transform.GetChild(0)?.gameObject;
         _initialLaserRotation = _playerLaser.transform.localRotation;
@@ -51,13 +50,13 @@ public class HandlerShootLaser : ManagedBehaviour
         CurrentCountShоtLaser = _defaultCountShotLaser;
     }
 
-    protected override void ManagedUpdate()
+    protected override void OnUpdate()
     {
-        _lastRechargeTime += Time.deltaTime;
+        lastRechargeTime += Time.deltaTime;
         _lastShootTime += Time.deltaTime;
-        if (_lastRechargeTime >= RechargeDuration && CurrentCountShоtLaser < _defaultCountShotLaser)
+        if (lastRechargeTime >= RechargeDuration && CurrentCountShоtLaser < _defaultCountShotLaser)
         {
-            _lastRechargeTime = 0f;
+            lastRechargeTime = 0f;
             IncreaseCountShotLaser();
         }
 
@@ -82,7 +81,7 @@ public class HandlerShootLaser : ManagedBehaviour
     private void Restart()
     {
         CurrentCountShоtLaser = _defaultCountShotLaser;
-        _lastRechargeTime = default;
+        lastRechargeTime = default;
     }
     private void IncreaseCountShotLaser()
     {

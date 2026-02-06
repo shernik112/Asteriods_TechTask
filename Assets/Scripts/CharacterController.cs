@@ -19,13 +19,13 @@ public class CharacterController : ManagedBehaviour
 
     private void OnDisable() => _restartInvoke.OnRestartGame -= SetActive;
 
-    public override void ManagedInintialize()
+    private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    protected override void ManagedUpdate()
+    protected override void OnUpdate()
     {
         _input = new Vector2(Input.GetAxisRaw("Horizontal"), Mathf.Clamp01(Input.GetAxisRaw("Vertical")));
         _input.Normalize(); 
@@ -44,7 +44,7 @@ public class CharacterController : ManagedBehaviour
         } 
     }
 
-    protected override void  ManagedFixedUpdate()
+    protected override void  OnFixedUpdate()
     {
         rb.angularVelocity = Mathf.MoveTowards(rb.angularVelocity, -_input.x * rotateSpeed, rotateAcceleration * Time.fixedDeltaTime);
         Vector2 targetVelocity = transform.up * _input.y * moveSpeed;

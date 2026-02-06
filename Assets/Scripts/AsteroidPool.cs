@@ -4,12 +4,12 @@ using Zenject;
 public class AsteroidPool : ObjectPool
 {
     [Inject] private GameObject _asteroidPrefab;
-    protected override int _startCount => 10;
+    protected override int StartCount => 5;
 
-    public override void ManagedInintialize()
+    protected override void Awake()
     {
-        _poolPrefab = _asteroidPrefab;
-        base.ManagedInintialize();
+        PoolPrefab = _asteroidPrefab;
+        base.Awake();
     }
 
     public override void ReturnToPool(GameObject obj)

@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using Zenject;
 
@@ -6,24 +5,25 @@ public abstract class BaseEnemy<TPool> : ManagedBehaviour
 where TPool : ObjectPool
 { 
     protected TPool Pool;
-    protected CharacterController _chController;
+    protected CharacterController ChController { get; private set; }
     private HandlerScore _handlerScore;
+    
     [Inject]
     public void Construct(TPool pool, CharacterController chController, HandlerScore handlerScore)
     {
         Pool = pool;
-        _chController = chController;
+        ChController = chController;
         _handlerScore = handlerScore;
     }
 
     private void OnEnable()
     {
-        if (_chController != null) _chController.OnHitPlayer += ReturnSelf;
+        if (ChController != null) ChController.OnHitPlayer += ReturnSelf;
     }
 
     private void OnDisable()
     {
-        if (_chController != null) _chController.OnHitPlayer -= ReturnSelf;
+        if (ChController != null) ChController.OnHitPlayer -= ReturnSelf;
     }
 
     protected abstract void HitBullet();

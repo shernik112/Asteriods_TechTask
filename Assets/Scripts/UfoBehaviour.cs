@@ -1,12 +1,11 @@
 using UnityEngine;
-using Zenject;
 
 public class UfoBehaviour : BaseEnemy<UfoPool>
 {
     [SerializeField] private float speed = default;
-    protected override void ManagedUpdate()
+    protected override void OnUpdate()
     {
-        Vector2 posPlayer = _chController.gameObject.transform.position;
+        Vector2 posPlayer = ChController.gameObject.transform.position;
         var targetDir = posPlayer - (Vector2)transform.position;
         targetDir.Normalize();
         transform.Translate(targetDir * speed * Time.deltaTime, Space.World);

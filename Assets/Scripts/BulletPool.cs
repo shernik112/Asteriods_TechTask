@@ -5,9 +5,9 @@ public class BulletPool : ObjectPool
 {
     [Inject] private GameObject _bulletPrefab;
 
-    public override void ManagedInintialize()
+    protected override void Awake()
     {
-        _poolPrefab = _bulletPrefab;
-        base.ManagedInintialize();
+        PoolPrefab = _bulletPrefab;
+        base.Awake();
     }
 }

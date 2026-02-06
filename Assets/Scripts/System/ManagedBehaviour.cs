@@ -1,39 +1,29 @@
+using UnityEngine;
 
-public class ManagedBehaviour : ManagedBehaviourBase
+public class ManagedBehaviour : MonoBehaviour
 {
     public static ReferenseSetToggle PauseAll = new ReferenseSetToggle();
     protected virtual bool UpdateWhenPause => false;
-    private bool _initialized = false;
-    protected virtual void ManagedUpdate(){}
-    protected virtual void ManagedLateUpdate(){}
-    protected virtual void ManagedFixedUpdate(){}
-    public virtual void ManagedInintialize(){}
+    protected virtual void OnUpdate(){}
+    protected virtual void OnLateUpdate(){}
+    protected virtual void OnFixedUpdate(){}
 
-    protected sealed override void Update()
+    private void Update()
     {
         if(CanUpdate())
-            ManagedUpdate();
+            OnUpdate();
     }
 
-    protected sealed override void LateUpdate()
+    private void LateUpdate()
     {
         if(CanUpdate())
-            ManagedLateUpdate();
+            OnLateUpdate();
     }
 
-    protected sealed override void FixedUpdate()
+    private void FixedUpdate()
     {
         if (CanUpdate())
-            ManagedFixedUpdate();
-    }
-
-    public sealed override void Awake()
-    {
-        if (!_initialized)
-        {
-            _initialized = true;
-            ManagedInintialize();
-        }
+            OnFixedUpdate();
     }
 
     private bool CanUpdate()

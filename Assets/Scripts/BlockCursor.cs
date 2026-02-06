@@ -5,7 +5,7 @@ public class BlockCursor : ManagedBehaviour
     public ReferenseSetToggle LockCursor = new ReferenseSetToggle();
     protected override bool UpdateWhenPause => true;
 
-    protected override void ManagedUpdate()
+    protected override void OnUpdate()
     {
         UpdateLockCondition();
     }

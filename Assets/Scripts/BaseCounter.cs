@@ -7,7 +7,7 @@ public abstract class BaseCounter : ManagedBehaviour
     protected int Count;
     protected TMP_Text Text;
 
-    public override void ManagedInintialize()
+    private void Awake()
     {
         Text = GetComponent<TMP_Text>();
     }
