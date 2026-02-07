@@ -17,6 +17,7 @@ public class CharacterController : ManagedBehaviour
     private Vector2 _input;
     
     public ShootLaser Laser { get; private set; }
+    public PlayerShoot PlayerShoot { get; private set; }
     public Rigidbody2D Rb { get; private set; }
 
     [Inject]
@@ -28,6 +29,7 @@ public class CharacterController : ManagedBehaviour
     private void Awake()
     {
         Laser = GetComponentInChildren<ShootLaser>(true);
+        PlayerShoot = GetComponent<PlayerShoot>();
         Rb = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _restartInvoke.OnRestartGame += SetActive;
@@ -35,10 +37,10 @@ public class CharacterController : ManagedBehaviour
     
     private void OnDestroy() => _restartInvoke.OnRestartGame -= SetActive;
 
-    protected override void OnUpdate()
+    public void SetInput(Vector2 input)
     {
-        _input = new Vector2(Input.GetAxisRaw("Horizontal"), Mathf.Clamp01(Input.GetAxisRaw("Vertical")));
-        _input.Normalize(); 
+        _input = input;
+        _input.Normalize();
     }
     
     protected override void  OnFixedUpdate()
@@ -50,7 +52,6 @@ public class CharacterController : ManagedBehaviour
     
     private void OnCollisionEnter2D(Collision2D other)
     {
-        Debug.Log($"{typeof(CharacterController)} OnCollisionEnter");
         if (other.gameObject.TryGetComponent<IEnemy>(out var enemy))
         {
             Debug.Log($"Invoke OnHitPlayer; subscribers = {(OnHitPlayer == null ? 0 : OnHitPlayer.GetInvocationList().Length)}");
@@ -59,6 +60,7 @@ public class CharacterController : ManagedBehaviour
             OnHitPlayer?.Invoke();
             SetDefaultValues();
         } 
+        Debug.Log($"{typeof(CharacterController)} OnCollisionEnter");
     }
 
     private void SetDefaultValues()
