@@ -32,8 +32,8 @@ public class CharacterController : ManagedBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _restartInvoke.OnRestartGame += SetActive;
     }
+    
     private void OnDestroy() => _restartInvoke.OnRestartGame -= SetActive;
-
 
     protected override void OnUpdate()
     {

@@ -2,29 +2,38 @@ using UnityEngine;
 using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
 
-[RequireComponent(typeof(MoveForward))]
 public class AsteroidBehaviour : BaseEnemy<AsteroidPool>
 {
+    private const int COUNT_SHARDS = 2;
+    
     [SerializeField] private float multiplierBoost = default;
     [SerializeField] private int countStage = default;
-    [field: SerializeField] 
-    public override int CountScoreByDefeat { get; set; } = default;
+
     private readonly float _createRotate = 50f;
     private readonly float _lowerRotate = 20f;
-    private MoveForward _moveForward;
-    private int _sizeLevel = 1;
+    private readonly float _defaultSpeed = 1.2f;
+    
     private Vector3 _initialScale;
+    private float _currentSpeed;
+    private int _sizeLevel = 1;
+    
+    [field: SerializeField] public override int CountScoreByDefeat { get; set; } = default;
     
     private void Awake()
     {
-        _moveForward = GetComponent<MoveForward>();
         _initialScale = transform.localScale;
+        _currentSpeed = _defaultSpeed;
     }
-    
-    public void InitParams(int size)
+
+    protected override void OnUpdate()
+    {
+        transform.Translate(Vector2.right * _currentSpeed * Time.deltaTime, Space.Self);
+    }
+
+    private void InitParams(int size)
     {
         _sizeLevel = size;
-        _moveForward.currentSpeed = _moveForward.defaultSpeed + multiplierBoost * size;
+        _currentSpeed += multiplierBoost * size;
         transform.localScale =  _initialScale / size;
     }
 
@@ -35,34 +44,37 @@ public class AsteroidBehaviour : BaseEnemy<AsteroidPool>
             Pool.ReturnToPool(gameObject); 
             return;
         }
-       InitAsteroid(1);
-       InitAsteroid(2);
-       Pool.ReturnToPool(gameObject);
+        
+        InitAsteroid();
+        Pool.ReturnToPool(gameObject);
     }
 
-    private void InitAsteroid(int side)
+    private void InitAsteroid()
     {
-        var mag = Random.Range(_lowerRotate, _createRotate);
-        var randomRotate = side == 1 ? mag : -mag;
-        var obj = Pool.Get();
-        obj.GetComponent<AsteroidBehaviour>().InitParams(_sizeLevel + 1);
-        obj.transform.position = transform.position;
-        obj.transform.rotation = transform.rotation * Quaternion.Euler(0, 0, randomRotate);
+        var sideToggle = false;
+        for (var i = 0; i < COUNT_SHARDS; i++)
+        { 
+            var mag = Random.Range(_lowerRotate, _createRotate);
+            var obj = Pool.Get();
+            var randomRotate = sideToggle ? mag : -mag;
+            obj.GetComponent<AsteroidBehaviour>().InitParams(_sizeLevel + 1);
+            obj.transform.position = transform.position;
+            obj.transform.rotation = transform.rotation * Quaternion.Euler(0, 0, randomRotate);
+            sideToggle = !sideToggle;
+        }
     }
 
     public void SetDefaultParameters()
     {
-        if (_moveForward != null)
-            _moveForward.currentSpeed = _moveForward.defaultSpeed;
-
-        transform.localScale = _initialScale;
-        transform.rotation = Quaternion.identity;
-        _sizeLevel = 1;
-        var rb = GetComponent<Rigidbody2D>();
-        if (rb != null)
+        if (TryGetComponent<Rigidbody2D>(out var rb))
         {
             rb.linearVelocity = Vector2.zero;
             rb.angularVelocity = 0f;
         }
+        
+        _currentSpeed = _defaultSpeed;
+        transform.localScale = _initialScale;
+        transform.rotation = Quaternion.identity;
+        _sizeLevel = 1;
     }
 }

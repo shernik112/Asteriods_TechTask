@@ -14,7 +14,7 @@ public class HandlerScore : BaseCounter
         _getFinalScore = getFinalScore;
     }
     
-    public void CountDefeatedEnemy(int countDefeatedEnemy) => AddToCount(countDefeatedEnemy);
+    public void CountDefeatedEnemy(int countDefeatedEnemy) => CountChange(countDefeatedEnemy);
 
     protected override void ResetCount()
     {
@@ -22,7 +22,7 @@ public class HandlerScore : BaseCounter
         base.ResetCount();
     }
 
-    protected override void AddToCount(int countEnemy)
+    protected override void CountChange(int countEnemy)
     {
         Count += countEnemy;
         Text.text = Count.ToString();

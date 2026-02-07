@@ -4,11 +4,17 @@ using Zenject;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Bullet : ManagedBehaviour
 {
-    [Inject] private BulletPool _bulletPool;
-    [field: SerializeField] 
-    public float MoveSpeed { get; private set; } = default;
+    private BulletPool _bulletPool;
     private Rigidbody2D _rg;
+    
+    [field: SerializeField] public float MoveSpeed { get; private set; } = default;
 
+    [Inject]
+    public void Construct(BulletPool bulletPool)
+    {
+        _bulletPool = bulletPool;
+    }
+    
     private void Awake()
     {
         _rg = GetComponent<Rigidbody2D>();

@@ -7,7 +7,7 @@ public class UfoBehaviour : BaseEnemy<UfoPool>
 
     protected override void OnUpdate()
     {
-        Vector2 posPlayer = ChController.gameObject.transform.position;
+        Vector2 posPlayer = CharacterController.gameObject.transform.position;
         var targetDir = posPlayer - (Vector2)transform.position;
         targetDir.Normalize();
         transform.Translate(targetDir * speed * Time.deltaTime, Space.World);

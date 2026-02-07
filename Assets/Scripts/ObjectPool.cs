@@ -1,15 +1,21 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class ObjectPool : ManagedBehaviour
 {
     protected virtual int StartCount => 5;
     
+    private GameObject _poolPrefab;
     private PrefabInstaller _installer;
     private Queue<GameObject> _pool = new Queue<GameObject>();
-    
-    protected GameObject PoolPrefab { get; set; }  
 
+    [Inject]
+    public void Construct(GameObject poolPrefab)
+    {
+        _poolPrefab = poolPrefab;
+    }
+    
     protected virtual void Awake()
     {
         _installer = FindFirstObjectByType<PrefabInstaller>();
@@ -23,7 +29,7 @@ public class ObjectPool : ManagedBehaviour
 
     private void CreateObject()
     {
-        var obj = Instantiate(PoolPrefab, transform);
+        var obj = Instantiate(_poolPrefab, transform);
         if(_installer != null)  _installer.InjectGo(obj);
         obj.SetActive(false);
         _pool.Enqueue(obj);

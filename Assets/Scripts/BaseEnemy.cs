@@ -5,34 +5,37 @@ public interface IEnemy
 {
     bool IsFirstEnterToTeleport { get ; set; }
 }
+
 public abstract class BaseEnemy<TPool> : ManagedBehaviour, IEnemy
 where TPool : ObjectPool
 { 
     protected TPool Pool;
+    private HandlerScore _handlerScore;
+    
+    protected CharacterController CharacterController { get; private set; }
     public abstract int CountScoreByDefeat { get; set; }
-    protected CharacterController ChController { get; private set; }
-    protected HandlerScore _handlerScore;
     public bool IsFirstEnterToTeleport { get; set; } = false;
     
     [Inject]
-    public void Construct(TPool pool, CharacterController chController, HandlerScore handlerScore)
+    public void Construct(TPool pool, CharacterController characterController, HandlerScore handlerScore)
     {
         Pool = pool;
-        ChController = chController;
+        CharacterController = characterController;
         _handlerScore = handlerScore;
     }
 
     private void OnEnable()
     {
-        if (ChController != null) ChController.OnHitPlayer += ReturnSelf;
+        if (CharacterController != null) CharacterController.OnHitPlayer += ReturnSelf;
     }
 
     private void OnDisable()
     {
-        if (ChController != null) ChController.OnHitPlayer -= ReturnSelf;
+        if (CharacterController != null) CharacterController.OnHitPlayer -= ReturnSelf;
     }
 
     protected virtual void HitBullet() => Pool.ReturnToPool(gameObject);
+    
     protected virtual void HitLaser() => Pool.ReturnToPool(gameObject);
 
     private void ReturnSelf()
@@ -52,11 +55,11 @@ where TPool : ObjectPool
     
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log($"{typeof(BaseEnemy<>)} Laser Trigger");
         if (other.TryGetComponent<ShootLaser>(out var laser))
         {
             _handlerScore.CountDefeatedEnemy(CountScoreByDefeat);
             HitLaser();
         }
+        Debug.Log($"{typeof(BaseEnemy<>)} Laser Trigger");
     }
 }

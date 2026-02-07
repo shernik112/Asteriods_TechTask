@@ -6,6 +6,7 @@ public class FloatRange
 {
         public float Min;
         public float Max;
+        
         public FloatRange(float min, float max)
         {
                 Min = min;
@@ -42,6 +43,7 @@ public class EnemiesSpawner : ManagedBehaviour
         }
 
         private void OnEnable() => _restartInvoke.OnRestartGame += StartCreate;
+        
         private void OnDisable() => _restartInvoke.OnRestartGame -= StartCreate;
 
         private void StartCreate()
@@ -85,6 +87,7 @@ public class EnemiesSpawner : ManagedBehaviour
                 }
                 
         }
+        
         private void CreateAsteroid(int count) => SetPointCreate(count);
 
         private void CreateUfo()

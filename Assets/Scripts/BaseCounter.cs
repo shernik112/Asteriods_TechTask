@@ -27,5 +27,5 @@ public abstract class BaseCounter : ManagedBehaviour
         Text.text = default;
     }
 
-    protected virtual void AddToCount(int count){}
+    protected virtual void CountChange(int count){}
 }

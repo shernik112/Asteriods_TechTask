@@ -8,7 +8,8 @@ public enum GameCondition
 
 public class HandlerGameCondition : ManagedBehaviour
 {
-    [Inject] private BlockCursor _blockCursor;
+    private GameCondition _currenGameCondition = GameCondition.Game;
+    private BlockCursor _blockCursor;
 
     public GameCondition GameCondition
     {
@@ -24,7 +25,11 @@ public class HandlerGameCondition : ManagedBehaviour
         }
     }
     
-    private GameCondition _currenGameCondition = GameCondition.Game;
+    [Inject]
+    public void Construct(BlockCursor blockCursor)
+    {
+        _blockCursor = blockCursor;
+    }
 
     private void Start()
     {
