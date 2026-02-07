@@ -23,14 +23,13 @@ public class EnemiesSpawner : ManagedBehaviour
 
         private readonly float _rotateOffset = 30f;
         private readonly float _posOffset = 0.5f;
-
         private readonly Vector2 _lookTarget = new Vector2(0, 0);
         private readonly int _startCountAsteroids = 2;
+        
         private float _halfHeight;
         private float _halfWidth;
         private float _lastTimeAsteroid;
         private float _lastTimeUfo;
-
         private float _currentRangeAsteroid;
         private float _currentRangeUfo;
 
@@ -86,16 +85,16 @@ public class EnemiesSpawner : ManagedBehaviour
                 }
                 
         }
+        private void CreateAsteroid(int count) => SetPointCreate(count);
 
-        public void CreateAsteroid(int count) => SetPointCreate(count);
-
-        public void CreateUfo()
+        private void CreateUfo()
         {
                 var pos = GetRandomPos();
                 var obj = _ufoPool.Get();
                 ActiveBoolFieldForTeleportation(obj);
                         obj.transform.position = pos;
         }
+
 
         private float GetFloatRange(FloatRange range) => Random.Range(range.Min, range.Max);
 
@@ -126,6 +125,7 @@ public class EnemiesSpawner : ManagedBehaviour
 
         private void ActiveBoolFieldForTeleportation(GameObject obj) =>
                 obj.GetComponent<IEnemy>().IsFirstEnterToTeleport = true;
+        
         private void RotateAsteroid(GameObject obj)
         {
                 var direction = _lookTarget - (Vector2)obj.transform.position;

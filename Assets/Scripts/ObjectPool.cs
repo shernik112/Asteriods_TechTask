@@ -1,13 +1,14 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ObjectPool : ManagedBehaviour
 {
-    private PrefabInstaller _installer;
     protected virtual int StartCount => 5;
-    protected GameObject PoolPrefab { get; set; }  
+    
+    private PrefabInstaller _installer;
     private Queue<GameObject> _pool = new Queue<GameObject>();
+    
+    protected GameObject PoolPrefab { get; set; }  
 
     protected virtual void Awake()
     {

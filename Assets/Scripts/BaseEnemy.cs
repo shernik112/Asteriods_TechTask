@@ -9,7 +9,7 @@ public abstract class BaseEnemy<TPool> : ManagedBehaviour, IEnemy
 where TPool : ObjectPool
 { 
     protected TPool Pool;
-    protected abstract int CountScoreByDefeat { get; }
+    public abstract int CountScoreByDefeat { get; set; }
     protected CharacterController ChController { get; private set; }
     protected HandlerScore _handlerScore;
     public bool IsFirstEnterToTeleport { get; set; } = false;
@@ -43,12 +43,20 @@ where TPool : ObjectPool
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.TryGetComponent<Bullet>(out var playerBullet)) HitBullet();
+        if (other.gameObject.TryGetComponent<Bullet>(out var playerBullet))
+        {
+            _handlerScore.CountDefeatedEnemy(CountScoreByDefeat);
+            HitBullet();
+        }
     }
     
     private void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log($"{typeof(BaseEnemy<>)} Laser Trigger");
-        if (other.TryGetComponent<ShootLaser>( out var laser)) HitLaser();
+        if (other.TryGetComponent<ShootLaser>(out var laser))
+        {
+            _handlerScore.CountDefeatedEnemy(CountScoreByDefeat);
+            HitLaser();
+        }
     }
 }

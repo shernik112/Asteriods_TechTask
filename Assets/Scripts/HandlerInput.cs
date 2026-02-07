@@ -10,7 +10,7 @@ public class HandlerInput : ManagedBehaviour
         if (Input.GetMouseButtonDown(1))
         {
             Debug.Log($"{typeof(HandlerInput)} Laser Shoot");
-            _chController.GetShootLaser.TryShoot();
+            _chController.Laser.TryShoot();
         }
     }
 }

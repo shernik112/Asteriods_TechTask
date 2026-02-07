@@ -3,7 +3,7 @@ using UnityEngine;
 public class UfoBehaviour : BaseEnemy<UfoPool>
 {
     [SerializeField] private float speed = default;
-    [field:SerializeField] protected override int CountScoreByDefeat { get; } = default;
+    [field:SerializeField] public override int CountScoreByDefeat { get; set; } = default;
 
     protected override void OnUpdate()
     {

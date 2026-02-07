@@ -4,24 +4,24 @@ public class TeleportBorder : ManagedBehaviour
 {
     [SerializeField] private bool isHorizonWall = default;
     private readonly float _tpOffset = 0.35f;
-    protected virtual void OnTriggerEnter2D(Collider2D other)
+    
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.TryGetComponent<IEnemy>(out var enemy))
         {
-            var enemy = other.gameObject.GetComponent<IEnemy>();
-            if (other.gameObject.GetComponent<IEnemy>().IsFirstEnterToTeleport)
+            if (enemy.IsFirstEnterToTeleport)
             {
                 enemy.IsFirstEnterToTeleport = false;
                 return;
             }
             TeleportationObject(other);
         }
-        if (other.CompareTag("Player"))
+        if (other.TryGetComponent<CharacterController>(out var player))
             TeleportationObject(other);
         
     }
 
-    protected void TeleportationObject(Collider2D otherObj)
+    private void TeleportationObject(Collider2D otherObj)
     {
         var pos = otherObj.transform.position;
         

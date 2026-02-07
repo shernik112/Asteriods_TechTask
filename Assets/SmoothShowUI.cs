@@ -25,18 +25,16 @@ public class SmoothShowUI : ManagedBehaviour
     private void Awake()
     {
         _cg = GetComponent<CanvasGroup>();
-    }
-
-    private void OnEnable()
-    {
         _chController.OnHitPlayer += SmoothShow;
         _restartInvoke.OnRestartGame += SmoothShow;
     }
-    private void OnDisable()
+    
+    private void OnDestroy()
     {
         _chController.OnHitPlayer -= SmoothShow;
         _restartInvoke.OnRestartGame -= SmoothShow;
     }
+    
     private void SmoothShow()
     {
         Debug.Log($"{typeof(SmoothShowUI)} SmoothShow");

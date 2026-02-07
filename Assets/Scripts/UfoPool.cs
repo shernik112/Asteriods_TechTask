@@ -3,7 +3,14 @@ using Zenject;
 
 public class UfoPool : ObjectPool
 {
-    [Inject] private GameObject _ufoPrefab;
+    private GameObject _ufoPrefab;
+    
+    [Inject]
+    public void Construct(GameObject ufoPrefab)
+    {
+        _ufoPrefab = ufoPrefab;
+    }
+    
     protected override void Awake()
     {
         PoolPrefab = _ufoPrefab;

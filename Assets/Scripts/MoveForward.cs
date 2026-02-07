@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class MoveForward : ManagedBehaviour
 {
-    public float defaultSpeed = 1.2f;
     [HideInInspector]public float currentSpeed;
+    public float defaultSpeed = 1.2f;
 
     private void Awake()
     {

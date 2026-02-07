@@ -10,10 +10,9 @@ public class RestartInvoke: ManagedBehaviour
     private void Awake()
     {
         _button = GetComponent<Button>();
+        _button.onClick.AddListener(InvokeRestartGame);
     }
-
-    private void OnEnable() => _button.onClick.AddListener(InvokeRestartGame);
-
-    private void OnDisable() => _button.onClick.RemoveListener(InvokeRestartGame);
+    
+    private void OnDestroy() => _button.onClick.RemoveListener(InvokeRestartGame);
     private void InvokeRestartGame() => OnRestartGame.Invoke();
 }

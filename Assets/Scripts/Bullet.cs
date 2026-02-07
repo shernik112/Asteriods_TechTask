@@ -1,10 +1,12 @@
 using UnityEngine;
 using Zenject;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class Bullet : ManagedBehaviour
 {
     [Inject] private BulletPool _bulletPool;
-    [SerializeField] private float moveSpeed = default;
+    [field: SerializeField] 
+    public float MoveSpeed { get; private set; } = default;
     private Rigidbody2D _rg;
 
     private void Awake()
@@ -14,7 +16,7 @@ public class Bullet : ManagedBehaviour
 
     protected override void OnFixedUpdate()
     { 
-        _rg.linearVelocity = transform.up * moveSpeed;
+        _rg.linearVelocity = transform.up * MoveSpeed;
     }
 
     private void OnCollisionEnter2D(Collision2D other)

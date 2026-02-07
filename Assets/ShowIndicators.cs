@@ -5,15 +5,21 @@ using Zenject;
 
 public class ShowIndicators : ManagedBehaviour
 {
-    [Inject] private CharacterController _chController;
+    private StringBuilder _sb = new StringBuilder();
+    private CharacterController _chController;
     private ShootLaser _shootLaser;
     private TMP_Text _text;
-    private StringBuilder _sb = new StringBuilder();
+
+    [Inject]
+    public void Construct(CharacterController chController)
+    {
+        _chController = chController;
+    }
     
     private void Awake()
     {
         _text = GetComponent<TMP_Text>();
-        _shootLaser = _chController.GetShootLaser;
+        _shootLaser = _chController.Laser;
     }
 
     protected override void OnUpdate()
@@ -40,10 +46,10 @@ public class ShowIndicators : ManagedBehaviour
 
     private string GetPlayerVelocity()
     {
-        Vector2 velocity = _chController.rb.linearVelocity;
+        Vector2 velocity = _chController.Rb.linearVelocity;
         return $"Velocity(X:{velocity.x:F2}  Y:{velocity.y:F2})";
     }
 
     private string GetCountLaserShot() => $"Count Laser Shots({_shootLaser.CurrentCountShоtLaser})";
-    private string GetRechargeTime() => $"Recharge Time({Mathf.Max(0,_shootLaser.RechargeDuration - _shootLaser.lastRechargeTime)})";
+    private string GetRechargeTime() => $"Recharge Time({Mathf.Max(0,_shootLaser.RechargeDuration - _shootLaser.LastRechargeTime)})";
 }

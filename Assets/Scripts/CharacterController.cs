@@ -4,54 +4,61 @@ using Zenject;
 
 [RequireComponent(typeof(Rigidbody2D),typeof(SpriteRenderer))]
 public class CharacterController : ManagedBehaviour
-{
-    public ShootLaser GetShootLaser => _shootLaser;
+{ 
+    public event Action OnHitPlayer;
+    
     [SerializeField] private float moveSpeed = default;
     [SerializeField] private float speedAcceleration = default;
     [SerializeField] private float rotateSpeed = default;
     [SerializeField] private float rotateAcceleration = default;
-    [Inject] private RestartInvoke _restartInvoke;
-    private ShootLaser _shootLaser;
+    
+    private RestartInvoke _restartInvoke;
     private SpriteRenderer _spriteRenderer;
     private Vector2 _input;
-    public Rigidbody2D rb;
-    public event Action OnHitPlayer;
+    
+    public ShootLaser Laser { get; private set; }
+    public Rigidbody2D Rb { get; private set; }
 
-    private void OnEnable() => _restartInvoke.OnRestartGame += SetActive;
-
-    private void OnDisable() => _restartInvoke.OnRestartGame -= SetActive;
-
+    [Inject]
+    public void Construct(RestartInvoke restartInvoke)
+    {
+        _restartInvoke = restartInvoke;
+    }
+    
     private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
-        _shootLaser = GetComponentInChildren<ShootLaser>(true);
+        Laser = GetComponentInChildren<ShootLaser>(true);
+        Rb = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _restartInvoke.OnRestartGame += SetActive;
     }
+    private void OnDestroy() => _restartInvoke.OnRestartGame -= SetActive;
+
 
     protected override void OnUpdate()
     {
         _input = new Vector2(Input.GetAxisRaw("Horizontal"), Mathf.Clamp01(Input.GetAxisRaw("Vertical")));
         _input.Normalize(); 
     }
-
+    
+    protected override void  OnFixedUpdate()
+    {
+        Rb.angularVelocity = Mathf.MoveTowards(Rb.angularVelocity, -_input.x * rotateSpeed, rotateAcceleration * Time.fixedDeltaTime);
+        Vector2 targetVelocity = transform.up * _input.y * moveSpeed;
+        Rb.linearVelocity = Vector2.MoveTowards(Rb.linearVelocity, targetVelocity, speedAcceleration * Time.fixedDeltaTime);
+    }
+    
     private void OnCollisionEnter2D(Collision2D other)
     {
         Debug.Log($"{typeof(CharacterController)} OnCollisionEnter");
-        if (other.gameObject.CompareTag("Enemy"))
+        if (other.gameObject.TryGetComponent<IEnemy>(out var enemy))
         {
             Debug.Log($"Invoke OnHitPlayer; subscribers = {(OnHitPlayer == null ? 0 : OnHitPlayer.GetInvocationList().Length)}");
-            rb.linearVelocity = Vector2.zero;
-            rb.angularVelocity = default;
+            Rb.linearVelocity = Vector2.zero;
+            Rb.angularVelocity = default;
             OnHitPlayer?.Invoke();
             SetDefaultValues();
         } 
-    }
-
-    protected override void  OnFixedUpdate()
-    {
-        rb.angularVelocity = Mathf.MoveTowards(rb.angularVelocity, -_input.x * rotateSpeed, rotateAcceleration * Time.fixedDeltaTime);
-        Vector2 targetVelocity = transform.up * _input.y * moveSpeed;
-        rb.linearVelocity = Vector2.MoveTowards(rb.linearVelocity, targetVelocity, speedAcceleration * Time.fixedDeltaTime);
     }
 
     private void SetDefaultValues()

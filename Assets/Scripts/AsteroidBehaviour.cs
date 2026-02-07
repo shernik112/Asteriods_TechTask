@@ -2,11 +2,13 @@ using UnityEngine;
 using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
 
+[RequireComponent(typeof(MoveForward))]
 public class AsteroidBehaviour : BaseEnemy<AsteroidPool>
 {
     [SerializeField] private float multiplierBoost = default;
     [SerializeField] private int countStage = default;
-    [field: SerializeField] protected override int CountScoreByDefeat { get; } = default;
+    [field: SerializeField] 
+    public override int CountScoreByDefeat { get; set; } = default;
     private readonly float _createRotate = 50f;
     private readonly float _lowerRotate = 20f;
     private MoveForward _moveForward;
