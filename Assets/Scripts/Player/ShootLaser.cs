@@ -10,10 +10,10 @@ namespace Project.Player
     public class ShootLaser : ManagedBehaviour
     {
         private readonly int _defaultCountShotLaser = 3;
+        private readonly float _durationLaserShot = 0.4f;
+        private readonly float _cooldownDuration = 0.5f;
     
         private int _currentCountShotLaser = default;
-        private float _durationLaserShot = 0.4f;
-        private float _cooldownDuration = 0.5f;
         private float _lastShootTime;
         private CountLaserShots _countLaserShots;
         private RestartInvoke _restartInvoke;
