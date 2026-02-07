@@ -22,7 +22,7 @@ public class PrefabInstaller : MonoInstaller
         typeof(UfoPool),
         typeof(AsteroidPool),
         typeof(HandlerGameCondition),
-        typeof(HandlerShootLaser),
+        typeof(HandlerInput)
     };
     public override void InstallBindings()
     {
@@ -36,6 +36,7 @@ public class PrefabInstaller : MonoInstaller
         Container.Bind<GameObject>().FromInstance(bulletPrefab).WhenInjectedInto<BulletPool>();
         Container.Bind<GameObject>().FromInstance(asteroidPrefab).WhenInjectedInto<AsteroidPool>();
         Container.Bind<GameObject>().FromInstance(ufoPrefab).WhenInjectedInto<UfoPool>();
+        
         for(var i = 0; i < _singleBehaviours.Length; i++)
         {
             var behaviour = _singleBehaviours[i];

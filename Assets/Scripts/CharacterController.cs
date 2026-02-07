@@ -5,11 +5,13 @@ using Zenject;
 [RequireComponent(typeof(Rigidbody2D),typeof(SpriteRenderer))]
 public class CharacterController : ManagedBehaviour
 {
+    public ShootLaser GetShootLaser => _shootLaser;
     [SerializeField] private float moveSpeed = default;
     [SerializeField] private float speedAcceleration = default;
     [SerializeField] private float rotateSpeed = default;
     [SerializeField] private float rotateAcceleration = default;
     [Inject] private RestartInvoke _restartInvoke;
+    private ShootLaser _shootLaser;
     private SpriteRenderer _spriteRenderer;
     private Vector2 _input;
     public Rigidbody2D rb;
@@ -22,6 +24,7 @@ public class CharacterController : ManagedBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        _shootLaser = GetComponentInChildren<ShootLaser>(true);
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 

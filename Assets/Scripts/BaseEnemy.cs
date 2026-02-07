@@ -9,8 +9,9 @@ public abstract class BaseEnemy<TPool> : ManagedBehaviour, IEnemy
 where TPool : ObjectPool
 { 
     protected TPool Pool;
+    protected abstract int CountScoreByDefeat { get; }
     protected CharacterController ChController { get; private set; }
-    private HandlerScore _handlerScore;
+    protected HandlerScore _handlerScore;
     public bool IsFirstEnterToTeleport { get; set; } = false;
     
     [Inject]
@@ -31,8 +32,8 @@ where TPool : ObjectPool
         if (ChController != null) ChController.OnHitPlayer -= ReturnSelf;
     }
 
-    protected abstract void HitBullet();
-    protected abstract void HitLaser();
+    protected virtual void HitBullet() => Pool.ReturnToPool(gameObject);
+    protected virtual void HitLaser() => Pool.ReturnToPool(gameObject);
 
     private void ReturnSelf()
     {
@@ -42,23 +43,12 @@ where TPool : ObjectPool
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        Debug.Log($"Hit object: {other.gameObject.name}, tag={other.gameObject.tag}, root={other.transform.root.name}");
-        if (other.gameObject.CompareTag("PlayerBullet"))
-        {
-            if(this is AsteroidBehaviour) _handlerScore.CountDefeatedEnemy(typeof(AsteroidBehaviour));
-            if(this is UfoBehaviour) _handlerScore.CountDefeatedEnemy(typeof(UfoBehaviour));
-        }
-        if(other.gameObject.CompareTag("PlayerBullet")) HitBullet();
+        if (other.gameObject.TryGetComponent<Bullet>(out var playerBullet)) HitBullet();
     }
-
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log($"{typeof(BaseEnemy<>)} Laser Trigger");
-        if (other.gameObject.CompareTag("Laser"))
-        {
-            if(this is AsteroidBehaviour) _handlerScore.CountDefeatedEnemy(typeof(AsteroidBehaviour));
-            if(this is UfoBehaviour) _handlerScore.CountDefeatedEnemy(typeof(UfoBehaviour));
-            HitLaser();
-        }
+        if (other.TryGetComponent<ShootLaser>( out var laser)) HitLaser();
     }
 }

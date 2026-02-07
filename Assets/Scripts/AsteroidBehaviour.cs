@@ -6,6 +6,7 @@ public class AsteroidBehaviour : BaseEnemy<AsteroidPool>
 {
     [SerializeField] private float multiplierBoost = default;
     [SerializeField] private int countStage = default;
+    [field: SerializeField] protected override int CountScoreByDefeat { get; } = default;
     private readonly float _createRotate = 50f;
     private readonly float _lowerRotate = 20f;
     private MoveForward _moveForward;
@@ -45,11 +46,6 @@ public class AsteroidBehaviour : BaseEnemy<AsteroidPool>
         obj.GetComponent<AsteroidBehaviour>().InitParams(_sizeLevel + 1);
         obj.transform.position = transform.position;
         obj.transform.rotation = transform.rotation * Quaternion.Euler(0, 0, randomRotate);
-    }
-    
-    protected override void HitLaser()
-    {
-        Pool.ReturnToPool(gameObject);
     }
 
     public void SetDefaultParameters()

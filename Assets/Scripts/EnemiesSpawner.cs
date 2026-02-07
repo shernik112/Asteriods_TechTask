@@ -94,7 +94,7 @@ public class EnemiesSpawner : ManagedBehaviour
                 var pos = GetRandomPos();
                 var obj = _ufoPool.Get();
                 ActiveBoolFieldForTeleportation(obj);
-                obj.transform.position = pos;
+                        obj.transform.position = pos;
         }
 
         private float GetFloatRange(FloatRange range) => Random.Range(range.Min, range.Max);

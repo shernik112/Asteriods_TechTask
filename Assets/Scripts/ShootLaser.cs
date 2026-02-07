@@ -3,7 +3,7 @@ using UnityEngine;
 using Zenject;
 using Pixelplacement;
 
-public class HandlerShootLaser : ManagedBehaviour
+public class ShootLaser : ManagedBehaviour
 {
     public int CurrentCountShоtLaser
     {
@@ -15,19 +15,20 @@ public class HandlerShootLaser : ManagedBehaviour
 
         }
     }
-
-    [Inject] private CharacterController _chController;
+    
     [Inject] private CountLaserShots _countLaserShots;
     [Inject] private RestartInvoke _restartInvoke;
     public readonly float RechargeDuration = 12;
     private readonly int _defaultCountShotLaser = 3;
     private int _currentCountShotLaser = default;
     private float _durationLaserShot = 0.4f;
-    private GameObject _playerLaser;
     private float _cooldownDuration = 0.5f;
     private Quaternion _initialLaserRotation;
     [HideInInspector] public float lastRechargeTime;
     private float _lastShootTime;
+    private Transform _parentTransform;
+    private SpriteRenderer _spriteRenderer;
+    private Collider2D _collider2D;
 
     private void OnEnable()
     {
@@ -41,8 +42,10 @@ public class HandlerShootLaser : ManagedBehaviour
 
     private void Awake()
     {
-        _playerLaser = _chController.transform.GetChild(0)?.gameObject;
-        _initialLaserRotation = _playerLaser.transform.localRotation;
+        _parentTransform = transform.parent;
+        _initialLaserRotation = _parentTransform.localRotation;
+        TryGetComponent<SpriteRenderer>(out _spriteRenderer);
+        TryGetComponent<Collider2D>(out _collider2D);
     }
 
     public void Start()
@@ -54,32 +57,33 @@ public class HandlerShootLaser : ManagedBehaviour
     {
         lastRechargeTime += Time.deltaTime;
         _lastShootTime += Time.deltaTime;
+        
         if (lastRechargeTime >= RechargeDuration && CurrentCountShоtLaser < _defaultCountShotLaser)
         {
             lastRechargeTime = 0f;
             IncreaseCountShotLaser();
         }
-
-        if (_lastShootTime >= _cooldownDuration && CurrentCountShоtLaser > 0)
-        {
-            if (Input.GetMouseButtonDown(1))
-            {
-                Debug.Log($"{typeof(HandlerShootLaser)} ShootLaser");
-                ShootLaser();
-                CurrentCountShоtLaser -= 1;
-                _countLaserShots.UpdateValue(CurrentCountShоtLaser);
-                _lastShootTime = 0f;
-            }
-        }
     }
 
-    private void ShootLaser()
+    public void TryShoot()
     {
-        _playerLaser.SetActive(true);
+        if (_lastShootTime >= _cooldownDuration && CurrentCountShоtLaser > 0)
+        {
+            Debug.Log($"{typeof(ShootLaser)} ShootLaser");
+            Shoot();
+            CurrentCountShоtLaser -= 1;
+            _countLaserShots.UpdateValue(CurrentCountShоtLaser);
+            _lastShootTime = 0f;
+        }
+    }
+    private void Shoot()
+    {
+        ChangeVisibility(true);
         TurnLaser();
     }
     private void Restart()
     {
+        Debug.Log($"{typeof(ShootLaser)} restart event");
         CurrentCountShоtLaser = _defaultCountShotLaser;
         lastRechargeTime = default;
     }
@@ -89,12 +93,17 @@ public class HandlerShootLaser : ManagedBehaviour
     }
     private void TurnLaser()
     {
-        Tween.Rotate(_playerLaser.transform, new Vector3(0, 0, -180),Space.Self, _durationLaserShot, 0f, Tween.EaseInOut,Tween.LoopType.None,null,
+        Tween.Rotate(_parentTransform, new Vector3(0, 0, -180),Space.Self, _durationLaserShot, 0f, Tween.EaseInOut,Tween.LoopType.None,null,
             () =>
             {
-                _playerLaser.SetActive(false);
-                _playerLaser.transform.localPosition = Vector2.zero;
-                _playerLaser.transform.localRotation = _initialLaserRotation;
+                ChangeVisibility(false);
+                _parentTransform.localRotation = _initialLaserRotation;
             });
+    }
+
+    private void ChangeVisibility(bool visibility)
+    {
+        _spriteRenderer.enabled = visibility;
+        _collider2D.enabled = visibility;
     }
 }
