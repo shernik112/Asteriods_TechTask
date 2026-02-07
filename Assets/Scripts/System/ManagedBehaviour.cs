@@ -1,27 +1,30 @@
 using UnityEngine;
 
-public class ManagedBehaviour : MonoBehaviour
+namespace Project.System
 {
-    public static ReferenseSetToggle PauseAll = new ReferenseSetToggle();
+    public class ManagedBehaviour : MonoBehaviour
+    {
+        public static ReferenseSetToggle PauseAll = new ReferenseSetToggle();
     
-    protected virtual bool UpdateWhenPause => false;
-    protected virtual void OnUpdate(){}
-    protected virtual void OnFixedUpdate(){}
+        protected virtual bool UpdateWhenPause => false;
+        protected virtual void OnUpdate(){}
+        protected virtual void OnFixedUpdate(){}
 
-    private void Update()
-    {
-        if(CanUpdate())
-            OnUpdate();
-    }
+        private void Update()
+        {
+            if(CanUpdate())
+                OnUpdate();
+        }
 
-    private void FixedUpdate()
-    {
-        if (CanUpdate())
-            OnFixedUpdate();
-    }
+        private void FixedUpdate()
+        {
+            if (CanUpdate())
+                OnFixedUpdate();
+        }
 
-    private bool CanUpdate()
-    {
-        return UpdateWhenPause || !PauseAll.True;
+        private bool CanUpdate()
+        {
+            return UpdateWhenPause || !PauseAll.True;
+        }
     }
 }
