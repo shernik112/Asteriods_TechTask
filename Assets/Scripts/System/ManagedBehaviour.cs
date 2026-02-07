@@ -3,6 +3,7 @@ using UnityEngine;
 public class ManagedBehaviour : MonoBehaviour
 {
     public static ReferenseSetToggle PauseAll = new ReferenseSetToggle();
+    
     protected virtual bool UpdateWhenPause => false;
     protected virtual void OnUpdate(){}
     protected virtual void OnFixedUpdate(){}

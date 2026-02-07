@@ -7,7 +7,7 @@ public class ObjectPool : ManagedBehaviour
     protected virtual int StartCount => 5;
     
     private GameObject _poolPrefab;
-    private PrefabInstaller _installer;
+    private MainInstaller _installer;
     private Queue<GameObject> _pool = new Queue<GameObject>();
 
     [Inject]
@@ -18,7 +18,7 @@ public class ObjectPool : ManagedBehaviour
     
     protected virtual void Awake()
     {
-        _installer = FindFirstObjectByType<PrefabInstaller>();
+        _installer = FindFirstObjectByType<MainInstaller>();
     }
 
     private void Start()

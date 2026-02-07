@@ -6,19 +6,19 @@ public class HandlerScore : BaseCounter
     [SerializeField] private int countAsteroid;
     [SerializeField] private int countUfo;
     
-    private GetFinalScore _getFinalScore;
+    private FinalScore _finalScore;
 
     [Inject]
-    public void Construct(GetFinalScore getFinalScore)
+    public void Construct(FinalScore finalScore)
     {
-        _getFinalScore = getFinalScore;
+        _finalScore = finalScore;
     }
     
     public void CountDefeatedEnemy(int countDefeatedEnemy) => CountChange(countDefeatedEnemy);
 
     protected override void ResetCount()
     {
-        _getFinalScore.ShowFinalScore(Count);
+        _finalScore.ShowFinalScore(Count);
         base.ResetCount();
     }
 

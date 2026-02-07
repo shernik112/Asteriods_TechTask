@@ -608,7 +608,7 @@ MonoBehaviour:
   restartButton: {fileID: 1493370215}
   handlerScore: {fileID: 1571366919}
   countLaserShots: {fileID: 1694237064}
-  getFinalScore: {fileID: 1642498940}
+  finalScore: {fileID: 1642498940}
 --- !u!114 &556996388
 MonoBehaviour:
   m_ObjectHideFlags: 0

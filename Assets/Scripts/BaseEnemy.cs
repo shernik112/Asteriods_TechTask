@@ -13,8 +13,8 @@ where TPool : ObjectPool
     private HandlerScore _handlerScore;
     
     protected CharacterController CharacterController { get; private set; }
-    public abstract int CountScoreByDefeat { get; set; }
     public bool IsFirstEnterToTeleport { get; set; } = false;
+    public abstract int CountScoreByDefeat { get; set; }
     
     [Inject]
     public void Construct(TPool pool, CharacterController characterController, HandlerScore handlerScore)

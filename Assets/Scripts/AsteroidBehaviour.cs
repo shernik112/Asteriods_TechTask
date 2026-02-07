@@ -1,6 +1,6 @@
-using UnityEngine;
 using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
+using UnityEngine;
 
 public class AsteroidBehaviour : BaseEnemy<AsteroidPool>
 {

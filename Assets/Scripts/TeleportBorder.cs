@@ -3,7 +3,8 @@ using UnityEngine;
 public class TeleportBorder : ManagedBehaviour
 {
     [SerializeField] private bool isHorizonWall = default;
-    private readonly float _tpOffset = 0.35f;
+    
+    private readonly float _teleportOffset = 0.35f;
     
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -14,11 +15,11 @@ public class TeleportBorder : ManagedBehaviour
                 enemy.IsFirstEnterToTeleport = false;
                 return;
             }
+            
             TeleportationObject(other);
         }
         if (other.TryGetComponent<CharacterController>(out var player))
             TeleportationObject(other);
-        
     }
 
     private void TeleportationObject(Collider2D otherObj)
@@ -33,6 +34,6 @@ public class TeleportBorder : ManagedBehaviour
 
     private float GetTargetPos(float tpPos)
     {
-        return -Mathf.Sign(tpPos) * (Mathf.Abs(tpPos) - _tpOffset);
+        return -Mathf.Sign(tpPos) * (Mathf.Abs(tpPos) - _teleportOffset);
     }
 }
