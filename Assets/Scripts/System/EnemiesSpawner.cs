@@ -70,7 +70,7 @@ namespace Project.System
                         StartCreate();
                 }
 
-                protected override void OnUpdate()
+                protected override void ManagedUpdate()
                 {
                         _lastTimeAsteroid += Time.deltaTime;
                         _lastTimeUfo += Time.deltaTime;

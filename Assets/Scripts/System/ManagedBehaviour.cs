@@ -4,22 +4,22 @@ namespace Project.System
 {
     public class ManagedBehaviour : MonoBehaviour
     {
-        public static ReferenseSetToggle PauseAll = new ReferenseSetToggle();
+        protected static ReferenseSetToggle PauseAll = new ReferenseSetToggle();
     
         protected virtual bool UpdateWhenPause => false;
-        protected virtual void OnUpdate(){}
-        protected virtual void OnFixedUpdate(){}
+        protected virtual void ManagedUpdate(){}
+        protected virtual void ManagedFixedUpdate(){}
 
         private void Update()
         {
             if(CanUpdate())
-                OnUpdate();
+                ManagedUpdate();
         }
 
         private void FixedUpdate()
         {
             if (CanUpdate())
-                OnFixedUpdate();
+                ManagedFixedUpdate();
         }
 
         private bool CanUpdate()

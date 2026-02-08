@@ -8,7 +8,7 @@ namespace Project.System
     
         protected override bool UpdateWhenPause => true;
 
-        protected override void OnUpdate()
+        protected override void ManagedUpdate()
         {
             UpdateLockCondition();
         }

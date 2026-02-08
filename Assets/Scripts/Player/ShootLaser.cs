@@ -67,7 +67,7 @@ namespace Project.Player
             CurrentCountShоtLaser = _defaultCountShotLaser;
         }
 
-        protected override void OnUpdate()
+        protected override void ManagedUpdate()
         {
             LastRechargeTime += Time.deltaTime;
             _lastShootTime += Time.deltaTime;

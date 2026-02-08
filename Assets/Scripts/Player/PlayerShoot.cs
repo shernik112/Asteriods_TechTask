@@ -18,7 +18,7 @@ namespace Project.Player
         {
             _bulletPool = bulletPool;
         }
-        protected override void OnUpdate()
+        protected override void ManagedUpdate()
         {
             _lastTime += Time.deltaTime;
         }

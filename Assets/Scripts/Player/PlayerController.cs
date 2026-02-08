@@ -47,7 +47,7 @@ namespace Project.Player
             _input.Normalize();
         }
     
-        protected override void  OnFixedUpdate()
+        protected override void  ManagedFixedUpdate()
         {
             Rb.angularVelocity = Mathf.MoveTowards(Rb.angularVelocity, -_input.x * rotateSpeed, rotateAcceleration * Time.fixedDeltaTime);
             Vector2 targetVelocity = transform.up * _input.y * moveSpeed;

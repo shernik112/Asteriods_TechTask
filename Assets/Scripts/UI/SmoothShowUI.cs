@@ -9,9 +9,12 @@ namespace Project.UI
     public class SmoothShowUI : ManagedBehaviour
     {
         [SerializeField] private float showTime = default;
+        
         private HandlerGameCondition _gameCondition;
         private PlayerController _playerController;
         private RestartInvoke _restartInvoke;
+        private CanvasGroup _cg;
+        private bool _isShowNow;
     
         [Inject]
         public void Construct(
@@ -23,8 +26,6 @@ namespace Project.UI
             _playerController = playerController;
             _restartInvoke = restartInvoke;
         }
-        private bool _isShowNow;
-        private CanvasGroup _cg;
 
         private void Awake()
         {

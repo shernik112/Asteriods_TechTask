@@ -8,7 +8,7 @@ namespace Project.Enemies
         [SerializeField] private float speed = default;
         [field:SerializeField] public override int CountScoreByDefeat { get; set; } = default;
 
-        protected override void OnUpdate()
+        protected override void ManagedUpdate()
         {
             Vector2 posPlayer = PlayerController.gameObject.transform.position;
             var targetDir = posPlayer - (Vector2)transform.position;

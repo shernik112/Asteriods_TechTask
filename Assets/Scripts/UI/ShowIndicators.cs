@@ -26,7 +26,7 @@ namespace Project.UI
             _shootLaser = _playerController.Laser;
         }
 
-        protected override void OnUpdate()
+        protected override void ManagedUpdate()
         {
             _sb.Clear();
             _sb.AppendLine(GetPlayerTranform());

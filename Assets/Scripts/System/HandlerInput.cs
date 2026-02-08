@@ -8,7 +8,7 @@ namespace Project.System
     {
         [Inject] private PlayerController _playerController;
 
-        protected override void OnUpdate()
+        protected override void ManagedUpdate()
         {
             var input = new Vector2(Input.GetAxisRaw("Horizontal"), Mathf.Clamp01(Input.GetAxisRaw("Vertical")));
             _playerController.SetInput(input);

@@ -28,7 +28,7 @@ namespace Project.Enemies
             _currentSpeed = _defaultSpeed;
         }
 
-        protected override void OnUpdate()
+        protected override void ManagedUpdate()
         {
             transform.Translate(Vector2.right * _currentSpeed * Time.deltaTime, Space.Self);
         }

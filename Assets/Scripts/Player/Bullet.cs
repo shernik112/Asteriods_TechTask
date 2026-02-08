@@ -23,7 +23,7 @@ namespace Project.Player
             _rg = GetComponent<Rigidbody2D>();
         }
 
-        protected override void OnFixedUpdate()
+        protected override void ManagedFixedUpdate()
         { 
             _rg.linearVelocity = transform.up * MoveSpeed;
         }
