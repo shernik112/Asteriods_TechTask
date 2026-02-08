@@ -4,7 +4,7 @@ using Zenject;
 
 namespace Project.Player
 {
-    public class PlayerShoot : ManagedBehaviour
+    public class PlayerShoot : MonoBehaviour
     {
         [SerializeField] private float cooldown = default;
         [SerializeField] private float instantiateOffset = default;
@@ -18,7 +18,7 @@ namespace Project.Player
         {
             _bulletPool = bulletPool;
         }
-        protected override void ManagedUpdate()
+        private void Update()
         {
             _lastTime += Time.deltaTime;
         }

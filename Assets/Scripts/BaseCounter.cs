@@ -7,7 +7,7 @@ using Zenject;
 namespace Project.UI
 {
     [RequireComponent(typeof(TMP_Text))]
-    public abstract class BaseCounter : ManagedBehaviour
+    public abstract class BaseCounter : MonoBehaviour
     {
         protected int Count;
         protected TMP_Text Text;

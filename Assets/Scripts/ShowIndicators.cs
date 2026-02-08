@@ -7,7 +7,7 @@ using Zenject;
 
 namespace Project.UI
 {
-    public class ShowIndicators : ManagedBehaviour
+    public class ShowIndicators : MonoBehaviour
     {
         private StringBuilder _sb = new StringBuilder();
         private PlayerController _playerController;
@@ -26,7 +26,7 @@ namespace Project.UI
             _shootLaser = _playerController.Laser;
         }
 
-        protected override void ManagedUpdate()
+        private void Update()
         {
             _sb.Clear();
             _sb.AppendLine(GetPlayerTranform());

@@ -4,7 +4,7 @@ using Zenject;
 
 namespace Project.System
 {
-    public class ObjectPool : ManagedBehaviour
+    public class ObjectPool : MonoBehaviour
     {
         protected virtual int StartCount => 5;
     

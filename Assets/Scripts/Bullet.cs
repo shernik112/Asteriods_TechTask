@@ -5,7 +5,7 @@ using Zenject;
 namespace Project.Player
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class Bullet : ManagedBehaviour
+    public class Bullet : MonoBehaviour
     {
         private BulletPool _bulletPool;
         private Rigidbody2D _rg;
@@ -23,7 +23,7 @@ namespace Project.Player
             _rg = GetComponent<Rigidbody2D>();
         }
 
-        protected override void ManagedFixedUpdate()
+        private void Update()
         { 
             _rg.linearVelocity = transform.up * MoveSpeed;
         }

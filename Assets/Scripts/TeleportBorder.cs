@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Project.Scene
 {
-    public class TeleportBorder : ManagedBehaviour
+    public class TeleportBorder : MonoBehaviour
     {
         [SerializeField] private bool isHorizonWall = default;
     

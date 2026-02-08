@@ -11,7 +11,7 @@ namespace Project.Enemies
         bool IsFirstEnterToTeleport { get ; set; }
     }
 
-    public abstract class BaseEnemy<TPool> : ManagedBehaviour, IEnemy
+    public abstract class BaseEnemy<TPool> : MonoBehaviour, IEnemy
         where TPool : ObjectPool
     { 
         protected TPool Pool;

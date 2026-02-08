@@ -7,7 +7,7 @@ using Zenject;
 namespace Project.Player
 {
     [RequireComponent(typeof(SpriteRenderer),typeof(Collider2D))]
-    public class ShootLaser : ManagedBehaviour
+    public class ShootLaser : MonoBehaviour
     {
         private readonly int _defaultCountShotLaser = 3;
         private readonly float _durationLaserShot = 0.4f;
@@ -67,7 +67,7 @@ namespace Project.Player
             CurrentCountShоtLaser = _defaultCountShotLaser;
         }
 
-        protected override void ManagedUpdate()
+        private void Update()
         {
             LastRechargeTime += Time.deltaTime;
             _lastShootTime += Time.deltaTime;

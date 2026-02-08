@@ -7,7 +7,7 @@ using Zenject;
 namespace Project.Player
 {
     [RequireComponent(typeof(Rigidbody2D),typeof(SpriteRenderer))]
-    public class PlayerController : ManagedBehaviour
+    public class PlayerController : MonoBehaviour
     { 
         public event Action OnHitPlayer;
     
@@ -47,7 +47,7 @@ namespace Project.Player
             _input.Normalize();
         }
     
-        protected override void  ManagedFixedUpdate()
+        private void FixedUpdate()
         {
             Rb.angularVelocity = Mathf.MoveTowards(Rb.angularVelocity, -_input.x * rotateSpeed, rotateAcceleration * Time.fixedDeltaTime);
             Vector2 targetVelocity = transform.up * _input.y * moveSpeed;

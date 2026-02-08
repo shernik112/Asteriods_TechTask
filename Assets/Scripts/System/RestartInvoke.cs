@@ -3,7 +3,7 @@ using Project.System;
 using UnityEngine;
 using UnityEngine.UI;
 [RequireComponent(typeof(Button))]
-public class RestartInvoke: ManagedBehaviour
+public class RestartInvoke: MonoBehaviour
 {
     public event Action OnRestartGame;
     private Button _button;

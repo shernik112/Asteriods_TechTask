@@ -4,11 +4,11 @@ using Zenject;
 
 namespace Project.System
 {
-    public class HandlerInput : ManagedBehaviour
+    public class HandlerInput : MonoBehaviour
     {
         [Inject] private PlayerController _playerController;
 
-        protected override void ManagedUpdate()
+        private void Update()
         {
             var input = new Vector2(Input.GetAxisRaw("Horizontal"), Mathf.Clamp01(Input.GetAxisRaw("Vertical")));
             _playerController.SetInput(input);

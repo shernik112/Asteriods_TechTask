@@ -6,7 +6,7 @@ using Zenject;
 
 namespace Project.UI
 {
-    public class SmoothShowUI : ManagedBehaviour
+    public class SmoothShowUI : MonoBehaviour
     {
         [SerializeField] private float showTime = default;
         

@@ -2,11 +2,11 @@ using UnityEngine;
 
 namespace Project.System
 {
-    public class BlockCursor : ManagedBehaviour
+    public class BlockCursor : MonoBehaviour
     {
         public ReferenseSetToggle LockCursor = new ReferenseSetToggle();
 
-        protected override void ManagedUpdate()
+        private void Update()
         {
             UpdateLockCondition();
         }

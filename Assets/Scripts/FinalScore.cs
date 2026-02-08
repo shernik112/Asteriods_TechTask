@@ -1,9 +1,10 @@
 using Project.System;
 using TMPro;
+using UnityEngine;
 
 namespace Project.UI
 {
-    public class FinalScore : ManagedBehaviour
+    public class FinalScore : MonoBehaviour
     {
         private TMP_Text _text;
 

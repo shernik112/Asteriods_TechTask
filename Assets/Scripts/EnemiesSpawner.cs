@@ -16,7 +16,7 @@ namespace Project.System
                 }
         }
 
-        public class EnemiesSpawner : ManagedBehaviour
+        public class EnemiesSpawner : MonoBehaviour
         {
                 private AsteroidPool _asteroidPool;
                 private UfoPool _ufoPool;
@@ -70,7 +70,7 @@ namespace Project.System
                         StartCreate();
                 }
 
-                protected override void ManagedUpdate()
+                private void Update()
                 {
                         _lastTimeAsteroid += Time.deltaTime;
                         _lastTimeUfo += Time.deltaTime;

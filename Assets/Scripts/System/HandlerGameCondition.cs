@@ -1,3 +1,4 @@
+using UnityEngine;
 using Zenject;
 
 namespace Project.System
@@ -8,7 +9,7 @@ namespace Project.System
         Menu  
     }
 
-    public class HandlerGameCondition : ManagedBehaviour
+    public class HandlerGameCondition : MonoBehaviour
     {
         private GameCondition _currenGameCondition = GameCondition.Game;
         private BlockCursor _blockCursor;
