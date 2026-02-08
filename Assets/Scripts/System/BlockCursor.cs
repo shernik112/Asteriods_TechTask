@@ -5,8 +5,6 @@ namespace Project.System
     public class BlockCursor : ManagedBehaviour
     {
         public ReferenseSetToggle LockCursor = new ReferenseSetToggle();
-    
-        protected override bool UpdateWhenPause => true;
 
         protected override void ManagedUpdate()
         {

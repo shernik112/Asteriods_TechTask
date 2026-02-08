@@ -41,15 +41,9 @@ namespace Project.System
         private void HandleNewCondition()
         {
             if (_currenGameCondition == GameCondition.Game)
-            {
-                PauseAll.Remove(this);
                 _blockCursor.LockCursor.Add(this);
-            }
             else
-            {
-                PauseAll.Add(this);
                 _blockCursor.LockCursor.Remove(this);
-            }
         }
     }
 }
