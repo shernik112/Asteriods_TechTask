@@ -1,7 +1,9 @@
+using System;
 using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
 using Project.System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Project.Enemies
 {
@@ -11,21 +13,28 @@ namespace Project.Enemies
     
         [SerializeField] private float multiplierBoost = default;
         [SerializeField] private int countStage = default;
-
+        [SerializeField] private Sprite firstSizeSprite = default;
+        [SerializeField] private Sprite secondSizeSpite = default;
+        [SerializeField] private Collider2D firstSizeCollider;
+        [SerializeField] private Collider2D secondSizeCollider;
+        
         private readonly float _createRotate = 50f;
         private readonly float _lowerRotate = 20f;
         private readonly float _defaultSpeed = 1.2f;
-    
-        private Vector3 _initialScale;
+        
         private float _currentSpeed;
         private int _sizeLevel = 1;
+        private SpriteRenderer _spriteRenderer;
     
         [field: SerializeField] public override int CountScoreByDefeat { get; set; } = default;
     
         private void Awake()
         {
-            _initialScale = transform.localScale;
             _currentSpeed = _defaultSpeed;
+            _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+            _spriteRenderer.sprite = firstSizeSprite;
+            firstSizeCollider.enabled = true;
+            secondSizeCollider.enabled = false;
         }
 
         private void Update()
@@ -33,11 +42,21 @@ namespace Project.Enemies
             transform.Translate(Vector2.right * _currentSpeed * Time.deltaTime, Space.Self);
         }
 
+        private void LateUpdate()
+        {
+            _spriteRenderer.transform.localRotation = Quaternion.Inverse(transform.rotation);
+        }
+
         private void InitParams(int size)
         {
             _sizeLevel = size;
+            if (size == 2)
+            {
+                _spriteRenderer.sprite = secondSizeSpite;
+                firstSizeCollider.enabled = false;
+                secondSizeCollider.enabled = true;
+            } 
             _currentSpeed += multiplierBoost * size;
-            transform.localScale =  _initialScale / size;
         }
 
         protected override void HitBullet()
@@ -74,9 +93,12 @@ namespace Project.Enemies
                 rb.linearVelocity = Vector2.zero;
                 rb.angularVelocity = 0f;
             }
-        
+            
+            _spriteRenderer.sprite = firstSizeSprite;
+            firstSizeCollider.enabled = true;
+            secondSizeCollider.enabled = false;
+            
             _currentSpeed = _defaultSpeed;
-            transform.localScale = _initialScale;
             transform.rotation = Quaternion.identity;
             _sizeLevel = 1;
         }
