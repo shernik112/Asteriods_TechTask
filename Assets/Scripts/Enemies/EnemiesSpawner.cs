@@ -20,7 +20,7 @@ namespace Project.System
         {
                 private AsteroidPool _asteroidPool;
                 private UfoPool _ufoPool;
-                private RestartInvoke _restartInvoke;
+                private RestartButton _restartButton;
                 private FloatRange _rangeTimeAsteroid = new FloatRange(5f,10f);
                 private FloatRange _rangeTimeUfo = new FloatRange(5f,15f);
 
@@ -37,16 +37,16 @@ namespace Project.System
                 private float _currentRangeUfo;
 
                 [Inject]
-                public void Construct(AsteroidPool asteroidPool, UfoPool ufoPool, RestartInvoke restartInvoke)
+                public void Construct(AsteroidPool asteroidPool, UfoPool ufoPool, RestartButton restartButton)
                 {
                         _asteroidPool = asteroidPool;
                         _ufoPool = ufoPool;
-                        _restartInvoke = restartInvoke;
+                        _restartButton = restartButton;
                 }
 
-                private void OnEnable() => _restartInvoke.OnRestartGame += StartCreate;
+                private void OnEnable() => _restartButton.OnRestartGame += StartCreate;
         
-                private void OnDisable() => _restartInvoke.OnRestartGame -= StartCreate;
+                private void OnDisable() => _restartButton.OnRestartGame -= StartCreate;
 
                 private void StartCreate()
                 {

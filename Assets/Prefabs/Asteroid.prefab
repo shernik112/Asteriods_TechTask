@@ -81,7 +81,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 4529342722946729552, guid: 0b1fbb96c2406314d8552c4e0eb003c5, type: 3}
+  m_Sprite: {fileID: 2366485693217430211, guid: ec139977163bbde438e67cb66fb0b102, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -168,8 +168,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Project.Enemies.AsteroidBehaviour
   multiplierBoost: 1.1
   countStage: 2
-  firstSizeSprite: {fileID: -2733380461590412450, guid: 0b1fbb96c2406314d8552c4e0eb003c5, type: 3}
-  secondSizeSpite: {fileID: 4529342722946729552, guid: 0b1fbb96c2406314d8552c4e0eb003c5, type: 3}
+  firstSizeSprite: {fileID: 2366485693217430211, guid: ec139977163bbde438e67cb66fb0b102, type: 3}
+  secondSizeSpite: {fileID: 2792433196770277248, guid: ec139977163bbde438e67cb66fb0b102, type: 3}
+  firstHitSprite: {fileID: -106300907, guid: ec139977163bbde438e67cb66fb0b102, type: 3}
+  secondHitSprite: {fileID: 1337031699, guid: ec139977163bbde438e67cb66fb0b102, type: 3}
   firstSizeCollider: {fileID: 560361010544198941}
   secondSizeCollider: {fileID: 3704753740806163580}
   <CountScoreByDefeat>k__BackingField: 1000
@@ -207,8 +209,8 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 0.5
+  m_Offset: {x: 0.0034549236, y: 0}
+  m_Radius: 0.56909966
 --- !u!58 &3704753740806163580
 CircleCollider2D:
   m_ObjectHideFlags: 0

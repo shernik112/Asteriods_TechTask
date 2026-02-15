@@ -12,7 +12,7 @@ namespace Project.UI
         
         private HandlerGameCondition _gameCondition;
         private PlayerController _playerController;
-        private RestartInvoke _restartInvoke;
+        private RestartButton _restartButton;
         private CanvasGroup _cg;
         private bool _isShowNow;
     
@@ -20,24 +20,24 @@ namespace Project.UI
         public void Construct(
             HandlerGameCondition gameCondition, 
             PlayerController playerController,
-            RestartInvoke restartInvoke)
+            RestartButton restartButton)
         {
             _gameCondition = gameCondition;
             _playerController = playerController;
-            _restartInvoke = restartInvoke;
+            _restartButton = restartButton;
         }
 
         private void Awake()
         {
             _cg = GetComponent<CanvasGroup>();
             _playerController.OnHitPlayer += SmoothShow;
-            _restartInvoke.OnRestartGame += SmoothShow;
+            _restartButton.OnRestartGame += SmoothShow;
         }
     
         private void OnDestroy()
         {
             _playerController.OnHitPlayer -= SmoothShow;
-            _restartInvoke.OnRestartGame -= SmoothShow;
+            _restartButton.OnRestartGame -= SmoothShow;
         }
     
         private void SmoothShow()

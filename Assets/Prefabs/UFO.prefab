@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
+  hitSprite: {fileID: -1737167495, guid: ec139977163bbde438e67cb66fb0b102, type: 3}
   <CountScoreByDefeat>k__BackingField: 1500
 --- !u!212 &6091585830226290129
 SpriteRenderer:
@@ -98,12 +99,12 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -8700937206603377882, guid: 0b1fbb96c2406314d8552c4e0eb003c5, type: 3}
+  m_Sprite: {fileID: -1425229959082085284, guid: ec139977163bbde438e67cb66fb0b102, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 4.32, y: 1.95}
+  m_Size: {x: 1.875, y: 1.0625}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -174,7 +175,7 @@ PolygonCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 1.75, y: 0.9375}
-    newSize: {x: 4.32, y: 1.95}
+    newSize: {x: 1.875, y: 1.0625}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0

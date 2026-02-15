@@ -6,7 +6,14 @@ namespace Project.Enemies
     public class UfoBehaviour : BaseEnemy<UfoPool>
     {
         [SerializeField] private float speed = default;
+        [SerializeField] private Sprite hitSprite = default;
         [field:SerializeField] public override int CountScoreByDefeat { get; set; } = default;
+
+        protected override void Awake()
+        {
+            base.Awake();
+            HitSprite = hitSprite;
+        }
 
         private void Update()
         {

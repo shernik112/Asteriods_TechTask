@@ -13,7 +13,7 @@ namespace Project.System
         [SerializeField] private GameObject ufoPrefab = default;
         [SerializeField] private GameObject bulletPrefab = default;
         [SerializeField] private Transform rootHandlers = default;
-        [SerializeField] private RestartInvoke restartButton = default;
+        [SerializeField] private RestartButton restartButton = default;
         [SerializeField] private HandlerScore handlerScore = default;
         [SerializeField] private CountLaserShots countLaserShots = default;
         [SerializeField] private FinalScore finalScore = default;
@@ -44,7 +44,7 @@ namespace Project.System
                     .AsSingle().NonLazy();
             }
         
-            Container.Bind<RestartInvoke>().FromInstance(restartButton).AsSingle();
+            Container.Bind<RestartButton>().FromInstance(restartButton).AsSingle();
             Container.Bind<CountLaserShots>().FromInstance(countLaserShots).AsSingle();
             Container.Bind<HandlerScore>().FromInstance(handlerScore).AsSingle();
             Container.Bind<FinalScore>().FromInstance(finalScore).AsSingle();

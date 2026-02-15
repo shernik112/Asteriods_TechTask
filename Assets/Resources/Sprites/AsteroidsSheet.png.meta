@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: 0b1fbb96c2406314d8552c4e0eb003c5
+guid: ec139977163bbde438e67cb66fb0b102
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8700937206603377882
-    second: AsteroidsSheet_0
+      213: -1425229959082085284
+    second: AsteroidsSheet-export_0
   - first:
-      213: -2613553714417230856
-    second: AsteroidsSheet_1
+      213: -9642782944324126
+    second: AsteroidsSheet-export_1
   - first:
-      213: -2733380461590412450
-    second: AsteroidsSheet_2
+      213: 2366485693217430211
+    second: AsteroidsSheet-export_2
   - first:
-      213: 4529342722946729552
-    second: AsteroidsSheet_3
+      213: 2792433196770277248
+    second: AsteroidsSheet-export_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -109,7 +109,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: AsteroidsSheet_0
+      name: AsteroidsSheet-export_0
       rect:
         serializedVersion: 2
         x: 2
@@ -124,14 +124,36 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6231d6bc5bf004780800000000000000
-      internalID: -8700937206603377882
+      spriteID: c54faa547e0983ce0800000000000000
+      internalID: -1425229959082085284
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AsteroidsSheet_2
+      name: AsteroidsSheet-export_1
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 76
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e515f3a0fdbddff0800000000000000
+      internalID: -9642782944324126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AsteroidsSheet-export_2
       rect:
         serializedVersion: 2
         x: 65
@@ -146,14 +168,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e5309e6c3f4111ad0800000000000000
-      internalID: -2733380461590412450
+      spriteID: 3cad446233277d020800000000000000
+      internalID: 2366485693217430211
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AsteroidsSheet_3
+      name: AsteroidsSheet-export_3
       rect:
         serializedVersion: 2
         x: 67
@@ -168,41 +190,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0568d3385357bde30800000000000000
-      internalID: 4529342722946729552
+      spriteID: 08730809237b0c620800000000000000
+      internalID: 2792433196770277248
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AsteroidsSheet_4
+      name: AsteroidsSheet-export_4
       rect:
         serializedVersion: 2
-        x: 56
-        y: 86
-        width: 4
-        height: 4
-      alignment: 9
-      pivot: {x: 0.3301258, y: 0.4999981}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a2a6d40d13e9a5445971e3f9c9f46035
-      internalID: -696236826
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: AsteroidsSheet_5
-      rect:
-        serializedVersion: 2
-        x: 35
-        y: 42
-        width: 15
+        x: 3
+        y: 16
+        width: 28
         height: 15
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -212,8 +212,74 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c839fc4be929d9e48b0a5636a3899c07
-      internalID: -1168194688
+      spriteID: 845513a0029617342bb6fe07beac2d76
+      internalID: -1737167495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AsteroidsSheet-export_5
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 16
+        width: 22
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a4b3922168ad6864cbd5e479d3dc6097
+      internalID: -106300907
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AsteroidsSheet-export_6
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 18
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a711cf22ce595964789993e1e59bba28
+      internalID: 1337031699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AsteroidsSheet-export_7
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 90
+        width: 3
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f24bc64a50d173a4b9977db7356c2714
+      internalID: -1745580958
       vertices: []
       indices: 
       edges: []
@@ -222,7 +288,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 9248b5ca2c4490f48af4ca30a22f4b4a
+    spriteID: a2ce8e4171cfea542b959e93103b71a7
     internalID: 0
     vertices: []
     indices: 
@@ -232,14 +298,16 @@ TextureImporter:
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":16.0,"y":16.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      AsteroidsSheet_0: -8700937206603377882
-      AsteroidsSheet_1: -2613553714417230856
-      AsteroidsSheet_2: -2733380461590412450
-      AsteroidsSheet_3: 4529342722946729552
-      AsteroidsSheet_4: -696236826
-      AsteroidsSheet_5: -1168194688
+      AsteroidsSheet-export_0: -1425229959082085284
+      AsteroidsSheet-export_1: -9642782944324126
+      AsteroidsSheet-export_2: 2366485693217430211
+      AsteroidsSheet-export_3: 2792433196770277248
+      AsteroidsSheet-export_4: -1737167495
+      AsteroidsSheet-export_5: -106300907
+      AsteroidsSheet-export_6: 1337031699
+      AsteroidsSheet-export_7: -1745580958
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

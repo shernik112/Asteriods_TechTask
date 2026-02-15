@@ -16,7 +16,7 @@ namespace Project.Player
         [SerializeField] private float rotateSpeed = default;
         [SerializeField] private float rotateAcceleration = default;
     
-        private RestartInvoke _restartInvoke;
+        private RestartButton _restartButton;
         private SpriteRenderer _spriteRenderer;
         private Vector2 _input;
     
@@ -25,9 +25,9 @@ namespace Project.Player
         public Rigidbody2D Rb { get; private set; }
 
         [Inject]
-        public void Construct(RestartInvoke restartInvoke)
+        public void Construct(RestartButton restartButton)
         {
-            _restartInvoke = restartInvoke;
+            _restartButton = restartButton;
         }
     
         private void Awake()
@@ -36,10 +36,10 @@ namespace Project.Player
             PlayerShoot = GetComponent<PlayerShoot>();
             Rb = GetComponent<Rigidbody2D>();
             _spriteRenderer = GetComponent<SpriteRenderer>();
-            _restartInvoke.OnRestartGame += SetActive;
+            _restartButton.OnRestartGame += SetActive;
         }
     
-        private void OnDestroy() => _restartInvoke.OnRestartGame -= SetActive;
+        private void OnDestroy() => _restartButton.OnRestartGame -= SetActive;
 
         public void SetInput(Vector2 input)
         {

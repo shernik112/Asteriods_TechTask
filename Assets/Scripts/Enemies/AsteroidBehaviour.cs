@@ -15,6 +15,8 @@ namespace Project.Enemies
         [SerializeField] private int countStage = default;
         [SerializeField] private Sprite firstSizeSprite = default;
         [SerializeField] private Sprite secondSizeSpite = default;
+        [SerializeField] private Sprite firstHitSprite = default;
+        [SerializeField] private Sprite secondHitSprite = default;
         [SerializeField] private Collider2D firstSizeCollider;
         [SerializeField] private Collider2D secondSizeCollider;
         
@@ -24,15 +26,15 @@ namespace Project.Enemies
         
         private float _currentSpeed;
         private int _sizeLevel = 1;
-        private SpriteRenderer _spriteRenderer;
     
         [field: SerializeField] public override int CountScoreByDefeat { get; set; } = default;
     
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             _currentSpeed = _defaultSpeed;
-            _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-            _spriteRenderer.sprite = firstSizeSprite;
+            SpriteRenderer.sprite = firstSizeSprite;
+            HitSprite = firstHitSprite;
             firstSizeCollider.enabled = true;
             secondSizeCollider.enabled = false;
         }
@@ -44,7 +46,7 @@ namespace Project.Enemies
 
         private void LateUpdate()
         {
-            _spriteRenderer.transform.localRotation = Quaternion.Inverse(transform.rotation);
+            SpriteRenderer.transform.localRotation = Quaternion.Inverse(transform.rotation);
         }
 
         private void InitParams(int size)
@@ -52,7 +54,8 @@ namespace Project.Enemies
             _sizeLevel = size;
             if (size == 2)
             {
-                _spriteRenderer.sprite = secondSizeSpite;
+                SpriteRenderer.sprite = secondSizeSpite;
+                HitSprite = secondHitSprite;
                 firstSizeCollider.enabled = false;
                 secondSizeCollider.enabled = true;
             } 
@@ -94,7 +97,8 @@ namespace Project.Enemies
                 rb.angularVelocity = 0f;
             }
             
-            _spriteRenderer.sprite = firstSizeSprite;
+            SpriteRenderer.sprite = firstSizeSprite;
+            HitSprite = firstHitSprite;
             firstSizeCollider.enabled = true;
             secondSizeCollider.enabled = false;
             

@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using Project.Player;
 using Project.System;
 using Project.UI;
@@ -13,11 +15,15 @@ namespace Project.Enemies
 
     public abstract class BaseEnemy<TPool> : MonoBehaviour, IEnemy
         where TPool : ObjectPool
-    { 
+    {
+        protected Sprite HitSprite;
         protected TPool Pool;
+        
+        private readonly WaitForSeconds _timeHitReaction = new WaitForSeconds(0.08f);
         private HandlerScore _handlerScore;
-    
+        
         protected PlayerController PlayerController { get; private set; }
+        protected SpriteRenderer SpriteRenderer;
         public bool IsFirstEnterToTeleport { get; set; } = false;
         public abstract int CountScoreByDefeat { get; set; }
     
@@ -27,6 +33,11 @@ namespace Project.Enemies
             Pool = pool;
             PlayerController = playerController;
             _handlerScore = handlerScore;
+        }
+
+        protected virtual void Awake()
+        {
+            SpriteRenderer = GetComponentInChildren<SpriteRenderer>();
         }
 
         private void OnEnable()
@@ -52,20 +63,36 @@ namespace Project.Enemies
         private void OnCollisionEnter2D(Collision2D other)
         {
             if (other.gameObject.TryGetComponent<Bullet>(out var playerBullet))
-            {
-                _handlerScore.CountDefeatedEnemy(CountScoreByDefeat);
-                HitBullet();
-            }
+                StartCoroutine(HitBulletReaction());
         }
     
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.TryGetComponent<ShootLaser>(out var laser))
-            {
-                _handlerScore.CountDefeatedEnemy(CountScoreByDefeat);
-                HitLaser();
-            }
+                StartCoroutine(HitLaserReaction());
+            
             Debug.Log($"{typeof(BaseEnemy<>)} Laser Trigger");
+        }
+        
+        private IEnumerator HitLaserReaction()
+        {
+            var defaultSprite = SpriteRenderer.sprite;
+            if (HitSprite != null) SpriteRenderer.sprite = HitSprite;
+            yield return _timeHitReaction;
+            SpriteRenderer.sprite = defaultSprite;
+            _handlerScore.CountDefeatedEnemy(CountScoreByDefeat);
+            HitLaser();
+        }
+
+        private IEnumerator HitBulletReaction()
+        {
+            var defaultSprite = SpriteRenderer.sprite;
+            if (HitSprite != null)
+                SpriteRenderer.sprite = HitSprite;
+            yield return _timeHitReaction;
+            SpriteRenderer.sprite = defaultSprite;
+            _handlerScore.CountDefeatedEnemy(CountScoreByDefeat);
+            HitBullet();
         }
     }
 }

@@ -16,7 +16,7 @@ namespace Project.Player
         private int _currentCountShotLaser = default;
         private float _lastShootTime;
         private CountLaserShots _countLaserShots;
-        private RestartInvoke _restartInvoke;
+        private RestartButton _restartButton;
         private Quaternion _initialLaserRotation;
         private Transform _parentTransform;
         private SpriteRenderer _spriteRenderer;
@@ -39,19 +39,19 @@ namespace Project.Player
         [Inject]
         public void Construct(
             CountLaserShots countLaserShots,
-            RestartInvoke restartInvoke)
+            RestartButton restartButton)
         {
             _countLaserShots = countLaserShots;
-            _restartInvoke = restartInvoke;
+            _restartButton = restartButton;
         }
         private void OnEnable()
         {
-            _restartInvoke.OnRestartGame += Restart;
+            _restartButton.OnRestartGame += Restart;
         }
 
         private void OnDisable()
         {
-            _restartInvoke.OnRestartGame -= Restart;
+            _restartButton.OnRestartGame -= Restart;
         }
 
         private void Awake()
