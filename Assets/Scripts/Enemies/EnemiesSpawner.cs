@@ -21,6 +21,7 @@ namespace Project.System
                 private AsteroidPool _asteroidPool;
                 private UfoPool _ufoPool;
                 private RestartButton _restartButton;
+                private PauseHandler _pauseHandler;
                 private FloatRange _rangeTimeAsteroid = new FloatRange(5f,10f);
                 private FloatRange _rangeTimeUfo = new FloatRange(5f,15f);
 
@@ -37,11 +38,16 @@ namespace Project.System
                 private float _currentRangeUfo;
 
                 [Inject]
-                public void Construct(AsteroidPool asteroidPool, UfoPool ufoPool, RestartButton restartButton)
+                public void Construct(
+                        AsteroidPool asteroidPool, 
+                        UfoPool ufoPool, 
+                        RestartButton restartButton,
+                        PauseHandler pauseHandler)
                 {
                         _asteroidPool = asteroidPool;
                         _ufoPool = ufoPool;
                         _restartButton = restartButton;
+                        _pauseHandler = pauseHandler;
                 }
 
                 private void OnEnable() => _restartButton.OnRestartGame += StartCreate;
@@ -72,6 +78,9 @@ namespace Project.System
 
                 private void Update()
                 {
+                        if(_pauseHandler.IsPause) 
+                                return;
+                        
                         _lastTimeAsteroid += Time.deltaTime;
                         _lastTimeUfo += Time.deltaTime;
                         if (_lastTimeAsteroid >= _currentRangeAsteroid)

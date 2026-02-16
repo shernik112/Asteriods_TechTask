@@ -6,10 +6,23 @@ namespace Project.System
 {
     public class HandlerInput : MonoBehaviour
     {
-        [Inject] private PlayerController _playerController;
+        private PlayerController _playerController;
+        private PauseHandler _pauseHandler;
 
+        [Inject]
+        public void Construct(
+            PlayerController playerController,
+            PauseHandler pauseHandler)
+        {
+            _playerController = playerController;
+            _pauseHandler = pauseHandler;
+        }
+        
         private void Update()
         {
+            if (_pauseHandler.IsPause) 
+                return;
+            
             var input = new Vector2(Input.GetAxisRaw("Horizontal"), Mathf.Clamp01(Input.GetAxisRaw("Vertical")));
             _playerController.SetInput(input);
         
