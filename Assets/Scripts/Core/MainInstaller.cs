@@ -17,6 +17,7 @@ namespace Project.System
         [SerializeField] private HandlerScore handlerScore = default;
         [SerializeField] private CountLaserShots countLaserShots = default;
         [SerializeField] private FinalScore finalScore = default;
+        [SerializeField] private MainAudio mainAudio = default;
 
         private readonly Type[] _singleBehaviours =
         {
@@ -27,7 +28,6 @@ namespace Project.System
             typeof(AsteroidPool),
             typeof(HandlerGameCondition),
             typeof(HandlerInput),
-            typeof(MainAudio),
             typeof(PauseHandler)
         };
     
@@ -50,6 +50,7 @@ namespace Project.System
             Container.Bind<CountLaserShots>().FromInstance(countLaserShots).AsSingle();
             Container.Bind<HandlerScore>().FromInstance(handlerScore).AsSingle();
             Container.Bind<FinalScore>().FromInstance(finalScore).AsSingle();
+            Container.Bind<MainAudio>().FromInstance(mainAudio).AsSingle();
         }
 
         public void InjectGo(GameObject obj)
