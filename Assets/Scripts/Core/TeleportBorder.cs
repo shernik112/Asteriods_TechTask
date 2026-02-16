@@ -2,14 +2,24 @@ using Project.Enemies;
 using Project.Player;
 using Project.System;
 using UnityEngine;
+using Zenject;
 
 namespace Project.Scene
 {
     public class TeleportBorder : MonoBehaviour
     {
         [SerializeField] private bool isHorizonWall = default;
+        [SerializeField] private AudioClip playerDashClip = default;
     
         private readonly float _teleportOffset = 0.35f;
+
+        private MainAudio _mainAudio;
+
+        [Inject]
+        public void Construct(MainAudio mainAudio)
+        {
+            _mainAudio = mainAudio;
+        }
     
         private void OnTriggerEnter2D(Collider2D other)
         {
@@ -23,8 +33,12 @@ namespace Project.Scene
             
                 TeleportationObject(other);
             }
-            if (other.TryGetComponent<PlayerController>(out var player))
+
+            else if (other.TryGetComponent<PlayerController>(out var player))
+            {
                 TeleportationObject(other);
+                _mainAudio.PlaySfx(playerDashClip);
+            }
         }
 
         private void TeleportationObject(Collider2D otherObj)

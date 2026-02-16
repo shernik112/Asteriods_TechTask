@@ -16,11 +16,14 @@ namespace Project.Enemies
     public abstract class BaseEnemy<TPool> : MonoBehaviour, IEnemy
         where TPool : ObjectPool
     {
+        [SerializeField] private AudioClip hitClip = default;
+        
         protected Sprite HitSprite;
         protected TPool Pool;
         
         private readonly WaitForSeconds _timeHitReaction = new WaitForSeconds(0.08f);
         private HandlerScore _handlerScore;
+        private MainAudio _mainAudio;
         
         protected PlayerController PlayerController { get; private set; }
         protected SpriteRenderer SpriteRenderer;
@@ -28,11 +31,15 @@ namespace Project.Enemies
         public abstract int CountScoreByDefeat { get; set; }
     
         [Inject]
-        public void Construct(TPool pool, PlayerController playerController, HandlerScore handlerScore)
+        public void Construct(TPool pool, 
+            PlayerController playerController, 
+            HandlerScore handlerScore,
+            MainAudio mainAudio)
         {
             Pool = pool;
             PlayerController = playerController;
             _handlerScore = handlerScore;
+            _mainAudio = mainAudio;
         }
 
         protected virtual void Awake()
@@ -77,8 +84,12 @@ namespace Project.Enemies
         private IEnumerator HitLaserReaction()
         {
             var defaultSprite = SpriteRenderer.sprite;
-            if (HitSprite != null) SpriteRenderer.sprite = HitSprite;
+            
+            if (HitSprite != null) 
+                SpriteRenderer.sprite = HitSprite;
+            _mainAudio.PlaySfx(hitClip);
             yield return _timeHitReaction;
+            
             SpriteRenderer.sprite = defaultSprite;
             _handlerScore.CountDefeatedEnemy(CountScoreByDefeat);
             HitLaser();
@@ -87,9 +98,12 @@ namespace Project.Enemies
         private IEnumerator HitBulletReaction()
         {
             var defaultSprite = SpriteRenderer.sprite;
+            
             if (HitSprite != null)
                 SpriteRenderer.sprite = HitSprite;
+            _mainAudio.PlaySfx(hitClip);
             yield return _timeHitReaction;
+            
             SpriteRenderer.sprite = defaultSprite;
             _handlerScore.CountDefeatedEnemy(CountScoreByDefeat);
             HitBullet();

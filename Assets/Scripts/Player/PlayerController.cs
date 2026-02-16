@@ -10,13 +10,15 @@ namespace Project.Player
     public class PlayerController : MonoBehaviour
     { 
         public event Action OnHitPlayer;
-    
+
+        [SerializeField] private AudioClip destructionClip = default;
         [SerializeField] private float moveSpeed = default;
         [SerializeField] private float speedAcceleration = default;
         [SerializeField] private float rotateSpeed = default;
         [SerializeField] private float rotateAcceleration = default;
     
         private RestartButton _restartButton;
+        private MainAudio _mainAudio;
         private SpriteRenderer _spriteRenderer;
         private Vector2 _input;
     
@@ -25,9 +27,12 @@ namespace Project.Player
         public Rigidbody2D Rb { get; private set; }
 
         [Inject]
-        public void Construct(RestartButton restartButton)
+        public void Construct(
+            RestartButton restartButton,
+            MainAudio mainAudio)
         {
             _restartButton = restartButton;
+            _mainAudio = mainAudio;
         }
     
         private void Awake()
@@ -61,6 +66,7 @@ namespace Project.Player
                 Debug.Log($"Invoke OnHitPlayer; subscribers = {(OnHitPlayer == null ? 0 : OnHitPlayer.GetInvocationList().Length)}");
                 Rb.linearVelocity = Vector2.zero;
                 Rb.angularVelocity = default;
+                _mainAudio.PlaySfx(destructionClip);
                 OnHitPlayer?.Invoke();
                 SetDefaultValues();
             } 

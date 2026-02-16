@@ -26,7 +26,8 @@ namespace Project.System
             typeof(UfoPool),
             typeof(AsteroidPool),
             typeof(HandlerGameCondition),
-            typeof(HandlerInput)
+            typeof(HandlerInput),
+            typeof(MainAudio)
         };
     
         public override void InstallBindings()

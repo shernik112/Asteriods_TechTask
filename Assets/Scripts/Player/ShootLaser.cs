@@ -9,6 +9,9 @@ namespace Project.Player
     [RequireComponent(typeof(SpriteRenderer),typeof(Collider2D))]
     public class ShootLaser : MonoBehaviour
     {
+        [SerializeField] private AudioClip newChargeClip = default;
+        [SerializeField] private AudioClip shootLaserClip = default;
+        
         private readonly int _defaultCountShotLaser = 3;
         private readonly float _durationLaserShot = 0.4f;
         private readonly float _cooldownDuration = 0.5f;
@@ -21,6 +24,7 @@ namespace Project.Player
         private Transform _parentTransform;
         private SpriteRenderer _spriteRenderer;
         private Collider2D _collider2D;
+        private MainAudio _mainAudio;
     
         public float LastRechargeTime { get; private set; }
         public float RechargeDuration => 12;
@@ -39,10 +43,12 @@ namespace Project.Player
         [Inject]
         public void Construct(
             CountLaserShots countLaserShots,
-            RestartButton restartButton)
+            RestartButton restartButton,
+            MainAudio mainAudio)
         {
             _countLaserShots = countLaserShots;
             _restartButton = restartButton;
+            _mainAudio = mainAudio;
         }
         private void OnEnable()
         {
@@ -93,6 +99,7 @@ namespace Project.Player
     
         private void Shoot()
         {
+            _mainAudio.PlaySfx(shootLaserClip);
             ChangeVisibility(true);
             TurnLaser();
         }
@@ -107,6 +114,7 @@ namespace Project.Player
         private void IncreaseCountShotLaser()
         {
             CurrentCountShоtLaser += 1;
+            _mainAudio.PlaySfx(newChargeClip);
         }
     
         private void TurnLaser()

@@ -166,6 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f2a043e372aa334c8df09c2433d6656, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Project.Enemies.AsteroidBehaviour
+  hitClip: {fileID: 8300000, guid: bc2ebc951a7d4f14da00fd136812cbc2, type: 3}
   multiplierBoost: 1.1
   countStage: 2
   firstSizeSprite: {fileID: 2366485693217430211, guid: ec139977163bbde438e67cb66fb0b102, type: 3}

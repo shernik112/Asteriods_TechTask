@@ -167,6 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d582843a28feb364499225c578301fbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destructionClip: {fileID: 8300000, guid: c9df04f783866ce40893cc561d250d94, type: 3}
   moveSpeed: 11
   speedAcceleration: 6
   rotateSpeed: 250
@@ -183,8 +184,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0844f172b7a5a5a49b200def817a7239, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldown: 0.25
-  instantiateOffset: 0.6
+  bulletShotClip: {fileID: 8300000, guid: 690982e4761760a42906fcc2dc5a2d2b, type: 3}
+  cooldown: 0.2
+  instantiateOffset: 0.5
 --- !u!60 &109552026019927316
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -223,7 +225,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.5625, y: 0.75}
+    oldSize: {x: 0.875, y: 0.9375}
     newSize: {x: 0.5625, y: 0.75}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
