@@ -1,3 +1,4 @@
+using System.Collections;
 using Project.Enemies;
 using Project.Player;
 using Project.System;
@@ -10,7 +11,8 @@ namespace Project.Scene
     {
         [SerializeField] private bool isHorizonWall = default;
         [SerializeField] private AudioClip playerDashClip = default;
-    
+
+
         private readonly float _teleportOffset = 0.35f;
 
         private MainAudio _mainAudio;
@@ -44,7 +46,7 @@ namespace Project.Scene
         private void TeleportationObject(Collider2D otherObj)
         {
             var pos = otherObj.transform.position;
-        
+            
             if (isHorizonWall)
                 otherObj.transform.position = new Vector2(pos.x, GetTargetPos(pos.y));
             else

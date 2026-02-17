@@ -9,6 +9,7 @@ namespace Project.UI
     public abstract class BaseCounter : MonoBehaviour
     {
         protected int Count;
+        
         protected TMP_Text Text;
         private PlayerController _сharacterController;
 
@@ -17,11 +18,13 @@ namespace Project.UI
         {
             _сharacterController = playerController;
         }
+        
         private void Awake()
         {
             Text = GetComponent<TMP_Text>();
             _сharacterController.OnHitPlayer += ResetCount;
         }
+        
         protected virtual void OnDestroy() => _сharacterController.OnHitPlayer -= ResetCount;
 
         protected virtual void ResetCount()
@@ -29,7 +32,5 @@ namespace Project.UI
             Count = default;
             Text.text = default;
         }
-
-        protected virtual void CountChange(int count){}
     }
 }

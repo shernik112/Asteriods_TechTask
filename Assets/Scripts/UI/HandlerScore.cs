@@ -18,22 +18,20 @@ namespace Project.UI
         {
             _finalScore = finalScore;
         }
-    
-        public void CountDefeatedEnemy(int countDefeatedEnemy) => CountChange(countDefeatedEnemy);
 
-        protected override void ResetCount()
-        {
-            _finalScore.ShowFinalScore(Count);
-            _targetScore = default;
-            base.ResetCount();
-        }
-
-        protected override void CountChange(int countEnemy)
+        public void CountScoreDefeatedEnemy(int countDefeatedEnemy)
         {
             StopAllCoroutines();
             
-            _targetScore += countEnemy;
+            _targetScore += countDefeatedEnemy;
             StartCoroutine(CounterNewChange());
+        }
+
+        protected override void ResetCount()
+        {
+            _finalScore.ShowFinalScore(_targetScore);
+            _targetScore = default;
+            base.ResetCount();
         }
 
         private IEnumerator CounterNewChange()

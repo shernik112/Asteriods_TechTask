@@ -9,10 +9,8 @@ namespace Project.UI
     {
         [SerializeField] private Color changeColor = default;
         [SerializeField] private float durationChange = default;
-            
-        public void UpdateValue(int value) => CountChange(value);
-    
-        protected override void CountChange(int count)
+
+        public void UpdateValue(int count)
         {
             Count = count;
             Text.text = count.ToString();

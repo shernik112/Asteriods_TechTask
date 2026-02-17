@@ -49,17 +49,19 @@ namespace Project.Enemies
 
         private void OnEnable()
         {
-            if (PlayerController != null) PlayerController.OnHitPlayer += ReturnSelf;
+            if (PlayerController != null) 
+                PlayerController.OnHitPlayer += ReturnSelf;
         }
 
         private void OnDisable()
         {
-            if (PlayerController != null) PlayerController.OnHitPlayer -= ReturnSelf;
+            if (PlayerController != null) 
+                PlayerController.OnHitPlayer -= ReturnSelf;
         }
 
         protected virtual void HitBullet() => Pool.ReturnToPool(gameObject);
     
-        protected virtual void HitLaser() => Pool.ReturnToPool(gameObject);
+        private void HitLaser() => Pool.ReturnToPool(gameObject);
 
         private void ReturnSelf()
         {
@@ -70,43 +72,27 @@ namespace Project.Enemies
         private void OnCollisionEnter2D(Collision2D other)
         {
             if (other.gameObject.TryGetComponent<Bullet>(out var playerBullet))
-                StartCoroutine(HitBulletReaction());
+                StartCoroutine(PlayHitReaction(HitBullet));
         }
     
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.TryGetComponent<ShootLaser>(out var laser))
-                StartCoroutine(HitLaserReaction());
-            
-            Debug.Log($"{typeof(BaseEnemy<>)} Laser Trigger");
+                StartCoroutine(PlayHitReaction(HitLaser));
         }
         
-        private IEnumerator HitLaserReaction()
-        {
-            var defaultSprite = SpriteRenderer.sprite;
-            
-            if (HitSprite != null) 
-                SpriteRenderer.sprite = HitSprite;
-            _mainAudio.PlaySfx(hitClip);
-            yield return _timeHitReaction;
-            
-            SpriteRenderer.sprite = defaultSprite;
-            _handlerScore.CountDefeatedEnemy(CountScoreByDefeat);
-            HitLaser();
-        }
-
-        private IEnumerator HitBulletReaction()
+        private IEnumerator PlayHitReaction(Action typeHit)
         {
             var defaultSprite = SpriteRenderer.sprite;
             
             if (HitSprite != null)
                 SpriteRenderer.sprite = HitSprite;
             _mainAudio.PlaySfx(hitClip);
-            yield return _timeHitReaction;
-            
+            yield return _timeHitReaction;            
+
             SpriteRenderer.sprite = defaultSprite;
-            _handlerScore.CountDefeatedEnemy(CountScoreByDefeat);
-            HitBullet();
+            _handlerScore.CountScoreDefeatedEnemy(CountScoreByDefeat);
+            typeHit?.Invoke();
         }
     }
 }
