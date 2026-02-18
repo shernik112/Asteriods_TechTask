@@ -12,7 +12,7 @@ namespace Project.System
     public class HandlerGameCondition : MonoBehaviour
     {
         private GameCondition _currenGameCondition = GameCondition.Game;
-        private BlockCursor _blockCursor;
+        private BlockCursor _blockCursor = new BlockCursor();
 
         public GameCondition GameCondition
         {
@@ -27,12 +27,6 @@ namespace Project.System
             
             }
         }
-    
-        [Inject]
-        public void Construct(BlockCursor blockCursor)
-        {
-            _blockCursor = blockCursor;
-        }
 
         private void Start()
         {
@@ -42,9 +36,9 @@ namespace Project.System
         private void HandleNewCondition()
         {
             if (_currenGameCondition == GameCondition.Game)
-                _blockCursor.LockCursor.Add(this);
+                _blockCursor.SetCursorCondition(true);
             else
-                _blockCursor.LockCursor.Remove(this);
+                _blockCursor.SetCursorCondition(false);
         }
     }
 }

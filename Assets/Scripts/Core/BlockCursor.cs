@@ -2,18 +2,11 @@ using UnityEngine;
 
 namespace Project.System
 {
-    public class BlockCursor : MonoBehaviour
+    public class BlockCursor
     {
-        public ReferenseSetToggle LockCursor = new ReferenseSetToggle();
-
-        private void Update()
+        public void SetCursorCondition(bool isLock)
         {
-            UpdateLockCondition();
-        }
-
-        private void UpdateLockCondition()
-        {
-            if (LockCursor.True)
+            if (isLock)
             {
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;

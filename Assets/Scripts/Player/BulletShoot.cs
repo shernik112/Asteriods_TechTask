@@ -1,4 +1,4 @@
-using System;
+
 using Project.System;
 using UnityEngine;
 using Zenject;
@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 
 namespace Project.Player
 {
-    public class PlayerShoot : MonoBehaviour
+    public class BulletShoot : MonoBehaviour
     {
         [SerializeField] private AudioClip bulletShotClip = default;
         [SerializeField] private float cooldown = default;

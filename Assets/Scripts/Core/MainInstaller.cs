@@ -22,7 +22,6 @@ namespace Project.System
         private readonly Type[] _singleBehaviours =
         {
             typeof(EnemiesSpawner),
-            typeof(BlockCursor),
             typeof(BulletPool),
             typeof(UfoPool),
             typeof(AsteroidPool),

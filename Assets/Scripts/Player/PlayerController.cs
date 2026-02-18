@@ -16,29 +16,35 @@ namespace Project.Player
         [SerializeField] private float speedAcceleration = default;
         [SerializeField] private float rotateSpeed = default;
         [SerializeField] private float rotateAcceleration = default;
-    
+        [SerializeField] private AudioClip bulletShotClip = default;
+
+        private float _bulletCooldown = 0.2f;
+        private float _instantiateOffsetBullet = 0.5f;
+        private BulletPool _bulletPool;
         private RestartButton _restartButton;
         private MainAudio _mainAudio;
         private SpriteRenderer _spriteRenderer;
         private Vector2 _input;
     
         public ShootLaser Laser { get; private set; }
-        public PlayerShoot PlayerShoot { get; private set; }
+        public BulletShoot BulletShoot { get; private set; }
         public Rigidbody2D Rb { get; private set; }
 
         [Inject]
         public void Construct(
             RestartButton restartButton,
-            MainAudio mainAudio)
+            MainAudio mainAudio,
+            BulletPool bulletPool)
         {
             _restartButton = restartButton;
             _mainAudio = mainAudio;
+            _bulletPool = bulletPool;
         }
     
         private void Awake()
         {
             Laser = GetComponentInChildren<ShootLaser>(true);
-            PlayerShoot = GetComponent<PlayerShoot>();
+            BulletShoot = GetComponent<BulletShoot>();
             Rb = GetComponent<Rigidbody2D>();
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _restartButton.OnRestartGame += SetActive;

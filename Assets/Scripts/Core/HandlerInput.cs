@@ -32,7 +32,7 @@ namespace Project.System
                 _playerController.Laser.TryShoot();
             }
             else if (Input.GetMouseButtonDown(0) || Input.GetMouseButton(0)) 
-                _playerController.PlayerShoot.TryShoot();
+                _playerController.BulletShoot.TryShoot();
         }
     }
 }
