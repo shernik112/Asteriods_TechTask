@@ -49,7 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitClip: {fileID: 8300000, guid: 5b2606f91b25a94489413e5b91e8cdac, type: 3}
   speed: 2
-  hitSprite: {fileID: -1737167495, guid: ec139977163bbde438e67cb66fb0b102, type: 3}
+  hitSprite: {fileID: -555725859505105965, guid: 5cbfe289cb78c224e8718d50266e9d2b, type: 3}
   <CountScoreByDefeat>k__BackingField: 1500
 --- !u!212 &6091585830226290129
 SpriteRenderer:
@@ -100,7 +100,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -1425229959082085284, guid: ec139977163bbde438e67cb66fb0b102, type: 3}
+  m_Sprite: {fileID: -1425229959082085284, guid: 5cbfe289cb78c224e8718d50266e9d2b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

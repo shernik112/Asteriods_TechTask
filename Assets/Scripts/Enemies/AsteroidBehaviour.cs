@@ -7,6 +7,7 @@ using Random = UnityEngine.Random;
 
 namespace Project.Enemies
 {
+    [RequireComponent(typeof(Rigidbody2D))]
     public class AsteroidBehaviour : BaseEnemy<AsteroidPool>
     {
         private const int COUNT_SHARDS = 2;
@@ -22,7 +23,7 @@ namespace Project.Enemies
         
         private readonly float _createRotate = 50f;
         private readonly float _lowerRotate = 20f;
-        private readonly float _defaultSpeed = 1.2f;
+        private readonly float _defaultSpeed = 1f;
         
         private float _currentSpeed;
         private int _sizeLevel = 1;
@@ -32,16 +33,17 @@ namespace Project.Enemies
         protected override void Awake()
         {
             base.Awake();
+            Rb = GetComponent<Rigidbody2D>();
             _currentSpeed = _defaultSpeed;
             SpriteRenderer.sprite = firstSizeSprite;
             HitSprite = firstHitSprite;
             firstSizeCollider.enabled = true;
             secondSizeCollider.enabled = false;
         }
-
-        private void Update()
+        
+        private void FixedUpdate()
         {
-            transform.Translate(Vector2.right * _currentSpeed * Time.deltaTime, Space.Self);
+            Rb.linearVelocity = transform.right * _currentSpeed;
         }
 
         private void LateUpdate()

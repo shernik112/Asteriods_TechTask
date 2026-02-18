@@ -20,6 +20,7 @@ namespace Project.Enemies
         
         protected Sprite HitSprite;
         protected TPool Pool;
+        protected Rigidbody2D Rb;
         
         private readonly WaitForSeconds _timeHitReaction = new WaitForSeconds(0.08f);
         private HandlerScore _handlerScore;
@@ -45,6 +46,7 @@ namespace Project.Enemies
         protected virtual void Awake()
         {
             SpriteRenderer = GetComponentInChildren<SpriteRenderer>();
+            Rb = GetComponent<Rigidbody2D>();
         }
 
         private void OnEnable()

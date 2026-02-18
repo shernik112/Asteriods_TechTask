@@ -1,3 +1,4 @@
+using System;
 using Project.System;
 using UnityEngine;
 
@@ -7,6 +8,9 @@ namespace Project.Enemies
     {
         [SerializeField] private float speed = default;
         [SerializeField] private Sprite hitSprite = default;
+
+        private Vector2 _targetDir;
+        
         [field:SerializeField] public override int CountScoreByDefeat { get; set; } = default;
 
         protected override void Awake()
@@ -18,9 +22,13 @@ namespace Project.Enemies
         private void Update()
         {
             Vector2 posPlayer = PlayerController.gameObject.transform.position;
-            var targetDir = posPlayer - (Vector2)transform.position;
-            targetDir.Normalize();
-            transform.Translate(targetDir * speed * Time.deltaTime, Space.World);
+            _targetDir = posPlayer - (Vector2)transform.position;
+            _targetDir.Normalize();
+        }
+
+        private void FixedUpdate()
+        {
+            Rb.linearVelocity = _targetDir * speed;
         }
     }
 }

@@ -169,10 +169,10 @@ MonoBehaviour:
   hitClip: {fileID: 8300000, guid: bc2ebc951a7d4f14da00fd136812cbc2, type: 3}
   multiplierBoost: 1.1
   countStage: 2
-  firstSizeSprite: {fileID: 2366485693217430211, guid: ec139977163bbde438e67cb66fb0b102, type: 3}
-  secondSizeSpite: {fileID: 2792433196770277248, guid: ec139977163bbde438e67cb66fb0b102, type: 3}
-  firstHitSprite: {fileID: -106300907, guid: ec139977163bbde438e67cb66fb0b102, type: 3}
-  secondHitSprite: {fileID: 1337031699, guid: ec139977163bbde438e67cb66fb0b102, type: 3}
+  firstSizeSprite: {fileID: 2366485693217430211, guid: 5cbfe289cb78c224e8718d50266e9d2b, type: 3}
+  secondSizeSpite: {fileID: 2792433196770277248, guid: 5cbfe289cb78c224e8718d50266e9d2b, type: 3}
+  firstHitSprite: {fileID: 1412400952390274074, guid: 5cbfe289cb78c224e8718d50266e9d2b, type: 3}
+  secondHitSprite: {fileID: -4939580502049857663, guid: 5cbfe289cb78c224e8718d50266e9d2b, type: 3}
   firstSizeCollider: {fileID: 560361010544198941}
   secondSizeCollider: {fileID: 3704753740806163580}
   <CountScoreByDefeat>k__BackingField: 1000
