@@ -7,9 +7,8 @@ namespace Project.System
 {
     public class EnemiesSpawner : MonoBehaviour
     {
-        public  ObjectPool AsteroidPool;
-        public ObjectPool UfoPool;
-        
+        private  ObjectPool _asteroidPool;
+        private ObjectPool _ufoPool;
         private GameObject _asteroidPoolPrefab;
         private GameObject _ufoPoolPrefab;
         private MainInstaller _mainInstaller;
@@ -48,8 +47,8 @@ namespace Project.System
         private void Awake()
         {
             _restartButton.OnRestartGame += StartCreate;   
-            AsteroidPool = new ObjectPool(_asteroidPoolPrefab, _mainInstaller);
-            UfoPool = new ObjectPool(_ufoPoolPrefab, _mainInstaller);
+            _asteroidPool = new ObjectPool(_asteroidPoolPrefab, _mainInstaller,transform);
+            _ufoPool = new ObjectPool(_ufoPoolPrefab, _mainInstaller,transform);
         }
         
         private void OnDestroy()
@@ -109,7 +108,7 @@ namespace Project.System
         private void CreateUfo()
         {
             var pos = GetRandomPos();
-            var obj = UfoPool.Get();
+            var obj = _ufoPool.Get();
             ActiveBoolFieldForTeleportation(obj);
             obj.transform.position = pos;
         }
@@ -122,7 +121,7 @@ namespace Project.System
             for (int i = 0; i < count; i++)
             {
                 var pos = GetRandomPos();
-                var obj = AsteroidPool.Get();
+                var obj = _asteroidPool.Get();
                 ActiveBoolFieldForTeleportation(obj);
                 obj.transform.position = pos;
                 RotateAsteroid(obj);

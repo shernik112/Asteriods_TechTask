@@ -6,8 +6,6 @@ namespace Project.UI
 {
     public class HandlerScore : BaseCounter
     {
-        [SerializeField] private int countAsteroid = default;
-        [SerializeField] private int countUfo = default;
         [SerializeField] private float counterSpeed = default;
         
         private FinalScore _finalScore;

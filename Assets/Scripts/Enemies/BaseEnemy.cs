@@ -40,11 +40,9 @@ namespace Project.Enemies
             PlayerController = playerController;
             _handlerScore = handlerScore;
             _mainAudio = mainAudio;
-            
-            Initialize();
         }
 
-        protected virtual void Initialize()
+        protected virtual void Awake()
         {
             SpriteRenderer = GetComponentInChildren<SpriteRenderer>();
             Rb = GetComponent<Rigidbody2D>();

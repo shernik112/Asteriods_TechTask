@@ -14,12 +14,14 @@ namespace Project.System
         private int StartCount => 5;
         private GameObject _poolPrefab;
         private MainInstaller _installer;
+        private Transform _parentTransform;
         private Queue<GameObject> _pool = new Queue<GameObject>();
-
-        public ObjectPool(GameObject poolPrefab, MainInstaller installer)
+        
+        public ObjectPool(GameObject poolPrefab, MainInstaller installer, Transform parentTransform)
         {
             _poolPrefab = poolPrefab;
             _installer = installer;
+            _parentTransform = parentTransform;
             
             MakeInstances();
         }
@@ -32,7 +34,7 @@ namespace Project.System
 
         private void CreateObject()
         {
-            var obj = GameObject.Instantiate(_poolPrefab);
+            var obj = GameObject.Instantiate(_poolPrefab,_parentTransform);
             _installer.InjectGo(obj);
             obj.SetActive(false);
             _pool.Enqueue(obj);

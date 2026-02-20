@@ -12,13 +12,12 @@ namespace Project.Enemies
         
         [field:SerializeField] public override int CountScoreByDefeat { get; set; } = default;
 
-        protected override void Initialize()
+        protected override void Awake()
         {
-            base.Initialize();
-            
+            base.Awake();
             HitSprite = hitSprite;
         }
-        
+
         private void Update()
         {
             Vector2 posPlayer = PlayerController.gameObject.transform.position;

@@ -1,4 +1,3 @@
-using System;
 using Project.Player;
 using UnityEngine;
 using Zenject;

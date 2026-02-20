@@ -28,10 +28,9 @@ namespace Project.Enemies
     
         [field: SerializeField] public override int CountScoreByDefeat { get; set; } = default;
 
-        protected override void Initialize()
+        protected override void Awake()
         {
-            base.Initialize();
-            
+            base.Awake();
             Rb = GetComponent<Rigidbody2D>();
             _currentSpeed = _defaultSpeed;
             SpriteRenderer.sprite = firstSizeSprite;

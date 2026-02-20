@@ -34,7 +34,7 @@ namespace Project.Player
         private void Awake()
         {
             _defaultCooldown = cooldown;
-            BulletPool = new ObjectPool(_bulletPrefab, _mainInstaller);
+            BulletPool = new ObjectPool(_bulletPrefab, _mainInstaller, transform);
         }
 
         private void Update()

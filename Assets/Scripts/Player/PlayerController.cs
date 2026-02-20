@@ -16,10 +16,7 @@ namespace Project.Player
         [SerializeField] private float speedAcceleration = default;
         [SerializeField] private float rotateSpeed = default;
         [SerializeField] private float rotateAcceleration = default;
-        [SerializeField] private AudioClip bulletShotClip = default;
-
-        private float _bulletCooldown = 0.2f;
-        private float _instantiateOffsetBullet = 0.5f;
+        
         private RestartButton _restartButton;
         private MainAudio _mainAudio;
         private SpriteRenderer _spriteRenderer;
