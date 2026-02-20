@@ -22,7 +22,6 @@ namespace Project.System
         private readonly Type[] _singleBehaviours =
         {
             typeof(EnemiesSpawner),
-            typeof(HandlerGameCondition),
             typeof(HandlerInput),
             typeof(PauseHandler)
         };

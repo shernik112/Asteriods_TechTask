@@ -799,7 +799,7 @@ PlayerSettings:
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
   projectName: Asteroids
-  organizationId: 
+  organizationId: shernik
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}

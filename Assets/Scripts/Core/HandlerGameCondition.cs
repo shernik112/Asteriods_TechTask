@@ -1,5 +1,3 @@
-using UnityEngine;
-using Zenject;
 
 namespace Project.System
 {
@@ -9,36 +7,26 @@ namespace Project.System
         Menu  
     }
 
-    public class HandlerGameCondition : MonoBehaviour
+    public class HandlerGameCondition
     {
         private GameCondition _currenGameCondition = GameCondition.Game;
         private BlockCursor _blockCursor = new BlockCursor();
 
         public GameCondition GameCondition
         {
-            get { return _currenGameCondition; }
             set
             {
-                if (_currenGameCondition != value)
-                {
-                    _currenGameCondition = value;
-                    HandleNewCondition();
-                }
-            
+                if (_currenGameCondition == value) 
+                    return;
+                _currenGameCondition = value;
+                HandleNewCondition();
             }
         }
 
-        private void Start()
-        {
+        public HandlerGameCondition() =>
             HandleNewCondition();
-        }
 
-        private void HandleNewCondition()
-        {
-            if (_currenGameCondition == GameCondition.Game)
-                _blockCursor.SetCursorCondition(true);
-            else
-                _blockCursor.SetCursorCondition(false);
-        }
+        private void HandleNewCondition() =>
+            _blockCursor.SetCursorCondition(_currenGameCondition == GameCondition.Game);
     }
 }

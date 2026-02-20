@@ -10,7 +10,7 @@ namespace Project.UI
     {
         [SerializeField] private float showTime = default;
         
-        private HandlerGameCondition _gameCondition;
+        private HandlerGameCondition _handlerGameCondition;
         private PlayerController _playerController;
         private RestartButton _restartButton;
         private CanvasGroup _cg;
@@ -18,11 +18,9 @@ namespace Project.UI
     
         [Inject]
         public void Construct(
-            HandlerGameCondition gameCondition, 
             PlayerController playerController,
             RestartButton restartButton)
         {
-            _gameCondition = gameCondition;
             _playerController = playerController;
             _restartButton = restartButton;
         }
@@ -30,6 +28,7 @@ namespace Project.UI
         private void Awake()
         {
             _cg = GetComponent<CanvasGroup>();
+            _handlerGameCondition = new HandlerGameCondition();
             _playerController.OnHitPlayer += SmoothShow;
             _restartButton.OnRestartGame += SmoothShow;
         }
@@ -48,7 +47,7 @@ namespace Project.UI
             var targetAlpha = _isShowNow ? 1f : 0f;
             _cg.interactable = _isShowNow;
             _cg.blocksRaycasts = _isShowNow;
-            _gameCondition.GameCondition = _isShowNow ? GameCondition.Menu : GameCondition.Game;
+            _handlerGameCondition.GameCondition = _isShowNow ? GameCondition.Menu : GameCondition.Game;
             Tween.CanvasGroupAlpha(_cg, startAlpha, targetAlpha, showTime, 0f,Tween.EaseInOut);
         }
     }
