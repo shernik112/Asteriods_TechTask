@@ -22,9 +22,6 @@ namespace Project.System
         private readonly Type[] _singleBehaviours =
         {
             typeof(EnemiesSpawner),
-            typeof(BulletPool),
-            typeof(UfoPool),
-            typeof(AsteroidPool),
             typeof(HandlerGameCondition),
             typeof(HandlerInput),
             typeof(PauseHandler)
@@ -34,9 +31,9 @@ namespace Project.System
         {
             Container.Bind<PlayerController>().FromComponentInNewPrefab(playerPrefab).AsSingle().NonLazy();
 
-            Container.Bind<GameObject>().FromInstance(bulletPrefab).WhenInjectedInto<BulletPool>();
-            Container.Bind<GameObject>().FromInstance(asteroidPrefab).WhenInjectedInto<AsteroidPool>();
-            Container.Bind<GameObject>().FromInstance(ufoPrefab).WhenInjectedInto<UfoPool>();
+            Container.Bind<GameObject>().FromInstance(bulletPrefab).WhenInjectedInto<BulletShoot>();
+            Container.Bind<GameObject>().WithId("Asteroid").FromInstance(asteroidPrefab).WhenInjectedInto<EnemiesSpawner>();
+            Container.Bind<GameObject>().WithId("Ufo").FromInstance(ufoPrefab).WhenInjectedInto<EnemiesSpawner>();
         
             for (var i = 0; i < _singleBehaviours.Length; i++)
             {
@@ -50,6 +47,8 @@ namespace Project.System
             Container.Bind<HandlerScore>().FromInstance(handlerScore).AsSingle();
             Container.Bind<FinalScore>().FromInstance(finalScore).AsSingle();
             Container.Bind<MainAudio>().FromInstance(mainAudio).AsSingle();
+
+            Container.Bind<MainInstaller>().FromInstance(this).AsSingle();
         }
 
         public void InjectGo(GameObject obj)

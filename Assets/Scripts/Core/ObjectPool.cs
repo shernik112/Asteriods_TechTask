@@ -1,29 +1,30 @@
 using System.Collections.Generic;
 using UnityEngine;
-using Zenject;
+
+public interface IPoolable
+{
+    void OnGetFromPool();
+    void OnReturnToPool();
+}
 
 namespace Project.System
 {
-    public class ObjectPool : MonoBehaviour
+    public class ObjectPool
     {
-        protected virtual int StartCount => 5;
-    
+        private int StartCount => 5;
         private GameObject _poolPrefab;
         private MainInstaller _installer;
         private Queue<GameObject> _pool = new Queue<GameObject>();
 
-        [Inject]
-        public void Construct(GameObject poolPrefab)
+        public ObjectPool(GameObject poolPrefab,MainInstaller installer)
         {
             _poolPrefab = poolPrefab;
+            _installer = installer;
+            
+            MakeInstances();
         }
-    
-        protected virtual void Awake()
-        {
-            _installer = FindFirstObjectByType<MainInstaller>();
-        }
-
-        private void Start()
+        
+        private void MakeInstances()
         {
             for (var i = 0; i < StartCount; i++)
                 CreateObject();
@@ -31,8 +32,8 @@ namespace Project.System
 
         private void CreateObject()
         {
-            var obj = Instantiate(_poolPrefab, transform);
-            if(_installer != null)  _installer.InjectGo(obj);
+            var obj = GameObject.Instantiate(_poolPrefab);
+            _installer.InjectGo(obj);
             obj.SetActive(false);
             _pool.Enqueue(obj);
         }
@@ -42,12 +43,19 @@ namespace Project.System
             if(_pool.Count == 0)
                 CreateObject();
             var obj = _pool.Dequeue();
+            
+            if (obj.TryGetComponent<IPoolable>(out var poolable))
+                poolable.OnGetFromPool();
+                
             obj.SetActive(true);
             return obj;
         }
 
-        public virtual void ReturnToPool(GameObject obj)
+        public void ReturnToPool(GameObject obj)
         {
+            if (obj.TryGetComponent<IPoolable>(out var poolable))
+                poolable.OnReturnToPool();
+            
             obj.SetActive(false);
             _pool.Enqueue(obj);
         }

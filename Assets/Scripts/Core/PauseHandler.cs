@@ -7,7 +7,7 @@ namespace Project.System
 {
     public class PauseHandler : MonoBehaviour
     {
-        public bool IsPause;
+        public bool IsPause = false;
 
         private RestartButton _restartButton;
         private PlayerController _characterController;

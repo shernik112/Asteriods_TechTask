@@ -1,10 +1,9 @@
 using System;
-using Project.System;
 using UnityEngine;
 
 namespace Project.Enemies
 {
-    public class UfoBehaviour : BaseEnemy<UfoPool>
+    public class UfoBehaviour : BaseEnemy
     {
         [SerializeField] private float speed = default;
         [SerializeField] private Sprite hitSprite = default;
@@ -13,10 +12,16 @@ namespace Project.Enemies
         
         [field:SerializeField] public override int CountScoreByDefeat { get; set; } = default;
 
-        protected override void Awake()
+        protected override void Initialize()
         {
-            base.Awake();
+            base.Initialize();
+            
             HitSprite = hitSprite;
+        }
+
+        private void Start()
+        {
+            Pool = EnemiesSpawner.UfoPool;
         }
 
         private void Update()

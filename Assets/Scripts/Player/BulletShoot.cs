@@ -1,35 +1,40 @@
-
+using Random = UnityEngine.Random;
 using Project.System;
 using UnityEngine;
 using Zenject;
-using Random = UnityEngine.Random;
 
 namespace Project.Player
 {
     public class BulletShoot : MonoBehaviour
     {
+        public ObjectPool BulletPool;
+        
         [SerializeField] private AudioClip bulletShotClip = default;
-        [SerializeField] private float cooldown = default;
         [SerializeField] private float instantiateOffset = default;
+        [SerializeField] private float cooldown = default;
     
-        private BulletPool _bulletPool;
         private MainAudio _mainAudio;
+        private MainInstaller _mainInstaller;
+        private GameObject _bulletPrefab;
         private float _defaultCooldown;
         private float _lastTime;
         private bool _mayShoot;
 
         [Inject]
         public void Construct(
-            BulletPool bulletPool,
-            MainAudio mainAudio)
+            MainAudio mainAudio,
+            MainInstaller mainInstaller,
+            GameObject bulletPrefab)
         {
-            _bulletPool = bulletPool;
             _mainAudio = mainAudio;
+            _mainInstaller = mainInstaller;
+            _bulletPrefab = bulletPrefab;
         }
 
         private void Awake()
         {
             _defaultCooldown = cooldown;
+            BulletPool = new ObjectPool(_bulletPrefab, _mainInstaller);
         }
 
         private void Update()
@@ -50,7 +55,7 @@ namespace Project.Player
     
         private void Shoot()
         {
-            var obj = _bulletPool.Get();
+            var obj = BulletPool.Get();
             var spawnPos = (Vector2)transform.position + (Vector2)transform.up * instantiateOffset;
             obj.transform.position = spawnPos;
             obj.transform.rotation = transform.localRotation;

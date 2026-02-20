@@ -1,14 +1,11 @@
-using System;
 using Quaternion = UnityEngine.Quaternion;
-using Vector3 = UnityEngine.Vector3;
-using Project.System;
-using UnityEngine;
 using Random = UnityEngine.Random;
+using UnityEngine;
 
 namespace Project.Enemies
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class AsteroidBehaviour : BaseEnemy<AsteroidPool>
+    public class AsteroidBehaviour : BaseEnemy,IPoolable
     {
         private const int COUNT_SHARDS = 2;
     
@@ -29,10 +26,11 @@ namespace Project.Enemies
         private int _sizeLevel = 1;
     
         [field: SerializeField] public override int CountScoreByDefeat { get; set; } = default;
-    
-        protected override void Awake()
+
+        protected override void Initialize()
         {
-            base.Awake();
+            base.Initialize();
+            
             Rb = GetComponent<Rigidbody2D>();
             _currentSpeed = _defaultSpeed;
             SpriteRenderer.sprite = firstSizeSprite;
@@ -40,7 +38,12 @@ namespace Project.Enemies
             firstSizeCollider.enabled = true;
             secondSizeCollider.enabled = false;
         }
-        
+
+        private void Start()
+        {
+            Pool = EnemiesSpawner.AsteroidPool;
+        }
+
         private void FixedUpdate()
         {
             Rb.linearVelocity = transform.right * _currentSpeed;
@@ -49,6 +52,16 @@ namespace Project.Enemies
         private void LateUpdate()
         {
             SpriteRenderer.transform.localRotation = Quaternion.Inverse(transform.rotation);
+        }
+
+        public void OnGetFromPool()
+        {
+            
+        }
+
+        public void OnReturnToPool()
+        {
+            SetDefaultParameters();
         }
 
         private void InitParams(int size)
@@ -91,7 +104,7 @@ namespace Project.Enemies
             }
         }
 
-        public void SetDefaultParameters()
+        private void SetDefaultParameters()
         {
             if (TryGetComponent<Rigidbody2D>(out var rb))
             {
@@ -105,7 +118,7 @@ namespace Project.Enemies
             secondSizeCollider.enabled = false;
             
             _currentSpeed = _defaultSpeed;
-            transform.rotation = Quaternion.identity;
+            transform.localRotation = Quaternion.identity;
             _sizeLevel = 1;
         }
     }

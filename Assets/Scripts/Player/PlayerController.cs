@@ -20,7 +20,6 @@ namespace Project.Player
 
         private float _bulletCooldown = 0.2f;
         private float _instantiateOffsetBullet = 0.5f;
-        private BulletPool _bulletPool;
         private RestartButton _restartButton;
         private MainAudio _mainAudio;
         private SpriteRenderer _spriteRenderer;
@@ -33,12 +32,10 @@ namespace Project.Player
         [Inject]
         public void Construct(
             RestartButton restartButton,
-            MainAudio mainAudio,
-            BulletPool bulletPool)
+            MainAudio mainAudio)
         {
             _restartButton = restartButton;
             _mainAudio = mainAudio;
-            _bulletPool = bulletPool;
         }
     
         private void Awake()

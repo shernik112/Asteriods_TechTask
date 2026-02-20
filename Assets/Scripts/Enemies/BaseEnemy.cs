@@ -13,14 +13,14 @@ namespace Project.Enemies
         bool IsFirstEnterToTeleport { get ; set; }
     }
 
-    public abstract class BaseEnemy<TPool> : MonoBehaviour, IEnemy
-        where TPool : ObjectPool
+    public abstract class BaseEnemy : MonoBehaviour, IEnemy
     {
         [SerializeField] private AudioClip hitClip = default;
         
         protected Sprite HitSprite;
-        protected TPool Pool;
+        protected ObjectPool Pool;
         protected Rigidbody2D Rb;
+        protected EnemiesSpawner EnemiesSpawner;
         
         private readonly WaitForSeconds _timeHitReaction = new WaitForSeconds(0.08f);
         private HandlerScore _handlerScore;
@@ -32,18 +32,21 @@ namespace Project.Enemies
         public abstract int CountScoreByDefeat { get; set; }
     
         [Inject]
-        public void Construct(TPool pool, 
+        public void Construct(
             PlayerController playerController, 
+            EnemiesSpawner enemiesSpawner,
             HandlerScore handlerScore,
             MainAudio mainAudio)
         {
-            Pool = pool;
             PlayerController = playerController;
+            EnemiesSpawner = enemiesSpawner;
             _handlerScore = handlerScore;
             _mainAudio = mainAudio;
+            
+            Initialize();
         }
 
-        protected virtual void Awake()
+        protected virtual void Initialize()
         {
             SpriteRenderer = GetComponentInChildren<SpriteRenderer>();
             Rb = GetComponent<Rigidbody2D>();
@@ -67,7 +70,7 @@ namespace Project.Enemies
 
         private void ReturnSelf()
         {
-            Debug.Log($"{typeof(BaseEnemy<>)} ReturnSelf ");
+            Debug.Log($"{typeof(BaseEnemy)} ReturnSelf ");
             Pool.ReturnToPool(gameObject);
         }
 

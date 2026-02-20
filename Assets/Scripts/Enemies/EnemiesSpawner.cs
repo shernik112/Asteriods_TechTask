@@ -1,13 +1,18 @@
 using Project.Enemies;
 using UnityEngine;
 using Zenject;
+using Random = UnityEngine.Random;
 
 namespace Project.System
 {
     public class EnemiesSpawner : MonoBehaviour
     {
-        private AsteroidPool _asteroidPool;
-        private UfoPool _ufoPool;
+        public  ObjectPool AsteroidPool;
+        public ObjectPool UfoPool;
+        
+        private GameObject _asteroidPoolPrefab;
+        private GameObject _ufoPoolPrefab;
+        private MainInstaller _mainInstaller;
         private RestartButton _restartButton;
         private PauseHandler _pauseHandler;
         private FloatRange _rangeTimeAsteroid = new FloatRange(5f, 10f);
@@ -27,30 +32,29 @@ namespace Project.System
 
         [Inject]
         public void Construct(
-            AsteroidPool asteroidPool,
-            UfoPool ufoPool,
+            [Inject(Id = "Asteroid")] GameObject asteroidPrefab,
+            [Inject(Id = "Ufo")] GameObject ufoPrefab,
             RestartButton restartButton,
-            PauseHandler pauseHandler)
+            PauseHandler pauseHandler,
+            MainInstaller mainInstaller)
         {
-            _asteroidPool = asteroidPool;
-            _ufoPool = ufoPool;
+            _asteroidPoolPrefab = asteroidPrefab;
+            _ufoPoolPrefab = ufoPrefab;
             _restartButton = restartButton;
             _pauseHandler = pauseHandler;
+            _mainInstaller = mainInstaller;
         }
-
-        private void OnEnable() =>
-            _restartButton.OnRestartGame += StartCreate;
-
-        private void OnDisable() =>
-            _restartButton.OnRestartGame -= StartCreate;
-
-        private void StartCreate()
+        
+        private void Awake()
         {
-            SetPointCreate(_startCountAsteroids);
-            _lastTimeAsteroid = default;
-            _lastTimeUfo = default;
-            _currentRangeAsteroid = GetFloatRange(_rangeTimeAsteroid);
-            _currentRangeUfo = GetFloatRange(_rangeTimeUfo);
+            _restartButton.OnRestartGame += StartCreate;   
+            AsteroidPool = new ObjectPool(_asteroidPoolPrefab, _mainInstaller);
+            UfoPool = new ObjectPool(_ufoPoolPrefab, _mainInstaller);
+        }
+        
+        private void OnDestroy()
+        {
+            _restartButton.OnRestartGame -= StartCreate;
         }
 
         private void Start()
@@ -63,7 +67,7 @@ namespace Project.System
                 _halfHeight += _posOffset;
                 _halfWidth += _posOffset;
             }
-
+            
             StartCreate();
         }
 
@@ -89,6 +93,15 @@ namespace Project.System
                 CreateUfo();
             }
         }
+        
+        private void StartCreate()
+        {
+            SetPointCreate(_startCountAsteroids);
+            _lastTimeAsteroid = default;
+            _lastTimeUfo = default;
+            _currentRangeAsteroid = GetFloatRange(_rangeTimeAsteroid);
+            _currentRangeUfo = GetFloatRange(_rangeTimeUfo);
+        }
 
         private void CreateAsteroid(int count) =>
             SetPointCreate(count);
@@ -96,7 +109,7 @@ namespace Project.System
         private void CreateUfo()
         {
             var pos = GetRandomPos();
-            var obj = _ufoPool.Get();
+            var obj = UfoPool.Get();
             ActiveBoolFieldForTeleportation(obj);
             obj.transform.position = pos;
         }
@@ -109,7 +122,7 @@ namespace Project.System
             for (int i = 0; i < count; i++)
             {
                 var pos = GetRandomPos();
-                var obj = _asteroidPool.Get();
+                var obj = AsteroidPool.Get();
                 ActiveBoolFieldForTeleportation(obj);
                 obj.transform.position = pos;
                 RotateAsteroid(obj);
