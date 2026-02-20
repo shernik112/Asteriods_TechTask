@@ -18,12 +18,7 @@ namespace Project.Enemies
             
             HitSprite = hitSprite;
         }
-
-        private void Start()
-        {
-            Pool = EnemiesSpawner.UfoPool;
-        }
-
+        
         private void Update()
         {
             Vector2 posPlayer = PlayerController.gameObject.transform.position;

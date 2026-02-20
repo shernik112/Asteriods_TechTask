@@ -2,30 +2,23 @@ using System;
 using Project.System;
 using UnityEngine;
 using Zenject;
+using IPoolable = Project.System.IPoolable;
 
 namespace Project.Player
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class Bullet : MonoBehaviour
+    public class Bullet : MonoBehaviour, IPoolable
     {
         private ObjectPool _bulletPool;
-        private PlayerController _playerController;
         private Rigidbody2D _rg;
     
         [field: SerializeField] public float MoveSpeed { get; private set; } = default;
 
-        [Inject]
-        public void Construct(PlayerController playerController)
+        private void Awake()
         {
-            _playerController = playerController;
             _rg = GetComponent<Rigidbody2D>();
         }
 
-        private void Start()
-        {
-            _bulletPool = _playerController.BulletShoot.BulletPool;
-        }
-        
         private void Update()
         { 
             _rg.linearVelocity = transform.up * MoveSpeed;
@@ -42,5 +35,12 @@ namespace Project.Player
             Debug.Log($"{typeof(Bullet)} bullet entered trigger");
             _bulletPool.ReturnToPool(gameObject);
         }
+
+        public void OnGetFromPool(ObjectPool objectPool)
+        {
+            _bulletPool = objectPool;
+        }
+
+        public void OnReturnToPool(){}
     }
 }

@@ -1,14 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IPoolable
-{
-    void OnGetFromPool();
-    void OnReturnToPool();
-}
-
 namespace Project.System
 {
+    public interface IPoolable
+    {
+        void OnGetFromPool(ObjectPool objectPool);
+        void OnReturnToPool();
+    }
+
     public class ObjectPool
     {
         private int StartCount => 5;
@@ -16,7 +16,7 @@ namespace Project.System
         private MainInstaller _installer;
         private Queue<GameObject> _pool = new Queue<GameObject>();
 
-        public ObjectPool(GameObject poolPrefab,MainInstaller installer)
+        public ObjectPool(GameObject poolPrefab, MainInstaller installer)
         {
             _poolPrefab = poolPrefab;
             _installer = installer;
@@ -45,7 +45,7 @@ namespace Project.System
             var obj = _pool.Dequeue();
             
             if (obj.TryGetComponent<IPoolable>(out var poolable))
-                poolable.OnGetFromPool();
+                poolable.OnGetFromPool(this);
                 
             obj.SetActive(true);
             return obj;

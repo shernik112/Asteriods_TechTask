@@ -1,3 +1,4 @@
+using Project.System;
 using Quaternion = UnityEngine.Quaternion;
 using Random = UnityEngine.Random;
 using UnityEngine;
@@ -39,11 +40,6 @@ namespace Project.Enemies
             secondSizeCollider.enabled = false;
         }
 
-        private void Start()
-        {
-            Pool = EnemiesSpawner.AsteroidPool;
-        }
-
         private void FixedUpdate()
         {
             Rb.linearVelocity = transform.right * _currentSpeed;
@@ -54,12 +50,7 @@ namespace Project.Enemies
             SpriteRenderer.transform.localRotation = Quaternion.Inverse(transform.rotation);
         }
 
-        public void OnGetFromPool()
-        {
-            
-        }
-
-        public void OnReturnToPool()
+        public override void OnReturnToPool()
         {
             SetDefaultParameters();
         }

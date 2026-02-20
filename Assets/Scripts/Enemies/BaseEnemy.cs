@@ -1,3 +1,4 @@
+using IPoolable = Project.System.IPoolable;
 using System;
 using System.Collections;
 using Project.Player;
@@ -13,14 +14,13 @@ namespace Project.Enemies
         bool IsFirstEnterToTeleport { get ; set; }
     }
 
-    public abstract class BaseEnemy : MonoBehaviour, IEnemy
+    public abstract class BaseEnemy : MonoBehaviour, IEnemy, IPoolable
     {
         [SerializeField] private AudioClip hitClip = default;
         
         protected Sprite HitSprite;
         protected ObjectPool Pool;
         protected Rigidbody2D Rb;
-        protected EnemiesSpawner EnemiesSpawner;
         
         private readonly WaitForSeconds _timeHitReaction = new WaitForSeconds(0.08f);
         private HandlerScore _handlerScore;
@@ -34,12 +34,10 @@ namespace Project.Enemies
         [Inject]
         public void Construct(
             PlayerController playerController, 
-            EnemiesSpawner enemiesSpawner,
             HandlerScore handlerScore,
             MainAudio mainAudio)
         {
             PlayerController = playerController;
-            EnemiesSpawner = enemiesSpawner;
             _handlerScore = handlerScore;
             _mainAudio = mainAudio;
             
@@ -64,6 +62,13 @@ namespace Project.Enemies
                 PlayerController.OnHitPlayer -= ReturnSelf;
         }
 
+        public void OnGetFromPool(ObjectPool objectPool)
+        {
+            Pool = objectPool;
+        }
+
+        public virtual void OnReturnToPool(){}
+        
         protected virtual void HitBullet() => Pool.ReturnToPool(gameObject);
     
         private void HitLaser() => Pool.ReturnToPool(gameObject);
