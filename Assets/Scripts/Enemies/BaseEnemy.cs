@@ -14,7 +14,7 @@ namespace Project.Enemies
         bool IsFirstEnterToTeleport { get ; set; }
     }
 
-    public abstract class BaseEnemy : MonoBehaviour, IEnemy, IPoolable
+    public abstract class BaseEnemy : MonoBehaviour, IEnemy, IPoolable, ITeleported
     {
         [SerializeField] private AudioClip hitClip = default;
         
@@ -63,6 +63,17 @@ namespace Project.Enemies
         public void OnGetFromPool(ObjectPool objectPool)
         {
             Pool = objectPool;
+        }
+
+        public bool TeleportReaction()
+        {
+            if (IsFirstEnterToTeleport)
+            {
+                IsFirstEnterToTeleport = false;
+                return false;
+            }
+
+            return true;
         }
 
         public virtual void OnReturnToPool(){}

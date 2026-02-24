@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Project.Enemies
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class AsteroidBehaviour : BaseEnemy,IPoolable
+    public class AsteroidBehaviour : BaseEnemy
     {
         private const int COUNT_SHARDS = 2;
     

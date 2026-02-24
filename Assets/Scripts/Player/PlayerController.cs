@@ -7,11 +7,12 @@ using Zenject;
 namespace Project.Player
 {
     [RequireComponent(typeof(Rigidbody2D),typeof(SpriteRenderer))]
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : MonoBehaviour, ITeleported
     { 
         public event Action OnHitPlayer;
 
         [SerializeField] private AudioClip destructionClip = default;
+        [SerializeField] private AudioClip dashClip = default;
         [SerializeField] private float moveSpeed = default;
         [SerializeField] private float speedAcceleration = default;
         [SerializeField] private float rotateSpeed = default;
@@ -51,7 +52,13 @@ namespace Project.Player
             _input = input;
             _input.Normalize();
         }
-    
+
+        public bool TeleportReaction()
+        {
+            _mainAudio.PlaySfx(dashClip);
+            return true;
+        }
+
         private void FixedUpdate()
         {
             Rb.angularVelocity = Mathf.MoveTowards(Rb.angularVelocity, -_input.x * rotateSpeed, rotateAcceleration * Time.fixedDeltaTime);
