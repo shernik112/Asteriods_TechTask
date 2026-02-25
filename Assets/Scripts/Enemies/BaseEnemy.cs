@@ -16,10 +16,13 @@ namespace Project.Enemies
 
     public abstract class BaseEnemy : MonoBehaviour, IEnemy, IPoolable, ITeleported
     {
+        public event Action<GameObject> OnDeactivation;
+        
         [SerializeField] private AudioClip hitClip = default;
         
-        protected Sprite HitSprite;
         protected ObjectPool Pool;
+        protected SpriteRenderer SpriteRenderer;
+        protected Sprite HitSprite;
         protected Rigidbody2D Rb;
         
         private readonly WaitForSeconds _timeHitReaction = new WaitForSeconds(0.08f);
@@ -27,7 +30,7 @@ namespace Project.Enemies
         private MainAudio _mainAudio;
         
         protected PlayerController PlayerController { get; private set; }
-        protected SpriteRenderer SpriteRenderer;
+        
         public bool IsFirstEnterToTeleport { get; set; } = false;
         public abstract int CountScoreByDefeat { get; set; }
     
@@ -51,18 +54,13 @@ namespace Project.Enemies
         private void OnEnable()
         {
             if (PlayerController != null) 
-                PlayerController.OnHitPlayer += ReturnSelf;
+                PlayerController.OnHitPlayer += Deactivation;
         }
 
         private void OnDisable()
         {
             if (PlayerController != null) 
-                PlayerController.OnHitPlayer -= ReturnSelf;
-        }
-
-        public void OnGetFromPool(ObjectPool objectPool)
-        {
-            Pool = objectPool;
+                PlayerController.OnHitPlayer -= Deactivation;
         }
 
         public bool TeleportReaction()
@@ -76,18 +74,16 @@ namespace Project.Enemies
             return true;
         }
 
+        public void OnGetFromPool(ObjectPool pool) => Pool = pool;
         public virtual void OnReturnToPool(){}
+
+        protected virtual void HitBullet() => Deactivation();
+
+        private void HitLaser() => Deactivation();
+
+        protected void Deactivation() =>
+            OnDeactivation?.Invoke(gameObject);
         
-        protected virtual void HitBullet() => Pool.ReturnToPool(gameObject);
-    
-        private void HitLaser() => Pool.ReturnToPool(gameObject);
-
-        private void ReturnSelf()
-        {
-            Debug.Log($"{typeof(BaseEnemy)} ReturnSelf ");
-            Pool.ReturnToPool(gameObject);
-        }
-
         private void OnCollisionEnter2D(Collision2D other)
         {
             if (other.gameObject.TryGetComponent<Bullet>(out var playerBullet))

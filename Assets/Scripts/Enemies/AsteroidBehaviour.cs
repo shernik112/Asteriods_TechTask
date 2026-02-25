@@ -1,4 +1,3 @@
-using Project.System;
 using Quaternion = UnityEngine.Quaternion;
 using Random = UnityEngine.Random;
 using UnityEngine;
@@ -71,12 +70,12 @@ namespace Project.Enemies
         {
             if (_sizeLevel >= countStage)
             {
-                Pool.ReturnToPool(gameObject); 
+                Deactivation();
                 return;
             }
         
             InitAsteroid();
-            Pool.ReturnToPool(gameObject);
+            Deactivation();
         }
 
         private void InitAsteroid()

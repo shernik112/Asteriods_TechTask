@@ -1,7 +1,6 @@
 using System;
 using Project.System;
 using UnityEngine;
-using Zenject;
 using IPoolable = Project.System.IPoolable;
 
 namespace Project.Player
@@ -9,6 +8,8 @@ namespace Project.Player
     [RequireComponent(typeof(Rigidbody2D))]
     public class Bullet : MonoBehaviour, IPoolable
     {
+        public event Action<GameObject> OnDeactivation;
+        
         private ObjectPool _bulletPool;
         private Rigidbody2D _rg;
     
@@ -27,20 +28,17 @@ namespace Project.Player
         private void OnCollisionEnter2D(Collision2D other)
         {
             Debug.Log($"{typeof(Bullet)} bullet hit enemy");
-            _bulletPool.ReturnToPool(gameObject);
+            OnDeactivation?.Invoke(gameObject);
         }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
             Debug.Log($"{typeof(Bullet)} bullet entered trigger");
-            _bulletPool.ReturnToPool(gameObject);
+            OnDeactivation?.Invoke(gameObject);
         }
 
-        public void OnGetFromPool(ObjectPool objectPool)
-        {
-            _bulletPool = objectPool;
-        }
-
+        public void OnGetFromPool(ObjectPool pool){}
+        
         public void OnReturnToPool(){}
     }
 }

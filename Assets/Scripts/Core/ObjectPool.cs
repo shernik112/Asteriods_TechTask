@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -5,6 +6,7 @@ namespace Project.System
 {
     public interface IPoolable
     {
+        event Action<GameObject> OnDeactivation;
         void OnGetFromPool(ObjectPool objectPool);
         void OnReturnToPool();
     }
@@ -45,18 +47,24 @@ namespace Project.System
             if(_pool.Count == 0)
                 CreateObject();
             var obj = _pool.Dequeue();
-            
+
             if (obj.TryGetComponent<IPoolable>(out var poolable))
+            {
+                poolable.OnDeactivation += ReturnObjectToPool;
                 poolable.OnGetFromPool(this);
-                
+            }
+            
             obj.SetActive(true);
             return obj;
         }
 
-        public void ReturnToPool(GameObject obj)
+        private void ReturnObjectToPool(GameObject obj)
         {
             if (obj.TryGetComponent<IPoolable>(out var poolable))
+            {
                 poolable.OnReturnToPool();
+                poolable.OnDeactivation -= ReturnObjectToPool;
+            }
             
             obj.SetActive(false);
             _pool.Enqueue(obj);
