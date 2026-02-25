@@ -27,7 +27,7 @@ namespace Project.UI
         
         protected virtual void OnDestroy() => PlayerController.OnHitPlayer -= ResetCount;
 
-        protected virtual void ResetCount()
+        private void ResetCount()
         {
             StopAllCoroutines();
             Count = default;

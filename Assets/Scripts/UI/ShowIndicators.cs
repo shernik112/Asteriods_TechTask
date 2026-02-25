@@ -1,6 +1,5 @@
 using System.Text;
 using Project.Player;
-using Project.System;
 using TMPro;
 using UnityEngine;
 using Zenject;
@@ -11,7 +10,6 @@ namespace Project.UI
     {
         private StringBuilder _sb = new StringBuilder();
         private PlayerController _playerController;
-        private ShootLaser _shootLaser;
         private TMP_Text _text;
 
         [Inject]
@@ -23,7 +21,6 @@ namespace Project.UI
         private void Awake()
         {
             _text = GetComponent<TMP_Text>();
-            _shootLaser = _playerController.Laser;
         }
 
         private void Update()
@@ -54,7 +51,7 @@ namespace Project.UI
             return $"Velocity(X:{velocity.x:F2}  Y:{velocity.y:F2})";
         }
 
-        private string GetCountLaserShot() => $"Count Laser Shots({_shootLaser.CurrentCountShоtLaser})";
-        private string GetRechargeTime() => $"Recharge Time({Mathf.Max(0,_shootLaser.RechargeDuration - _shootLaser.LastRechargeTime)})";
+        private string GetCountLaserShot() => $"Count Laser Shots({_playerController.Laser.CurrentCountShоtLaser})";
+        private string GetRechargeTime() => $"Recharge Time({Mathf.Max(0,_playerController.Laser.RechargeDuration - _playerController.Laser.LastRechargeTime):F2})";
     }
 }

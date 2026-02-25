@@ -12,10 +12,9 @@ namespace Project.System
         [SerializeField] private GameObject asteroidPrefab = default;
         [SerializeField] private GameObject ufoPrefab = default;
         [SerializeField] private GameObject bulletPrefab = default;
+        [SerializeField] private GameObject mainCanvas = default;
         [SerializeField] private Camera mainCamera = default;
-        // [SerializeField] private Transform mainCanvas = default;
         [SerializeField] private Transform rootHandlers = default;
-        [SerializeField] private RestartButton restartButton = default;
         [SerializeField] private MainAudio mainAudio = default;
         [SerializeField] private GameObject[] uiPrefabs;
         
@@ -31,6 +30,7 @@ namespace Project.System
         public override void InstallBindings()
         { 
             Container.Bind<PlayerController>().FromComponentInNewPrefab(playerPrefab).AsSingle().NonLazy();
+            Container.Bind<RestartButton>().FromComponentInNewPrefab(mainCanvas).AsSingle().NonLazy();
             Container.Bind<GameObject>().FromInstance(bulletPrefab).WhenInjectedInto<BulletShoot>();
             Container.Bind<GameObject>().WithId("Asteroid").FromInstance(asteroidPrefab).WhenInjectedInto<EnemiesSpawner>();
             Container.Bind<GameObject>().WithId("Ufo").FromInstance(ufoPrefab).WhenInjectedInto<EnemiesSpawner>();
@@ -42,15 +42,7 @@ namespace Project.System
                     .AsSingle().NonLazy();
             }
 
-            // foreach (var uiPrefab in uiPrefabs)
-            // {
-            //     var behaviour = uiPrefab.GetType();
-            //     Container.Bind(behaviour).FromComponentInNewPrefab(uiPrefab).UnderTransform(rootHandlers)
-            //         .AsSingle().NonLazy();
-            // }
-
             Container.Bind<Camera>().FromInstance(mainCamera).AsSingle();
-            Container.Bind<RestartButton>().FromInstance(restartButton).AsSingle();
             Container.Bind<MainAudio>().FromInstance(mainAudio).AsSingle();
 
             Container.Bind<MainInstaller>().FromInstance(this).AsSingle();

@@ -1,16 +1,10 @@
-using Project.Player;
-using Zenject;
 
 namespace Project.UI
 {
     public class CountLaserShots : BaseCounter
     {
-
-        protected override void Awake()
-        {
-            base.Awake();
+        private void Start() =>
             PlayerController.Laser.NewCountShotLaser += UpdateValue;
-        }
 
         protected override void OnDestroy()
         {
