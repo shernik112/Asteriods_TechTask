@@ -11,21 +11,21 @@ namespace Project.UI
         protected int Count;
         
         protected TMP_Text Text;
-        private PlayerController _playerController;
+        protected PlayerController PlayerController;
 
         [Inject]
         public virtual void Construct(PlayerController playerController)
         {
-            _playerController = playerController;
+            PlayerController = playerController;
         }
         
         protected virtual void Awake()
         {
             Text = GetComponent<TMP_Text>();
-            _playerController.OnHitPlayer += ResetCount;
+            PlayerController.OnHitPlayer += ResetCount;
         }
         
-        protected virtual void OnDestroy() => _playerController.OnHitPlayer -= ResetCount;
+        protected virtual void OnDestroy() => PlayerController.OnHitPlayer -= ResetCount;
 
         protected virtual void ResetCount()
         {

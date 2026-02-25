@@ -1,3 +1,4 @@
+using System;
 using Pixelplacement;
 using Project.System;
 using Project.UI;
@@ -9,6 +10,8 @@ namespace Project.Player
     [RequireComponent(typeof(SpriteRenderer),typeof(Collider2D))]
     public class ShootLaser : MonoBehaviour
     {
+        public event Action<int> NewCountShotLaser;
+        
         [SerializeField] private AudioClip newChargeClip = default;
         [SerializeField] private AudioClip shootLaserClip = default;
         
@@ -18,7 +21,6 @@ namespace Project.Player
     
         private int _currentCountShotLaser = default;
         private float _lastShootTime;
-        private CountLaserShots _countLaserShots;
         private RestartButton _restartButton;
         private Quaternion _initialLaserRotation;
         private Transform _parentTransform;
@@ -35,18 +37,15 @@ namespace Project.Player
             private set
             {
                 _currentCountShotLaser = value;
-                _countLaserShots.UpdateValue(_currentCountShotLaser);
-
+                NewCountShotLaser?.Invoke(_currentCountShotLaser);
             }
         }
 
         [Inject]
         public void Construct(
-            CountLaserShots countLaserShots,
             RestartButton restartButton,
             MainAudio mainAudio)
         {
-            _countLaserShots = countLaserShots;
             _restartButton = restartButton;
             _mainAudio = mainAudio;
         }
@@ -92,7 +91,7 @@ namespace Project.Player
                 Debug.Log($"{typeof(ShootLaser)} ShootLaser");
                 Shoot();
                 CurrentCountShоtLaser -= 1;
-                _countLaserShots.UpdateValue(CurrentCountShоtLaser);
+                NewCountShotLaser?.Invoke(CurrentCountShоtLaser);
                 _lastShootTime = 0f;
             }
         }

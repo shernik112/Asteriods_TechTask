@@ -16,7 +16,6 @@ namespace Project.System
         // [SerializeField] private Transform mainCanvas = default;
         [SerializeField] private Transform rootHandlers = default;
         [SerializeField] private RestartButton restartButton = default;
-        [SerializeField] private CountLaserShots countLaserShots = default;
         [SerializeField] private MainAudio mainAudio = default;
         [SerializeField] private GameObject[] uiPrefabs;
         
@@ -30,9 +29,8 @@ namespace Project.System
 
     
         public override void InstallBindings()
-        {
+        { 
             Container.Bind<PlayerController>().FromComponentInNewPrefab(playerPrefab).AsSingle().NonLazy();
-
             Container.Bind<GameObject>().FromInstance(bulletPrefab).WhenInjectedInto<BulletShoot>();
             Container.Bind<GameObject>().WithId("Asteroid").FromInstance(asteroidPrefab).WhenInjectedInto<EnemiesSpawner>();
             Container.Bind<GameObject>().WithId("Ufo").FromInstance(ufoPrefab).WhenInjectedInto<EnemiesSpawner>();
@@ -53,7 +51,6 @@ namespace Project.System
 
             Container.Bind<Camera>().FromInstance(mainCamera).AsSingle();
             Container.Bind<RestartButton>().FromInstance(restartButton).AsSingle();
-            Container.Bind<CountLaserShots>().FromInstance(countLaserShots).AsSingle();
             Container.Bind<MainAudio>().FromInstance(mainAudio).AsSingle();
 
             Container.Bind<MainInstaller>().FromInstance(this).AsSingle();
