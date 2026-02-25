@@ -168,11 +168,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destructionClip: {fileID: 8300000, guid: c9df04f783866ce40893cc561d250d94, type: 3}
+  dashClip: {fileID: 8300000, guid: e3fbc685c9eacb149b681edbf136e065, type: 3}
   moveSpeed: 11
   speedAcceleration: 6
   rotateSpeed: 250
   rotateAcceleration: 180
-  bulletShotClip: {fileID: 0}
 --- !u!60 &109552026019927316
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -285,8 +285,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Project.Player.BulletShoot
   bulletShotClip: {fileID: 8300000, guid: 690982e4761760a42906fcc2dc5a2d2b, type: 3}
-  cooldown: 0.2
   instantiateOffset: 0.5
+  cooldown: 0.2
 --- !u!1001 &7529915992298546324
 PrefabInstance:
   m_ObjectHideFlags: 0

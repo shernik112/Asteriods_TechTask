@@ -12,6 +12,7 @@ namespace Project.System
         [SerializeField] private GameObject asteroidPrefab = default;
         [SerializeField] private GameObject ufoPrefab = default;
         [SerializeField] private GameObject bulletPrefab = default;
+        [SerializeField] private Camera mainCamera = default;
         [SerializeField] private Transform rootHandlers = default;
         [SerializeField] private RestartButton restartButton = default;
         [SerializeField] private HandlerScore handlerScore = default;
@@ -40,7 +41,8 @@ namespace Project.System
                 Container.Bind(behaviour).FromNewComponentOnNewGameObject().UnderTransform(rootHandlers)
                     .AsSingle().NonLazy();
             }
-        
+
+            Container.Bind<Camera>().FromInstance(mainCamera).AsSingle();
             Container.Bind<RestartButton>().FromInstance(restartButton).AsSingle();
             Container.Bind<CountLaserShots>().FromInstance(countLaserShots).AsSingle();
             Container.Bind<HandlerScore>().FromInstance(handlerScore).AsSingle();

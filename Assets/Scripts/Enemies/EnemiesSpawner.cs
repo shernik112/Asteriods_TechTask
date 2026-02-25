@@ -1,14 +1,20 @@
+using Random = UnityEngine.Random;
 using Project.Enemies;
 using UnityEngine;
 using Zenject;
-using Random = UnityEngine.Random;
 
 namespace Project.System
 {
     public class EnemiesSpawner : MonoBehaviour
     {
-        private  ObjectPool _asteroidPool;
+        private readonly float _rotateOffset = 30f;
+        private readonly float _posOffset = 0.5f;
+        private readonly Vector2 _lookTarget = new Vector2(0, 0);
+        private readonly int _startCountAsteroids = 2;
+        
+        private ObjectPool _asteroidPool;
         private ObjectPool _ufoPool;
+        private Camera _mainCamera;
         private GameObject _asteroidPoolPrefab;
         private GameObject _ufoPoolPrefab;
         private MainInstaller _mainInstaller;
@@ -16,12 +22,7 @@ namespace Project.System
         private PauseHandler _pauseHandler;
         private FloatRange _rangeTimeAsteroid = new FloatRange(5f, 10f);
         private FloatRange _rangeTimeUfo = new FloatRange(5f, 15f);
-
-        private readonly float _rotateOffset = 30f;
-        private readonly float _posOffset = 0.5f;
-        private readonly Vector2 _lookTarget = new Vector2(0, 0);
-        private readonly int _startCountAsteroids = 2;
-
+        
         private float _halfHeight;
         private float _halfWidth;
         private float _lastTimeAsteroid;
@@ -33,12 +34,14 @@ namespace Project.System
         public void Construct(
             [Inject(Id = "Asteroid")] GameObject asteroidPrefab,
             [Inject(Id = "Ufo")] GameObject ufoPrefab,
+            Camera mainCamera,
             RestartButton restartButton,
             PauseHandler pauseHandler,
             MainInstaller mainInstaller)
         {
             _asteroidPoolPrefab = asteroidPrefab;
             _ufoPoolPrefab = ufoPrefab;
+            _mainCamera = mainCamera;
             _restartButton = restartButton;
             _pauseHandler = pauseHandler;
             _mainInstaller = mainInstaller;
@@ -58,14 +61,10 @@ namespace Project.System
 
         private void Start()
         {
-            var cam = Camera.main;
-            if (cam != null)
-            {
-                _halfHeight = cam.orthographicSize;
-                _halfWidth = _halfHeight * cam.aspect;
-                _halfHeight += _posOffset;
-                _halfWidth += _posOffset;
-            }
+            _halfHeight = _mainCamera.orthographicSize;
+            _halfWidth = _halfHeight * _mainCamera.aspect;
+            _halfHeight += _posOffset;
+            _halfWidth += _posOffset;
             
             StartCreate();
         }
