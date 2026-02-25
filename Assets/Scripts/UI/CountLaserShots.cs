@@ -1,7 +1,3 @@
-using System.Collections;
-using DigitalRuby.Tween;
-using UnityEngine;
-using Pixelplacement;
 
 namespace Project.UI
 {

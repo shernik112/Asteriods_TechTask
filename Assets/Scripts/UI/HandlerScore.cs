@@ -1,45 +1,44 @@
-using System.Collections;
+using Project.Player;
 using UnityEngine;
-using Zenject; 
+using Zenject;
+using System;
 
 namespace Project.UI
 {
-    public class HandlerScore : BaseCounter
+    public class HandlerScore : MonoBehaviour
     {
-        [SerializeField] private float counterSpeed = default;
-        
-        private FinalScore _finalScore;
+        public event Action<int> IsFinalScore;
+        public event Action<int> NewTargetScore; 
+
+        private PlayerController _playerController;
         private int _targetScore;
 
         [Inject]
-        public void Construct(FinalScore finalScore)
+        public void Construct(PlayerController playerController)
         {
-            _finalScore = finalScore;
+            _playerController = playerController;
         }
+
+        private void Awake() => 
+            _playerController.OnHitPlayer += ResetCount;
+
+        private void OnDestroy() =>
+            _playerController.OnHitPlayer -= ResetCount;
+
 
         public void CountScoreDefeatedEnemy(int countDefeatedEnemy)
         {
             StopAllCoroutines();
             
             _targetScore += countDefeatedEnemy;
-            StartCoroutine(CounterNewChange());
+
+            NewTargetScore?.Invoke(_targetScore);
         }
 
-        protected override void ResetCount()
+        private void ResetCount()
         {
-            _finalScore.ShowFinalScore(_targetScore);
+            IsFinalScore?.Invoke(_targetScore);
             _targetScore = default;
-            base.ResetCount();
-        }
-
-        private IEnumerator CounterNewChange()
-        {
-            while (Count != _targetScore)
-            {
-                Count = Mathf.RoundToInt(Mathf.MoveTowards(Count, _targetScore, counterSpeed * Time.deltaTime));
-                Text.text = Count.ToString();
-                yield return null;
-            }
         }
     }
 }

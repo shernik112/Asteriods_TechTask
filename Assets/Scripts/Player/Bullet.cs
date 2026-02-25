@@ -1,7 +1,7 @@
-using System;
+using IPoolable = Project.System.IPoolable;
 using Project.System;
 using UnityEngine;
-using IPoolable = Project.System.IPoolable;
+using System;
 
 namespace Project.Player
 {

@@ -1,8 +1,8 @@
-using System;
 using Project.Player;
 using Project.UI;
 using UnityEngine;
 using Zenject;
+using System;
 
 namespace Project.System
 {
@@ -13,19 +13,21 @@ namespace Project.System
         [SerializeField] private GameObject ufoPrefab = default;
         [SerializeField] private GameObject bulletPrefab = default;
         [SerializeField] private Camera mainCamera = default;
+        // [SerializeField] private Transform mainCanvas = default;
         [SerializeField] private Transform rootHandlers = default;
         [SerializeField] private RestartButton restartButton = default;
-        [SerializeField] private HandlerScore handlerScore = default;
         [SerializeField] private CountLaserShots countLaserShots = default;
-        [SerializeField] private FinalScore finalScore = default;
         [SerializeField] private MainAudio mainAudio = default;
-
+        [SerializeField] private GameObject[] uiPrefabs;
+        
         private readonly Type[] _singleBehaviours =
         {
             typeof(EnemiesSpawner),
             typeof(HandlerInput),
-            typeof(PauseHandler)
+            typeof(PauseHandler),
+            typeof(HandlerScore)
         };
+
     
         public override void InstallBindings()
         {
@@ -42,11 +44,16 @@ namespace Project.System
                     .AsSingle().NonLazy();
             }
 
+            // foreach (var uiPrefab in uiPrefabs)
+            // {
+            //     var behaviour = uiPrefab.GetType();
+            //     Container.Bind(behaviour).FromComponentInNewPrefab(uiPrefab).UnderTransform(rootHandlers)
+            //         .AsSingle().NonLazy();
+            // }
+
             Container.Bind<Camera>().FromInstance(mainCamera).AsSingle();
             Container.Bind<RestartButton>().FromInstance(restartButton).AsSingle();
             Container.Bind<CountLaserShots>().FromInstance(countLaserShots).AsSingle();
-            Container.Bind<HandlerScore>().FromInstance(handlerScore).AsSingle();
-            Container.Bind<FinalScore>().FromInstance(finalScore).AsSingle();
             Container.Bind<MainAudio>().FromInstance(mainAudio).AsSingle();
 
             Container.Bind<MainInstaller>().FromInstance(this).AsSingle();
