@@ -1,8 +1,8 @@
-using System.Text;
 using Project.Player;
-using TMPro;
+using System.Text;
 using UnityEngine;
 using Zenject;
+using TMPro;
 
 namespace Project.UI
 {

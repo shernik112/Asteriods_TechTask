@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 6362072258954275457}
   - component: {fileID: 7736275250942499405}
   - component: {fileID: 2714802972886945533}
-  m_Layer: 5
+  - component: {fileID: -1385992742189299244}
+  m_Layer: 0
   m_Name: MainCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51,7 +52,7 @@ Canvas:
   m_GameObject: {fileID: 1025001364014580855}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 1
@@ -105,6 +106,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &-1385992742189299244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1025001364014580855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d98b5b0ece71d84b8e9fc9346c7608e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1 &2261581005240262370
 GameObject:
   m_ObjectHideFlags: 0
@@ -117,7 +130,7 @@ GameObject:
   - component: {fileID: 3783439454768023711}
   - component: {fileID: 4384866805688920803}
   - component: {fileID: 833814837726486128}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Score
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -267,7 +280,7 @@ GameObject:
   - component: {fileID: 416086935678946037}
   - component: {fileID: 6432444007013689419}
   - component: {fileID: 6895241062778993815}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: NearCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -368,7 +381,7 @@ GameObject:
   - component: {fileID: 6956594949106223171}
   - component: {fileID: 4353318188060257236}
   - component: {fileID: 8645181666104346247}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -506,7 +519,7 @@ GameObject:
   - component: {fileID: 7610588228274614050}
   - component: {fileID: 2768055673464694669}
   - component: {fileID: 555405829919389571}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: CountLaserShots
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -657,13 +670,13 @@ GameObject:
   - component: {fileID: 3112230391674809536}
   - component: {fileID: 2057720117601275829}
   - component: {fileID: 6753688687046545103}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: GameOverPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2655217458516934269
 RectTransform:
   m_ObjectHideFlags: 0
@@ -760,7 +773,7 @@ GameObject:
   - component: {fileID: 5279884542515855158}
   - component: {fileID: 5578800899376376566}
   - component: {fileID: 5840811132752948703}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: FinalScore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -911,7 +924,7 @@ GameObject:
   - component: {fileID: 2952498269918443539}
   - component: {fileID: 5743765516322512514}
   - component: {fileID: 5376259031838148474}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1044,7 +1057,7 @@ GameObject:
   - component: {fileID: 8993819636286766023}
   - component: {fileID: 4200162703122975284}
   - component: {fileID: 7018917959487404891}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Indicators
   m_TagString: Untagged
   m_Icon: {fileID: 0}
