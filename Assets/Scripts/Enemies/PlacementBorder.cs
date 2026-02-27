@@ -50,9 +50,6 @@ namespace Project.System
                     case 4:
                         obj.transform.position = new Vector2(0, -_heightCreate);
                         break;
-                    
-                    default:
-                        break;
                 }
                 obj.AddComponent<TeleportBorder>();
             }

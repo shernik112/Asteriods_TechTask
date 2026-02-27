@@ -1,7 +1,5 @@
-using System;
 using Pixelplacement;
 using Project.System;
-using Project.UI;
 using UnityEngine;
 using Zenject;
 
@@ -10,8 +8,6 @@ namespace Project.Player
     [RequireComponent(typeof(SpriteRenderer),typeof(Collider2D))]
     public class ShootLaser : MonoBehaviour
     {
-        public event Action<int> NewCountShotLaser;
-        
         [SerializeField] private AudioClip newChargeClip = default;
         [SerializeField] private AudioClip shootLaserClip = default;
         
@@ -21,7 +17,7 @@ namespace Project.Player
     
         private int _currentCountShotLaser = default;
         private float _lastShootTime;
-        private RestartButton _restartButton;
+        private EventBus _eventBus;
         private Quaternion _initialLaserRotation;
         private Transform _parentTransform;
         private SpriteRenderer _spriteRenderer;
@@ -37,26 +33,26 @@ namespace Project.Player
             private set
             {
                 _currentCountShotLaser = value;
-                NewCountShotLaser?.Invoke(_currentCountShotLaser);
+                _eventBus.NewCountShotLaser?.Invoke(_currentCountShotLaser);
             }
         }
 
         [Inject]
         public void Construct(
-            RestartButton restartButton,
+            EventBus eventBus,
             MainAudio mainAudio)
         {
-            _restartButton = restartButton;
+            _eventBus = eventBus;
             _mainAudio = mainAudio;
         }
         private void OnEnable()
         {
-            _restartButton.OnRestartGame += Restart;
+            _eventBus.OnRestartGame += Restart;
         }
 
         private void OnDisable()
         {
-            _restartButton.OnRestartGame -= Restart;
+            _eventBus.OnRestartGame -= Restart;
         }
 
         private void Awake()
@@ -91,7 +87,7 @@ namespace Project.Player
                 Debug.Log($"{typeof(ShootLaser)} ShootLaser");
                 Shoot();
                 CurrentCountShоtLaser -= 1;
-                NewCountShotLaser?.Invoke(CurrentCountShоtLaser);
+                _eventBus.NewCountShotLaser?.Invoke(CurrentCountShоtLaser);
                 _lastShootTime = 0f;
             }
         }

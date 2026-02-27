@@ -14,6 +14,7 @@ namespace Project.System
         [SerializeField] private GameObject bulletPrefab = default;
         [SerializeField] private GameObject mainCanvas = default;
         [SerializeField] private GameObject mainCamera = default;
+        [SerializeField] private GameObject eventBus = default;
         [SerializeField] private Transform rootHandlers = default;
         [SerializeField] private MainAudio mainAudio = default;
         private readonly Type[] _singleBehaviours =
@@ -27,6 +28,7 @@ namespace Project.System
     
         public override void InstallBindings()
         {
+            Container.Bind<EventBus>().FromComponentInNewPrefab(eventBus).AsSingle().NonLazy();
             Container.Bind<Camera>().FromComponentInNewPrefab(mainCamera).AsSingle().NonLazy();
             Container.Bind<PlayerController>().FromComponentInNewPrefab(playerPrefab).AsSingle().NonLazy();
             Container.Bind<RestartButton>().FromComponentInNewPrefab(mainCanvas).AsSingle().NonLazy();

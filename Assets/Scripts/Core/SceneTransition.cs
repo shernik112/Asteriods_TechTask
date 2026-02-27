@@ -1,5 +1,4 @@
 using System.Collections;
-using Project.Player;
 using Project.UI;
 using UnityEngine;
 using Zenject;
@@ -13,22 +12,19 @@ namespace Project.System
         private bool _transitionIn;
         private SpriteMask _mask;
         private ShowUI _showUI;
-        private PlayerController _playerController;
-        private RestartButton _restartButton;
+        private EventBus _eventBus;
 
         [Inject]
         public void Construct(
-            PlayerController playerController, 
-            RestartButton restartButton)
+            EventBus eventBus)
         {
-            _playerController = playerController;
-            _restartButton = restartButton;
+            _eventBus = eventBus;
         }
     
         private void Awake()
         {
-            _playerController.OnHitPlayer += Transition;
-            _restartButton.OnRestartGame += Transition;
+            _eventBus.OnHitPlayer += Transition;
+            _eventBus.OnRestartGame += Transition;
             _mask = GetComponentInChildren<SpriteMask>();
             _showUI = GetComponentInChildren<ShowUI>();
             _transitionIn = true;
@@ -36,8 +32,8 @@ namespace Project.System
 
         private void OnDestroy()
         {
-            _playerController.OnHitPlayer -= Transition;
-            _restartButton.OnRestartGame -= Transition;
+            _eventBus.OnHitPlayer -= Transition;
+            _eventBus.OnRestartGame -= Transition;
         }
 
         private void Transition()

@@ -1,7 +1,6 @@
 using Project.System;
 using Project.Enemies;
 using UnityEngine;
-using System;
 using Zenject;
 
 namespace Project.Player
@@ -9,16 +8,14 @@ namespace Project.Player
     [RequireComponent(typeof(Rigidbody2D),typeof(SpriteRenderer))]
     public class PlayerController : MonoBehaviour, ITeleported
     { 
-        public event Action OnHitPlayer;
-
         [SerializeField] private AudioClip destructionClip = default;
         [SerializeField] private AudioClip dashClip = default;
         [SerializeField] private float moveSpeed = default;
         [SerializeField] private float speedAcceleration = default;
         [SerializeField] private float rotateSpeed = default;
         [SerializeField] private float rotateAcceleration = default;
-        
-        private RestartButton _restartButton;
+
+        private EventBus _eventBus;
         private MainAudio _mainAudio;
         private SpriteRenderer _spriteRenderer;
         private Vector2 _input;
@@ -29,10 +26,10 @@ namespace Project.Player
 
         [Inject]
         public void Construct(
-            RestartButton restartButton,
+            EventBus eventBus,
             MainAudio mainAudio)
         {
-            _restartButton = restartButton;
+            _eventBus = eventBus;
             _mainAudio = mainAudio;
         }
     
@@ -42,10 +39,10 @@ namespace Project.Player
             BulletShoot = GetComponent<BulletShoot>();
             Rb = GetComponent<Rigidbody2D>();
             _spriteRenderer = GetComponent<SpriteRenderer>();
-            _restartButton.OnRestartGame += SetActive;
+            _eventBus.OnRestartGame += SetActive;
         }
     
-        private void OnDestroy() => _restartButton.OnRestartGame -= SetActive;
+        private void OnDestroy() => _eventBus.OnRestartGame -= SetActive;
 
         public void SetInput(Vector2 input)
         {
@@ -70,11 +67,10 @@ namespace Project.Player
         {
             if (other.gameObject.TryGetComponent<IEnemy>(out var enemy))
             {
-                Debug.Log($"Invoke OnHitPlayer; subscribers = {(OnHitPlayer == null ? 0 : OnHitPlayer.GetInvocationList().Length)}");
                 Rb.linearVelocity = Vector2.zero;
                 Rb.angularVelocity = default;
                 _mainAudio.PlaySfx(destructionClip);
-                OnHitPlayer?.Invoke();
+                _eventBus.OnHitPlayer?.Invoke();
                 SetDefaultValues();
             } 
             Debug.Log($"{typeof(PlayerController)} OnCollisionEnter");

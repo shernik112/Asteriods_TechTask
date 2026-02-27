@@ -1,4 +1,5 @@
 using Project.Player;
+using Project.System;
 using TMPro;
 using UnityEngine;
 using Zenject;
@@ -9,23 +10,22 @@ namespace Project.UI
     public abstract class BaseCounter : MonoBehaviour
     {
         protected int Count;
-        
         protected TMP_Text Text;
-        protected PlayerController PlayerController;
+        protected EventBus EventBus;
 
         [Inject]
-        public virtual void Construct(PlayerController playerController)
+        public virtual void Construct(EventBus eventBus)
         {
-            PlayerController = playerController;
+            EventBus = eventBus;
         }
         
         protected virtual void Awake()
         {
             Text = GetComponent<TMP_Text>();
-            PlayerController.OnHitPlayer += ResetCount;
+            EventBus.OnHitPlayer += ResetCount;
         }
         
-        protected virtual void OnDestroy() => PlayerController.OnHitPlayer -= ResetCount;
+        protected virtual void OnDestroy() => EventBus.OnHitPlayer -= ResetCount;
 
         private void ResetCount()
         {
