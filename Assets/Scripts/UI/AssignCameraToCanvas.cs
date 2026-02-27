@@ -5,6 +5,7 @@ namespace Project.UI
 {
     public class AssignCameraToCanvas : MonoBehaviour
     {
+        [SerializeField] private string layerId; 
         private Camera _mainCamera;
         
         [Inject]
@@ -17,7 +18,7 @@ namespace Project.UI
         {
             var canvas = GetComponent<Canvas>();
             canvas.worldCamera = _mainCamera;
-            canvas.sortingLayerID = SortingLayer.NameToID("UI");
+            canvas.sortingLayerID = SortingLayer.NameToID(layerId);
         }
     }
 }

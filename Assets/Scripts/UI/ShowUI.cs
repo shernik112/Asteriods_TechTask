@@ -6,7 +6,7 @@ namespace Project.UI
 {
     public class ShowUI : MonoBehaviour
     {
-        [SerializeField] private float showTime = default;
+        public float ShowTime { get; private set; } = 0.3f;
         
         private HandlerGameCondition _handlerGameCondition;
         private CanvasGroup _cg;
@@ -27,7 +27,7 @@ namespace Project.UI
             _cg.interactable = _isShowNow;
             _cg.blocksRaycasts = _isShowNow;
             _handlerGameCondition.GameCondition = _isShowNow ? GameCondition.Menu : GameCondition.Game;
-            Tween.CanvasGroupAlpha(_cg, startAlpha, targetAlpha, showTime, 0f,Tween.EaseInOut);
+            Tween.CanvasGroupAlpha(_cg, startAlpha, targetAlpha, ShowTime, 0f,Tween.EaseInOut);
         }
     }
 }

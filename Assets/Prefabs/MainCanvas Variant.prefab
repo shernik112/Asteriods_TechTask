@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -1385992742189299244, guid: bf0327adaa1a7fe45af4c5dd76ac41c0, type: 3}
+      propertyPath: layerId
+      value: UI
+      objectReference: {fileID: 0}
     - target: {fileID: 1025001364014580855, guid: bf0327adaa1a7fe45af4c5dd76ac41c0, type: 3}
       propertyPath: m_Name
       value: MainCanvas Variant

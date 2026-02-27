@@ -1,4 +1,5 @@
 using System;
+using NUnit.Framework;
 using UnityEngine;
 using Zenject;
 
@@ -6,7 +7,7 @@ namespace Project.System
 {
     public class PauseHandler : MonoBehaviour
     {
-        public bool IsPause = false;
+        public bool IsPause { get; private set; }
 
         private EventBus _eventBus;
             
@@ -32,7 +33,8 @@ namespace Project.System
 
         private void TogglePause()
         {
-            IsPause = !IsPause;
+                IsPause = !IsPause;
+            Debug.Log($"{typeof(PauseHandler)} {IsPause}");
         }
     }
 }

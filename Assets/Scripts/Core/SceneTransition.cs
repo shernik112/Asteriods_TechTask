@@ -7,12 +7,15 @@ namespace Project.System
 {
     public class SceneTransition : MonoBehaviour
     {
-        private readonly float _speed = 2.5f;
+
+
+        private readonly float _speed = 3f;
 
         private bool _transitionIn;
         private SpriteMask _mask;
         private ShowUI _showUI;
         private EventBus _eventBus;
+        private WaitForSeconds _waitHiding;
 
         [Inject]
         public void Construct(
@@ -23,26 +26,41 @@ namespace Project.System
     
         private void Awake()
         {
-            _eventBus.OnHitPlayer += Transition;
-            _eventBus.OnRestartGame += Transition;
+            _eventBus.OnHitPlayer += StartTransition;
+            _eventBus.OnRestartGame += StartTransition;
             _mask = GetComponentInChildren<SpriteMask>();
-            // _showUI = GetComponentInChildren<ShowUI>();
+            _showUI = GetComponentInChildren<ShowUI>();
+            _waitHiding = new WaitForSeconds(_showUI.ShowTime);
             _transitionIn = true;
         }
 
         private void OnDestroy()
         {
-            _eventBus.OnHitPlayer -= Transition;
-            _eventBus.OnRestartGame -= Transition;
+            _eventBus.OnHitPlayer -= StartTransition;
+            _eventBus.OnRestartGame -= StartTransition;
         }
 
-        private void Transition()
+        private void StartTransition()
         {
             StopAllCoroutines();
+            StartCoroutine(Transition());
+        }
+        
+        private IEnumerator Transition()
+        {
             _transitionIn = !_transitionIn;
             
-            StartCoroutine(_transitionIn ? FadeIn() : FadeOut());
-            // _showUI.SmoothShow();
+            if (_transitionIn)
+            {
+                _showUI.SmoothShow();
+                yield return _waitHiding;
+                StartCoroutine(_transitionIn ? FadeIn() : FadeOut());
+            }
+            else
+            {
+                yield return StartCoroutine(_transitionIn ? FadeIn() : FadeOut());
+                _showUI.SmoothShow();
+            }
         }
 
         private IEnumerator FadeOut()

@@ -17,6 +17,7 @@ namespace Project.Player
 
         private EventBus _eventBus;
         private MainAudio _mainAudio;
+        private PauseHandler _pauseHandler;
         private SpriteRenderer _spriteRenderer;
         private Vector2 _input;
     
@@ -27,9 +28,11 @@ namespace Project.Player
         [Inject]
         public void Construct(
             EventBus eventBus,
+            PauseHandler pauseHandler,
             MainAudio mainAudio)
         {
             _eventBus = eventBus;
+            _pauseHandler = pauseHandler;
             _mainAudio = mainAudio;
         }
     
@@ -58,6 +61,8 @@ namespace Project.Player
 
         private void FixedUpdate()
         {
+            if (_pauseHandler.IsPause)
+                return;
             Rb.angularVelocity = Mathf.MoveTowards(Rb.angularVelocity, -_input.x * rotateSpeed, rotateAcceleration * Time.fixedDeltaTime);
             Vector2 targetVelocity = transform.up * _input.y * moveSpeed;
             Rb.linearVelocity = Vector2.MoveTowards(Rb.linearVelocity, targetVelocity, speedAcceleration * Time.fixedDeltaTime);
@@ -79,6 +84,7 @@ namespace Project.Player
         private void SetDefaultValues()
         {
             _spriteRenderer.enabled = false;
+            Rb.linearVelocity = Vector2.zero;
             transform.position = new Vector2(0, 0);
             transform.rotation = Quaternion.Euler(0, 0, 0);
         }
