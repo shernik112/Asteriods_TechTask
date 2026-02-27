@@ -1,7 +1,6 @@
 using System.Collections;
 using Project.System;
 using UnityEngine;
-using Zenject;
 
 namespace Project.UI
 {

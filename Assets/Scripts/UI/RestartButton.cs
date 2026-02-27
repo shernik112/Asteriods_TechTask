@@ -1,13 +1,15 @@
 using Project.System;
 using UnityEngine.UI;
 using UnityEngine;
+using Zenject;
 
 [RequireComponent(typeof(Button))]
-public class RestartButton: MonoBehaviour
+public class RestartButton : MonoBehaviour
 {
     private EventBus _eventBus;
     private Button _button;
 
+    [Inject]
     public void Construct(EventBus eventBus)
     {
         _eventBus = eventBus;

@@ -1,4 +1,3 @@
-using Project.Player;
 using Project.System;
 using TMPro;
 using UnityEngine;
@@ -14,15 +13,15 @@ namespace Project.UI
         protected EventBus EventBus;
 
         [Inject]
-        public virtual void Construct(EventBus eventBus)
+        public void Construct(EventBus eventBus)
         {
             EventBus = eventBus;
         }
         
         protected virtual void Awake()
         {
-            Text = GetComponent<TMP_Text>();
             EventBus.OnHitPlayer += ResetCount;
+            Text = GetComponent<TMP_Text>();
         }
         
         protected virtual void OnDestroy() => EventBus.OnHitPlayer -= ResetCount;

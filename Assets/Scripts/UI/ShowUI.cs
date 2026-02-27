@@ -1,8 +1,6 @@
 using Pixelplacement;
 using Project.System;
-using Project.Player;
 using UnityEngine;
-using Zenject;
 
 namespace Project.UI
 {

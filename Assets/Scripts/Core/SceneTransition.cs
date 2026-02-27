@@ -26,7 +26,7 @@ namespace Project.System
             _eventBus.OnHitPlayer += Transition;
             _eventBus.OnRestartGame += Transition;
             _mask = GetComponentInChildren<SpriteMask>();
-            _showUI = GetComponentInChildren<ShowUI>();
+            // _showUI = GetComponentInChildren<ShowUI>();
             _transitionIn = true;
         }
 
@@ -42,7 +42,7 @@ namespace Project.System
             _transitionIn = !_transitionIn;
             
             StartCoroutine(_transitionIn ? FadeIn() : FadeOut());
-            _showUI.SmoothShow();
+            // _showUI.SmoothShow();
         }
 
         private IEnumerator FadeOut()
