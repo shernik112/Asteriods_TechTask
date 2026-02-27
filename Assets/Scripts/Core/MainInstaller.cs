@@ -12,12 +12,11 @@ namespace Project.System
         [SerializeField] private GameObject asteroidPrefab = default;
         [SerializeField] private GameObject ufoPrefab = default;
         [SerializeField] private GameObject bulletPrefab = default;
-        [SerializeField] private GameObject mainCanvas = default;
         [SerializeField] private GameObject mainCamera = default;
         [SerializeField] private GameObject eventBus = default;
-        [SerializeField] private GameObject transition = default;
         [SerializeField] private Transform rootHandlers = default;
         [SerializeField] private MainAudio mainAudio = default;
+        [SerializeField] private GameObject[] prefabs;
         private readonly Type[] _singleBehaviours =
         {
             typeof(EnemiesSpawner),
@@ -45,10 +44,15 @@ namespace Project.System
             
             Container.Bind<MainAudio>().FromInstance(mainAudio).AsSingle();
             Container.Bind<MainInstaller>().FromInstance(this).AsSingle();
-            Container.InstantiatePrefab(mainCanvas);
-                Container.InstantiatePrefab(transition);
         }
 
+        public override void Start()
+        {
+            foreach (var prefab in prefabs)
+            {
+                Container.InstantiatePrefab(prefab);
+            }
+        }
         public void InjectGo(GameObject obj)
         {
             Container.InjectGameObject(obj);
