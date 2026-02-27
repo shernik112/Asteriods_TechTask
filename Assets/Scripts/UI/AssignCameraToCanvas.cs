@@ -18,7 +18,6 @@ namespace Project.UI
             var canvas = GetComponent<Canvas>();
             canvas.worldCamera = _mainCamera;
             canvas.sortingLayerID = SortingLayer.NameToID("UI");
-
         }
     }
 }

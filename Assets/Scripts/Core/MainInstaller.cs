@@ -16,7 +16,6 @@ namespace Project.System
         [SerializeField] private GameObject mainCamera = default;
         [SerializeField] private Transform rootHandlers = default;
         [SerializeField] private MainAudio mainAudio = default;
-        
         private readonly Type[] _singleBehaviours =
         {
             typeof(EnemiesSpawner),
@@ -27,9 +26,9 @@ namespace Project.System
 
     
         public override void InstallBindings()
-        { 
-            Container.Bind<PlayerController>().FromComponentInNewPrefab(playerPrefab).AsSingle().NonLazy();
+        {
             Container.Bind<Camera>().FromComponentInNewPrefab(mainCamera).AsSingle().NonLazy();
+            Container.Bind<PlayerController>().FromComponentInNewPrefab(playerPrefab).AsSingle().NonLazy();
             Container.Bind<RestartButton>().FromComponentInNewPrefab(mainCanvas).AsSingle().NonLazy();
             Container.Bind<GameObject>().FromInstance(bulletPrefab).WhenInjectedInto<BulletShoot>();
             Container.Bind<GameObject>().WithId("Asteroid").FromInstance(asteroidPrefab).WhenInjectedInto<EnemiesSpawner>();

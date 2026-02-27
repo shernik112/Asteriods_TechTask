@@ -6,42 +6,23 @@ using Zenject;
 
 namespace Project.UI
 {
-    public class SmoothShowUI : MonoBehaviour
+    public class ShowUI : MonoBehaviour
     {
         [SerializeField] private float showTime = default;
         
         private HandlerGameCondition _handlerGameCondition;
-        private PlayerController _playerController;
-        private RestartButton _restartButton;
         private CanvasGroup _cg;
         private bool _isShowNow;
-    
-        [Inject]
-        public void Construct(
-            PlayerController playerController,
-            RestartButton restartButton)
-        {
-            _playerController = playerController;
-            _restartButton = restartButton;
-        }
-
+        
         private void Awake()
         {
             _cg = GetComponent<CanvasGroup>();
             _handlerGameCondition = new HandlerGameCondition();
-            _playerController.OnHitPlayer += SmoothShow;
-            _restartButton.OnRestartGame += SmoothShow;
         }
-    
-        private void OnDestroy()
+        
+        public void SmoothShow()
         {
-            _playerController.OnHitPlayer -= SmoothShow;
-            _restartButton.OnRestartGame -= SmoothShow;
-        }
-    
-        private void SmoothShow()
-        {
-            Debug.Log($"{typeof(SmoothShowUI)} SmoothShow");
+            Debug.Log($"{typeof(ShowUI)} SmoothShow");
             _isShowNow = !_isShowNow;
             var startAlpha = _cg.alpha;
             var targetAlpha = _isShowNow ? 1f : 0f;

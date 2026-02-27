@@ -1,5 +1,6 @@
 using System.Collections;
 using Project.Player;
+using Project.UI;
 using UnityEngine;
 using Zenject;
 
@@ -11,6 +12,7 @@ namespace Project.System
 
         private bool _transitionIn;
         private SpriteMask _mask;
+        private ShowUI _showUI;
         private PlayerController _playerController;
         private RestartButton _restartButton;
 
@@ -28,6 +30,7 @@ namespace Project.System
             _playerController.OnHitPlayer += Transition;
             _restartButton.OnRestartGame += Transition;
             _mask = GetComponentInChildren<SpriteMask>();
+            _showUI = GetComponentInChildren<ShowUI>();
             _transitionIn = true;
         }
 
@@ -43,6 +46,7 @@ namespace Project.System
             _transitionIn = !_transitionIn;
             
             StartCoroutine(_transitionIn ? FadeIn() : FadeOut());
+            _showUI.SmoothShow();
         }
 
         private IEnumerator FadeOut()
