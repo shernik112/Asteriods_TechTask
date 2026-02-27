@@ -46,7 +46,7 @@ namespace Project.System
             Container.Bind<MainAudio>().FromInstance(mainAudio).AsSingle();
             Container.Bind<MainInstaller>().FromInstance(this).AsSingle();
             Container.InstantiatePrefab(mainCanvas);
-            // Container.InstantiatePrefab(transition);
+                Container.InstantiatePrefab(transition);
         }
 
         public void InjectGo(GameObject obj)
