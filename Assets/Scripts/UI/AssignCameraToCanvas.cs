@@ -9,7 +9,8 @@ namespace Project.UI
         private Camera _mainCamera;
         
         [Inject]
-        public void Construct(Camera mainCamera)
+        public void Construct(
+            Camera mainCamera)
         {
             _mainCamera = mainCamera;
         }

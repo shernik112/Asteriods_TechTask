@@ -34,11 +34,10 @@ namespace Project.System
             Container.Bind<GameObject>().FromInstance(bulletPrefab).WhenInjectedInto<BulletShoot>();
             Container.Bind<GameObject>().WithId("Asteroid").FromInstance(asteroidPrefab).WhenInjectedInto<EnemiesSpawner>();
             Container.Bind<GameObject>().WithId("Ufo").FromInstance(ufoPrefab).WhenInjectedInto<EnemiesSpawner>();
-        
-            for (var i = 0; i < _singleBehaviours.Length; i++)
+            
+            foreach (var singleBehaviour in _singleBehaviours)
             {
-                var behaviour = _singleBehaviours[i];
-                Container.Bind(behaviour).FromNewComponentOnNewGameObject().UnderTransform(rootHandlers)
+                Container.Bind(singleBehaviour).FromNewComponentOnNewGameObject().UnderTransform(rootHandlers)
                     .AsSingle().NonLazy();
             }
             

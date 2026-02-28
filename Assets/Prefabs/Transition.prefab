@@ -61,7 +61,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 1111
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!114 &7391364387351441097
 MonoBehaviour:
@@ -857,7 +857,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -817489623
   m_SortingLayer: 4
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_MaskInteraction: 2
   m_Sprite: {fileID: 7623462965570301069, guid: adb242323a172504b90a0e304d277395, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

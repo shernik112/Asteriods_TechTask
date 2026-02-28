@@ -63,7 +63,7 @@ namespace Project.Player
             _collider2D = GetComponent<Collider2D>();
         }
 
-        public void Start()
+        private void Start()
         {
             CurrentCountShоtLaser = _defaultCountShotLaser;
         }
