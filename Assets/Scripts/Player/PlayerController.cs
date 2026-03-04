@@ -7,13 +7,8 @@ namespace Project.Player
 {
     [RequireComponent(typeof(Rigidbody2D),typeof(SpriteRenderer))]
     public class PlayerController : MonoBehaviour, ITeleported
-    { 
-        [SerializeField] private AudioClip destructionClip = default;
-        [SerializeField] private AudioClip dashClip = default;
-        [SerializeField] private float moveSpeed = default;
-        [SerializeField] private float speedAcceleration = default;
-        [SerializeField] private float rotateSpeed = default;
-        [SerializeField] private float rotateAcceleration = default;
+    {
+        [SerializeField] private PlayerData _playerData;
 
         private EventBus _eventBus;
         private MainAudio _mainAudio;
@@ -55,7 +50,7 @@ namespace Project.Player
 
         public bool TeleportReaction()
         {
-            _mainAudio.PlaySfx(dashClip);
+            _mainAudio.PlaySfx(_playerData.dashClip);
             return true;
         }
 
@@ -63,9 +58,9 @@ namespace Project.Player
         {
             if (_pauseHandler.IsPause)
                 return;
-            Rb.angularVelocity = Mathf.MoveTowards(Rb.angularVelocity, -_input.x * rotateSpeed, rotateAcceleration * Time.fixedDeltaTime);
-            Vector2 targetVelocity = transform.up * _input.y * moveSpeed;
-            Rb.linearVelocity = Vector2.MoveTowards(Rb.linearVelocity, targetVelocity, speedAcceleration * Time.fixedDeltaTime);
+            Rb.angularVelocity = Mathf.MoveTowards(Rb.angularVelocity, -_input.x * _playerData.rotateSpeed, _playerData.rotateAcceleration * Time.fixedDeltaTime);
+            Vector2 targetVelocity = transform.up * _input.y * _playerData.moveSpeed;
+            Rb.linearVelocity = Vector2.MoveTowards(Rb.linearVelocity, targetVelocity, _playerData.moveAcceleration * Time.fixedDeltaTime);
         }
     
         private void OnCollisionEnter2D(Collision2D other)
@@ -74,7 +69,7 @@ namespace Project.Player
             {
                 Rb.linearVelocity = Vector2.zero;
                 Rb.angularVelocity = default;
-                _mainAudio.PlaySfx(destructionClip);
+                _mainAudio.PlaySfx(_playerData.destructionClip);
                 _eventBus.OnHitPlayer?.Invoke();
                 SetDefaultValues();
             } 

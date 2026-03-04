@@ -167,12 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d582843a28feb364499225c578301fbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destructionClip: {fileID: 8300000, guid: c9df04f783866ce40893cc561d250d94, type: 3}
-  dashClip: {fileID: 8300000, guid: e3fbc685c9eacb149b681edbf136e065, type: 3}
-  moveSpeed: 11
-  speedAcceleration: 6
-  rotateSpeed: 250
-  rotateAcceleration: 180
+  _playerData: {fileID: 11400000, guid: 34feac179934ba64cbb253009e7c079a, type: 2}
 --- !u!60 &109552026019927316
 PolygonCollider2D:
   m_ObjectHideFlags: 0

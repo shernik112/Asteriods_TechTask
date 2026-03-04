@@ -8,8 +8,7 @@ namespace Project.Player
     [RequireComponent(typeof(SpriteRenderer),typeof(Collider2D))]
     public class ShootLaser : MonoBehaviour
     {
-        [SerializeField] private AudioClip newChargeClip = default;
-        [SerializeField] private AudioClip shootLaserClip = default;
+        [SerializeField] private LaserData laserData = default;
         
         private readonly int _defaultCountShotLaser = 3;
         private readonly float _durationLaserShot = 0.4f;
@@ -94,7 +93,7 @@ namespace Project.Player
     
         private void Shoot()
         {
-            _mainAudio.PlaySfx(shootLaserClip);
+            _mainAudio.PlaySfx(laserData.shootLaser);
             ChangeVisibility(true);
             TurnLaser();
         }
@@ -109,7 +108,7 @@ namespace Project.Player
         private void IncreaseCountShotLaser()
         {
             CurrentCountShоtLaser += 1;
-            _mainAudio.PlaySfx(newChargeClip);
+            _mainAudio.PlaySfx(laserData.newChargeClip);
         }
     
         private void TurnLaser()

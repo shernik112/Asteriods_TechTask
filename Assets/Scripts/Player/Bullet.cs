@@ -10,19 +10,21 @@ namespace Project.Player
     {
         public event Action<GameObject> OnDeactivation;
         
+        [SerializeField] private BulletData bulletData;
+        
         private ObjectPool _bulletPool;
         private Rigidbody2D _rg;
-    
-        [field: SerializeField] public float MoveSpeed { get; private set; } = default;
 
         private void Awake()
         {
             _rg = GetComponent<Rigidbody2D>();
+            var spriteRenderer = GetComponent<SpriteRenderer>();
+            spriteRenderer.sprite = bulletData.sprite;
         }
 
         private void Update()
         { 
-            _rg.linearVelocity = transform.up * MoveSpeed;
+            _rg.linearVelocity = transform.up * bulletData.moveSpeed;
         }
 
         private void OnCollisionEnter2D(Collision2D other)

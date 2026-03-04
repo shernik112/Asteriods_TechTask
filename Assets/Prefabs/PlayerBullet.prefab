@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 346ec1ea0c6fb1a46b61df190b179f06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <MoveSpeed>k__BackingField: 15
+  bulletData: {fileID: 11400000, guid: dc95d30e2394853468652c9befca26a5, type: 2}
 --- !u!50 &8488462146676226241
 Rigidbody2D:
   serializedVersion: 5
@@ -124,7 +124,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -1971997584, guid: 5cbfe289cb78c224e8718d50266e9d2b, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -132,7 +132,7 @@ SpriteRenderer:
   m_Size: {x: 0.4375, y: 0.3125}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_SpriteSortPoint: 0
 --- !u!60 &9091981829405955397
 PolygonCollider2D:

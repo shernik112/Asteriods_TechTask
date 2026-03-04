@@ -156,5 +156,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74dad316e45c8944abc4eb4f84a78792, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HandlerShootLaser
-  newChargeClip: {fileID: 8300000, guid: d6d55607074a97b4c87e8f0b64e085a1, type: 3}
-  shootLaserClip: {fileID: 8300000, guid: e95e6051bebd8894a8ff68e53dca6853, type: 3}
+  laserData: {fileID: 11400000, guid: b36d758fa6f76cd4995c49da3c320cc1, type: 2}
