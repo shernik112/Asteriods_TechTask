@@ -17,24 +17,22 @@ namespace Project.Enemies
     public abstract class BaseEnemy : MonoBehaviour, IEnemy, IPoolable, ITeleported
     {
         public event Action<GameObject> OnDeactivation;
+
+        [SerializeField] protected EnemyDefinition enemyData = default;
         
-        [SerializeField] private AudioClip hitClip = default;
-        
-        protected ObjectPool Pool;
         protected SpriteRenderer SpriteRenderer;
-        protected Sprite HitSprite;
         protected Rigidbody2D Rb;
         
         private readonly WaitForSeconds _timeHitReaction = new WaitForSeconds(0.08f);
+       
         private EventBus _eventBus;
         private HandlerScore _handlerScore;
         private MainAudio _mainAudio;
         
+        public bool IsFirstEnterToTeleport { get; set; } = false;
+        
         protected PlayerController PlayerController { get; private set; }
         
-        public bool IsFirstEnterToTeleport { get; set; } = false;
-        public abstract int CountScoreByDefeat { get; set; }
-    
         [Inject]
         public void Construct(
             PlayerController playerController,
@@ -51,6 +49,7 @@ namespace Project.Enemies
         protected virtual void Awake()
         {
             SpriteRenderer = GetComponentInChildren<SpriteRenderer>();
+            SpriteRenderer.sprite = enemyData.sprite;
             Rb = GetComponent<Rigidbody2D>();
         }
 
@@ -76,8 +75,7 @@ namespace Project.Enemies
 
             return true;
         }
-
-        public void OnGetFromPool(ObjectPool pool) => Pool = pool;
+        
         public virtual void OnReturnToPool(){}
 
         protected virtual void HitBullet() => Deactivation();
@@ -101,15 +99,12 @@ namespace Project.Enemies
         
         private IEnumerator PlayHitReaction(Action typeHit)
         {
-            var defaultSprite = SpriteRenderer.sprite;
-            
-            if (HitSprite != null)
-                SpriteRenderer.sprite = HitSprite;
-            _mainAudio.PlaySfx(hitClip);
+            SpriteRenderer.sprite = enemyData.hitSprite;
+            _mainAudio.PlaySfx(enemyData.hitClip);
             yield return _timeHitReaction;            
 
-            SpriteRenderer.sprite = defaultSprite;
-            _handlerScore.CountScoreDefeatedEnemy(CountScoreByDefeat);
+            SpriteRenderer.sprite = enemyData.sprite;
+            _handlerScore.CountScoreDefeatedEnemy(enemyData.scoreByHit);
             typeHit?.Invoke();
         }
     }

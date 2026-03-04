@@ -7,16 +7,22 @@ namespace Project.System
 {
     public class EnemiesSpawner : MonoBehaviour
     {
+        private const int COUNT_FRAGMENTS = 2;
+        
         private readonly float _rotateOffset = 30f;
         private readonly float _posOffset = 0.5f;
         private readonly Vector2 _lookTarget = new Vector2(0, 0);
         private readonly int _startCountAsteroids = 2;
+        private readonly float _createFragmentRotate = 50f;
+        private readonly float _lowerFragmentRotate = 20f;
         
         private ObjectPool _asteroidPool;
+        private ObjectPool _fragmentAsteroidPool;
         private ObjectPool _ufoPool;
         private Camera _mainCamera;
-        private GameObject _asteroidPoolPrefab;
-        private GameObject _ufoPoolPrefab;
+        private GameObject _asteroidPrefab;
+        private GameObject _fragmentAsteroidPrefab;
+        private GameObject _ufoPrefab;
         private MainInstaller _mainInstaller;
         private EventBus _eventBus;
         private PauseHandler _pauseHandler;
@@ -33,14 +39,16 @@ namespace Project.System
         [Inject]
         public void Construct(
             [Inject(Id = "Asteroid")] GameObject asteroidPrefab,
+            [Inject(Id = "FragmentAsteroid")] GameObject fragmentAsteroidPrefab,
             [Inject(Id = "Ufo")] GameObject ufoPrefab,
             Camera mainCamera,
             EventBus eventBus,
             PauseHandler pauseHandler,
             MainInstaller mainInstaller)
         {
-            _asteroidPoolPrefab = asteroidPrefab;
-            _ufoPoolPrefab = ufoPrefab;
+            _asteroidPrefab = asteroidPrefab;
+            _fragmentAsteroidPrefab = fragmentAsteroidPrefab;
+            _ufoPrefab = ufoPrefab;
             _mainCamera = mainCamera;
             _eventBus = eventBus;
             _pauseHandler = pauseHandler;
@@ -50,8 +58,9 @@ namespace Project.System
         private void Awake()
         {
             _eventBus.OnRestartGame += StartCreate;   
-            _asteroidPool = new ObjectPool(_asteroidPoolPrefab, _mainInstaller,transform);
-            _ufoPool = new ObjectPool(_ufoPoolPrefab, _mainInstaller,transform);
+            _asteroidPool = new ObjectPool(_asteroidPrefab, _mainInstaller,transform);
+            _fragmentAsteroidPool = new ObjectPool(_fragmentAsteroidPrefab, _mainInstaller, transform);
+            _ufoPool = new ObjectPool(_ufoPrefab, _mainInstaller,transform);
         }
         
         private void OnDestroy()
@@ -121,6 +130,9 @@ namespace Project.System
             {
                 var pos = GetRandomPos();
                 var obj = _asteroidPool.Get();
+                if (obj.TryGetComponent<AsteroidBehaviour>(out var asteroid))
+                    asteroid.OnHitAsteroid += InitFragmentsAsteroid;
+                
                 ActiveBoolFieldForTeleportation(obj);
                 obj.transform.position = pos;
                 RotateAsteroid(obj);
@@ -151,6 +163,20 @@ namespace Project.System
                 0f,
                 0f,
                 angle + Random.Range(-_rotateOffset, _rotateOffset));
+        }
+        
+        private void InitFragmentsAsteroid(Transform asteroidTransform)
+        {
+            var sideToggle = false;
+            for (var i = 0; i < COUNT_FRAGMENTS; i++)
+            { 
+                var mag = Random.Range(_lowerFragmentRotate, _createFragmentRotate);
+                var obj = _fragmentAsteroidPool.Get();
+                var randomRotate = sideToggle ? mag : -mag;
+                obj.transform.position = asteroidTransform.position;
+                obj.transform.rotation = asteroidTransform.rotation * Quaternion.Euler(0, 0, randomRotate);
+                sideToggle = !sideToggle;
+            }
         }
     }
 }

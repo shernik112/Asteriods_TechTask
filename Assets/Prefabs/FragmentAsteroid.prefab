@@ -101,10 +101,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5259500147604113292}
   - component: {fileID: 3302825953624382577}
-  - component: {fileID: 27252801306579284}
-  - component: {fileID: 560361010544198941}
+  - component: {fileID: 3704753740806163580}
+  - component: {fileID: -5924003924063103675}
   m_Layer: 0
-  m_Name: Asteroid
+  m_Name: FragmentAsteroid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -153,20 +153,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &27252801306579284
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8980806605422784256}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f2a043e372aa334c8df09c2433d6656, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Project.Enemies.AsteroidBehaviour
-  enemyData: {fileID: 11400000, guid: 7762ff104d287104585d5fa1da7a3d05, type: 2}
---- !u!58 &560361010544198941
+--- !u!58 &3704753740806163580
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -200,5 +187,18 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.0034549236, y: 0}
-  m_Radius: 0.56909966
+  m_Offset: {x: -0.0041587353, y: -0.006931126}
+  m_Radius: 0.2282995
+--- !u!114 &-5924003924063103675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8980806605422784256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 186e44dccb6e8714a846443ff40398a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Project.Enemies.FragmentAsteroidBehaviour
+  enemyData: {fileID: 11400000, guid: fe639a55993ca96489c840fffa7aa939, type: 2}

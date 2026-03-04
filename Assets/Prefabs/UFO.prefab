@@ -47,10 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9632396e1fff32b45af91c32b3558db8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitClip: {fileID: 8300000, guid: 5b2606f91b25a94489413e5b91e8cdac, type: 3}
-  speed: 2
-  hitSprite: {fileID: -555725859505105965, guid: 5cbfe289cb78c224e8718d50266e9d2b, type: 3}
-  <CountScoreByDefeat>k__BackingField: 1500
+  enemyData: {fileID: 11400000, guid: ee91a60b822ef5a49b8c416de3c96120, type: 2}
 --- !u!212 &6091585830226290129
 SpriteRenderer:
   serializedVersion: 2
