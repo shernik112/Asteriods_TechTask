@@ -14,8 +14,8 @@ namespace Project.System
         [SerializeField] private GameObject bulletPrefab = default;
         [SerializeField] private GameObject mainCamera = default;
         [SerializeField] private GameObject eventBus = default;
+        [SerializeField] private GameObject mainAudio = default;
         [SerializeField] private Transform rootHandlers = default;
-        [SerializeField] private MainAudio mainAudio = default;
         [SerializeField] private GameObject[] prefabs;
         private readonly Type[] _singleBehaviours =
         {
@@ -31,6 +31,7 @@ namespace Project.System
             Container.Bind<EventBus>().FromComponentInNewPrefab(eventBus).AsSingle().NonLazy();
             Container.Bind<Camera>().FromComponentInNewPrefab(mainCamera).AsSingle().NonLazy();
             Container.Bind<PlayerController>().FromComponentInNewPrefab(playerPrefab).AsSingle().NonLazy();
+            Container.Bind<MainAudio>().FromComponentInNewPrefab(mainAudio).AsSingle().NonLazy();
             Container.Bind<GameObject>().FromInstance(bulletPrefab).WhenInjectedInto<BulletShoot>();
             Container.Bind<GameObject>().WithId("Asteroid").FromInstance(asteroidPrefab).WhenInjectedInto<EnemiesSpawner>();
             Container.Bind<GameObject>().WithId("Ufo").FromInstance(ufoPrefab).WhenInjectedInto<EnemiesSpawner>();
@@ -41,7 +42,6 @@ namespace Project.System
                     .AsSingle().NonLazy();
             }
             
-            Container.Bind<MainAudio>().FromInstance(mainAudio).AsSingle();
             Container.Bind<MainInstaller>().FromInstance(this).AsSingle();
         }
 

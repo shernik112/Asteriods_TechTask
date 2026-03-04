@@ -21,7 +21,7 @@ namespace Project.UI
             _eventBus.OnHitPlayer += ResetCount;
 
         private void OnDestroy() =>
-            _eventBus.OnHitPlayer -= ResetCount;
+            _eventBus.OnHitPlayer -= ResetCount;    
 
 
         public void CountScoreDefeatedEnemy(int countDefeatedEnemy)
