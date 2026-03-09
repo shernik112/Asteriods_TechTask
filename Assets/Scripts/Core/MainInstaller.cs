@@ -18,6 +18,7 @@ namespace Project.System
         [SerializeField] private GameObject mainAudio = default;
         [SerializeField] private Transform rootHandlers = default;
         [SerializeField] private GameObject[] prefabs;
+        
         private readonly Type[] _singleBehaviours =
         {
             typeof(EnemiesSpawner),
@@ -55,6 +56,12 @@ namespace Project.System
             {
                 Container.InstantiatePrefab(prefab);
             }
+        }
+
+        public GameObject Instantiate(GameObject prefab, Transform parentTransform)
+        {
+            var go = Container.InstantiatePrefab(prefab, parentTransform);
+            return go;
         }
         public void InjectGo(GameObject obj)
         {

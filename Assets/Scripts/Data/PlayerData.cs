@@ -9,6 +9,7 @@ namespace Project.Player
         public float moveAcceleration;
         public float rotateSpeed;
         public float rotateAcceleration;
+        public Sprite sprite;
         public AudioClip destructionClip;
         public AudioClip dashClip;
     }

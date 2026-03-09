@@ -35,8 +35,7 @@ namespace Project.System
 
         private void CreateObject()
         {
-            var obj = GameObject.Instantiate(_poolPrefab,_parentTransform);
-            _installer.InjectGo(obj);
+            var obj = _installer.Instantiate(_poolPrefab, _parentTransform);
             obj.SetActive(false);
             _pool.Enqueue(obj);
         }

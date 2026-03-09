@@ -6,6 +6,6 @@ namespace Project
     public class BulletData : ScriptableObject
     {
         public float moveSpeed;
-        public Sprite sprite;
+        public Sprite sprite;   
     }
 }

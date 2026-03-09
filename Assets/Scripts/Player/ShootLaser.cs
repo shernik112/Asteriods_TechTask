@@ -1,7 +1,6 @@
 using Pixelplacement;
 using Project.System;
 using UnityEngine;
-using Zenject;
 
 namespace Project.Player
 {
@@ -18,7 +17,6 @@ namespace Project.Player
         private float _lastShootTime;
         private EventBus _eventBus;
         private Quaternion _initialLaserRotation;
-        private Transform _parentTransform;
         private SpriteRenderer _spriteRenderer;
         private Collider2D _collider2D;
         private MainAudio _mainAudio;
@@ -35,36 +33,24 @@ namespace Project.Player
                 _eventBus.NewCountShotLaser?.Invoke(_currentCountShotLaser);
             }
         }
-
-        [Inject]
-        public void Construct(
-            EventBus eventBus,
-            MainAudio mainAudio)
-        {
-            _eventBus = eventBus;
-            _mainAudio = mainAudio;
-        }
-        private void OnEnable()
-        {
-            _eventBus.OnRestartGame += Restart;
-        }
-
-        private void OnDisable()
-        {
-            _eventBus.OnRestartGame -= Restart;
-        }
-
+        
         private void Awake()
         {
-            _parentTransform = transform.parent;
-            _initialLaserRotation = _parentTransform.localRotation;
+            _initialLaserRotation = transform.localRotation;
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _collider2D = GetComponent<Collider2D>();
         }
 
         private void Start()
         {
+            ChangeVisibility(false);
+            _eventBus.OnRestartGame += Restart;
             CurrentCountShоtLaser = _defaultCountShotLaser;
+        }
+        
+        private void OnDestroy()
+        {
+            _eventBus.OnRestartGame -= Restart;
         }
 
         private void Update()
@@ -79,11 +65,18 @@ namespace Project.Player
             }
         }
 
+        public void Init( 
+            EventBus eventBus,
+            MainAudio mainAudio)
+        {
+            _eventBus = eventBus;
+            _mainAudio = mainAudio;
+        }
+        
         public void TryShoot()
         {
             if (_lastShootTime >= _cooldownDuration && CurrentCountShоtLaser > 0)
             {
-                Debug.Log($"{typeof(ShootLaser)} ShootLaser");
                 Shoot();
                 CurrentCountShоtLaser -= 1;
                 _eventBus.NewCountShotLaser?.Invoke(CurrentCountShоtLaser);
@@ -100,7 +93,6 @@ namespace Project.Player
     
         private void Restart()
         {
-            Debug.Log($"{typeof(ShootLaser)} restart event");
             CurrentCountShоtLaser = _defaultCountShotLaser;
             LastRechargeTime = default;
         }
@@ -113,11 +105,11 @@ namespace Project.Player
     
         private void TurnLaser()
         {
-            Tween.Rotate(_parentTransform, new Vector3(0, 0, -180),Space.Self, _durationLaserShot, 0f, Tween.EaseInOut,Tween.LoopType.None,null,
+            Tween.Rotate(transform, new Vector3(0, 0, -180),Space.Self, _durationLaserShot, 0f, Tween.EaseInOut,Tween.LoopType.None,null,
                 () =>
                 {
                     ChangeVisibility(false);
-                    _parentTransform.localRotation = _initialLaserRotation;
+                    transform.localRotation = _initialLaserRotation;
                 });
         }
 

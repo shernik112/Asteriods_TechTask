@@ -24,7 +24,8 @@ namespace Project.UI
             Text = GetComponent<TMP_Text>();
         }
         
-        protected virtual void OnDestroy() => EventBus.OnHitPlayer -= ResetCount;
+        protected virtual void OnDestroy() => 
+            EventBus.OnHitPlayer -= ResetCount;
 
         private void ResetCount()
         {

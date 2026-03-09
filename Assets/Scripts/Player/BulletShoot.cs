@@ -7,12 +7,11 @@ namespace Project.Player
 {
     public class BulletShoot : MonoBehaviour
     {
-        public ObjectPool BulletPool;
-        
         [SerializeField] private AudioClip bulletShotClip = default;
-        [SerializeField] private float instantiateOffset = default;
-        [SerializeField] private float cooldown = default;
-    
+        
+        private readonly float _instantiateOffset = 0.5f;
+        private float _cooldown = 0.2f;
+        private ObjectPool _bulletPool;
         private MainAudio _mainAudio;
         private MainInstaller _mainInstaller;
         private GameObject _bulletPrefab;
@@ -33,8 +32,8 @@ namespace Project.Player
 
         private void Awake()
         {
-            _defaultCooldown = cooldown;
-            BulletPool = new ObjectPool(_bulletPrefab, _mainInstaller, transform);
+            _defaultCooldown = _cooldown;
+            _bulletPool = new ObjectPool(_bulletPrefab, _mainInstaller, transform);
         }
 
         private void Update()
@@ -44,19 +43,19 @@ namespace Project.Player
 
         public void TryShoot()
         {
-            if (_lastTime >= cooldown)
+            if (_lastTime >= _cooldown)
             {
                 _mainAudio.PlaySfx(bulletShotClip);
                 Shoot();
                 _lastTime = 0f;
-                cooldown = _defaultCooldown + Random.Range(0.01f, 0.05f);
+                _cooldown = _defaultCooldown + Random.Range(0.01f, 0.05f);
             }
         }
     
         private void Shoot()
         {
-            var obj = BulletPool.Get();
-            var spawnPos = (Vector2)transform.position + (Vector2)transform.up * instantiateOffset;
+            var obj = _bulletPool.Get();
+            var spawnPos = (Vector2)transform.position + (Vector2)transform.up * _instantiateOffset;
             obj.transform.position = spawnPos;
             obj.transform.rotation = transform.localRotation;
         }

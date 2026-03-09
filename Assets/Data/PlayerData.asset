@@ -16,5 +16,6 @@ MonoBehaviour:
   moveAcceleration: 5
   rotateSpeed: 250
   rotateAcceleration: 180
+  sprite: {fileID: -9642782944324126, guid: 5cbfe289cb78c224e8718d50266e9d2b, type: 3}
   destructionClip: {fileID: 8300000, guid: c9df04f783866ce40893cc561d250d94, type: 3}
   dashClip: {fileID: 8300000, guid: e3fbc685c9eacb149b681edbf136e065, type: 3}

@@ -9,7 +9,7 @@ namespace Project.System
     {
 
 
-        private readonly float _speed = 3f;
+        private readonly float _speed = 2f;
 
         private bool _transitionIn;
         private SpriteMask _mask;

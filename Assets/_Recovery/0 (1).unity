@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 185f37485b683b7449c496324d2b57af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 2495265613067161707, guid: 5a06847e7522bd244bc7f9cfeba9e5c5, type: 3}
+  playerPrefab: {fileID: 5037804548135090899, guid: 291270eb6b01bae42ba3fddef2e7df42, type: 3}
   asteroidPrefab: {fileID: 8980806605422784256, guid: 332e3cdb502a4a44a889bda641980f91, type: 3}
   fragmentAsteroidPrefab: {fileID: 8980806605422784256, guid: 0a58b4c23363b8945aa5a08a2cb07443, type: 3}
   ufoPrefab: {fileID: 4679316564590342010, guid: 5bfe4a59da5cda4489fbb8f8d42d71c1, type: 3}

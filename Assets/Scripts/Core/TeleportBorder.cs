@@ -1,4 +1,5 @@
-using System;
+using Project.Enemies;
+using Project.Player;
 using Project.System;
 using UnityEngine;
 
@@ -16,17 +17,32 @@ namespace Project.Scene
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (!other.TryGetComponent<ITeleported>(out var obj))
+            if (other.TryGetComponent<IEnemy>(out var enemyObj))
+            {
+                if (enemyObj.IsFirstEnterToTeleport)
+                {
+                    enemyObj.IsFirstEnterToTeleport = false;
+                    return;
+                }
+            }
+
+            if (other.TryGetComponent<ITeleportedReaction>(out var obj))
+                obj.TeleportReaction();
+            
+            if(other.TryGetComponent<ShootLaser>(out var laser))
                 return;
             
-            if(obj.TeleportReaction())
-                TeleportationObject(other);
+            TeleportationObject(other);
         }
 
         private void TeleportationObject(Collider2D otherObj)
         {
             Debug.Log($"{typeof(TeleportBorder)} Teleportation Object");
-            var pos = otherObj.transform.position;
+            
+            var rb = otherObj.attachedRigidbody;
+            var targetTransform = rb != null ? rb.transform : otherObj.transform;
+
+            var pos = targetTransform.position;
             
             if (_isHorizonWall)
                 otherObj.transform.position = new Vector2(pos.x, GetTargetPos(pos.y));

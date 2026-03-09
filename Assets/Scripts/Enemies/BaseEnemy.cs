@@ -14,7 +14,7 @@ namespace Project.Enemies
         bool IsFirstEnterToTeleport { get ; set; }
     }
 
-    public abstract class BaseEnemy : MonoBehaviour, IEnemy, IPoolable, ITeleported
+    public abstract class BaseEnemy : MonoBehaviour, IEnemy, IPoolable
     {
         public event Action<GameObject> OnDeactivation;
 
@@ -52,29 +52,12 @@ namespace Project.Enemies
             SpriteRenderer.sprite = enemyData.sprite;
             Rb = GetComponent<Rigidbody2D>();
         }
+        
+        private void OnEnable() =>
+            _eventBus.OnHitPlayer += Deactivation;
 
-        private void OnEnable()
-        {
-            if (PlayerController != null) 
-                _eventBus.OnHitPlayer += Deactivation;
-        }
-
-        private void OnDisable()
-        {
-            if (PlayerController != null) 
-                _eventBus.OnHitPlayer -= Deactivation;
-        }
-
-        public bool TeleportReaction()
-        {
-            if (IsFirstEnterToTeleport)
-            {
-                IsFirstEnterToTeleport = false;
-                return false;
-            }
-
-            return true;
-        }
+        private void OnDisable() =>
+            _eventBus.OnHitPlayer -= Deactivation;
         
         public virtual void OnReturnToPool(){}
 

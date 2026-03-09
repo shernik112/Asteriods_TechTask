@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace Project.Enemies
@@ -9,7 +8,7 @@ namespace Project.Enemies
         
         private void Update()
         {
-            Vector2 posPlayer = PlayerController.gameObject.transform.position;
+            Vector2 posPlayer = PlayerController.View.gameObject.transform.position;
             _targetDir = posPlayer - (Vector2)transform.position;
             _targetDir.Normalize();
         }
