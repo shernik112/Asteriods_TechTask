@@ -1,5 +1,4 @@
 using Project.Enemies;
-using Project.Player;
 using Project.System;
 using UnityEngine;
 
@@ -26,12 +25,10 @@ namespace Project.Scene
                 }
             }
 
-            if (other.TryGetComponent<ITeleportedReaction>(out var obj))
-                obj.TeleportReaction();
-            
-            if(other.TryGetComponent<ShootLaser>(out var laser))
+            if (!other.TryGetComponent<ITeleportedReaction>(out var obj))
                 return;
             
+            obj.TeleportReaction();
             TeleportationObject(other);
         }
 

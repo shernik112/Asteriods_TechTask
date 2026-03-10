@@ -14,7 +14,7 @@ namespace Project.Enemies
         bool IsFirstEnterToTeleport { get ; set; }
     }
 
-    public abstract class BaseEnemy : MonoBehaviour, IEnemy, IPoolable
+    public abstract class BaseEnemy : MonoBehaviour, IEnemy, IPoolable, ITeleportedReaction
     {
         public event Action<GameObject> OnDeactivation;
 
@@ -60,6 +60,8 @@ namespace Project.Enemies
             _eventBus.OnHitPlayer -= Deactivation;
         
         public virtual void OnReturnToPool(){}
+
+        public void TeleportReaction(){}
 
         protected virtual void HitBullet() => Deactivation();
 

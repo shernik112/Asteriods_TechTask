@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Project.Player
 {
     [RequireComponent(typeof(Rigidbody2D), typeof(SpriteRenderer))]
-    public class PlayerView : MonoBehaviour
+    public class PlayerView : MonoBehaviour, ITeleportedReaction
     {
         private Rigidbody2D _rb;
         private SpriteRenderer _sprite;
@@ -63,6 +63,9 @@ namespace Project.Player
 
             Debug.Log($"{typeof(PlayerView)} OnCollisionEnter");
         }
+        
+        public void TeleportReaction() =>
+            _mainAudio?.PlaySfx(_model.Data.dashClip);
 
         private void ChangeActive(bool active) =>
             _sprite.enabled = active;

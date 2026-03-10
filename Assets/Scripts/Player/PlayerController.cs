@@ -4,7 +4,7 @@ using Zenject;
 
 namespace Project.Player
 {
-    public class PlayerController : MonoBehaviour, ITeleportedReaction
+    public class PlayerController : MonoBehaviour
     {
         [SerializeField] private PlayerData playerData;
         [SerializeField] private GameObject laserPrefab;
@@ -54,8 +54,6 @@ namespace Project.Player
             View.ResetState();
         }
         
-        public void TeleportReaction() =>
-            _mainAudio?.PlaySfx(playerData.dashClip);
         
         public void SetInput(Vector2 input) => 
             _model.SetInput(input);
