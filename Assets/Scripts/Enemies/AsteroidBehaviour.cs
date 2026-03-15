@@ -1,5 +1,5 @@
-using System;
 using Quaternion = UnityEngine.Quaternion;
+using System;
 using UnityEngine;
 
 namespace Project.Enemies
@@ -25,7 +25,7 @@ namespace Project.Enemies
             SpriteRenderer.transform.localRotation = Quaternion.Inverse(transform.rotation);
         }
 
-        public override void OnReturnToPool()
+        public override void ReturnToPool()
         {
             Rb.linearVelocity = Vector2.zero;
             Rb.angularVelocity = 0f;

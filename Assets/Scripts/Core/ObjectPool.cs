@@ -7,7 +7,7 @@ namespace Project.System
     public interface IPoolable
     {
         event Action<GameObject> OnDeactivation;
-        void OnReturnToPool();
+        void ReturnToPool();
     }
 
     public class ObjectPool
@@ -44,6 +44,7 @@ namespace Project.System
         {
             if(_pool.Count == 0)
                 CreateObject();
+            
             var obj = _pool.Dequeue();
 
             if (obj.TryGetComponent<IPoolable>(out var poolable))
@@ -57,7 +58,7 @@ namespace Project.System
         {
             if (obj.TryGetComponent<IPoolable>(out var poolable))
             {
-                poolable.OnReturnToPool();
+                poolable.ReturnToPool();
                 poolable.OnDeactivation -= ReturnObjectToPool;
             }
             

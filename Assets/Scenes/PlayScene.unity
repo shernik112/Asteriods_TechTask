@@ -150,9 +150,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 2495265613067161707, guid: 5a06847e7522bd244bc7f9cfeba9e5c5, type: 3}
-  asteroidPrefab: {fileID: 8980806605422784256, guid: 332e3cdb502a4a44a889bda641980f91, type: 3}
+  asteroidPrefab: {fileID: 6644502608561468640, guid: 3c8515e6a592f9f4bae648933eeed333, type: 3}
   fragmentAsteroidPrefab: {fileID: 8980806605422784256, guid: 0a58b4c23363b8945aa5a08a2cb07443, type: 3}
-  ufoPrefab: {fileID: 4679316564590342010, guid: 5bfe4a59da5cda4489fbb8f8d42d71c1, type: 3}
+  ufoPrefab: {fileID: 3991344284791591244, guid: 9b3a625d73f75e9499683cb57aaba707, type: 3}
   bulletPrefab: {fileID: 1061576356628838479, guid: 03167c7ca000e5e459ef335ed3caf741, type: 3}
   mainCamera: {fileID: 1832153777867801605, guid: 49fb7464a69c80c468a9a603521ea078, type: 3}
   eventBus: {fileID: 2966412476588914346, guid: 2a9cd11c8b2c20f4ca11cd2a78fc4c13, type: 3}

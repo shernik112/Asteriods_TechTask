@@ -157,12 +157,14 @@ namespace Project.System
 
         private void RotateAsteroid(GameObject obj)
         {
+            if (!obj.TryGetComponent<Rigidbody2D>(out var rb))
+               return;
+            
             var direction = _lookTarget - (Vector2)obj.transform.position;
             var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            obj.transform.rotation = Quaternion.Euler(
-                0f,
-                0f,
-                angle + Random.Range(-_rotateOffset, _rotateOffset));
+            var offset = Random.Range(-_rotateOffset, _rotateOffset);
+            
+            rb.rotation = angle + offset;
         }
         
         private void InitFragmentsAsteroid(Transform asteroidTransform)
@@ -172,9 +174,15 @@ namespace Project.System
             { 
                 var mag = Random.Range(_lowerFragmentRotate, _createFragmentRotate);
                 var obj = _fragmentAsteroidPool.Get();
+                
+                if (!obj.TryGetComponent<Rigidbody2D>(out var rb))
+                    return;
+                
+                rb.position = asteroidTransform.position;
+                var baseAngle = transform.eulerAngles.z;
                 var randomRotate = sideToggle ? mag : -mag;
-                obj.transform.position = asteroidTransform.position;
-                obj.transform.rotation = asteroidTransform.rotation * Quaternion.Euler(0, 0, randomRotate);
+                rb.rotation = baseAngle + randomRotate;
+                
                 sideToggle = !sideToggle;
             }
         }

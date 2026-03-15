@@ -41,6 +41,6 @@ namespace Project.Player
 
         public void OnGetFromPool(ObjectPool pool){}
         
-        public void OnReturnToPool(){}
+        public void ReturnToPool(){}
     }
 }

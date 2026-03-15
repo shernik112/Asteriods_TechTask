@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1b744223d4e68345b6fca3459c3a671, type: 3}
   m_Name: UfoData
   m_EditorClassIdentifier: Assembly-CSharp::Project.Enemies.EnemyDefinition
-  speed: 2
+  speed: 1.4
   scoreByHit: 1500
   sprite: {fileID: -1425229959082085284, guid: 5cbfe289cb78c224e8718d50266e9d2b, type: 3}
   hitSprite: {fileID: -555725859505105965, guid: 5cbfe289cb78c224e8718d50266e9d2b, type: 3}

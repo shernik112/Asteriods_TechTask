@@ -23,7 +23,7 @@ namespace Project.Enemies
         protected SpriteRenderer SpriteRenderer;
         protected Rigidbody2D Rb;
         
-        private readonly WaitForSeconds _timeHitReaction = new WaitForSeconds(0.08f);
+        private readonly WaitForSeconds _timeHitReaction = new (0.08f);
        
         private EventBus _eventBus;
         private HandlerScore _handlerScore;
@@ -59,7 +59,7 @@ namespace Project.Enemies
         private void OnDisable() =>
             _eventBus.OnHitPlayer -= Deactivation;
         
-        public virtual void OnReturnToPool(){}
+        public virtual void ReturnToPool(){}
 
         public void TeleportReaction(){}
 

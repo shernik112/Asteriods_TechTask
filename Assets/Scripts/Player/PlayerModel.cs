@@ -8,8 +8,6 @@ namespace Project.Player
         public event Action<bool> ChangeActive;
         
         public Vector2 Input { get; private set; } = Vector2.zero;
-        
-        private bool _isActive =  true;
 
         public PlayerModel(PlayerData data) : base(data) { }
         
@@ -20,14 +18,14 @@ namespace Project.Player
 
         public void Hit()
         {
-            _isActive = false;
-            ChangeActive?.Invoke(_isActive);
+            IsActive = false;
+            ChangeActive?.Invoke(IsActive);
         }
 
         public void ResetState()
         {
-            _isActive = true;
-            ChangeActive?.Invoke(_isActive);
+            IsActive = true;
+            ChangeActive?.Invoke(IsActive);
             Input = Vector2.zero;
         }
     }
