@@ -1,8 +1,9 @@
 using Project.Enemies;
+using UnityEngine;
 
-namespace Project.Enemies
+namespace Project
 {
-    public class FragmentAsteroidBehaviour : AsteroidBehaviour
+    public class FragmentController : AsteroidController
     {
         protected override void HitBullet()
         {

@@ -12,6 +12,7 @@ namespace Project.Enemies
         public override void SetDefaultValues()
         {
             Rb.linearVelocity = Vector2.zero;
+            SpriteRenderer.sprite = Model.Data.sprite;
         }
     }
 }
