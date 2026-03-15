@@ -51,7 +51,7 @@ namespace Project.UI
             return $"Velocity(X:{velocity.x:F2}  Y:{velocity.y:F2})";
         }
 
-        private string GetCountLaserShot() => $"Count Laser Shots({_playerController.Laser.CurrentCountShоtLaser})";
-        private string GetRechargeTime() => $"Recharge Time({Mathf.Max(0,_playerController.Laser.RechargeDuration - _playerController.Laser.LastRechargeTime):F2})";
+        private string GetCountLaserShot() => $"Count Laser Shots({_playerController.Laser.Model.CurrentCountShotLaser})";
+        private string GetRechargeTime() => $"Recharge Time({Mathf.Max(0,_playerController.Laser.Data.RechargeDuration - _playerController.Laser.Model.LastRechargeTime):F2})";
     }
 }

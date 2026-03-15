@@ -12,8 +12,8 @@ namespace Project.Player
         private readonly int _defaultCountShotLaser = 3;
         private readonly float _durationLaserShot = 0.4f;
         private readonly float _cooldownDuration = 0.5f;
-    
-        private int _currentCountShotLaser = default;
+
+        private int _currentCountShotLaser;
         private float _lastShootTime;
         private EventBus _eventBus;
         private Quaternion _initialLaserRotation;

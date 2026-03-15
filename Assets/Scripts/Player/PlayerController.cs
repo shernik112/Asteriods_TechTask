@@ -1,3 +1,4 @@
+using System;
 using Project.System;
 using UnityEngine;
 using Zenject; 
@@ -15,7 +16,7 @@ namespace Project.Player
         private PlayerModel _model;
         
         public PlayerView View { get; private set; }
-        public ShootLaser Laser { get; private set; }
+        public LaserController Laser { get; private set; }
         public BulletShoot BulletShoot { get; private set; }
         public Rigidbody2D Rb { get; private set; }
 
@@ -38,11 +39,14 @@ namespace Project.Player
             View.Init(_model, _eventBus, _mainAudio, _pauseHandler);
             Rb = View.gameObject.GetComponent<Rigidbody2D>();
             BulletShoot = View.GetComponent<BulletShoot>();
-            var go = Instantiate(laserPrefab, transform.position, laserPrefab.transform.rotation, View.transform);
-            Laser = go.GetComponent<ShootLaser>();
-            Laser.Init(_eventBus,_mainAudio);
+            Laser = transform.parent.GetComponentInChildren<LaserController>();
             
             _eventBus.OnRestartGame += OnRestart;
+        }
+
+        private void Start()
+        {
+            Debug.Log($"Player {Laser == null}");
         }
 
         private void OnDestroy() =>
@@ -53,7 +57,6 @@ namespace Project.Player
             _model.ResetState();
             View.ResetState();
         }
-        
         
         public void SetInput(Vector2 input) => 
             _model.SetInput(input);

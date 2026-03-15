@@ -38,7 +38,7 @@ namespace Project.Enemies
     
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.TryGetComponent<ShootLaser>(out var laser))
+            if (other.TryGetComponent<LaserController>(out var laser))
                 OnHitReaction?.Invoke(EnemyTypeHit.Laser);
         }
         public void TeleportReaction(){}
