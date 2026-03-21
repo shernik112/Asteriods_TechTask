@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using Project.Core;
 using Project.Player;
@@ -12,6 +11,12 @@ public enum EnemyTypeHit
     Laser,
     Bullet
 }
+
+interface IEnemy
+{
+    bool IsFirstEnterToTeleport { get; set; }
+}
+
 namespace Project.Enemies
 {
     public abstract class EnemyController<TModel> : PoolableController<TModel>

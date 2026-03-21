@@ -22,13 +22,13 @@ namespace Project
         
         private void OnCollisionEnter2D(Collision2D other)
         {
-            Debug.Log($"{typeof(Bullet)} bullet hit enemy");
+            Debug.Log($"{typeof(BulletView)} bullet hit enemy");
             OnHitReaction?.Invoke();
         }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            Debug.Log($"{typeof(Bullet)} bullet entered trigger");
+            Debug.Log($"{typeof(BulletView)} bullet entered trigger");
             OnHitReaction?.Invoke();
         }
     }
