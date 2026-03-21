@@ -32,7 +32,7 @@ namespace Project.Enemies
         
         private void OnCollisionEnter2D(Collision2D other)
         {
-            if (other.gameObject.TryGetComponent<Bullet>(out var playerBullet))
+            if (other.gameObject.TryGetComponent<BulletController>(out var playerBullet))
                 OnHitReaction?.Invoke(EnemyTypeHit.Bullet);
         }
     

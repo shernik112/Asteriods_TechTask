@@ -1,5 +1,4 @@
 using IPoolable = Project.System.IPoolable;
-using Project.System;
 using UnityEngine;
 using System;
 
@@ -12,7 +11,6 @@ namespace Project.Player
         
         [SerializeField] private BulletData bulletData;
         
-        private ObjectPool _bulletPool;
         private Rigidbody2D _rg;
 
         private void Awake()
@@ -38,8 +36,6 @@ namespace Project.Player
             Debug.Log($"{typeof(Bullet)} bullet entered trigger");
             OnDeactivation?.Invoke(gameObject);
         }
-
-        public void OnGetFromPool(ObjectPool pool){}
         
         public void ReturnToPool(){}
     }

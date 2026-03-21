@@ -2,16 +2,20 @@ using UnityEngine;
 
 namespace Project.Player
 {
-    public class Model<T> where T : ScriptableObject
+    public abstract class Model<TData> : Model
     {
-        public readonly T Data;
+        public readonly TData Data;
         
         protected bool IsActive =  true;
 
-        protected Model(T data)
+        protected Model(TData data)
         {
             Data = data;
         }
+        
+    }
+    public class Model  : ScriptableObject
+    {
         
     }
 }

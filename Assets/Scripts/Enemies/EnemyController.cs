@@ -1,11 +1,11 @@
 using System;
 using System.Collections;
+using Project.Core;
 using Project.Player;
 using Project.System;
 using Project.UI;
 using UnityEngine;
 using Zenject;
-using IPoolable = Project.System.IPoolable;
 
 public enum EnemyTypeHit
 {
@@ -14,11 +14,9 @@ public enum EnemyTypeHit
 }
 namespace Project.Enemies
 {
-    public abstract class EnemyController<TModel> : MonoBehaviour, IPoolable
+    public abstract class EnemyController<TModel> : PoolableController<TModel>
         where TModel : EnemyModel
     {
-        public event Action<GameObject> OnDeactivation;
-        
         [SerializeField] protected EnemyDefinition enemyData = default;
         
         protected EnemyView<TModel> View;
@@ -62,16 +60,11 @@ namespace Project.Enemies
             View.OnHitReaction -= StartHitReaction;
         }
 
-        protected abstract TModel CreateModel();
-
-        public virtual void ReturnToPool()
+        public override void ReturnToPool()
         {
             View.SetDefaultValues();
             Model.SetDefaultValues();
         }
-
-        protected void Deactivation() =>
-            OnDeactivation?.Invoke(gameObject);
         
         protected virtual void HitBullet() => 
             Deactivation();
