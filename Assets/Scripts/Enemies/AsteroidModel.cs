@@ -6,8 +6,6 @@ namespace Project
 {
     public class AsteroidModel : EnemyModel
     {
-        public AsteroidModel(EnemyDefinition data) : base(data){}
-
         public override void SetDefaultValues()
         {
         }

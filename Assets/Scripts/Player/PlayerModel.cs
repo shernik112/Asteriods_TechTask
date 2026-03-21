@@ -8,8 +8,6 @@ namespace Project.Player
         public event Action<bool> ChangeActive;
         
         public Vector2 Input { get; private set; } = Vector2.zero;
-
-        public PlayerModel(PlayerData data) : base(data) { }
         
         public void SetInput(Vector2 input)
         {

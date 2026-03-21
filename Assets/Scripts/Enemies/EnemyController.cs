@@ -25,7 +25,6 @@ namespace Project.Enemies
         [SerializeField] protected EnemyDefinition enemyData = default;
         
         protected EnemyView<TModel> View;
-        protected TModel Model;
         
         private EventBus _eventBus;
         private MainAudio _mainAudio;
@@ -46,9 +45,9 @@ namespace Project.Enemies
             _mainAudio = mainAudio;
         }
         
-        protected virtual void Awake()
+        protected override void Awake()
         {
-            Model = CreateModel();
+            base.Awake();
             View = GetComponent<EnemyView<TModel>>();
             View.Init(Model);
         }

@@ -4,11 +4,11 @@ namespace Project.Player
 {
     public abstract class Model<TData> : Model
     {
-        public readonly TData Data;
+        public TData Data { get; private set; }
         
         protected bool IsActive =  true;
 
-        protected Model(TData data)
+        public void Init(TData data)
         {
             Data = data;
         }

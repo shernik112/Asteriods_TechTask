@@ -18,8 +18,12 @@ namespace Project
             _view.Init(Model);
         }
 
-        protected override BulletModel CreateModel() =>
-            new (data);
+        protected override BulletModel CreateModel()
+        {
+            var m = ScriptableObject.CreateInstance<BulletModel>();
+            m.Init(data);
+            return m;
+        }
 
         private void OnEnable()
         {

@@ -32,7 +32,7 @@ namespace Project.Player
 
         private void Awake()
         {
-            _model = new PlayerModel(playerData);
+            _model = CreateModel();
             
             View = transform.GetComponent<PlayerView>();
             View.Init(_model, _eventBus, _mainAudio, _pauseHandler);
@@ -59,5 +59,12 @@ namespace Project.Player
         
         public void SetInput(Vector2 input) => 
             _model.SetInput(input);
+        
+        private PlayerModel CreateModel()
+        {
+            var m = ScriptableObject.CreateInstance<PlayerModel>();
+            m.Init(playerData);
+            return m;
+        }
     }
 }

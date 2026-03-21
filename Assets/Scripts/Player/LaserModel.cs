@@ -20,8 +20,6 @@ namespace Project.Player
         public float LastRechargeTime { get; private set; }
 
         private int _currentCountShotLaser;
-        
-        public LaserModel(LaserData data) : base(data){}
 
         public void Start()
         {

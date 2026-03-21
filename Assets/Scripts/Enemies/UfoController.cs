@@ -10,7 +10,11 @@ namespace Project.Enemies
             Model.SetTargetDir(posPlayer,View.transform.position);
         }
 
-        protected override UfoModel CreateModel() =>
-            new (enemyData);
+        protected override UfoModel CreateModel()
+        {
+            var m = ScriptableObject.CreateInstance<UfoModel>();
+            m.Init(enemyData);
+            return m;
+        }
     }
 }

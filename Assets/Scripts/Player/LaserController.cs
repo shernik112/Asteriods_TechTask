@@ -24,7 +24,7 @@ namespace Project.Player
         
         private void Awake()
         {
-            Model = new LaserModel(Data);
+            Model = CreateModel();
             _view = GetComponent<LaserView>();
             _view.Init(Model);
 
@@ -72,5 +72,12 @@ namespace Project.Player
 
         private void ShowNewCount(int count) =>
             _eventBus.NewCountShotLaser?.Invoke(count);
+        
+        private LaserModel CreateModel()
+        {
+            var m = ScriptableObject.CreateInstance<LaserModel>();
+            m.Init(Data);
+            return m;
+        }
     }
 }
