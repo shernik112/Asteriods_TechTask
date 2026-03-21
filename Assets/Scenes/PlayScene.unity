@@ -149,11 +149,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 185f37485b683b7449c496324d2b57af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 2495265613067161707, guid: 5a06847e7522bd244bc7f9cfeba9e5c5, type: 3}
+  playerPrefab: {fileID: 2495265613067161707, guid: 8a1e75a2dbc947042aa5f1c30022784b, type: 3}
   asteroidPrefab: {fileID: 6644502608561468640, guid: 3c8515e6a592f9f4bae648933eeed333, type: 3}
   fragmentAsteroidPrefab: {fileID: 6644502608561468640, guid: 8530921e5145e4b42b5d34a81d781047, type: 3}
-  ufoPrefab: {fileID: 6239866979175829631, guid: 296f97032619fff4f98e4c1bcee08d5f, type: 3}
-  bulletPrefab: {fileID: 1061576356628838479, guid: 03167c7ca000e5e459ef335ed3caf741, type: 3}
+  ufoPrefab: {fileID: 3991344284791591244, guid: 9b3a625d73f75e9499683cb57aaba707, type: 3}
+  bulletPrefab: {fileID: 6239866979175829631, guid: 296f97032619fff4f98e4c1bcee08d5f, type: 3}
   mainCamera: {fileID: 1832153777867801605, guid: 49fb7464a69c80c468a9a603521ea078, type: 3}
   eventBus: {fileID: 2966412476588914346, guid: 2a9cd11c8b2c20f4ca11cd2a78fc4c13, type: 3}
   mainAudio: {fileID: 8355928865945117578, guid: c68d6fcf0495ae441ba51dec039cee92, type: 3}
