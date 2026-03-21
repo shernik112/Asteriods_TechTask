@@ -1,13 +1,11 @@
 using Project.System;
 using UnityEngine;
 using Zenject;
-using System;
 
 namespace Project.UI
 {
     public class HandlerScore : MonoBehaviour
     {
-
         private EventBus _eventBus;
         private int _targetScore;
 
@@ -27,7 +25,6 @@ namespace Project.UI
         public void CountScoreDefeatedEnemy(int countDefeatedEnemy)
         {
             StopAllCoroutines();
-            
             _targetScore += countDefeatedEnemy;
 
             _eventBus.NewTargetScore?.Invoke(_targetScore);
@@ -36,7 +33,7 @@ namespace Project.UI
         private void ResetCount()
         {
             _eventBus.IsFinalScore?.Invoke(_targetScore);
-            _targetScore = default;
+            _targetScore = 0;
         }
     }
 }

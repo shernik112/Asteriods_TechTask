@@ -21,9 +21,9 @@ namespace Project.Enemies
 
         protected override AsteroidModel CreateModel()
         {
-            var m = ScriptableObject.CreateInstance<AsteroidModel>();
-            m.Init(enemyData);
-            return m;
+            var model = ScriptableObject.CreateInstance<AsteroidModel>();
+            model.Init(enemyData);
+            return model;
         }
     }
 }

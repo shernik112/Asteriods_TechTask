@@ -4,11 +4,10 @@ using Zenject;
 
 namespace Project.Player
 {
-    public class LaserController : MonoBehaviour
+    public class LaserController : Controller<LaserModel>
     {
         [field:SerializeField] public LaserData Data { get; private set; }
         
-        public LaserModel Model { get; private set; }
         private LaserView _view;
         private EventBus _eventBus;
         private MainAudio _mainAudio;
@@ -22,9 +21,10 @@ namespace Project.Player
             _mainAudio = mainAudio;
         }
         
-        private void Awake()
+        protected override void Awake()
         {
-            Model = CreateModel();
+            base.Awake();
+            
             _view = GetComponent<LaserView>();
             _view.Init(Model);
 
@@ -67,17 +67,17 @@ namespace Project.Player
             _view.TurnLaser();
         }
         
+        protected override LaserModel CreateModel()
+        {
+            var model = ScriptableObject.CreateInstance<LaserModel>();
+            model.Init(Data);
+            return model;
+        }
+        
         private void Restart() => 
             Model.RestartValues();
 
         private void ShowNewCount(int count) =>
             _eventBus.NewCountShotLaser?.Invoke(count);
-        
-        private LaserModel CreateModel()
-        {
-            var m = ScriptableObject.CreateInstance<LaserModel>();
-            m.Init(Data);
-            return m;
-        }
     }
 }

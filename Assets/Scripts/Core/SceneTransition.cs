@@ -7,10 +7,7 @@ namespace Project.System
 {
     public class SceneTransition : MonoBehaviour
     {
-
-
         private readonly float _speed = 2f;
-
         private bool _transitionIn;
         private SpriteMask _mask;
         private ShowUI _showUI;

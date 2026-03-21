@@ -26,8 +26,8 @@ namespace Project.System
         private MainInstaller _mainInstaller;
         private EventBus _eventBus;
         private PauseHandler _pauseHandler;
-        private FloatRange _rangeTimeAsteroid = new FloatRange(5f, 10f);
-        private FloatRange _rangeTimeUfo = new FloatRange(5f, 15f);
+        private readonly FloatRange _rangeTimeAsteroid = new FloatRange(5f, 10f);
+        private readonly FloatRange _rangeTimeUfo = new FloatRange(5f, 15f);
         
         private float _halfHeight;
         private float _halfWidth;

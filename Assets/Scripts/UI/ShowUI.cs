@@ -6,7 +6,7 @@ namespace Project.UI
 {
     public class ShowUI : MonoBehaviour
     {
-        public float ShowTime { get; private set; } = 0.3f;
+        public float ShowTime => 0.3f;
         
         private HandlerGameCondition _handlerGameCondition;
         private CanvasGroup _cg;

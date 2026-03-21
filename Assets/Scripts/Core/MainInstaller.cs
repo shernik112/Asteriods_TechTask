@@ -63,9 +63,5 @@ namespace Project.System
             var go = Container.InstantiatePrefab(prefab, parentTransform);
             return go;
         }
-        public void InjectGo(GameObject obj)
-        {
-            Container.InjectGameObject(obj);
-        }
     }
 }

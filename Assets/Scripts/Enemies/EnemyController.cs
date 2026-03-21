@@ -12,7 +12,7 @@ public enum EnemyTypeHit
     Bullet
 }
 
-interface IEnemy
+public interface IEnemy
 {
     bool IsFirstEnterToTeleport { get; set; }
 }

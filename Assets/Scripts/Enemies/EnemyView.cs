@@ -30,17 +30,6 @@ namespace Project.Enemies
             Rb = GetComponent<Rigidbody2D>();
         }
         
-        private void OnCollisionEnter2D(Collision2D other)
-        {
-            if (other.gameObject.TryGetComponent<BulletController>(out var playerBullet))
-                OnHitReaction?.Invoke(EnemyTypeHit.Bullet);
-        }
-    
-        private void OnTriggerEnter2D(Collider2D other)
-        {
-            if (other.TryGetComponent<LaserController>(out var laser))
-                OnHitReaction?.Invoke(EnemyTypeHit.Laser);
-        }
         public void TeleportReaction(){}
         
         public IEnumerator PlayHitReaction()
@@ -52,5 +41,17 @@ namespace Project.Enemies
         }
 
         public abstract void SetDefaultValues();
+        
+        private void OnCollisionEnter2D(Collision2D other)
+        {
+            if (other.gameObject.TryGetComponent<BulletController>(out var playerBullet))
+                OnHitReaction?.Invoke(EnemyTypeHit.Bullet);
+        }
+    
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.TryGetComponent<LaserController>(out var laser))
+                OnHitReaction?.Invoke(EnemyTypeHit.Laser);
+        }
     }
 }

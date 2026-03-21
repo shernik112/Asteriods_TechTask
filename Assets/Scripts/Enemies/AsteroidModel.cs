@@ -1,6 +1,4 @@
 using Project.Enemies;
-using UnityEngine;
-using NotImplementedException = System.NotImplementedException;
 
 namespace Project
 {

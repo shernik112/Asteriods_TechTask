@@ -10,9 +10,9 @@ namespace Project.Core
     {
         public event Action<GameObject> OnDeactivation;
 
+        public abstract void ReturnToPool();
+        
         protected void Deactivation() =>
             OnDeactivation?.Invoke(gameObject);
-
-        public abstract void ReturnToPool();
     }
 }

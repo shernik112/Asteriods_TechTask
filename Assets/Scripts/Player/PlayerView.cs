@@ -51,6 +51,9 @@ namespace Project.Player
             _rb.linearVelocity = Vector2.MoveTowards(_rb.linearVelocity, targetVelocity, _model.Data.moveAcceleration * Time.fixedDeltaTime);
         }
 
+        public void TeleportReaction() =>
+            _mainAudio?.PlaySfx(_model.Data.dashClip);
+        
         private void OnCollisionEnter2D(Collision2D other)
         {
             if (other.gameObject.TryGetComponent<IEnemy>(out var enemy))
@@ -64,9 +67,6 @@ namespace Project.Player
             Debug.Log($"{typeof(PlayerView)} OnCollisionEnter");
         }
         
-        public void TeleportReaction() =>
-            _mainAudio?.PlaySfx(_model.Data.dashClip);
-
         private void ChangeActive(bool active) =>
             _sprite.enabled = active;
 

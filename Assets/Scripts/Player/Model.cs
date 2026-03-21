@@ -14,8 +14,8 @@ namespace Project.Player
         }
         
     }
+    
     public class Model  : ScriptableObject
     {
-        
     }
 }

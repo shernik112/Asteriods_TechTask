@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace Project.System
@@ -7,7 +6,7 @@ namespace Project.System
     public class MainAudio : MonoBehaviour
     {
         [SerializeField] private AudioClip mainTrack;
-        private float _volumeSfx = 0.75f;
+        private readonly float _volumeSfx = 0.75f;
         private AudioSource _audioSource;
         
         private void Awake()

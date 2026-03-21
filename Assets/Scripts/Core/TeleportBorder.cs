@@ -6,8 +6,8 @@ namespace Project.Scene
 {
     public class TeleportBorder : MonoBehaviour
     {
-        private bool _isHorizonWall;
         private readonly float _teleportOffset = 0.35f;
+        private bool _isHorizonWall;
 
         private void Awake()
         {

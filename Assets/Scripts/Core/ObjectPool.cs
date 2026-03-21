@@ -13,10 +13,10 @@ namespace Project.System
     public class ObjectPool
     {
         private int StartCount => 5;
-        private GameObject _poolPrefab;
-        private MainInstaller _installer;
-        private Transform _parentTransform;
-        private Queue<GameObject> _pool = new Queue<GameObject>();
+        private readonly GameObject _poolPrefab;
+        private readonly MainInstaller _installer;
+        private readonly Transform _parentTransform;
+        private readonly Queue<GameObject> _pool = new Queue<GameObject>();
         
         public ObjectPool(GameObject poolPrefab, MainInstaller installer, Transform parentTransform)
         {
@@ -25,19 +25,6 @@ namespace Project.System
             _parentTransform = parentTransform;
             
             MakeInstances();
-        }
-        
-        private void MakeInstances()
-        {
-            for (var i = 0; i < StartCount; i++)
-                CreateObject();
-        }
-
-        private void CreateObject()
-        {
-            var obj = _installer.Instantiate(_poolPrefab, _parentTransform);
-            obj.SetActive(false);
-            _pool.Enqueue(obj);
         }
 
         public GameObject Get()
@@ -52,6 +39,19 @@ namespace Project.System
             
             obj.SetActive(true);
             return obj;
+        }
+        
+        private void MakeInstances()
+        {
+            for (var i = 0; i < StartCount; i++)
+                CreateObject();
+        }
+
+        private void CreateObject()
+        {
+            var obj = _installer.Instantiate(_poolPrefab, _parentTransform);
+            obj.SetActive(false);
+            _pool.Enqueue(obj);
         }
 
         private void ReturnObjectToPool(GameObject obj)

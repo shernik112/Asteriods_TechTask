@@ -12,9 +12,9 @@ namespace Project.Enemies
 
         protected override UfoModel CreateModel()
         {
-            var m = ScriptableObject.CreateInstance<UfoModel>();
-            m.Init(enemyData);
-            return m;
+            var model = ScriptableObject.CreateInstance<UfoModel>();
+            model.Init(enemyData);
+            return model;
         }
     }
 }

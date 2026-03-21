@@ -36,7 +36,7 @@ namespace Project.UI
 
         private string GetPlayerTransform()
         {
-            Vector2 pos = _playerController.View.transform.position;
+            var pos = _playerController.View.transform.position;
             return $"Position(X:{pos.x:F2}  Y:{pos.y:F2})";
         }
 
@@ -47,7 +47,7 @@ namespace Project.UI
 
         private string GetPlayerVelocity()
         {
-            Vector2 velocity = _playerController.Rb.linearVelocity;
+            var velocity = _playerController.Rb.linearVelocity;
             return $"Velocity(X:{velocity.x:F2}  Y:{velocity.y:F2})";
         }
 

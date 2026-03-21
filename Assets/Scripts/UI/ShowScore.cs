@@ -6,9 +6,9 @@ namespace Project.UI
 {
     public class ShowScore : BaseCounter
     {
+        private readonly float _counterSpeed = 700;
         private HandlerScore _handlerScore;
         private EventBus _eventBus;
-        private readonly float _counterSpeed = 700;
         private Coroutine _currentCoroutine;
 
         protected override void Awake()
