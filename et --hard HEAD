@@ -1,0 +1,290 @@
+[33mcommit 33e05f6a77fc4bc480673e6a3fa199abf02c6a9a[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Nikita Shcherbak~ <shernik112@gmail.com>
+Date:   Sat Mar 21 20:56:51 2026 +0300
+
+    Bullet MVC
+
+[33mcommit cbf23724997cc712540857665a11697b604773c7[m
+Author: Nikita Shcherbak~ <shernik112@gmail.com>
+Date:   Sun Mar 15 22:40:22 2026 +0300
+
+    MVC Laser
+
+[33mcommit d36b95bb30cd397a568619d7a9b65fe49a41b868[m
+Author: Nikita Shcherbak~ <shernik112@gmail.com>
+Date:   Sun Mar 15 18:12:25 2026 +0300
+
+    MVC Fragment
+
+[33mcommit 4b2d041ea62966d66bd8f0e156208eebf8f0adec[m
+Author: Nikita Shcherbak~ <shernik112@gmail.com>
+Date:   Sun Mar 15 17:50:17 2026 +0300
+
+    MVC Enemies
+
+[33mcommit a897303d338d5ce2f46997792b90bc7415bb6ba5[m
+Author: Nikita Shcherbak~ <shernik112@gmail.com>
+Date:   Tue Mar 10 22:06:08 2026 +0300
+
+    Teleport Border New
+
+[33mcommit 9d682309b0ca17718a8bffaf3f14eaf7fd4513b0[m
+Author: Nikita Shcherbak~ <shernik112@gmail.com>
+Date:   Mon Mar 9 11:22:02 2026 +0300
+
+    MVC Player
+
+[33mcommit 1376b12094fa2b1dfaa4ac94b5584291b8a69ae9[m
+Author: Nikita Shcherbak~ <shernik112@gmail.com>
+Date:   Wed Mar 4 20:51:53 2026 +0300
+
+    Data
+
+[33mcommit 634fb3ade2b8456ac376103141e029c4dfebded8[m
+Author: Nikita Shcherbak~ <shernik112@gmail.com>
+Date:   Wed Mar 4 20:15:04 2026 +0300
+
+    Scriptable Instanitiate Enemies
+
+[33mcommit fc930e267d1799632ec6bc7b06d80bb82ba1f0eb[m
+Author: Nikita Shcherbak~ <shernik112@gmail.com>
+Date:   Wed Mar 4 17:20:56 2026 +0300
+
+    Stabial Version
+
+[33mcommit f8b4d1416962fa50ea74ca23d4c16b2062f62c14[m
+Author: Nikita Shcherbak~ <shernik112@gmail.com>
+Date:   Sat Feb 28 14:01:24 2026 +0300
+
+    Volume
+
+[33mcommit e8cb84a07c98e3680f891cdb1435e36f368f5054[m
+Author: Nikita Shcherbak~ <shernik112@gmail.com>
+Date:   Fri Feb 27 19:34:24 2026 +0300
+
+    Super Final
+
+[33mcommit 0f17c8ecebf731e912344989b28a6fdcf02352ad[m
+Author: Nikita Shcherbak~ <shernik112@gmail.com>
+Date:   Fri Feb 27 19:25:46 2026 +0300
+
+    PRE-FINAL
+
+[33mcommit f109468ac30668f4f13f2de70b8e044ca5f24fb2[m
+Author: Nikita Shcherbak~ <shernik112@gmail.com>
+Date:   Fri Feb 27 19:05:12 2026 +0300
+
+    Pre-final Asteroid
+
+[33mcommit fabe8ac7fea96f8edc0c447f2f9e337204951b10[m
+Author: Nikita Shcherbak~ <shernik112@gmail.com>
+Date:   Fri Feb 27 17:20:15 2026 +0300
+
+    Transition
+
+[33mcommit 0289409e4594bd4087347ff2b1fdd48e913380cb[m
+Author: Nikita Shcherbak~ <shernik112@gmail.com>
+Date:   Fri Feb 27 15:01:38 2026 +0300
+
+    EventBus
+
+[33mcommit 2486690d515686edf6275b697163a783837c73cb[m
+Author: Nikita Shcherbak~ <shernik112@gmail.com>
+Date:   Fri Feb 27 13:48:58 2026 +0300
+
+    Pre-Transition
+
+[33mcommit 3df8c5307cd8fb99b87cfa26490a24d65b82ee67[m
+Author: Nikita Shcherbak~ <shernik112@gmail.com>
+Date:   Thu Feb 26 23:24:05 2026 +0300
+
+    Transition
+
+[33mcommit cbf4f44257e2fc2b6540b26e84c909dc2fcf8742[m
+Author: Nikita Shcherbak~ <shernik112@gmail.com>
+Date:   Wed Feb 25 23:22:40 2026 +0300
+
+    Runtime UI
+
+[33mcommit f46a2a139e787252e5b5950a8c02706c1d0c061a[m
+Author: Nikita Shcherbak~ <shernik112@gmail.com>
+Date:   Wed Feb 25 23:00:44 2026 +0300
+
+    UI Count Laser Shots
+
+[33mcommit 93af327cab806965353027b37b4793c0aea1bf6c[m
+Author: Nikita Shcherbak~ <shernik112@gmail.com>
+Date:   Wed Feb 25 22:43:50 2026 +0300
+
+    UI Score
+
+[33mcommit 1cf6836235618134073446fa6507366acb73ef9a[m
+Author: Nikita Shcherbak~ <shernik112@gmail.com>
+Date:   Wed Feb 25 18:38:52 2026 +0300
+
+    New Object Pool
+
+[33mcommit bbfb1886e21349b1b1b5634b7fd377475b170b64[m
+Author: Nikita Shcherbak~ <shernik112@gmail.com>
+Date:   Wed Feb 25 13:11:39 2026 +0300
+
+    TeleportBorder
+
+[33mcommit c12d643315e8a01f7313d29c969fbbd97ea5f61f[m
+Author: Nikita Shcherbak~ <shernik112@gmail.com>
+Date:   Tue Feb 24 22:46:14 2026 +0300
+
+    ITeleported interface
+
+[33mcommit e69097b926139f63414e6b766fb7a8b43d997c83[m
+Author: Nikita Shcherbak~ <shernik112@gmail.com>
+Date:   Fri Feb 20 22:09:43 2026 +0300
+
+    Refactroing new
+
+[33mcommit bfb2cea3e8817a3fb6e680a197360ae2b6c718c7[m
+Author: Nikita Shcherbak~ <shernik112@gmail.com>
+Date:   Fri Feb 20 21:44:47 2026 +0300
+
+    Second Final Refactoring
+
+[33mcommit 65b6e4e9909d86f7fde3afa0be57f6f66ebb2740[m
+Author: Nikita Shcherbak~ <shernik112@gmail.com>
+Date:   Fri Feb 20 21:24:18 2026 +0300
+
+    Objet Pool Refactoring Interface
+
+[33mcommit 9466a7d5f4e16c4ff280aed344dd8c964ef28595[m
+Author: Nikita Shcherbak~ <shernik112@gmail.com>
+Date:   Fri Feb 20 21:02:46 2026 +0300
+
+    New Refactoring ObjectPool
+
+[33mcommit 46e20848d9a4e9a955374fb11e566cb5ffbe8429[m
+Author: Nikita Shcherbak~ <shernik112@gmail.com>
+Date:   Wed Feb 18 22:53:32 2026 +0300
+
+    Remove first MonoBehaviour
+
+[33mcommit de51ba6b1dfc036e95b60fb6ea81a4647bd596e3[m
+Author: Nikita Shcherbak~ <shernik112@gmail.com>
+Date:   Wed Feb 18 22:07:07 2026 +0300
+
+    New Second Refactoring
+
+[33mcommit aeb2317cdc37aae76f625247b66d7990b268727a[m
+Author: Nikita Shcherbak~ <shernik112@gmail.com>
+Date:   Tue Feb 17 21:54:07 2026 +0300
+
+    New Refactoring
+
+[33mcommit 0c2c586df577eab54bec344e418290040e2b0c80[m
+Author: Nikita Shcherbak~ <shernik112@gmail.com>
+Date:   Mon Feb 16 22:46:52 2026 +0300
+
+    Final Visual Polishing
+
+[33mcommit 4ba9dac8be74528001ad3dc3a8aa7b2a144dc0a6[m
+Author: Nikita Shcherbak~ <shernik112@gmail.com>
+Date:   Mon Feb 16 20:28:53 2026 +0300
+
+    Counter Score
+
+[33mcommit d5870282f751efab14e92af72008c4bf7019b842[m
+Author: Nikita Shcherbak~ <shernik112@gmail.com>
+Date:   Mon Feb 16 18:55:16 2026 +0300
+
+    Pause Handler
+
+[33mcommit 61de09e1a93500794876d45712fda29317438542[m
+Author: Nikita Shcherbak~ <shernik112@gmail.com>
+Date:   Mon Feb 16 18:31:41 2026 +0300
+
+    Main Audio
+
+[33mcommit 8dba7337b4797bef85e3f8d7a6393c7783fbcef3[m
+Author: Nikita Shcherbak~ <shernik112@gmail.com>
+Date:   Sun Feb 15 21:30:57 2026 +0300
+
+    Hit Enemy Effect
+
+[33mcommit 8885062d988e364992787cb7d4e044450146eb22[m
+Author: Nikita Shcherbak~ <shernik112@gmail.com>
+Date:   Fri Feb 13 15:51:49 2026 +0300
+
+    Pixel Camera
+
+[33mcommit 0ac54d3be352544e99712f42735c2b6befd680d3[m
+Author: Nikita Shcherbak~ <shernik112@gmail.com>
+Date:   Sun Feb 8 12:47:03 2026 +0300
+
+    Remove ManagedBehaviour
+
+[33mcommit dfe16161d37d16b9e46b5863149bf5cf22d13932[m
+Author: Nikita Shcherbak~ <shernik112@gmail.com>
+Date:   Sun Feb 8 12:37:07 2026 +0300
+
+    Remove Pause
+
+[33mcommit ae1410ad9b64d186aa7b172ec9cb2190eb56e277[m
+Author: Nikita Shcherbak~ <shernik112@gmail.com>
+Date:   Sun Feb 8 10:53:20 2026 +0300
+
+    ManagedBehaviour
+
+[33mcommit af66e294681f09fcd94c150eca0c1cbd9766b495[m
+Author: Nikita Shcherbak~ <shernik112@gmail.com>
+Date:   Sat Feb 7 23:51:58 2026 +0300
+
+    Final commit
+
+[33mcommit 2d9bfe9582738a48fc5cc0c7cff6125a71df738d[m
+Author: Nikita Shcherbak~ <shernik112@gmail.com>
+Date:   Sat Feb 7 23:44:38 2026 +0300
+
+    Namespace
+
+[33mcommit 279f386373125c62d3ca0608817396389fc91793[m
+Author: Nikita Shcherbak~ <shernik112@gmail.com>
+Date:   Sat Feb 7 22:33:51 2026 +0300
+
+    Completed HandlerInput
+
+[33mcommit 4e0cf2203fa274f1cc6ce2439bf9528c89a3f23f[m
+Author: Nikita Shcherbak~ <shernik112@gmail.com>
+Date:   Sat Feb 7 22:10:05 2026 +0300
+
+    Pre-final refactroring
+
+[33mcommit 205275df14c9e3b46c6e2e27081ac64f7dba8c57[m
+Author: Nikita Shcherbak~ <shernik112@gmail.com>
+Date:   Sat Feb 7 21:46:59 2026 +0300
+
+    Remove MoveForward
+
+[33mcommit d77ad5f1444b8110515332e94e1b0e61cc67f747[m
+Author: Nikita Shcherbak~ <shernik112@gmail.com>
+Date:   Sat Feb 7 20:52:24 2026 +0300
+
+    New Refactoring
+
+[33mcommit 78f27c56e3290505b06521a303ed920fc9611072[m
+Author: Nikita Shcherbak~ <shernik112@gmail.com>
+Date:   Sat Feb 7 15:48:14 2026 +0300
+
+    Handler input and other refactoring
+
+[33mcommit 3744ebb6021f942235b8bd0349e8b107a3f26706[m
+Author: Nikita Shcherbak~ <shernik112@gmail.com>
+Date:   Fri Feb 6 18:18:56 2026 +0300
+
+    New Teleport Border
+
+[33mcommit 4465ebd5a60e638eb4b4b6ee2ba771525bc88e8e[m
+Author: Nikita Shcherbak~ <shernik112@gmail.com>
+Date:   Fri Feb 6 17:22:41 2026 +0300
+
+    Second Refactoring
+
+[33mcommit debea1b9b1e24c19c5e2df9cdff1ae5ac54438db[m
+Author: Nikita Sh

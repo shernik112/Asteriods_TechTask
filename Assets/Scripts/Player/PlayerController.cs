@@ -8,7 +8,6 @@ namespace Project.Player
     public class PlayerController : MonoBehaviour
     {
         [SerializeField] private PlayerData playerData;
-        [SerializeField] private GameObject laserPrefab;
 
         private EventBus _eventBus;
         private MainAudio _mainAudio;
@@ -35,11 +34,11 @@ namespace Project.Player
         {
             _model = new PlayerModel(playerData);
             
-            View = transform.parent.GetComponentInChildren<PlayerView>();
+            View = transform.GetComponent<PlayerView>();
             View.Init(_model, _eventBus, _mainAudio, _pauseHandler);
             Rb = View.gameObject.GetComponent<Rigidbody2D>();
             BulletShoot = View.GetComponent<BulletShoot>();
-            Laser = transform.parent.GetComponentInChildren<LaserController>();
+            Laser = transform.GetComponentInChildren<LaserController>();
             
             _eventBus.OnRestartGame += OnRestart;
         }
