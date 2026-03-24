@@ -1,4 +1,5 @@
 using Project.System;
+using Project.UI;
 using UnityEngine;
 using Zenject; 
 
@@ -13,17 +14,17 @@ namespace Project.Player
         
         [SerializeField] private PlayerData playerData;
 
-        private EventBus _eventBus;
+        private RestartButton _restartButton;
         private MainAudio _mainAudio;
         private PauseHandler _pauseHandler;
         
         [Inject]
         public void Construct(
-            EventBus eventBus, 
+            RestartButton restartButton, 
             PauseHandler pauseHandler, 
             MainAudio mainAudio)
         {
-            _eventBus = eventBus;
+            _restartButton = restartButton;
             _pauseHandler = pauseHandler;
             _mainAudio = mainAudio;
         }
@@ -33,16 +34,16 @@ namespace Project.Player
             base.Awake();
             
             View = transform.GetComponent<PlayerView>();
-            View.Init(Model, _eventBus, _mainAudio, _pauseHandler);
+            View.Init(Model, _mainAudio, _pauseHandler);
             Rb = View.gameObject.GetComponent<Rigidbody2D>();
             BulletShoot = View.GetComponent<BulletShoot>();
             Laser = transform.GetComponentInChildren<LaserController>();
             
-            _eventBus.OnRestartGame += OnRestart;
+            _restartButton.OnRestartGame += OnRestart;
         }
         
         private void OnDestroy() =>
-            _eventBus.OnRestartGame -= OnRestart;
+            _restartButton.OnRestartGame -= OnRestart;
         
         public void SetInput(Vector2 input) => 
             Model.SetInput(input);

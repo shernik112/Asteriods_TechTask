@@ -1,6 +1,7 @@
 using System.Collections;
-using Project.System;
+using Project.Player;
 using UnityEngine;
+using Zenject;
 
 namespace Project.UI
 {
@@ -8,19 +9,27 @@ namespace Project.UI
     {
         private readonly float _counterSpeed = 700;
         private HandlerScore _handlerScore;
-        private EventBus _eventBus;
         private Coroutine _currentCoroutine;
+
+        [Inject]
+        public void Construct(
+            PlayerController playerController,
+            HandlerScore handlerScore)
+        {
+            base.Construct(playerController);
+            _handlerScore = handlerScore;
+        }
 
         protected override void Awake()
         {
             base.Awake();
-            EventBus.NewTargetScore += StartCounterNewChange;
+            _handlerScore.NewTargetScore += StartCounterNewChange;
         }
 
         protected override void OnDestroy()
         {
             base.OnDestroy();
-            EventBus.NewTargetScore -= StartCounterNewChange;
+            _handlerScore.NewTargetScore -= StartCounterNewChange;
         }
 
         private void StartCounterNewChange(int targetScore)

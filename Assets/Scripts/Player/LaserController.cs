@@ -1,4 +1,6 @@
+using System;
 using Project.System;
+using Project.UI;
 using UnityEngine;
 using Zenject;
 
@@ -7,17 +9,18 @@ namespace Project.Player
     public class LaserController : Controller<LaserModel>
     {
         [field:SerializeField] public LaserData Data { get; private set; }
-        
+
+        public event Action<int> NewCountShotLaser;
         private LaserView _view;
-        private EventBus _eventBus;
+        private RestartButton _restartButton;
         private MainAudio _mainAudio;
 
         [Inject]
         public void Construct(
-            EventBus eventBus,
+            RestartButton restartButton,
             MainAudio mainAudio)
         {
-            _eventBus = eventBus;
+            _restartButton = restartButton;
             _mainAudio = mainAudio;
         }
         
@@ -29,13 +32,13 @@ namespace Project.Player
             _view.Init(Model);
 
             Model.OnChangeCount += ShowNewCount;
-            _eventBus.OnRestartGame += Restart;
+            _restartButton.OnRestartGame += Restart;
         }
 
         private void OnDestroy()
         {
             Model.OnChangeCount -= ShowNewCount;
-            _eventBus.OnRestartGame -= Restart;
+            _restartButton.OnRestartGame -= Restart;
         }
         
         private void Start()
@@ -62,7 +65,7 @@ namespace Project.Player
             
             Model.HandleShoot();
             _mainAudio.PlaySfx(Data.shootLaser);
-            _eventBus.NewCountShotLaser?.Invoke(Model.CurrentCountShotLaser);
+            NewCountShotLaser?.Invoke(Model.CurrentCountShotLaser);
             _view.ChangeVisibility(true);
             _view.TurnLaser();
         }
@@ -78,6 +81,6 @@ namespace Project.Player
             Model.RestartValues();
 
         private void ShowNewCount(int count) =>
-            _eventBus.NewCountShotLaser?.Invoke(count);
+            NewCountShotLaser?.Invoke(count);
     }
 }

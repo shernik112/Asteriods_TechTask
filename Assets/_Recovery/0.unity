@@ -275,7 +275,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d40d83c85e5a4b346909edbdf3e8365d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isHorizonWall: 0
 --- !u!1 &363400411
 GameObject:
   m_ObjectHideFlags: 0
@@ -432,7 +431,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d40d83c85e5a4b346909edbdf3e8365d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isHorizonWall: 1
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -625,15 +623,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 185f37485b683b7449c496324d2b57af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 5037804548135090899, guid: 291270eb6b01bae42ba3fddef2e7df42, type: 3}
-  asteroidPrefab: {fileID: 8980806605422784256, guid: 332e3cdb502a4a44a889bda641980f91, type: 3}
-  ufoPrefab: {fileID: 4679316564590342010, guid: 5bfe4a59da5cda4489fbb8f8d42d71c1, type: 3}
-  bulletPrefab: {fileID: 1061576356628838479, guid: 03167c7ca000e5e459ef335ed3caf741, type: 3}
-  rootHandlers: {fileID: 1268290209}
-  restartButton: {fileID: 1493370215}
-  handlerScore: {fileID: 1571366919}
-  countLaserShots: {fileID: 1694237064}
-  finalScore: {fileID: 1642498940}
+  mainCamera: {fileID: 519420031}
+  playerPrefab: {fileID: 2495265613067161707, guid: 8a1e75a2dbc947042aa5f1c30022784b, type: 3}
+  asteroidPrefab: {fileID: 6644502608561468640, guid: 3c8515e6a592f9f4bae648933eeed333, type: 3}
+  fragmentAsteroidPrefab: {fileID: 6644502608561468640, guid: 8530921e5145e4b42b5d34a81d781047, type: 3}
+  ufoPrefab: {fileID: 3991344284791591244, guid: 9b3a625d73f75e9499683cb57aaba707, type: 3}
+  bulletPrefab: {fileID: 6239866979175829631, guid: 296f97032619fff4f98e4c1bcee08d5f, type: 3}
+  transitionPrefab: {fileID: 4701732250828865926, guid: 24d8b2b68611b3845bee0dd90499e033, type: 3}
+  handlerScorePrefab: {fileID: 4406208447736525551, guid: d6d48272a56d67143a8533fc8d5824b8, type: 3}
+  mainAudio: {fileID: 8355928865945117578, guid: c68d6fcf0495ae441ba51dec039cee92, type: 3}
+  prefabs:
+  - {fileID: 1875957906698893538, guid: df518e677490a2741ac8b5030db2dec1, type: 3}
+  - {fileID: 5964213808735479061, guid: 498da90f143b7004b8c706acd05b1576, type: 3}
 --- !u!114 &556996388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -773,7 +774,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ecb3b7b9be12424994a18b4f2675c24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showTime: 0.1
 --- !u!225 &744602027
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -1044,7 +1044,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d40d83c85e5a4b346909edbdf3e8365d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isHorizonWall: 1
 --- !u!1 &1268290208
 GameObject:
   m_ObjectHideFlags: 0
@@ -1227,7 +1226,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d40d83c85e5a4b346909edbdf3e8365d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isHorizonWall: 0
 --- !u!60 &1383418779
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -1759,8 +1757,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c722c151e6e53c40a3bf003efe00075, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  countAsteroid: 1000
-  countUfo: 2000
 --- !u!1 &1642498936
 GameObject:
   m_ObjectHideFlags: 0

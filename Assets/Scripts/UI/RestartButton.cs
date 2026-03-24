@@ -1,3 +1,4 @@
+using System;
 using Project.System;
 using UnityEngine.UI;
 using UnityEngine;
@@ -8,14 +9,9 @@ namespace Project.UI
     [RequireComponent(typeof(Button))]
     public class RestartButton : MonoBehaviour
     {
-        private EventBus _eventBus;
+        public event Action OnRestartGame;
+        
         private Button _button;
-
-        [Inject]
-        public void Construct(EventBus eventBus)
-        {
-            _eventBus = eventBus;
-        }
     
         private void Awake()
         {
@@ -25,7 +21,7 @@ namespace Project.UI
     
         private void OnDestroy() => _button.onClick.RemoveListener(RestartGame);
         
-        private void RestartGame() => _eventBus.OnRestartGame.Invoke();
+        private void RestartGame() => OnRestartGame?.Invoke();
     }
 }
 

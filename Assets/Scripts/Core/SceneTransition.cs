@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using Project.Player;
 using Project.UI;
 using UnityEngine;
 using Zenject;
@@ -11,30 +13,38 @@ namespace Project.System
         private bool _transitionIn;
         private SpriteMask _mask;
         private ShowUI _showUI;
-        private EventBus _eventBus;
+        private PlayerController _playerController;
+        private RestartButton _restartButton;
         private WaitForSeconds _waitHiding;
 
         [Inject]
         public void Construct(
-            EventBus eventBus)
+            PlayerController playerController,
+            RestartButton restartButton
+            )
         {
-            _eventBus = eventBus;
+            _playerController = playerController;
+            _restartButton = restartButton;
         }
     
         private void Awake()
         {
-            _eventBus.OnHitPlayer += StartTransition;
-            _eventBus.OnRestartGame += StartTransition;
             _mask = GetComponentInChildren<SpriteMask>();
             _showUI = GetComponentInChildren<ShowUI>();
             _waitHiding = new WaitForSeconds(_showUI.ShowTime);
             _transitionIn = true;
         }
 
+        private void Start()
+        {
+            _playerController.View.OnHitPlayer += StartTransition;
+            _restartButton.OnRestartGame += StartTransition;
+        }
+
         private void OnDestroy()
         {
-            _eventBus.OnHitPlayer -= StartTransition;
-            _eventBus.OnRestartGame -= StartTransition;
+            _playerController.View.OnHitPlayer -= StartTransition;
+            _restartButton.OnRestartGame -= StartTransition;
         }
 
         private void StartTransition()

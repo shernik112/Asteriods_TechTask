@@ -35,12 +35,10 @@ namespace Project.Enemies
         [Inject]
         public void Construct(
             PlayerController playerController,
-            EventBus eventBus, 
             HandlerScore handlerScore, 
             MainAudio mainAudio)
         {
             PlayerController = playerController;
-            _eventBus = eventBus;
             _handlerScore = handlerScore;
             _mainAudio = mainAudio;
         }
@@ -54,13 +52,13 @@ namespace Project.Enemies
 
         private void OnEnable()
         {
-            _eventBus.OnHitPlayer += Deactivation;
+            PlayerController.View.OnHitPlayer += Deactivation;
             View.OnHitReaction += StartHitReaction;
         }
 
         private void OnDisable()
         {
-            _eventBus.OnHitPlayer -= Deactivation;
+            PlayerController.View.OnHitPlayer -= Deactivation;
             View.OnHitReaction -= StartHitReaction;
         }
 

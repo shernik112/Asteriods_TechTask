@@ -155,11 +155,10 @@ MonoBehaviour:
   fragmentAsteroidPrefab: {fileID: 6644502608561468640, guid: 8530921e5145e4b42b5d34a81d781047, type: 3}
   ufoPrefab: {fileID: 3991344284791591244, guid: 9b3a625d73f75e9499683cb57aaba707, type: 3}
   bulletPrefab: {fileID: 6239866979175829631, guid: 296f97032619fff4f98e4c1bcee08d5f, type: 3}
-  eventBus: {fileID: 2966412476588914346, guid: 2a9cd11c8b2c20f4ca11cd2a78fc4c13, type: 3}
+  transitionPrefab: {fileID: 4701732250828865926, guid: 24d8b2b68611b3845bee0dd90499e033, type: 3}
+  handlerScorePrefab: {fileID: 4406208447736525551, guid: d6d48272a56d67143a8533fc8d5824b8, type: 3}
   mainAudio: {fileID: 8355928865945117578, guid: c68d6fcf0495ae441ba51dec039cee92, type: 3}
-  rootHandlers: {fileID: 0}
   prefabs:
-  - {fileID: 4701732250828865926, guid: 24d8b2b68611b3845bee0dd90499e033, type: 3}
   - {fileID: 1875957906698893538, guid: df518e677490a2741ac8b5030db2dec1, type: 3}
   - {fileID: 3698066480869194213, guid: 3ae2f2e8503da0d48ac90113e855520c, type: 3}
   - {fileID: 5964213808735479061, guid: 498da90f143b7004b8c706acd05b1576, type: 3}

@@ -1,5 +1,7 @@
 using System;
 using NUnit.Framework;
+using Project.Player;
+using Project.UI;
 using UnityEngine;
 using Zenject;
 
@@ -10,25 +12,29 @@ namespace Project.System
         public bool IsPause { get; private set; }
 
         private EventBus _eventBus;
+        private PlayerController _playerController;
+        private RestartButton _restartButton;
             
         [Inject]
         public void Construct(
-            EventBus eventBus
+            PlayerController playerController,
+            RestartButton restartButton
         )
         {
-            _eventBus = eventBus;
+            _playerController = playerController;
+            _restartButton = restartButton;
         }
 
-        private void Awake()
+        private void Start()
         {
-            _eventBus.OnRestartGame += TogglePause;
-            _eventBus.OnHitPlayer += TogglePause;
+            _restartButton.OnRestartGame += TogglePause;
+            _playerController.View.OnHitPlayer += TogglePause;
         }
-
+        
         private void OnDestroy()
         {
-            _eventBus.OnRestartGame -= TogglePause;
-            _eventBus.OnHitPlayer -= TogglePause;
+            _restartButton.OnRestartGame -= TogglePause;
+            _playerController.View.OnHitPlayer -= TogglePause;
         }
 
         private void TogglePause()
