@@ -1,24 +1,17 @@
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 
 namespace Project.System
 {
-    public interface IPoolable
-    {
-        event Action<GameObject> OnDeactivation;
-        void ReturnToPool();
-    }
-
     public class ObjectPool
     {
         private int StartCount => 5;
         private readonly GameObject _poolPrefab;
-        private readonly MainInstaller _installer;
+        private readonly PlaySceneInstaller _installer;
         private readonly Transform _parentTransform;
         private readonly Queue<GameObject> _pool = new Queue<GameObject>();
         
-        public ObjectPool(GameObject poolPrefab, MainInstaller installer, Transform parentTransform)
+        public ObjectPool(GameObject poolPrefab, PlaySceneInstaller installer, Transform parentTransform)
         {
             _poolPrefab = poolPrefab;
             _installer = installer;

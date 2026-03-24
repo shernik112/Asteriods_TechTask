@@ -32,19 +32,15 @@ namespace Project.Scene
             TeleportationObject(other);
         }
 
-        private void TeleportationObject(Collider2D otherObj)
+        private void TeleportationObject(Collider2D obj)
         {
             Debug.Log($"{typeof(TeleportBorder)} Teleportation Object");
             
-            var rb = otherObj.attachedRigidbody;
-            var targetTransform = rb != null ? rb.transform : otherObj.transform;
-
-            var pos = targetTransform.position;
+            var pos = obj.transform.position;
             
-            if (_isHorizonWall)
-                otherObj.transform.position = new Vector2(pos.x, GetTargetPos(pos.y));
-            else
-                otherObj.transform.position = new Vector2(GetTargetPos(pos.x), pos.y);
+            obj.transform.position = _isHorizonWall
+                ? new Vector2(pos.x, GetTargetPos(pos.y))
+                : new Vector2(GetTargetPos(pos.x), pos.y);
         }
 
         private float GetTargetPos(float tpPos)

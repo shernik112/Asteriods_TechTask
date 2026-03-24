@@ -6,7 +6,7 @@ using System;
 
 namespace Project.System
 {
-    public class MainInstaller : MonoInstaller
+    public class PlaySceneInstaller : MonoInstaller
     {
         [SerializeField] private Camera mainCamera = default;
         [SerializeField] private GameObject playerPrefab = default;
@@ -43,7 +43,7 @@ namespace Project.System
                 Container.Bind(singleBehaviour).FromNewComponentOnNewGameObject().AsSingle().NonLazy();
             
             Container.Bind<Camera>().FromInstance(mainCamera).AsSingle();
-            Container.Bind<MainInstaller>().FromInstance(this).AsSingle();
+            Container.Bind<PlaySceneInstaller>().FromInstance(this).AsSingle();
         }
 
         public override void Start()
