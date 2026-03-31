@@ -12,11 +12,6 @@ public enum EnemyTypeHit
     Bullet
 }
 
-public interface IEnemy
-{
-    bool IsFirstEnterToTeleport { get; set; }
-}
-
 namespace Project.Enemies
 {
     public abstract class EnemyController<TModel> : PoolableController<TModel>
@@ -26,7 +21,6 @@ namespace Project.Enemies
         
         protected EnemyView<TModel> View;
         
-        private EventBus _eventBus;
         private MainAudio _mainAudio;
         private HandlerScore _handlerScore;
         

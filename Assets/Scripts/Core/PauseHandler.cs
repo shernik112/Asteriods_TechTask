@@ -10,8 +10,7 @@ namespace Project.System
     public class PauseHandler : MonoBehaviour
     {
         public bool IsPause { get; private set; }
-
-        private EventBus _eventBus;
+        
         private PlayerController _playerController;
         private RestartButton _restartButton;
             
