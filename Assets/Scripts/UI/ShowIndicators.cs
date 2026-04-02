@@ -36,13 +36,13 @@ namespace Project.UI
 
         private string GetPlayerTransform()
         {
-            Vector2 pos = _playerController.View.transform.position;
+            Vector2 pos = _playerController.transform.position;
             return $"Position(X:{pos.x:F2}  Y:{pos.y:F2})";
         }
 
         private string GetPlayerRotation()
         {
-            return $"Rotation({_playerController.View.transform.rotation.eulerAngles.z.ToString("F2")})";
+            return $"Rotation({_playerController.transform.rotation.eulerAngles.z.ToString("F2")})";
         }
 
         private string GetPlayerVelocity()

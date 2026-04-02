@@ -13,9 +13,9 @@ namespace Project.System
         [SerializeField] private GameObject fragmentAsteroidPrefab = default;
         [SerializeField] private GameObject ufoPrefab = default;
         [SerializeField] private GameObject bulletPrefab = default;
-        [SerializeField] private GameObject mainCamera = default;
         [SerializeField] private GameObject eventBus = default;
         [SerializeField] private GameObject mainAudio = default;
+        [SerializeField] private Camera mainCamera = default;
         [SerializeField] private Transform rootHandlers = default;
         [SerializeField] private GameObject[] prefabs;
         
@@ -31,7 +31,6 @@ namespace Project.System
         public override void InstallBindings()
         {
             Container.Bind<EventBus>().FromComponentInNewPrefab(eventBus).AsSingle().NonLazy();
-            Container.Bind<Camera>().FromComponentInNewPrefab(mainCamera).AsSingle().NonLazy();
             Container.Bind<PlayerController>().FromComponentInNewPrefab(playerPrefab).AsSingle().NonLazy();
             Container.Bind<MainAudio>().FromComponentInNewPrefab(mainAudio).AsSingle().NonLazy();
             
@@ -47,6 +46,7 @@ namespace Project.System
                     .AsSingle().NonLazy();
             }
             
+            Container.Bind<Camera>().FromInstance(mainCamera).AsSingle();
             Container.Bind<MainInstaller>().FromInstance(this).AsSingle();
         }
 

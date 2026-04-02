@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d582843a28feb364499225c578301fbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerData: {fileID: 11400000, guid: 34feac179934ba64cbb253009e7c079a, type: 2}
+  data: {fileID: 11400000, guid: 34feac179934ba64cbb253009e7c079a, type: 2}
 --- !u!60 &109552026019927316
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -280,8 +280,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Project.Player.BulletShoot
   bulletShotClip: {fileID: 8300000, guid: 690982e4761760a42906fcc2dc5a2d2b, type: 3}
-  instantiateOffset: 0.5
-  cooldown: 0.2
 --- !u!1001 &7529915992298546324
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -292,15 +290,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1986828927222902561, guid: dcbe943058ab0ac47b17f57ea858d7e0, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5803345136434244909, guid: dcbe943058ab0ac47b17f57ea858d7e0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5803345136434244909, guid: dcbe943058ab0ac47b17f57ea858d7e0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 5803345136434244909, guid: dcbe943058ab0ac47b17f57ea858d7e0, type: 3}
       propertyPath: m_LocalPosition.z

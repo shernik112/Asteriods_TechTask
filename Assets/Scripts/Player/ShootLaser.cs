@@ -44,7 +44,7 @@ namespace Project.Player
         private void Start()
         {
             ChangeVisibility(false);
-            _eventBus.OnRestartGame += Restart;
+                _eventBus.OnRestartGame += Restart;
             CurrentCountShоtLaser = _defaultCountShotLaser;
         }
         
