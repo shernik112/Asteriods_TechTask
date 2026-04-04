@@ -2,26 +2,28 @@ using Project.System;
 using UnityEngine;
 using Zenject;
 using System;
+using Project.Player;
 
 namespace Project.UI
 {
     public class HandlerScore : MonoBehaviour
     {
-
-        private EventBus _eventBus;
+        public event Action<int> IsFinalScore;
+        public event Action<int> NewTargetScore;
+        private PlayerController _playerController;
         private int _targetScore;
 
         [Inject]
-        public void Construct(EventBus eventBus)
+        public void Construct(PlayerController playerController)
         {
-            _eventBus = eventBus;
+            _playerController = playerController;
         }
 
         private void Awake() => 
-            _eventBus.OnHitPlayer += ResetCount;
+            _playerController.OnHitPlayer += ResetCount;
 
         private void OnDestroy() =>
-            _eventBus.OnHitPlayer -= ResetCount;        
+            _playerController.OnHitPlayer -= ResetCount;        
 
 
         public void CountScoreDefeatedEnemy(int countDefeatedEnemy)
@@ -30,12 +32,12 @@ namespace Project.UI
             
             _targetScore += countDefeatedEnemy;
 
-            _eventBus.NewTargetScore?.Invoke(_targetScore);
+            NewTargetScore?.Invoke(_targetScore);
         }
 
         private void ResetCount()
         {
-            _eventBus.IsFinalScore?.Invoke(_targetScore);
+            IsFinalScore?.Invoke(_targetScore);
             _targetScore = default;
         }
     }

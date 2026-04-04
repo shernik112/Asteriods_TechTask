@@ -51,7 +51,6 @@ namespace Project.System
                         obj.transform.position = new Vector2(0, -_heightCreate);
                         break;
                 }
-                obj.AddComponent<TeleportBorder>();
             }
         }
     }

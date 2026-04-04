@@ -1,19 +1,13 @@
-using Project.System;
+using System;
 using UnityEngine.UI;
 using UnityEngine;
-using Zenject;
 
 [RequireComponent(typeof(Button))]
 public class RestartButton : MonoBehaviour
 {
-    private EventBus _eventBus;
+    public event Action OnRestartGame;
     private Button _button;
-
-    [Inject]
-    public void Construct(EventBus eventBus)
-    {
-        _eventBus = eventBus;
-    }
+    
     private void Awake()
     {
         _button = GetComponent<Button>();
@@ -21,5 +15,5 @@ public class RestartButton : MonoBehaviour
     }
     
     private void OnDestroy() => _button.onClick.RemoveListener(RestartGame);
-    private void RestartGame() => _eventBus.OnRestartGame.Invoke();
+    private void RestartGame() => OnRestartGame.Invoke();
 }

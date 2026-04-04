@@ -6,13 +6,13 @@ namespace Project.UI
         protected override void Awake()
         {
             base.Awake();
-            EventBus.NewCountShotLaser += UpdateValue;
+            PlayerController.Laser.NewCountShotLaser += UpdateValue;
         }
 
         protected override void OnDestroy()
         {
             base.OnDestroy();
-            EventBus.NewCountShotLaser -= UpdateValue;
+            PlayerController.Laser.NewCountShotLaser -= UpdateValue;
         }
 
         private void UpdateValue(int count)

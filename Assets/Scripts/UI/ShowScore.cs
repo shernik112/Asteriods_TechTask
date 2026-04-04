@@ -7,20 +7,19 @@ namespace Project.UI
     public class ShowScore : BaseCounter
     {
         private HandlerScore _handlerScore;
-        private EventBus _eventBus;
         private readonly float _counterSpeed = 700;
         private Coroutine _currentCoroutine;
 
         protected override void Awake()
         {
             base.Awake();
-            EventBus.NewTargetScore += StartCounterNewChange;
+            HandlerScore.NewTargetScore += StartCounterNewChange;
         }
 
         protected override void OnDestroy()
         {
             base.OnDestroy();
-            EventBus.NewTargetScore -= StartCounterNewChange;
+            HandlerScore.NewTargetScore -= StartCounterNewChange;
         }
 
         private void StartCounterNewChange(int targetScore)

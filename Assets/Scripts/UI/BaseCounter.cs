@@ -1,3 +1,4 @@
+using Project.Player;
 using Project.System;
 using TMPro;
 using UnityEngine;
@@ -10,22 +11,26 @@ namespace Project.UI
     {
         protected int Count;
         protected TMP_Text Text;
-        protected EventBus EventBus;
+        protected PlayerController PlayerController;
+        protected HandlerScore HandlerScore;
 
         [Inject]
-        public void Construct(EventBus eventBus)
+        public void Construct(
+            PlayerController playerController, 
+            HandlerScore handlerScore)
         {
-            EventBus = eventBus;
+            PlayerController = playerController;
+            HandlerScore = handlerScore;
         }
         
         protected virtual void Awake()
         {
-            EventBus.OnHitPlayer += ResetCount;
+            PlayerController.OnHitPlayer += ResetCount;
             Text = GetComponent<TMP_Text>();
         }
         
         protected virtual void OnDestroy() => 
-            EventBus.OnHitPlayer -= ResetCount;
+            PlayerController.OnHitPlayer -= ResetCount;
 
         private void ResetCount()
         {

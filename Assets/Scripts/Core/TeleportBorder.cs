@@ -9,7 +9,7 @@ namespace Project.Scene
         private bool _isHorizonWall;
         private readonly float _teleportOffset = 0.35f;
 
-        private void Awake()
+        private void Start()
         {
             _isHorizonWall = transform.position.y != 0;
         }

@@ -13,10 +13,9 @@ namespace Project.System
         [SerializeField] private GameObject fragmentAsteroidPrefab = default;
         [SerializeField] private GameObject ufoPrefab = default;
         [SerializeField] private GameObject bulletPrefab = default;
-        [SerializeField] private GameObject eventBus = default;
         [SerializeField] private GameObject mainAudio = default;
+        [SerializeField] private GameObject transitionPrefab = default;
         [SerializeField] private Camera mainCamera = default;
-        [SerializeField] private Transform rootHandlers = default;
         [SerializeField] private GameObject[] prefabs;
         
         private readonly Type[] _singleBehaviours =
@@ -30,8 +29,8 @@ namespace Project.System
     
         public override void InstallBindings()
         {
-            Container.Bind<EventBus>().FromComponentInNewPrefab(eventBus).AsSingle().NonLazy();
             Container.Bind<PlayerController>().FromComponentInNewPrefab(playerPrefab).AsSingle().NonLazy();
+            Container.Bind<RestartButton>().FromComponentInNewPrefab(transitionPrefab).AsSingle().NonLazy();
             Container.Bind<MainAudio>().FromComponentInNewPrefab(mainAudio).AsSingle().NonLazy();
             
             Container.Bind<GameObject>().FromInstance(bulletPrefab).WhenInjectedInto<BulletShoot>();
@@ -42,8 +41,7 @@ namespace Project.System
             
             foreach (var singleBehaviour in _singleBehaviours)
             {
-                Container.Bind(singleBehaviour).FromNewComponentOnNewGameObject().UnderTransform(rootHandlers)
-                    .AsSingle().NonLazy();
+                Container.Bind(singleBehaviour).FromNewComponentOnNewGameObject().AsSingle().NonLazy();
             }
             
             Container.Bind<Camera>().FromInstance(mainCamera).AsSingle();

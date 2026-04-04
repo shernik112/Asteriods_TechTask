@@ -24,7 +24,7 @@ namespace Project.System
         private GameObject _fragmentAsteroidPrefab;
         private GameObject _ufoPrefab;
         private MainInstaller _mainInstaller;
-        private EventBus _eventBus;
+        private RestartButton _restartButton;
         private PauseHandler _pauseHandler;
         private FloatRange _rangeTimeAsteroid = new FloatRange(5f, 10f);
         private FloatRange _rangeTimeUfo = new FloatRange(5f, 15f);
@@ -42,7 +42,7 @@ namespace Project.System
             [Inject(Id = "FragmentAsteroid")] GameObject fragmentAsteroidPrefab,
             [Inject(Id = "Ufo")] GameObject ufoPrefab,
             Camera mainCamera,
-            EventBus eventBus,
+            RestartButton restartButton,
             PauseHandler pauseHandler,
             MainInstaller mainInstaller)
         {
@@ -50,14 +50,14 @@ namespace Project.System
             _fragmentAsteroidPrefab = fragmentAsteroidPrefab;
             _ufoPrefab = ufoPrefab;
             _mainCamera = mainCamera;
-            _eventBus = eventBus;
+            _restartButton = restartButton;
             _pauseHandler = pauseHandler;
             _mainInstaller = mainInstaller;
         }
         
         private void Awake()
         {
-            _eventBus.OnRestartGame += StartCreate;   
+            _restartButton.OnRestartGame += StartCreate;   
             _asteroidPool = new ObjectPool(_asteroidPrefab, _mainInstaller,transform);
             _fragmentAsteroidPool = new ObjectPool(_fragmentAsteroidPrefab, _mainInstaller, transform);
             _ufoPool = new ObjectPool(_ufoPrefab, _mainInstaller,transform);
@@ -65,7 +65,7 @@ namespace Project.System
         
         private void OnDestroy()
         {
-            _eventBus.OnRestartGame -= StartCreate;
+            _restartButton.OnRestartGame -= StartCreate;
         }
 
         private void Start()

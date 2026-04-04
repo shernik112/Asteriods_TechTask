@@ -1,3 +1,4 @@
+using System;
 using Project.System;
 using Project.Enemies;
 using UnityEngine;
@@ -8,9 +9,11 @@ namespace Project.Player
     [RequireComponent(typeof(Rigidbody2D), typeof(SpriteRenderer))]
     public class PlayerController : MonoBehaviour, ITeleportedReaction
     {
+        public event Action OnHitPlayer;
+            
         [SerializeField] private PlayerData data;
 
-        private EventBus _eventBus;
+        private RestartButton _restartButton;
         private MainAudio _mainAudio;
         private PauseHandler _pauseHandler;
         private SpriteRenderer _spriteRenderer;
@@ -23,11 +26,11 @@ namespace Project.Player
         
         [Inject]
         public void Construct(
-            EventBus eventBus,
+            RestartButton restartButton,
             PauseHandler pauseHandler,
             MainAudio mainAudio)
         {
-            _eventBus = eventBus;
+            _restartButton = restartButton;
             _pauseHandler = pauseHandler;
             _mainAudio = mainAudio;
         }
@@ -39,12 +42,12 @@ namespace Project.Player
             Laser = GetComponentInChildren<ShootLaser>();
             _spriteRenderer = GetComponent<SpriteRenderer>();
 
-            Laser.Init(_eventBus,_mainAudio);
-            _eventBus.OnRestartGame += SetActive;
+            Laser.Init(_restartButton,_mainAudio);
+            _restartButton.OnRestartGame += SetActive;
         }
 
         private void OnDestroy() =>
-            _eventBus.OnRestartGame -= SetActive;
+            _restartButton.OnRestartGame -= SetActive;
 
         public void SetInput(Vector2 input)
         {
@@ -82,7 +85,7 @@ namespace Project.Player
                 Rb.angularVelocity = 0f;
 
                 _mainAudio.PlaySfx(data.destructionClip);
-                _eventBus.OnHitPlayer?.Invoke();
+                OnHitPlayer?.Invoke();
 
                 SetDefaultValues();
             }
