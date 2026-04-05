@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 8544919699193392034}
   - component: {fileID: 2355469100598916106}
   - component: {fileID: 2948478594722256502}
-  - component: {fileID: 2279800685150937829}
+  - component: {fileID: 1937906709803332155}
+  - component: {fileID: 1062154395734806133}
   m_Layer: 0
   m_Name: Score
   m_TagString: Untagged
@@ -138,7 +139,7 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &2279800685150937829
+--- !u!114 &1937906709803332155
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -147,9 +148,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 816149307515462263}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 437c9f37019cc974cb375d4d0ef41a6d, type: 3}
+  m_Script: {fileID: 11500000, guid: d17e290648ef4426a507d932c5428013, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: '::'
+  m_EditorClassIdentifier: Assembly-CSharp::Project.UI.MvcView
+--- !u!114 &1062154395734806133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 816149307515462263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad2aaa782fdd47dead6403caca6df47b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Project.UI.CounterScore
 --- !u!1 &1875957906698893538
 GameObject:
   m_ObjectHideFlags: 0
