@@ -15,5 +15,5 @@ public class RestartButton : MonoBehaviour
     }
     
     private void OnDestroy() => _button.onClick.RemoveListener(RestartGame);
-    private void RestartGame() => OnRestartGame.Invoke();
+    private void RestartGame() => OnRestartGame?.Invoke();
 }
