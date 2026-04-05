@@ -158,9 +158,9 @@ MonoBehaviour:
   transitionPrefab: {fileID: 4701732250828865926, guid: 24d8b2b68611b3845bee0dd90499e033, type: 3}
   mainCamera: {fileID: 878547605457886350}
   prefabs:
-  - {fileID: 1875957906698893538, guid: df518e677490a2741ac8b5030db2dec1, type: 3}
   - {fileID: 3698066480869194213, guid: 3ae2f2e8503da0d48ac90113e855520c, type: 3}
   - {fileID: 5964213808735479061, guid: 498da90f143b7004b8c706acd05b1576, type: 3}
+  - {fileID: 1875957906698893538, guid: df518e677490a2741ac8b5030db2dec1, type: 3}
 --- !u!114 &556996388
 MonoBehaviour:
   m_ObjectHideFlags: 0

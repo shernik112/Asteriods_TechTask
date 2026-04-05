@@ -1,19 +1,25 @@
 using System;
-using UnityEngine.UI;
 using UnityEngine;
 
-[RequireComponent(typeof(Button))]
-public class RestartButton : MonoBehaviour
+namespace Project.UI
 {
-    public event Action OnRestartGame;
-    private Button _button;
-    
-    private void Awake()
+    [RequireComponent(typeof(ButtonView))]
+    public class RestartButton : MonoBehaviour
     {
-        _button = GetComponent<Button>();
-        _button.onClick.AddListener(RestartGame);
+        public event Action OnRestartGame;
+
+        private ButtonView _view;
+        
+        private void Awake()
+        {
+            _view = GetComponent<ButtonView>();
+            _view.OnClicked += HandleButtonClick;
+        }
+
+        private void OnDestroy() =>
+            _view.OnClicked -= HandleButtonClick;
+
+        private void HandleButtonClick() =>
+            OnRestartGame?.Invoke();
     }
-    
-    private void OnDestroy() => _button.onClick.RemoveListener(RestartGame);
-    private void RestartGame() => OnRestartGame?.Invoke();
 }

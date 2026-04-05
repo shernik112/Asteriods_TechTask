@@ -1,6 +1,7 @@
 using System;
 using NUnit.Framework;
 using Project.Player;
+using Project.UI;
 using UnityEngine;
 using Zenject;
 
