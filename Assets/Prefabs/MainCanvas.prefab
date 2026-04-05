@@ -453,9 +453,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4712598753436829925}
-  - component: {fileID: 7557396173375407954}
   - component: {fileID: 3348651929667597985}
   - component: {fileID: 8455790032876537806}
+  - component: {fileID: 4491590263504154292}
+  - component: {fileID: 4116784909313345243}
   m_Layer: 0
   m_Name: Indicators
   m_TagString: Untagged
@@ -482,18 +483,6 @@ RectTransform:
   m_AnchoredPosition: {x: 585, y: 352}
   m_SizeDelta: {x: 1000, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &7557396173375407954
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8729298205261815781}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68751de207017154b92cc57d2ee1ca61, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!222 &3348651929667597985
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -594,3 +583,27 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &4491590263504154292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8729298205261815781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd4210794acf4a498d7064da8514cab7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Project.UI.IndicatorsView
+--- !u!114 &4116784909313345243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8729298205261815781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bdcde0526baeed43b95a70f15c9010e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Project.UI.IndicatorsEntryPoint
