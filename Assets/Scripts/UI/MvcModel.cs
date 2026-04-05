@@ -16,7 +16,7 @@ namespace Project.UI
 
         public void Reset()
         {
-            Count = default;
+            Count = 0;
             OnNewCount?.Invoke();
         }
     }

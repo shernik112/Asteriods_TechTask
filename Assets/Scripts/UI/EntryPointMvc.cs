@@ -1,4 +1,4 @@
-using Project.Player;
+    using Project.Player;
 using UnityEngine;
 using Zenject;
 
@@ -8,9 +8,9 @@ namespace Project.UI
     public class EntryPointMvc : MonoBehaviour
     {
         protected PlayerController PlayerController;
+        protected MvcModel Model;
 
         private MvcController _controller;
-        protected MvcModel Model;
         private MvcView _view;
 
         [Inject]
@@ -22,16 +22,13 @@ namespace Project.UI
         protected virtual void Awake()
         {
             _view = GetComponent<MvcView>();
+            Model = new MvcModel();
+            _controller = new MvcController(Model, _view);
             PlayerController.OnHitPlayer += ResetCount;
         }
 
-        protected virtual void Start()
-        {
-            Model = new MvcModel();
-            _controller = new MvcController(Model, _view);
-
+        protected virtual void Start() =>
             _controller.Start();
-        }
 
         protected virtual void OnDestroy()
         {
