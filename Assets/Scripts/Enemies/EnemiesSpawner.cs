@@ -23,7 +23,7 @@ namespace Project.System
         private GameObject _asteroidPrefab;
         private GameObject _fragmentAsteroidPrefab;
         private GameObject _ufoPrefab;
-        private MainInstaller _mainInstaller;
+        private PlaySceneInstaller _playSceneInstaller;
         private RestartButton _restartButton;
         private PauseHandler _pauseHandler;
         private FloatRange _rangeTimeAsteroid = new FloatRange(5f, 10f);
@@ -44,7 +44,7 @@ namespace Project.System
             Camera mainCamera,
             RestartButton restartButton,
             PauseHandler pauseHandler,
-            MainInstaller mainInstaller)
+            PlaySceneInstaller playSceneInstaller)
         {
             _asteroidPrefab = asteroidPrefab;
             _fragmentAsteroidPrefab = fragmentAsteroidPrefab;
@@ -52,15 +52,15 @@ namespace Project.System
             _mainCamera = mainCamera;
             _restartButton = restartButton;
             _pauseHandler = pauseHandler;
-            _mainInstaller = mainInstaller;
+            _playSceneInstaller = playSceneInstaller;
         }
         
         private void Awake()
         {
             _restartButton.OnRestartGame += StartCreate;   
-            _asteroidPool = new ObjectPool(_asteroidPrefab, _mainInstaller,transform);
-            _fragmentAsteroidPool = new ObjectPool(_fragmentAsteroidPrefab, _mainInstaller, transform);
-            _ufoPool = new ObjectPool(_ufoPrefab, _mainInstaller,transform);
+            _asteroidPool = new ObjectPool(_asteroidPrefab, _playSceneInstaller,transform);
+            _fragmentAsteroidPool = new ObjectPool(_fragmentAsteroidPrefab, _playSceneInstaller, transform);
+            _ufoPool = new ObjectPool(_ufoPrefab, _playSceneInstaller,transform);
         }
         
         private void OnDestroy()

@@ -279,7 +279,8 @@ GameObject:
   - component: {fileID: 7224664288707698968}
   - component: {fileID: 9056467419180946359}
   - component: {fileID: 3628546089996524312}
-  - component: {fileID: 1406255724207049494}
+  - component: {fileID: 8604658801898490108}
+  - component: {fileID: 2221945996795085099}
   m_Layer: 0
   m_Name: CountLaserShots
   m_TagString: Untagged
@@ -406,7 +407,7 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &1406255724207049494
+--- !u!114 &8604658801898490108
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -417,7 +418,19 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 425d760b151abf445a47cfa96d24797f, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::Project.UI.CountLaserShots
+--- !u!114 &2221945996795085099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2471560922313193938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d17e290648ef4426a507d932c5428013, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Project.UI.MvcView
 --- !u!1 &8729298205261815781
 GameObject:
   m_ObjectHideFlags: 0
