@@ -6,16 +6,19 @@ namespace Project.System
 {
     public class PlacementBorder : MonoBehaviour
     {
-        [SerializeField] private GameObject borderPrefab;
-        
         private readonly float _placementOffset = 1f;
+        
+        private GameObject _borderPrefab;
         private Camera _mainCamera;
         private float _heightCreate;
         private float _widthCreate;
         
         [Inject]
-        public void Construct(Camera mainCamera)
+        public void Construct(
+            [Inject(Id = "Border")] GameObject borderPrefab,
+            Camera mainCamera)
         {
+            _borderPrefab = borderPrefab;
             _mainCamera = mainCamera;
         }
 
@@ -31,7 +34,7 @@ namespace Project.System
         {
             for (var i = 1; i <= 4; i++)
             {
-                var obj = Instantiate(borderPrefab);
+                var obj = Instantiate(_borderPrefab);
                 obj.transform.SetParent(transform); 
                 
                 switch (i)

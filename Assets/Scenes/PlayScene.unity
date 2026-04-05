@@ -156,6 +156,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 1061576356628838479, guid: 03167c7ca000e5e459ef335ed3caf741, type: 3}
   mainAudio: {fileID: 8355928865945117578, guid: c68d6fcf0495ae441ba51dec039cee92, type: 3}
   transitionPrefab: {fileID: 4701732250828865926, guid: 24d8b2b68611b3845bee0dd90499e033, type: 3}
+  borderPrefab: {fileID: 6914650507238123481, guid: 65f22abc5497de945a4cb4957dc0b77b, type: 3}
   mainCamera: {fileID: 878547605457886350}
   prefabs:
   - {fileID: 3698066480869194213, guid: 3ae2f2e8503da0d48ac90113e855520c, type: 3}

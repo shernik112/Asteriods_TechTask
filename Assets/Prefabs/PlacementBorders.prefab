@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2454684614805277498}
   - component: {fileID: 3354564617584252598}
   m_Layer: 0
-  m_Name: TeleportBorder
+  m_Name: PlacementBorders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

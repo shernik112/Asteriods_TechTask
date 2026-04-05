@@ -22,17 +22,16 @@ namespace Project.UI
         {
             _view = GetComponent<IndicatorsView>();
             _model = new IndicatorsModel();
-            _controller = new IndicatorsController(_playerController, _model);
-            _model.OnNewText += ShowNewText;
+            _controller = new IndicatorsController(_playerController, _model, _view);
         }
 
+        private void Start() =>
+            _controller.Start();
+        
+        private void OnDestroy() =>
+            _controller.OnDestroy();
+        
         private void Update() =>
             _controller.Update();
-
-        private void OnDestroy() =>
-            _model.OnNewText -= ShowNewText;
-
-        private void ShowNewText() =>
-            _view.ShowText(_model.Text);
     }
 }

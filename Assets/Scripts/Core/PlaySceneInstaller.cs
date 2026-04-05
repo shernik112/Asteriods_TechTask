@@ -3,6 +3,7 @@ using Project.UI;
 using UnityEngine;
 using Zenject;
 using System;
+using Project.Scene;
 
 namespace Project.System
 {
@@ -15,6 +16,7 @@ namespace Project.System
         [SerializeField] private GameObject bulletPrefab = default;
         [SerializeField] private GameObject mainAudio = default;
         [SerializeField] private GameObject transitionPrefab = default;
+        [SerializeField] private GameObject borderPrefab = default;
         [SerializeField] private Camera mainCamera = default;
         [SerializeField] private GameObject[] prefabs;
         
@@ -38,6 +40,7 @@ namespace Project.System
             Container.Bind<GameObject>().WithId("Asteroid").FromInstance(asteroidPrefab).WhenInjectedInto<EnemiesSpawner>();
             Container.Bind<GameObject>().WithId("FragmentAsteroid").FromInstance(fragmentAsteroidPrefab).WhenInjectedInto<EnemiesSpawner>();
             Container.Bind<GameObject>().WithId("Ufo").FromInstance(ufoPrefab).WhenInjectedInto<EnemiesSpawner>();
+            Container.Bind<GameObject>().WithId("Border").FromInstance(borderPrefab).WhenInjectedInto<PlacementBorder>();
             
             foreach (var singleBehaviour in _singleBehaviours)
             {

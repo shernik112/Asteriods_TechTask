@@ -8,11 +8,16 @@ namespace Project.UI
     {
         private readonly PlayerController _player;
         private readonly IndicatorsModel _model;
-
-        public IndicatorsController(PlayerController player, IndicatorsModel model)
+        private readonly IndicatorsView _view;
+        
+        public IndicatorsController(
+            PlayerController player, 
+            IndicatorsModel model, 
+            IndicatorsView view)
         {
             _player = player;
             _model = model;
+            _view = view;
         }
 
         public void Update()
@@ -26,5 +31,13 @@ namespace Project.UI
 
             _model.SetText(sb.ToString());
         }
+        public void Start() =>
+            _model.OnNewText += NewText;
+
+        public void OnDestroy() =>
+            _model.OnNewText -= NewText;
+
+        private void NewText() =>
+            _view.ShowText(_model.Text);
     }
 }
