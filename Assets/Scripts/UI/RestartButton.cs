@@ -1,25 +1,25 @@
-using Project.System;
-using UnityEngine.UI;
+using System;
 using UnityEngine;
-using Zenject;
 
-[RequireComponent(typeof(Button))]
-public class RestartButton : MonoBehaviour
+namespace Project.UI
 {
-    private EventBus _eventBus;
-    private Button _button;
+    [RequireComponent(typeof(ButtonView))]
+    public class RestartButton : MonoBehaviour
+    {
+        public event Action OnRestartGame;
 
-    [Inject]
-    public void Construct(EventBus eventBus)
-    {
-        _eventBus = eventBus;
+        private ButtonView _view;
+        
+        private void Awake()
+        {
+            _view = GetComponent<ButtonView>();
+            _view.OnClicked += HandleButtonClick;
+        }
+
+        private void OnDestroy() =>
+            _view.OnClicked -= HandleButtonClick;
+
+        private void HandleButtonClick() =>
+            OnRestartGame?.Invoke();
     }
-    private void Awake()
-    {
-        _button = GetComponent<Button>();
-        _button.onClick.AddListener(RestartGame);
-    }
-    
-    private void OnDestroy() => _button.onClick.RemoveListener(RestartGame);
-    private void RestartGame() => _eventBus.OnRestartGame.Invoke();
 }

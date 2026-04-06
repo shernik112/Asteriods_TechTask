@@ -24,8 +24,7 @@ namespace Project.Enemies
         protected Rigidbody2D Rb;
         
         private readonly WaitForSeconds _timeHitReaction = new WaitForSeconds(0.08f);
-       
-        private EventBus _eventBus;
+        
         private HandlerScore _handlerScore;
         private MainAudio _mainAudio;
         
@@ -36,12 +35,10 @@ namespace Project.Enemies
         [Inject]
         public void Construct(
             PlayerController playerController,
-            EventBus eventBus, 
             HandlerScore handlerScore,
             MainAudio mainAudio)
         {
             PlayerController = playerController;
-            _eventBus = eventBus;
             _handlerScore = handlerScore;
             _mainAudio = mainAudio;
         }
@@ -54,10 +51,10 @@ namespace Project.Enemies
         }
         
         private void OnEnable() =>
-            _eventBus.OnHitPlayer += Deactivation;
+            PlayerController.OnHitPlayer += Deactivation;
 
         private void OnDisable() =>
-            _eventBus.OnHitPlayer -= Deactivation;
+            PlayerController.OnHitPlayer -= Deactivation;
         
         public virtual void OnReturnToPool(){}
 

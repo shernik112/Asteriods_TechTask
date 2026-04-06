@@ -1,28 +1,33 @@
 using System.Collections;
-using Project.System;
 using UnityEngine;
+using Zenject;
 
 namespace Project.UI
 {
-    public class ShowScore : BaseCounter
+    public class CounterScore :  EntryPointMvc
     {
-        private HandlerScore _handlerScore;
-        private EventBus _eventBus;
         private readonly float _counterSpeed = 700;
+        private HandlerScore _handlerScore;
         private Coroutine _currentCoroutine;
+        
+        [Inject]
+        public void Init(HandlerScore handlerScore)
+        {
+            _handlerScore = handlerScore;
+        }
 
         protected override void Awake()
         {
             base.Awake();
-            EventBus.NewTargetScore += StartCounterNewChange;
+            _handlerScore.NewTargetScore += StartCounterNewChange;
         }
 
         protected override void OnDestroy()
         {
             base.OnDestroy();
-            EventBus.NewTargetScore -= StartCounterNewChange;
+            _handlerScore.NewTargetScore -= StartCounterNewChange;
         }
-
+        
         private void StartCounterNewChange(int targetScore)
         {
             if (_currentCoroutine != null)
@@ -33,13 +38,12 @@ namespace Project.UI
         
         private IEnumerator CounterNewChange(int targetScore)
         {
-            while (Count != targetScore)
+            while (Model.Count != targetScore)
             {
-                Count = Mathf.RoundToInt(Mathf.MoveTowards(Count, targetScore, _counterSpeed * Time.deltaTime));
-                Text.text = Count.ToString();
+                var value = Mathf.RoundToInt(Mathf.MoveTowards(Model.Count, targetScore, _counterSpeed * Time.deltaTime));
+                Model.SetCount(value);
                 yield return null;
             }
-
             _currentCoroutine = null;
         }
     }

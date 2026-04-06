@@ -1,5 +1,6 @@
 using Random = UnityEngine.Random;
 using Project.Enemies;
+using Project.UI;
 using UnityEngine;
 using Zenject;
 
@@ -23,8 +24,8 @@ namespace Project.System
         private GameObject _asteroidPrefab;
         private GameObject _fragmentAsteroidPrefab;
         private GameObject _ufoPrefab;
-        private MainInstaller _mainInstaller;
-        private EventBus _eventBus;
+        private PlaySceneInstaller _playSceneInstaller;
+        private RestartButton _restartButton;
         private PauseHandler _pauseHandler;
         private FloatRange _rangeTimeAsteroid = new FloatRange(5f, 10f);
         private FloatRange _rangeTimeUfo = new FloatRange(5f, 15f);
@@ -42,30 +43,30 @@ namespace Project.System
             [Inject(Id = "FragmentAsteroid")] GameObject fragmentAsteroidPrefab,
             [Inject(Id = "Ufo")] GameObject ufoPrefab,
             Camera mainCamera,
-            EventBus eventBus,
+            RestartButton restartButton,
             PauseHandler pauseHandler,
-            MainInstaller mainInstaller)
+            PlaySceneInstaller playSceneInstaller)
         {
             _asteroidPrefab = asteroidPrefab;
             _fragmentAsteroidPrefab = fragmentAsteroidPrefab;
             _ufoPrefab = ufoPrefab;
             _mainCamera = mainCamera;
-            _eventBus = eventBus;
+            _restartButton = restartButton;
             _pauseHandler = pauseHandler;
-            _mainInstaller = mainInstaller;
+            _playSceneInstaller = playSceneInstaller;
         }
         
         private void Awake()
         {
-            _eventBus.OnRestartGame += StartCreate;   
-            _asteroidPool = new ObjectPool(_asteroidPrefab, _mainInstaller,transform);
-            _fragmentAsteroidPool = new ObjectPool(_fragmentAsteroidPrefab, _mainInstaller, transform);
-            _ufoPool = new ObjectPool(_ufoPrefab, _mainInstaller,transform);
+            _restartButton.OnRestartGame += StartCreate;   
+            _asteroidPool = new ObjectPool(_asteroidPrefab, _playSceneInstaller,transform);
+            _fragmentAsteroidPool = new ObjectPool(_fragmentAsteroidPrefab, _playSceneInstaller, transform);
+            _ufoPool = new ObjectPool(_ufoPrefab, _playSceneInstaller,transform);
         }
         
         private void OnDestroy()
         {
-            _eventBus.OnRestartGame -= StartCreate;
+            _restartButton.OnRestartGame -= StartCreate;
         }
 
         private void Start()
