@@ -275,8 +275,6 @@ GameObject:
   - component: {fileID: 8832953816568878875}
   - component: {fileID: 4833064962449730160}
   - component: {fileID: 6512133867913021215}
-  - component: {fileID: 265806249951798490}
-  - component: {fileID: 2920055908837693355}
   m_Layer: 0
   m_Name: FinalScore
   m_TagString: Untagged
@@ -415,30 +413,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8806fdc0f62701f46a7e51a88359a948, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &265806249951798490
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2904747483373933783}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d17e290648ef4426a507d932c5428013, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Project.UI.MvcView
---- !u!114 &2920055908837693355
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2904747483373933783}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b5500c1a92f497c96fd53916aedcc2d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Project.UI.FinalScores
 --- !u!1 &3100504032333849406
 GameObject:
   m_ObjectHideFlags: 0
