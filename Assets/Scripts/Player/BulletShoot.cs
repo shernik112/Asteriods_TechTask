@@ -13,7 +13,7 @@ namespace Project.Player
         private float _cooldown = 0.2f;
         private ObjectPool _bulletPool;
         private MainAudio _mainAudio;
-        private PlaySceneInstaller _playSceneInstaller;
+        private MainInstaller _mainInstaller;
         private GameObject _bulletPrefab;
         private float _defaultCooldown;
         private float _lastTime;
@@ -22,18 +22,18 @@ namespace Project.Player
         [Inject]
         public void Construct(
             MainAudio mainAudio,
-            PlaySceneInstaller playSceneInstaller,
+            MainInstaller mainInstaller,
             GameObject bulletPrefab)
         {
             _mainAudio = mainAudio;
-            _playSceneInstaller = playSceneInstaller;
+            _mainInstaller = mainInstaller;
             _bulletPrefab = bulletPrefab;
         }
 
         private void Awake()
         {
             _defaultCooldown = _cooldown;
-            _bulletPool = new ObjectPool(_bulletPrefab, _playSceneInstaller, transform);
+            _bulletPool = new ObjectPool(_bulletPrefab, _mainInstaller, transform);
         }
 
         private void Update()

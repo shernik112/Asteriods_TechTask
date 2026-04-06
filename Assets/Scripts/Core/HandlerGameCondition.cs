@@ -10,7 +10,7 @@ namespace Project.System
     public class HandlerGameCondition
     {
         private GameCondition _currenGameCondition = GameCondition.Game;
-        private readonly BlockCursor _blockCursor = new BlockCursor();
+        private BlockCursor _blockCursor = new BlockCursor();
 
         public GameCondition GameCondition
         {

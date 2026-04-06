@@ -1,6 +1,5 @@
 using Random = UnityEngine.Random;
 using Project.Enemies;
-using Project.UI;
 using UnityEngine;
 using Zenject;
 
@@ -24,11 +23,11 @@ namespace Project.System
         private GameObject _asteroidPrefab;
         private GameObject _fragmentAsteroidPrefab;
         private GameObject _ufoPrefab;
-        private PlaySceneInstaller _playSceneInstaller;
-        private RestartButton _restartButton;
+        private MainInstaller _mainInstaller;
+        private EventBus _eventBus;
         private PauseHandler _pauseHandler;
-        private readonly FloatRange _rangeTimeAsteroid = new FloatRange(5f, 10f);
-        private readonly FloatRange _rangeTimeUfo = new FloatRange(5f, 15f);
+        private FloatRange _rangeTimeAsteroid = new FloatRange(5f, 10f);
+        private FloatRange _rangeTimeUfo = new FloatRange(5f, 15f);
         
         private float _halfHeight;
         private float _halfWidth;
@@ -43,30 +42,30 @@ namespace Project.System
             [Inject(Id = "FragmentAsteroid")] GameObject fragmentAsteroidPrefab,
             [Inject(Id = "Ufo")] GameObject ufoPrefab,
             Camera mainCamera,
-            RestartButton restartButton,
+            EventBus eventBus,
             PauseHandler pauseHandler,
-            PlaySceneInstaller playSceneInstaller)
+            MainInstaller mainInstaller)
         {
             _asteroidPrefab = asteroidPrefab;
             _fragmentAsteroidPrefab = fragmentAsteroidPrefab;
             _ufoPrefab = ufoPrefab;
             _mainCamera = mainCamera;
-            _restartButton = restartButton;
+            _eventBus = eventBus;
             _pauseHandler = pauseHandler;
-            _playSceneInstaller = playSceneInstaller;
+            _mainInstaller = mainInstaller;
         }
         
         private void Awake()
         {
-            _restartButton.OnRestartGame += StartCreate;   
-            _asteroidPool = new ObjectPool(_asteroidPrefab, _playSceneInstaller,transform);
-            _fragmentAsteroidPool = new ObjectPool(_fragmentAsteroidPrefab, _playSceneInstaller, transform);
-            _ufoPool = new ObjectPool(_ufoPrefab, _playSceneInstaller,transform);
+            _eventBus.OnRestartGame += StartCreate;   
+            _asteroidPool = new ObjectPool(_asteroidPrefab, _mainInstaller,transform);
+            _fragmentAsteroidPool = new ObjectPool(_fragmentAsteroidPrefab, _mainInstaller, transform);
+            _ufoPool = new ObjectPool(_ufoPrefab, _mainInstaller,transform);
         }
         
         private void OnDestroy()
         {
-            _restartButton.OnRestartGame -= StartCreate;
+            _eventBus.OnRestartGame -= StartCreate;
         }
 
         private void Start()
@@ -131,7 +130,7 @@ namespace Project.System
             {
                 var pos = GetRandomPos();
                 var obj = _asteroidPool.Get();
-                if (obj.TryGetComponent<AsteroidController>(out var asteroid))
+                if (obj.TryGetComponent<AsteroidBehaviour>(out var asteroid))
                     asteroid.OnHitAsteroid += InitFragmentsAsteroid;
                 
                 ActiveBoolFieldForTeleportation(obj);
@@ -160,13 +159,10 @@ namespace Project.System
         {
             var direction = _lookTarget - (Vector2)obj.transform.position;
             var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            var offset = Random.Range(-_rotateOffset, _rotateOffset);
-
             obj.transform.rotation = Quaternion.Euler(
-                0f, 
-                0f, 
-                angle + offset
-            );
+                0f,
+                0f,
+                angle + Random.Range(-_rotateOffset, _rotateOffset));
         }
         
         private void InitFragmentsAsteroid(Transform asteroidTransform)
@@ -176,11 +172,9 @@ namespace Project.System
             { 
                 var mag = Random.Range(_lowerFragmentRotate, _createFragmentRotate);
                 var obj = _fragmentAsteroidPool.Get();
-                
-                obj.transform.position = asteroidTransform.position;
                 var randomRotate = sideToggle ? mag : -mag;
+                obj.transform.position = asteroidTransform.position;
                 obj.transform.rotation = asteroidTransform.rotation * Quaternion.Euler(0, 0, randomRotate);
-                
                 sideToggle = !sideToggle;
             }
         }

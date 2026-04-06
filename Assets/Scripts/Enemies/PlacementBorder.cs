@@ -9,7 +9,6 @@ namespace Project.System
         [SerializeField] private GameObject borderPrefab;
         
         private readonly float _placementOffset = 1f;
-        
         private Camera _mainCamera;
         private float _heightCreate;
         private float _widthCreate;
@@ -52,6 +51,7 @@ namespace Project.System
                         obj.transform.position = new Vector2(0, -_heightCreate);
                         break;
                 }
+                obj.AddComponent<TeleportBorder>();
             }
         }
     }

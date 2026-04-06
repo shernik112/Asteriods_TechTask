@@ -1,64 +1,61 @@
 using Project.System;
-using Project.UI;
 using UnityEngine;
 using Zenject; 
 
 namespace Project.Player
 {
-    public class PlayerController : Controller<PlayerModel>
+    public class PlayerController : MonoBehaviour
     {
-        public PlayerView View { get; private set; }
-        public LaserController Laser { get; private set; }
-        public BulletShoot BulletShoot { get; private set; }
-        public Rigidbody2D Rb { get; private set; }
-        
         [SerializeField] private PlayerData playerData;
+        [SerializeField] private GameObject laserPrefab;
 
-        private RestartButton _restartButton;
+        private EventBus _eventBus;
         private MainAudio _mainAudio;
         private PauseHandler _pauseHandler;
+        private PlayerModel _model;
         
+        public PlayerView View { get; private set; }
+        public ShootLaser Laser { get; private set; }
+        public BulletShoot BulletShoot { get; private set; }
+        public Rigidbody2D Rb { get; private set; }
+
         [Inject]
         public void Construct(
-            RestartButton restartButton, 
+            EventBus eventBus, 
             PauseHandler pauseHandler, 
             MainAudio mainAudio)
         {
-            _restartButton = restartButton;
+            _eventBus = eventBus;
             _pauseHandler = pauseHandler;
             _mainAudio = mainAudio;
         }
 
-        protected override void Awake()
+        private void Awake()
         {
-            base.Awake();
+            _model = new PlayerModel(playerData);
             
-            View = transform.GetComponent<PlayerView>();
-            View.Init(Model, _mainAudio, _pauseHandler);
+            View = transform.parent.GetComponentInChildren<PlayerView>();
+            View.Init(_model, _eventBus, _mainAudio, _pauseHandler);
             Rb = View.gameObject.GetComponent<Rigidbody2D>();
             BulletShoot = View.GetComponent<BulletShoot>();
-            Laser = transform.GetComponentInChildren<LaserController>();
+            var go = Instantiate(laserPrefab, transform.position, laserPrefab.transform.rotation, View.transform);
+            Laser = go.GetComponent<ShootLaser>();
+            Laser.Init(_eventBus,_mainAudio);
             
-            _restartButton.OnRestartGame += OnRestart;
+            _eventBus.OnRestartGame += OnRestart;
         }
-        
+
         private void OnDestroy() =>
-            _restartButton.OnRestartGame -= OnRestart;
-        
-        public void SetInput(Vector2 input) => 
-            Model.SetInput(input);
-        
-        protected override PlayerModel CreateModel()
-        {
-            var model = ScriptableObject.CreateInstance<PlayerModel>();
-            model.Init(playerData);
-            return model;
-        }
+            _eventBus.OnRestartGame -= OnRestart;
         
         private void OnRestart()
         {
-            Model.ResetState();
+            _model.ResetState();
             View.ResetState();
         }
+        
+        
+        public void SetInput(Vector2 input) => 
+            _model.SetInput(input);
     }
 }

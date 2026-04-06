@@ -1,4 +1,3 @@
-using System;
 using Project.Enemies;
 using Project.System;
 using UnityEngine;
@@ -8,15 +7,15 @@ namespace Project.Player
     [RequireComponent(typeof(Rigidbody2D), typeof(SpriteRenderer))]
     public class PlayerView : MonoBehaviour, ITeleportedReaction
     {
-        public event Action OnHitPlayer;
-        
         private Rigidbody2D _rb;
         private SpriteRenderer _sprite;
         private PlayerModel _model;
+        private EventBus _eventBus;
         private MainAudio _mainAudio;
         private PauseHandler _pauseHandler;
 
         public void Init(PlayerModel model, 
+            EventBus eventBus, 
             MainAudio mainAudio, 
             PauseHandler pauseHandler)
         {
@@ -24,6 +23,7 @@ namespace Project.Player
             _sprite = GetComponent<SpriteRenderer>();
 
             _model = model;
+            _eventBus = eventBus;
             _mainAudio = mainAudio;
             _pauseHandler = pauseHandler;
             
@@ -51,15 +51,12 @@ namespace Project.Player
             _rb.linearVelocity = Vector2.MoveTowards(_rb.linearVelocity, targetVelocity, _model.Data.moveAcceleration * Time.fixedDeltaTime);
         }
 
-        public void TeleportReaction() =>
-            _mainAudio?.PlaySfx(_model.Data.dashClip);
-        
         private void OnCollisionEnter2D(Collision2D other)
         {
             if (other.gameObject.TryGetComponent<IEnemy>(out var enemy))
             {
                 _mainAudio?.PlaySfx(_model.Data.destructionClip);
-                OnHitPlayer?.Invoke();
+                _eventBus.OnHitPlayer?.Invoke();
                 _model.Hit();
                 SetDefaultValues();
             }
@@ -67,6 +64,9 @@ namespace Project.Player
             Debug.Log($"{typeof(PlayerView)} OnCollisionEnter");
         }
         
+        public void TeleportReaction() =>
+            _mainAudio?.PlaySfx(_model.Data.dashClip);
+
         private void ChangeActive(bool active) =>
             _sprite.enabled = active;
 

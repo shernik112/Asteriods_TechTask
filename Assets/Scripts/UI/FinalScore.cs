@@ -8,22 +8,22 @@ namespace Project.UI
     public class FinalScore : MonoBehaviour
     {
         private TMP_Text _text;
-        private HandlerScore _handlerScore;
+        private EventBus _eventBus;
 
         [Inject]
-        public void Construct(HandlerScore handlerScore)
+        public void Construct(EventBus eventBus)
         {
-            _handlerScore = handlerScore;
+            _eventBus = eventBus;
         }
         
         private void Awake()
         {
             _text = GetComponent<TMP_Text>();
-            _handlerScore.IsFinalScore += ShowFinalScore;
+            _eventBus.IsFinalScore += ShowFinalScore;
         }
 
         private void OnDestroy() =>
-            _handlerScore.IsFinalScore -= ShowFinalScore;
+            _eventBus.IsFinalScore -= ShowFinalScore;
 
         private void ShowFinalScore(int count)
         {

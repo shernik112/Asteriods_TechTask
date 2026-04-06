@@ -36,7 +36,7 @@ namespace Project.UI
 
         private string GetPlayerTransform()
         {
-            var pos = _playerController.View.transform.position;
+            Vector2 pos = _playerController.View.transform.position;
             return $"Position(X:{pos.x:F2}  Y:{pos.y:F2})";
         }
 
@@ -47,11 +47,11 @@ namespace Project.UI
 
         private string GetPlayerVelocity()
         {
-            var velocity = _playerController.Rb.linearVelocity;
+            Vector2 velocity = _playerController.Rb.linearVelocity;
             return $"Velocity(X:{velocity.x:F2}  Y:{velocity.y:F2})";
         }
 
-        private string GetCountLaserShot() => $"Count Laser Shots({_playerController.Laser.Model.CurrentCountShotLaser})";
-        private string GetRechargeTime() => $"Recharge Time({Mathf.Max(0,_playerController.Laser.Data.RechargeDuration - _playerController.Laser.Model.LastRechargeTime):F2})";
+        private string GetCountLaserShot() => $"Count Laser Shots({_playerController.Laser.CurrentCountShоtLaser})";
+        private string GetRechargeTime() => $"Recharge Time({Mathf.Max(0,_playerController.Laser.RechargeDuration - _playerController.Laser.LastRechargeTime):F2})";
     }
 }

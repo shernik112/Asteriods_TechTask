@@ -1,7 +1,5 @@
 using System;
 using NUnit.Framework;
-using Project.Player;
-using Project.UI;
 using UnityEngine;
 using Zenject;
 
@@ -10,30 +8,27 @@ namespace Project.System
     public class PauseHandler : MonoBehaviour
     {
         public bool IsPause { get; private set; }
-        
-        private PlayerController _playerController;
-        private RestartButton _restartButton;
+
+        private EventBus _eventBus;
             
         [Inject]
         public void Construct(
-            PlayerController playerController,
-            RestartButton restartButton
+            EventBus eventBus
         )
         {
-            _playerController = playerController;
-            _restartButton = restartButton;
+            _eventBus = eventBus;
         }
 
-        private void Start()
+        private void Awake()
         {
-            _restartButton.OnRestartGame += TogglePause;
-            _playerController.View.OnHitPlayer += TogglePause;
+            _eventBus.OnRestartGame += TogglePause;
+            _eventBus.OnHitPlayer += TogglePause;
         }
-        
+
         private void OnDestroy()
         {
-            _restartButton.OnRestartGame -= TogglePause;
-            _playerController.View.OnHitPlayer -= TogglePause;
+            _eventBus.OnRestartGame -= TogglePause;
+            _eventBus.OnHitPlayer -= TogglePause;
         }
 
         private void TogglePause()

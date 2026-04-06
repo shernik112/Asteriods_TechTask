@@ -1,37 +1,30 @@
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 namespace Project.System
 {
+    public interface IPoolable
+    {
+        event Action<GameObject> OnDeactivation;
+        void OnReturnToPool();
+    }
+
     public class ObjectPool
     {
         private int StartCount => 5;
-        private readonly GameObject _poolPrefab;
-        private readonly PlaySceneInstaller _installer;
-        private readonly Transform _parentTransform;
-        private readonly Queue<GameObject> _pool = new Queue<GameObject>();
+        private GameObject _poolPrefab;
+        private MainInstaller _installer;
+        private Transform _parentTransform;
+        private Queue<GameObject> _pool = new Queue<GameObject>();
         
-        public ObjectPool(GameObject poolPrefab, PlaySceneInstaller installer, Transform parentTransform)
+        public ObjectPool(GameObject poolPrefab, MainInstaller installer, Transform parentTransform)
         {
             _poolPrefab = poolPrefab;
             _installer = installer;
             _parentTransform = parentTransform;
             
             MakeInstances();
-        }
-
-        public GameObject Get()
-        {
-            if(_pool.Count == 0)
-                CreateObject();
-            
-            var obj = _pool.Dequeue();
-
-            if (obj.TryGetComponent<IPoolable>(out var poolable))
-                poolable.OnDeactivation += ReturnObjectToPool;
-            
-            obj.SetActive(true);
-            return obj;
         }
         
         private void MakeInstances()
@@ -47,11 +40,24 @@ namespace Project.System
             _pool.Enqueue(obj);
         }
 
+        public GameObject Get()
+        {
+            if(_pool.Count == 0)
+                CreateObject();
+            var obj = _pool.Dequeue();
+
+            if (obj.TryGetComponent<IPoolable>(out var poolable))
+                poolable.OnDeactivation += ReturnObjectToPool;
+            
+            obj.SetActive(true);
+            return obj;
+        }
+
         private void ReturnObjectToPool(GameObject obj)
         {
             if (obj.TryGetComponent<IPoolable>(out var poolable))
             {
-                poolable.ReturnToPool();
+                poolable.OnReturnToPool();
                 poolable.OnDeactivation -= ReturnObjectToPool;
             }
             

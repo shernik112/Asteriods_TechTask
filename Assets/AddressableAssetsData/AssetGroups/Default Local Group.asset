@@ -14,7 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_GroupName: Default Local Group
   m_GUID: 68affa0e6aa283c4e8c138aac7f4d6a4
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: dcbe943058ab0ac47b17f57ea858d7e0
+    m_Address: Assets/Prefabs/Laser.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 5fdc9cdbc20162a4d8e8ee8bcd9ebe0f, type: 2}
   m_SchemaSet:

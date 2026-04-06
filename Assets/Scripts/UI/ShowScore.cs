@@ -1,35 +1,26 @@
 using System.Collections;
-using Project.Player;
+using Project.System;
 using UnityEngine;
-using Zenject;
 
 namespace Project.UI
 {
     public class ShowScore : BaseCounter
     {
-        private readonly float _counterSpeed = 700;
         private HandlerScore _handlerScore;
+        private EventBus _eventBus;
+        private readonly float _counterSpeed = 700;
         private Coroutine _currentCoroutine;
-
-        [Inject]
-        public void Construct(
-            PlayerController playerController,
-            HandlerScore handlerScore)
-        {
-            base.Construct(playerController);
-            _handlerScore = handlerScore;
-        }
 
         protected override void Awake()
         {
             base.Awake();
-            _handlerScore.NewTargetScore += StartCounterNewChange;
+            EventBus.NewTargetScore += StartCounterNewChange;
         }
 
         protected override void OnDestroy()
         {
             base.OnDestroy();
-            _handlerScore.NewTargetScore -= StartCounterNewChange;
+            EventBus.NewTargetScore -= StartCounterNewChange;
         }
 
         private void StartCounterNewChange(int targetScore)

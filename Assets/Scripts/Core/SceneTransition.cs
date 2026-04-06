@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using Project.Player;
 using Project.UI;
 using UnityEngine;
 using Zenject;
@@ -9,42 +7,37 @@ namespace Project.System
 {
     public class SceneTransition : MonoBehaviour
     {
+
+
         private readonly float _speed = 2f;
+
         private bool _transitionIn;
         private SpriteMask _mask;
         private ShowUI _showUI;
-        private PlayerController _playerController;
-        private RestartButton _restartButton;
+        private EventBus _eventBus;
         private WaitForSeconds _waitHiding;
 
         [Inject]
         public void Construct(
-            PlayerController playerController,
-            RestartButton restartButton
-            )
+            EventBus eventBus)
         {
-            _playerController = playerController;
-            _restartButton = restartButton;
+            _eventBus = eventBus;
         }
     
         private void Awake()
         {
+            _eventBus.OnHitPlayer += StartTransition;
+            _eventBus.OnRestartGame += StartTransition;
             _mask = GetComponentInChildren<SpriteMask>();
             _showUI = GetComponentInChildren<ShowUI>();
             _waitHiding = new WaitForSeconds(_showUI.ShowTime);
             _transitionIn = true;
         }
 
-        private void Start()
-        {
-            _playerController.View.OnHitPlayer += StartTransition;
-            _restartButton.OnRestartGame += StartTransition;
-        }
-
         private void OnDestroy()
         {
-            _playerController.View.OnHitPlayer -= StartTransition;
-            _restartButton.OnRestartGame -= StartTransition;
+            _eventBus.OnHitPlayer -= StartTransition;
+            _eventBus.OnRestartGame -= StartTransition;
         }
 
         private void StartTransition()

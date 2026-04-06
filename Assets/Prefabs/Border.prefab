@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5847070825195142700}
   - component: {fileID: 5294661836420371962}
-  - component: {fileID: 195508885440963059}
   m_Layer: 0
   m_Name: Border
   m_TagString: Untagged
@@ -79,15 +78,3 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &195508885440963059
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6914650507238123481}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d40d83c85e5a4b346909edbdf3e8365d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Project.Scene.TeleportBorder
