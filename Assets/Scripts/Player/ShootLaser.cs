@@ -12,10 +12,6 @@ namespace Project.Player
     {
         public event Action<int> NewCountShotLaser;
         [SerializeField] private LaserData laserData = default;
-        
-        private readonly int _defaultCountShotLaser = 3;
-        private readonly float _durationLaserShot = 0.4f;
-        private readonly float _cooldownDuration = 0.5f;
     
         private int _currentCountShotLaser = default;
         private float _lastShootTime;
@@ -58,7 +54,7 @@ namespace Project.Player
         {
             ChangeVisibility(false);
                 _restartButton.OnRestartGame += Restart;
-            CurrentCountShоtLaser = _defaultCountShotLaser;
+            CurrentCountShоtLaser = laserData.defaultCountShotLaser;
         }
         
         private void OnDestroy()
@@ -71,7 +67,7 @@ namespace Project.Player
             LastRechargeTime += Time.deltaTime;
             _lastShootTime += Time.deltaTime;
         
-            if (LastRechargeTime >= RechargeDuration && CurrentCountShоtLaser < _defaultCountShotLaser)
+            if (LastRechargeTime >= RechargeDuration && CurrentCountShоtLaser < laserData.defaultCountShotLaser)
             {
                 LastRechargeTime = 0f;
                 IncreaseCountShotLaser();
@@ -80,7 +76,7 @@ namespace Project.Player
         
         public void TryShoot()
         {
-            if (_lastShootTime >= _cooldownDuration && CurrentCountShоtLaser > 0)
+            if (_lastShootTime >= laserData.cooldownDuration && CurrentCountShоtLaser > 0)
             {
                 Shoot();
                 CurrentCountShоtLaser -= 1;
@@ -98,7 +94,7 @@ namespace Project.Player
     
         private void Restart()
         {
-            CurrentCountShоtLaser = _defaultCountShotLaser;
+            CurrentCountShоtLaser = laserData.defaultCountShotLaser;
             LastRechargeTime = default;
         }
     
@@ -110,7 +106,7 @@ namespace Project.Player
     
         private void TurnLaser()
         {
-            Tween.Rotate(transform, new Vector3(0, 0, -180),Space.Self, _durationLaserShot, 0f, Tween.EaseInOut,Tween.LoopType.None,null,
+            Tween.Rotate(transform, new Vector3(0, 0, -180),Space.Self, laserData.durationLaserShot, 0f, Tween.EaseInOut,Tween.LoopType.None,null,
                 () =>
                 {
                     ChangeVisibility(false);

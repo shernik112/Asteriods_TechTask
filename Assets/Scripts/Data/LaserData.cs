@@ -7,5 +7,8 @@ namespace Project
     {
         public AudioClip newChargeClip;
         public AudioClip shootLaser;
+        public int defaultCountShotLaser;
+        public float durationLaserShot;
+        public float cooldownDuration;
     }
 }
