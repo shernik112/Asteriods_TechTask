@@ -3,6 +3,7 @@ using Pixelplacement;
 using Project.System;
 using Project.UI;
 using UnityEngine;
+using Zenject;
 
 namespace Project.Player
 {
@@ -36,6 +37,15 @@ namespace Project.Player
                 NewCountShotLaser?.Invoke(_currentCountShotLaser);
             }
         }
+
+        [Inject]
+        public void Construct(
+            RestartButton restartButton,
+            MainAudio mainAudio)
+        {
+            _restartButton = restartButton;
+            _mainAudio = mainAudio;
+        }
         
         private void Awake()
         {
@@ -66,14 +76,6 @@ namespace Project.Player
                 LastRechargeTime = 0f;
                 IncreaseCountShotLaser();
             }
-        }
-
-        public void Init( 
-            RestartButton restartButton,
-            MainAudio mainAudio)
-        {
-            _restartButton = restartButton;
-            _mainAudio = mainAudio;
         }
         
         public void TryShoot()

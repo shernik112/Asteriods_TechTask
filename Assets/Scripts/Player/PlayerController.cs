@@ -42,8 +42,6 @@ namespace Project.Player
             BulletShoot = GetComponent<BulletShoot>();
             Laser = GetComponentInChildren<ShootLaser>();
             _spriteRenderer = GetComponent<SpriteRenderer>();
-
-            Laser.Init(_restartButton,_mainAudio);
             _restartButton.OnRestartGame += SetActive;
         }
 
