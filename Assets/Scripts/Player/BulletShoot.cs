@@ -13,27 +13,22 @@ namespace Project.Player
         private float _cooldown = 0.2f;
         private ObjectPool _bulletPool;
         private MainAudio _mainAudio;
-        private PlaySceneInstaller _playSceneInstaller;
-        private GameObject _bulletPrefab;
         private float _defaultCooldown;
         private float _lastTime;
         private bool _mayShoot;
 
         [Inject]
         public void Construct(
-            MainAudio mainAudio,
-            PlaySceneInstaller playSceneInstaller,
-            GameObject bulletPrefab)
+            MainAudio mainAudio, 
+            ObjectPool bulletPool)
         {
             _mainAudio = mainAudio;
-            _playSceneInstaller = playSceneInstaller;
-            _bulletPrefab = bulletPrefab;
+            _bulletPool = bulletPool;
         }
 
         private void Awake()
         {
             _defaultCooldown = _cooldown;
-            _bulletPool = new ObjectPool(_bulletPrefab, _playSceneInstaller, transform);
         }
 
         private void Update()

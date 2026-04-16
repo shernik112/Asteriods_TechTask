@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace Project.System
 {
@@ -7,14 +8,14 @@ namespace Project.System
     {
         private int StartCount => 5;
         private GameObject _poolPrefab;
-        private PlaySceneInstaller _installer;
+        private DiContainer _container;
         private Transform _parentTransform;
         private Queue<GameObject> _pool = new Queue<GameObject>();
         
-        public ObjectPool(GameObject poolPrefab, PlaySceneInstaller installer, Transform parentTransform)
+        public ObjectPool(GameObject poolPrefab, DiContainer container, Transform parentTransform)
         {
             _poolPrefab = poolPrefab;
-            _installer = installer;
+            _container = container;
             _parentTransform = parentTransform;
             
             MakeInstances();
@@ -28,7 +29,7 @@ namespace Project.System
 
         private void CreateObject()
         {
-            var obj = _installer.Instantiate(_poolPrefab, _parentTransform);
+            var obj = _container.InstantiatePrefab(_poolPrefab, _parentTransform);
             obj.SetActive(false);
             _pool.Enqueue(obj);
         }
