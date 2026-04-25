@@ -34,7 +34,7 @@ namespace Project.System
 
             Container.Bind<EnemiesSpawnerData>().FromInstance(enemiesSpawnerData);
             var rootPools = new GameObject("RootPools").transform;
-            Container.Bind<Transform>().FromInstance(rootPools);
+            Container.Bind<Transform>().FromInstance(rootPools).AsSingle();
             Container.BindInstance(new ObjectPool(bulletPrefab, Container, rootPools));
             Container.BindInterfacesAndSelfTo<EnemiesSpawner>().AsSingle();
             
