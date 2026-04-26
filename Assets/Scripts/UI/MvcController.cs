@@ -3,9 +3,9 @@ namespace Project.UI
     public class MvcController
     {
         private MvcModel _model;
-        private MvcView _view;
+        private MvpView _view;
 
-        public MvcController(MvcModel model, MvcView view)
+        public MvcController(MvcModel model, MvpView view)
         {
             _model = model;
             _view = view;

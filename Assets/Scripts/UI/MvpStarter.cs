@@ -4,14 +4,14 @@ using Zenject;
 
 namespace Project.UI
 {
-    [RequireComponent(typeof(MvcView))]
-    public class EntryPointMvc : MonoBehaviour
+    [RequireComponent(typeof(MvpView))]
+    public class MvpStarter : MonoBehaviour
     {
         protected PlayerController PlayerController;
         protected MvcModel Model;
 
         private MvcController _controller;
-        private MvcView _view;
+        private MvpView _view;
 
         [Inject]
         public void Construct(PlayerController playerController)
@@ -21,7 +21,7 @@ namespace Project.UI
 
         protected virtual void Awake()
         {
-            _view = GetComponent<MvcView>();
+            _view = GetComponent<MvpView>();
             Model = new MvcModel();
             _controller = new MvcController(Model, _view);
             PlayerController.OnHitPlayer += ResetCount;

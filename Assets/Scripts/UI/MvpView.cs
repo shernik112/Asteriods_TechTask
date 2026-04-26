@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Project.UI
 {
     [RequireComponent(typeof(TextMeshProUGUI))]
-    public class MvcView : MonoBehaviour
+    public class MvpView : MonoBehaviour
     {
         private TextMeshProUGUI _text;
 

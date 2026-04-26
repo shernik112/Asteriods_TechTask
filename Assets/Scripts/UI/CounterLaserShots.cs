@@ -1,6 +1,6 @@
 namespace Project.UI
 {
-    public class CounterLaserShots : EntryPointMvc
+    public class CounterLaserShots : MvpStarter
     {
         protected override void Start()
         {

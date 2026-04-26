@@ -4,7 +4,7 @@ using Zenject;
 
 namespace Project.UI
 {
-    public class CounterScore :  EntryPointMvc
+    public class CounterScore :  MvpStarter
     {
         private readonly float _counterSpeed = 700;
         private HandlerScore _handlerScore;
