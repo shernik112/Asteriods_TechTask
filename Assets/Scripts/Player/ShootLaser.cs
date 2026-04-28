@@ -11,6 +11,7 @@ namespace Project.Player
     public class ShootLaser : MonoBehaviour
     {
         public event Action<int> NewCountShotLaser;
+        
         [SerializeField] private LaserData laserData = default;
     
         private int _currentCountShotLaser = default;
@@ -45,16 +46,13 @@ namespace Project.Player
         
         private void Awake()
         {
-            _initialLaserRotation = transform.localRotation;
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _collider2D = GetComponent<Collider2D>();
-        }
-
-        private void Start()
-        {
-            ChangeVisibility(false);
-                _restartButton.OnRestartGame += Restart;
             CurrentCountShоtLaser = laserData.DefaultCountShotLaser;
+            _initialLaserRotation = transform.localRotation;
+            
+            _restartButton.OnRestartGame += Restart;
+            ChangeVisibility(false);
         }
         
         private void OnDestroy()
