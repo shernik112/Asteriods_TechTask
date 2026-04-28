@@ -8,10 +8,10 @@ namespace Project.System
 {
     public class PlaySceneInstaller : MonoInstaller
     {
-        [SerializeField] private GameObject playerPrefab = default;
-        [SerializeField] private GameObject bulletPrefab = default;
-        [SerializeField] private GameObject mainAudio = default;
+        [SerializeField] private PlayerController playerPrefab = default;
+        [SerializeField] private MainAudio mainAudio = default;
         [SerializeField] private GameObject transitionPrefab = default;
+        [SerializeField] private GameObject bulletPrefab = default;
         [SerializeField] private GameObject borderPrefab = default;
         [SerializeField] private Camera mainCamera = default;
         [SerializeField] private EnemiesSpawnerData enemiesSpawnerData = default;

@@ -149,9 +149,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 185f37485b683b7449c496324d2b57af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 5037804548135090899, guid: 291270eb6b01bae42ba3fddef2e7df42, type: 3}
+  playerPrefab: {fileID: 5719302002317865043, guid: 291270eb6b01bae42ba3fddef2e7df42, type: 3}
   bulletPrefab: {fileID: 1061576356628838479, guid: 03167c7ca000e5e459ef335ed3caf741, type: 3}
-  mainAudio: {fileID: 8355928865945117578, guid: c68d6fcf0495ae441ba51dec039cee92, type: 3}
+  mainAudio: {fileID: 7014705364084509386, guid: c68d6fcf0495ae441ba51dec039cee92, type: 3}
   transitionPrefab: {fileID: 4701732250828865926, guid: 24d8b2b68611b3845bee0dd90499e033, type: 3}
   borderPrefab: {fileID: 6914650507238123481, guid: 65f22abc5497de945a4cb4957dc0b77b, type: 3}
   mainCamera: {fileID: 878547605457886350}
