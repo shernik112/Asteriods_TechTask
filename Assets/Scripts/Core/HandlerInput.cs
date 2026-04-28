@@ -4,7 +4,7 @@ using Zenject;
 
 namespace Project.System
 {
-    public class HandlerInput : MonoBehaviour
+    public class HandlerInput : ITickable
     {
         private PlayerController _playerController;
         private PauseHandler _pauseHandler;
@@ -18,7 +18,7 @@ namespace Project.System
             _pauseHandler = pauseHandler;
         }
         
-        private void Update()
+        public void Tick()
         {
             if (_pauseHandler.IsPause) 
                 return;

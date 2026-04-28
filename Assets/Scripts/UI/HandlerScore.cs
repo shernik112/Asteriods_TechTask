@@ -1,12 +1,10 @@
-using Project.System;
-using UnityEngine;
 using Zenject;
 using System;
 using Project.Player;
 
 namespace Project.UI
 {
-    public class HandlerScore : MonoBehaviour
+    public class HandlerScore : IInitializable, IDisposable
     {
         public event Action<int> IsFinalScore;
         public event Action<int> NewTargetScore;
@@ -19,17 +17,15 @@ namespace Project.UI
             _playerController = playerController;
         }
 
-        private void Awake() => 
+        public void Initialize() => 
             _playerController.OnHitPlayer += ResetCount;
 
-        private void OnDestroy() =>
+        public void Dispose() =>
             _playerController.OnHitPlayer -= ResetCount;        
 
 
         public void CountScoreDefeatedEnemy(int countDefeatedEnemy)
         {
-            StopAllCoroutines();
-            
             _targetScore += countDefeatedEnemy;
 
             NewTargetScore?.Invoke(_targetScore);

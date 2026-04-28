@@ -3,7 +3,6 @@ using Project.UI;
 using UnityEngine;
 using Zenject;
 using System;
-using Project.Scene;
 
 namespace Project.System
 {
@@ -20,9 +19,10 @@ namespace Project.System
         
         private readonly Type[] _singleBehaviours =
         {
-            typeof(HandlerInput),
             typeof(PauseHandler),
-            typeof(HandlerScore)
+            typeof(EnemiesSpawner),
+            typeof(HandlerInput),
+            typeof(HandlerScore),
         };
 
     
@@ -36,7 +36,7 @@ namespace Project.System
             var rootPools = new GameObject("RootPools").transform;
             Container.Bind<Transform>().FromInstance(rootPools).AsSingle();
             Container.BindInstance(new ObjectPool(bulletPrefab, Container, rootPools));
-            Container.BindInterfacesAndSelfTo<EnemiesSpawner>().AsSingle();
+  
             
             Container.Bind<GameObject>().FromInstance(bulletPrefab).WhenInjectedInto<BulletShoot>();
 
@@ -44,7 +44,7 @@ namespace Project.System
             
             foreach (var singleBehaviour in _singleBehaviours)
             {
-                Container.Bind(singleBehaviour).FromNewComponentOnNewGameObject().AsSingle().NonLazy();
+                Container.BindInterfacesAndSelfTo(singleBehaviour).AsSingle();
             }
             
             Container.Bind<Camera>().FromInstance(mainCamera).AsSingle();
@@ -57,6 +57,5 @@ namespace Project.System
                 Container.InstantiatePrefab(prefab);
             }
         }
-        
     }
 }

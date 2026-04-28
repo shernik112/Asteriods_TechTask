@@ -1,5 +1,4 @@
 using System;
-using NUnit.Framework;
 using Project.Player;
 using Project.UI;
 using UnityEngine;
@@ -7,7 +6,7 @@ using Zenject;
 
 namespace Project.System
 {
-    public class PauseHandler : MonoBehaviour
+    public class PauseHandler : IInitializable, IDisposable
     {
         public bool IsPause { get; private set; }
 
@@ -24,13 +23,13 @@ namespace Project.System
             _restartButton = restartButton;
         }
 
-        private void Awake()
+        public void Initialize()
         {
             _restartButton.OnRestartGame += TogglePause;
             _playerController.OnHitPlayer += TogglePause;
         }
 
-        private void OnDestroy()
+        public void Dispose()
         {
             _restartButton.OnRestartGame -= TogglePause;
             _playerController.OnHitPlayer -= TogglePause;

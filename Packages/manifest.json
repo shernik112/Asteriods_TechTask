@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "com.codewriter.triinspector": "https://github.com/codewriter-packages/Tri-Inspector.git",
+    "com.coplaydev.unity-mcp": "https://github.com/CoplayDev/unity-mcp.git?path=/MCPForUnity#main",
     "com.unity.2d.animation": "13.0.4",
     "com.unity.addressables": "2.7.6",
     "com.unity.cinemachine": "3.1.6",
@@ -8,7 +9,6 @@
     "com.unity.feature.2d": "2.0.2",
     "com.unity.ide.rider": "3.0.38",
     "com.unity.ide.visualstudio": "2.0.25",
-    "com.unity.inputsystem": "1.16.0",
     "com.unity.localization": "1.5.9",
     "com.unity.multiplayer.center": "1.0.1",
     "com.unity.render-pipelines.universal": "17.3.0",

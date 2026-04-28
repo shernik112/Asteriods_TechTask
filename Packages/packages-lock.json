@@ -9,6 +9,16 @@
       },
       "hash": "b53903e192dfb866bca7d2ecab594eca79cea6cf"
     },
+    "com.coplaydev.unity-mcp": {
+      "version": "https://github.com/CoplayDev/unity-mcp.git?path=/MCPForUnity#main",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.nuget.newtonsoft-json": "3.0.2",
+        "com.unity.test-framework": "1.1.31"
+      },
+      "hash": "b92c05a25820cfc9f59ce4094eb46aaec8632ea2"
+    },
     "com.unity.2d.animation": {
       "version": "13.0.4",
       "depth": 0,
@@ -203,15 +213,6 @@
       "source": "registry",
       "dependencies": {
         "com.unity.test-framework": "1.1.31"
-      },
-      "url": "https://packages.unity.com"
-    },
-    "com.unity.inputsystem": {
-      "version": "1.16.0",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {
-        "com.unity.modules.uielements": "1.0.0"
       },
       "url": "https://packages.unity.com"
     },
