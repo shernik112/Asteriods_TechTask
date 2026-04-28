@@ -4,7 +4,7 @@ using Zenject;
 
 namespace Project.System
 {
-    public class ObjectPool
+    public class ObjectPool : IInitializable
     {
         private int StartCount => 5;
         private GameObject _poolPrefab;
@@ -17,11 +17,9 @@ namespace Project.System
             _poolPrefab = poolPrefab;
             _container = container;
             _parentTransform = parentTransform;
-            
-            MakeInstances();
         }
-        
-        private void MakeInstances()
+
+        public void Initialize()
         {
             for (var i = 0; i < StartCount; i++)
                 CreateObject();

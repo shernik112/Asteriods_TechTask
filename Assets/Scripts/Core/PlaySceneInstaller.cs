@@ -35,6 +35,7 @@ namespace Project.System
             Container.Bind<EnemiesSpawnerData>().FromInstance(enemiesSpawnerData);
             Container.Bind<Transform>().FromInstance(transform).AsSingle();
             Container.BindInstance(new ObjectPool(bulletPrefab, Container, transform));
+            Container.BindInterfacesAndSelfTo<ObjectPool>().WithArguments(bulletPrefab, transform).WhenInjectedInto<BulletShoot>();
   
             
             Container.Bind<GameObject>().FromInstance(bulletPrefab).WhenInjectedInto<BulletShoot>();
