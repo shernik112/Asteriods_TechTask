@@ -33,19 +33,15 @@ namespace Project.System
             Container.Bind<MainAudio>().FromComponentInNewPrefab(mainAudio).AsSingle();
 
             Container.Bind<EnemiesSpawnerData>().FromInstance(enemiesSpawnerData);
-            var rootPools = new GameObject("RootPools").transform;
-            Container.Bind<Transform>().FromInstance(rootPools).AsSingle();
-            Container.BindInstance(new ObjectPool(bulletPrefab, Container, rootPools));
+            Container.Bind<Transform>().FromInstance(transform).AsSingle();
+            Container.BindInstance(new ObjectPool(bulletPrefab, Container, transform));
   
             
             Container.Bind<GameObject>().FromInstance(bulletPrefab).WhenInjectedInto<BulletShoot>();
-
-            Container.Bind<GameObject>().WithId("Border").FromInstance(borderPrefab).WhenInjectedInto<PlacementBorder>();
+            Container.Bind<GameObject>().FromInstance(borderPrefab).WhenInjectedInto<PlacementBorder>();
             
             foreach (var singleBehaviour in _singleBehaviours)
-            {
                 Container.BindInterfacesAndSelfTo(singleBehaviour).AsSingle();
-            }
             
             Container.Bind<Camera>().FromInstance(mainCamera).AsSingle();
         }

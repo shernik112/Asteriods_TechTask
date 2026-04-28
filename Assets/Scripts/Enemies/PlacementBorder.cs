@@ -15,7 +15,7 @@ namespace Project.System
         
         [Inject]
         public void Construct(
-            [Inject(Id = "Border")] GameObject borderPrefab,
+            GameObject borderPrefab,
             Camera mainCamera)
         {
             _borderPrefab = borderPrefab;
