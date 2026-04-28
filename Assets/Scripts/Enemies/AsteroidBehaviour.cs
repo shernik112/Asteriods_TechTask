@@ -17,7 +17,7 @@ namespace Project.Enemies
 
         private void FixedUpdate()
         {
-            Rb.linearVelocity = transform.right * enemyData.speed;
+            Rb.linearVelocity = transform.right * enemyData.Speed;
         }
 
         private void LateUpdate()
@@ -31,7 +31,7 @@ namespace Project.Enemies
             Rb.angularVelocity = 0f;
             transform.localRotation = Quaternion.identity;
             OnHitAsteroid = null;
-            SpriteRenderer.sprite = enemyData.sprite;
+            SpriteRenderer.sprite = enemyData.Sprite;
         }
         
         protected override void HitBullet()

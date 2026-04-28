@@ -46,7 +46,7 @@ namespace Project.Enemies
         protected virtual void Awake()
         {
             SpriteRenderer = GetComponentInChildren<SpriteRenderer>();
-            SpriteRenderer.sprite = enemyData.sprite;
+            SpriteRenderer.sprite = enemyData.Sprite;
             Rb = GetComponent<Rigidbody2D>();
         }
         
@@ -81,12 +81,12 @@ namespace Project.Enemies
         
         private IEnumerator PlayHitReaction(Action typeHit)
         {
-            SpriteRenderer.sprite = enemyData.hitSprite;
-            _mainAudio.PlaySfx(enemyData.hitClip);
+            SpriteRenderer.sprite = enemyData.HitSprite;
+            _mainAudio.PlaySfx(enemyData.HitClip);
             yield return _timeHitReaction;            
 
-            SpriteRenderer.sprite = enemyData.sprite;
-            _handlerScore.CountScoreDefeatedEnemy(enemyData.scoreByHit);
+            SpriteRenderer.sprite = enemyData.Sprite;
+            _handlerScore.CountScoreDefeatedEnemy(enemyData.ScoreByHit);
             typeHit?.Invoke();
         }
     }

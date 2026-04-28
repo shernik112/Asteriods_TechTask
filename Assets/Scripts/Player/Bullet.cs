@@ -19,12 +19,12 @@ namespace Project.Player
         {
             _rg = GetComponent<Rigidbody2D>();
             var spriteRenderer = GetComponent<SpriteRenderer>();
-            spriteRenderer.sprite = bulletData.sprite;
+            spriteRenderer.sprite = bulletData.Sprite;
         }
 
         private void Update()
         { 
-            _rg.linearVelocity = transform.up * bulletData.moveSpeed;
+            _rg.linearVelocity = transform.up * bulletData.MoveSpeed;
         }
 
         private void OnCollisionEnter2D(Collision2D other)

@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9eb9b7821fb3dd40971b832bfeac385, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: Assembly-CSharp::Project.Player.PlayerData
-  moveSpeed: 11
-  moveAcceleration: 5
-  rotateSpeed: 250
-  rotateAcceleration: 180
-  sprite: {fileID: -9642782944324126, guid: 5cbfe289cb78c224e8718d50266e9d2b, type: 3}
-  destructionClip: {fileID: 8300000, guid: c9df04f783866ce40893cc561d250d94, type: 3}
-  dashClip: {fileID: 8300000, guid: e3fbc685c9eacb149b681edbf136e065, type: 3}
+  <MoveSpeed>k__BackingField: 11
+  <MoveAcceleration>k__BackingField: 5
+  <RotateSpeed>k__BackingField: 250
+  <RotateAcceleration>k__BackingField: 180
+  <Sprite>k__BackingField: {fileID: -9642782944324126, guid: 5cbfe289cb78c224e8718d50266e9d2b, type: 3}
+  <DestructionClip>k__BackingField: {fileID: 8300000, guid: c9df04f783866ce40893cc561d250d94, type: 3}
+  <DashClip>k__BackingField: {fileID: 8300000, guid: e3fbc685c9eacb149b681edbf136e065, type: 3}

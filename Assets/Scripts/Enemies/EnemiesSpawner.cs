@@ -60,9 +60,9 @@ namespace Project.System
             _halfHeight = _mainCamera.orthographicSize + _posOffset;
             _halfWidth = _halfHeight * _mainCamera.aspect + _posOffset;
 
-            _asteroidPool = new ObjectPool(_data.asteroidPrefab, _container, _poolsRoot);
-            _fragmentAsteroidPool = new ObjectPool(_data.fragmentAsteroidPrefab, _container, _poolsRoot);
-            _ufoPool = new ObjectPool(_data.ufoPrefab, _container, _poolsRoot);
+            _asteroidPool = new ObjectPool(_data.AsteroidPrefab, _container, _poolsRoot);
+            _fragmentAsteroidPool = new ObjectPool(_data.FragmentAsteroidPrefab, _container, _poolsRoot);
+            _ufoPool = new ObjectPool(_data.UfoPrefab, _container, _poolsRoot);
 
             _restartButton.OnRestartGame += StartCreate;
 

@@ -55,7 +55,7 @@ namespace Project.Player
 
         public void TeleportReaction()
         {
-            _mainAudio.PlaySfx(data.dashClip);
+            _mainAudio.PlaySfx(data.DashClip);
         }
 
         private void FixedUpdate()
@@ -65,15 +65,15 @@ namespace Project.Player
 
             Rb.angularVelocity = Mathf.MoveTowards(
                 Rb.angularVelocity,
-                -_input.x * data.rotateSpeed,
-                data.rotateAcceleration * Time.fixedDeltaTime);
+                -_input.x * data.RotateSpeed,
+                data.RotateAcceleration * Time.fixedDeltaTime);
 
-            Vector2 targetVelocity = transform.up * _input.y * data.moveSpeed;
+            Vector2 targetVelocity = transform.up * _input.y * data.MoveSpeed;
 
             Rb.linearVelocity = Vector2.MoveTowards(
                 Rb.linearVelocity,
                 targetVelocity,
-                data.moveAcceleration * Time.fixedDeltaTime);
+                data.MoveAcceleration * Time.fixedDeltaTime);
         }
 
         private void OnCollisionEnter2D(Collision2D other)
@@ -83,7 +83,7 @@ namespace Project.Player
                 Rb.linearVelocity = Vector2.zero;
                 Rb.angularVelocity = 0f;
 
-                _mainAudio.PlaySfx(data.destructionClip);
+                _mainAudio.PlaySfx(data.DestructionClip);
                 OnHitPlayer?.Invoke();
 
                 SetDefaultValues();

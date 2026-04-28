@@ -18,7 +18,7 @@ namespace Project.System
         [SerializeField] private GameObject[] prefabs;
         
         private readonly Type[] _singleBehaviours =
-        {
+        {    
             typeof(PauseHandler),
             typeof(EnemiesSpawner),
             typeof(HandlerInput),

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c28836c795b438a4c97bd77b936945cd, type: 3}
   m_Name: LaserData
   m_EditorClassIdentifier: Assembly-CSharp::Project.LaserData
-  newChargeClip: {fileID: 8300000, guid: d6d55607074a97b4c87e8f0b64e085a1, type: 3}
-  shootLaser: {fileID: 8300000, guid: e95e6051bebd8894a8ff68e53dca6853, type: 3}
-  defaultCountShotLaser: 3
-  durationLaserShot: 0.5
-  cooldownDuration: 0.2
+  <NewChargeClip>k__BackingField: {fileID: 8300000, guid: d6d55607074a97b4c87e8f0b64e085a1, type: 3}
+  <ShootLaser>k__BackingField: {fileID: 8300000, guid: e95e6051bebd8894a8ff68e53dca6853, type: 3}
+  <DefaultCountShotLaser>k__BackingField: 3
+  <DurationLaserShot>k__BackingField: 0.5
+  <CooldownDuration>k__BackingField: 0.2

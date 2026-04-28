@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c1b225c0ffcdd94ead80e43a6fa543b, type: 3}
   m_Name: BulletData
   m_EditorClassIdentifier: Assembly-CSharp::Project.BulletData
-  moveSpeed: 15
-  sprite: {fileID: -1971997584, guid: 5cbfe289cb78c224e8718d50266e9d2b, type: 3}
+  <MoveSpeed>k__BackingField: 15
+  <Sprite>k__BackingField: {fileID: -1971997584, guid: 5cbfe289cb78c224e8718d50266e9d2b, type: 3}

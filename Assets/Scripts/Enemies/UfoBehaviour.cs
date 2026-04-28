@@ -15,7 +15,7 @@ namespace Project.Enemies
 
         private void FixedUpdate()
         {
-            Rb.linearVelocity = _targetDir * enemyData.speed;
+            Rb.linearVelocity = _targetDir * enemyData.Speed;
         }
     }
 }
