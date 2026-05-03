@@ -5,12 +5,12 @@ using Zenject;
 namespace Project.UI
 {
     [RequireComponent(typeof(IndicatorsView))]
-    public class IndicatorsEntryPoint : MonoBehaviour
+    public class IndicatorsStarter : MonoBehaviour
     {
         private PlayerController _playerController;
         private IndicatorsModel _model;
-        private IndicatorsController _controller;
-        private IndicatorsView _view;
+        private IndicatorsPresenter _presenter;
+        private IIndicatorsView _view;
 
         [Inject]
         public void Construct(PlayerController playerController)
@@ -20,18 +20,16 @@ namespace Project.UI
 
         private void Awake()
         {
-            _view = GetComponent<IndicatorsView>();
+            _view = GetComponent<IIndicatorsView>();
             _model = new IndicatorsModel();
-            _controller = new IndicatorsController(_playerController, _model, _view);
+            _presenter = new IndicatorsPresenter(_playerController, _model, _view);
+            _presenter.Awake();
         }
-
-        private void Start() =>
-            _controller.Start();
         
         private void OnDestroy() =>
-            _controller.OnDestroy();
+            _presenter.OnDestroy();
         
         private void Update() =>
-            _controller.Update();
+            _presenter.Update();
     }
 }

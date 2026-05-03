@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Project.UI
 {
     [RequireComponent(typeof(TMP_Text))]
-    public class IndicatorsView : MonoBehaviour
+    public class IndicatorsView : MonoBehaviour, IIndicatorsView
     {
         private TMP_Text _text;
 

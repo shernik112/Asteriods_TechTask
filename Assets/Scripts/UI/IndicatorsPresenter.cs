@@ -4,22 +4,25 @@ using UnityEngine;
 
 namespace Project.UI
 {
-    public class IndicatorsController
+    public class IndicatorsPresenter
     {
         private readonly PlayerController _player;
         private readonly IndicatorsModel _model;
-        private readonly IndicatorsView _view;
+        private readonly IIndicatorsView _view;
         
-        public IndicatorsController(
+        public IndicatorsPresenter(
             PlayerController player, 
             IndicatorsModel model, 
-            IndicatorsView view)
+            IIndicatorsView view)
         {
             _player = player;
             _model = model;
             _view = view;
         }
 
+        public void Awake() =>
+            _model.OnNewText += NewText;
+        
         public void Update()
         {
             var sb = new StringBuilder();
@@ -31,9 +34,7 @@ namespace Project.UI
 
             _model.SetText(sb.ToString());
         }
-        public void Start() =>
-            _model.OnNewText += NewText;
-
+        
         public void OnDestroy() =>
             _model.OnNewText -= NewText;
 

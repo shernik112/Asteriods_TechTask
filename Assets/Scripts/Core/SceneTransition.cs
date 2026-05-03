@@ -12,7 +12,7 @@ namespace Project.System
 
         private bool _transitionIn;
         private SpriteMask _mask;
-        private ShowUI _showUI;
+        private ShowRestartUI _showRestartUI;
         private PlayerController _playerController;
         private RestartButton _restartButton;
         private WaitForSeconds _waitHiding;
@@ -31,8 +31,8 @@ namespace Project.System
             _playerController.OnHitPlayer += StartTransition;
             _restartButton.OnRestartGame += StartTransition;
             _mask = GetComponentInChildren<SpriteMask>();
-            _showUI = GetComponentInChildren<ShowUI>();
-            _waitHiding = new WaitForSeconds(_showUI.ShowTime);
+            _showRestartUI = GetComponentInChildren<ShowRestartUI>();
+            _waitHiding = new WaitForSeconds(_showRestartUI.ShowTime);
             _transitionIn = true;
         }
 
@@ -54,14 +54,14 @@ namespace Project.System
             
             if (_transitionIn)
             {
-                _showUI.SmoothShow();
+                _showRestartUI.SmoothShow();
                 yield return _waitHiding;
                 StartCoroutine(_transitionIn ? FadeIn() : FadeOut());
             }
             else
             {
                 yield return StartCoroutine(_transitionIn ? FadeIn() : FadeOut());
-                _showUI.SmoothShow();
+                _showRestartUI.SmoothShow();
             }
         }
 

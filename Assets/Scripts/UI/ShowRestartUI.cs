@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Project.UI
 {
-    public class ShowUI : MonoBehaviour
+    public class ShowRestartUI : MonoBehaviour
     {
         public float ShowTime { get; private set; } = 0.3f;
         
@@ -20,7 +20,7 @@ namespace Project.UI
         
         public void SmoothShow()
         {
-            Debug.Log($"{typeof(ShowUI)} SmoothShow");
+            Debug.Log($"{typeof(ShowRestartUI)} SmoothShow");
             _isShowNow = !_isShowNow;
             var startAlpha = _cg.alpha;
             var targetAlpha = _isShowNow ? 1f : 0f;

@@ -14,7 +14,7 @@ namespace Project.Player
         
         [SerializeField] private LaserData laserData = default;
     
-        private int _currentCountShotLaser = default;
+        private int _currentCountShotLaser;
         private float _lastShootTime;
         private RestartButton _restartButton;
         private Quaternion _initialLaserRotation;
