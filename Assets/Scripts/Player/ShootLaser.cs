@@ -12,10 +12,9 @@ namespace Project.Player
     {
         public event Action<int> NewCountShotLaser;
         
-        [SerializeField] private LaserData laserData = default;
-    
         private int _currentCountShotLaser;
         private float _lastShootTime;
+        private LaserData _laserData;
         private RestartButton _restartButton;
         private Quaternion _initialLaserRotation;
         private SpriteRenderer _spriteRenderer;
@@ -37,9 +36,11 @@ namespace Project.Player
 
         [Inject]
         public void Construct(
+            LaserData laserData,
             RestartButton restartButton,
             MainAudio mainAudio)
         {
+            _laserData = laserData;
             _restartButton = restartButton;
             _mainAudio = mainAudio;
         }
@@ -48,7 +49,8 @@ namespace Project.Player
         {
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _collider2D = GetComponent<Collider2D>();
-            CurrentCountShоtLaser = laserData.DefaultCountShotLaser;
+            
+            CurrentCountShоtLaser = _laserData.DefaultCountShotLaser;
             _initialLaserRotation = transform.localRotation;
             
             _restartButton.OnRestartGame += Restart;
@@ -65,7 +67,7 @@ namespace Project.Player
             LastRechargeTime += Time.deltaTime;
             _lastShootTime += Time.deltaTime;
         
-            if (LastRechargeTime >= RechargeDuration && CurrentCountShоtLaser < laserData.DefaultCountShotLaser)
+            if (LastRechargeTime >= RechargeDuration && CurrentCountShоtLaser < _laserData.DefaultCountShotLaser)
             {
                 LastRechargeTime = 0f;
                 IncreaseCountShotLaser();
@@ -74,7 +76,7 @@ namespace Project.Player
         
         public void TryShoot()
         {
-            if (_lastShootTime >= laserData.CooldownDuration && CurrentCountShоtLaser > 0)
+            if (_lastShootTime >= _laserData.CooldownDuration && CurrentCountShоtLaser > 0)
             {
                 Shoot();
                 CurrentCountShоtLaser -= 1;
@@ -85,26 +87,26 @@ namespace Project.Player
     
         private void Shoot()
         {
-            _mainAudio.PlaySfx(laserData.ShootLaser);
+            _mainAudio.PlaySfx(_laserData.ShootLaser);
             ChangeVisibility(true);
             TurnLaser();
         }
     
         private void Restart()
         {
-            CurrentCountShоtLaser = laserData.DefaultCountShotLaser;
+            CurrentCountShоtLaser = _laserData.DefaultCountShotLaser;
             LastRechargeTime = default;
         }
     
         private void IncreaseCountShotLaser()
         {
             CurrentCountShоtLaser += 1;
-            _mainAudio.PlaySfx(laserData.NewChargeClip);
+            _mainAudio.PlaySfx(_laserData.NewChargeClip);
         }
     
         private void TurnLaser()
         {
-            Tween.Rotate(transform, new Vector3(0, 0, -180),Space.Self, laserData.DurationLaserShot, 0f, Tween.EaseInOut,Tween.LoopType.None,null,
+            Tween.Rotate(transform, new Vector3(0, 0, -180),Space.Self, _laserData.DurationLaserShot, 0f, Tween.EaseInOut,Tween.LoopType.None,null,
                 () =>
                 {
                     ChangeVisibility(false);

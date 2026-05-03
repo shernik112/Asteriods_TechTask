@@ -6,15 +6,14 @@ namespace Project.UI
 {
     public class CounterScore :  CounterStarter
     {
-        private readonly float _counterSpeed = 700;
+        [SerializeField] private float counterSpeed = default;
+        
         private HandlerScore _handlerScore;
         private Coroutine _currentCoroutine;
         
         [Inject]
-        public void Init(HandlerScore handlerScore)
-        {
+        public void Init(HandlerScore handlerScore) =>
             _handlerScore = handlerScore;
-        }
 
         protected override void Awake()
         {
@@ -40,7 +39,7 @@ namespace Project.UI
         {
             while (Model.Count != targetScore)
             {
-                var value = Mathf.RoundToInt(Mathf.MoveTowards(Model.Count, targetScore, _counterSpeed * Time.deltaTime));
+                var value = Mathf.RoundToInt(Mathf.MoveTowards(Model.Count, targetScore, counterSpeed * Time.deltaTime));
                 Model.SetCount(value);
                 yield return null;
             }

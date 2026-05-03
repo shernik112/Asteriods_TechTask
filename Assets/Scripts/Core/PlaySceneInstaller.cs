@@ -15,6 +15,7 @@ namespace Project.System
         [SerializeField] private GameObject borderPrefab = default;
         [SerializeField] private Camera mainCamera = default;
         [SerializeField] private EnemiesSpawnerData enemiesSpawnerData = default;
+        [SerializeField] private LaserData laserData = default;
         [SerializeField] private GameObject[] prefabs;
         
         private readonly Type[] _singleBehaviours =
@@ -33,6 +34,7 @@ namespace Project.System
             Container.Bind<MainAudio>().FromComponentInNewPrefab(mainAudio).AsSingle();
 
             Container.Bind<EnemiesSpawnerData>().FromInstance(enemiesSpawnerData);
+            Container.Bind<LaserData>().FromInstance(laserData);
             Container.Bind<Transform>().FromInstance(transform).AsSingle();
             Container.BindInstance(new ObjectPool(bulletPrefab, Container, transform));
             Container.BindInterfacesAndSelfTo<ObjectPool>().WithArguments(bulletPrefab, transform).WhenInjectedInto<BulletShoot>();
