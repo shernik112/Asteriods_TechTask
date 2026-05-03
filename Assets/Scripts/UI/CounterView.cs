@@ -1,14 +1,13 @@
-using System.Collections;
 using TMPro;
 using UnityEngine;
 
 namespace Project.UI
 {
     [RequireComponent(typeof(TextMeshProUGUI))]
-    public class MvpView : MonoBehaviour
+    public class CounterView : MonoBehaviour, ICounterView
     {
         private TextMeshProUGUI _text;
-
+        
         private void Awake()
         {
             _text = GetComponent<TextMeshProUGUI>();

@@ -2,7 +2,7 @@ using System;
 
 namespace Project.UI
 {
-    public class MvcModel
+    public class CounterModel
     {
         public int Count { get; private set; }
 

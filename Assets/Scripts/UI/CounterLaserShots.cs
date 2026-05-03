@@ -1,12 +1,9 @@
 namespace Project.UI
 {
-    public class CounterLaserShots : MvpStarter
+    public class CounterLaserShots : CounterStarter
     {
-        protected override void Start()
-        {
-            base.Start();
+        private void Start() =>
             PlayerController.Laser.NewCountShotLaser += Model.SetCount;
-        }
 
         protected override void OnDestroy()
         {

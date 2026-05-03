@@ -4,14 +4,14 @@ using Zenject;
 
 namespace Project.UI
 {
-    [RequireComponent(typeof(MvpView))]
-    public class MvpStarter : MonoBehaviour
+    [RequireComponent(typeof(CounterView))]
+    public class CounterStarter : MonoBehaviour
     {
         protected PlayerController PlayerController;
-        protected MvcModel Model;
+        protected CounterModel Model;
 
-        private MvcController _controller;
-        private MvpView _view;
+        private CounterPresenter _counterPresenter;
+        private CounterView _counterView;
 
         [Inject]
         public void Construct(PlayerController playerController)
@@ -21,19 +21,19 @@ namespace Project.UI
 
         protected virtual void Awake()
         {
-            _view = GetComponent<MvpView>();
-            Model = new MvcModel();
-            _controller = new MvcController(Model, _view);
+            _counterView = GetComponent<CounterView>();
+            Model = new CounterModel();
+            _counterPresenter = new CounterPresenter(Model, _counterView);
+            _counterPresenter.Awake();
+            
             PlayerController.OnHitPlayer += ResetCount;
         }
-
-        protected virtual void Start() =>
-            _controller.Start();
 
         protected virtual void OnDestroy()
         {
             PlayerController.OnHitPlayer -= ResetCount;
-            _controller.OnDestroy();
+            
+            _counterPresenter.OnDestroy();
         }
 
         private void ResetCount() =>
