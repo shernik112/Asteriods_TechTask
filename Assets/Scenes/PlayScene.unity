@@ -155,7 +155,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 1061576356628838479, guid: 03167c7ca000e5e459ef335ed3caf741, type: 3}
   borderPrefab: {fileID: 6914650507238123481, guid: 65f22abc5497de945a4cb4957dc0b77b, type: 3}
   mainCamera: {fileID: 878547605457886350}
-  enemiesSpawnerData: {fileID: 11400000, guid: d4596b83bdecc6346af7230dee959583, type: 2}
+  enemiesControllerData: {fileID: 11400000, guid: d4596b83bdecc6346af7230dee959583, type: 2}
   laserData: {fileID: 11400000, guid: b36d758fa6f76cd4995c49da3c320cc1, type: 2}
   playerData: {fileID: 11400000, guid: 34feac179934ba64cbb253009e7c079a, type: 2}
   prefabs:

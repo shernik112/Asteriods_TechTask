@@ -3,10 +3,17 @@ using UnityEngine;
 namespace Project
 {
     [CreateAssetMenu(fileName = "EnemiesSpawnerData", menuName = "Scriptable Objects/EnemiesSpawnerData")]
-    public class EnemiesSpawnerData : ScriptableObject
+    public class EnemiesControllerData : ScriptableObject
     {
         [field: SerializeField] public GameObject FragmentAsteroidPrefab { get; private set; }
         [field: SerializeField] public GameObject AsteroidPrefab { get; private set; }
         [field: SerializeField] public GameObject UfoPrefab { get; private set; }
+        
+        [field:SerializeField]  public float DefaultPosOffset { get;private set; }
+        [field:SerializeField]  public float RotateOffset { get; private set; }
+        
+        [field:SerializeField]  public float CreateFragmentRotate { get; private set; }
+        [field:SerializeField]  public float LowerFragmentRotate { get; private set; }
+
     }
 }

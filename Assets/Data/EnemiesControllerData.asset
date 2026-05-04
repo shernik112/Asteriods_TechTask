@@ -10,8 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 30b898b55126c2f4ba3fa1c194284674, type: 3}
-  m_Name: EnemiesSpawnerData
+  m_Name: EnemiesControllerData
   m_EditorClassIdentifier: Assembly-CSharp::Project.EnemiesSpawnerData
   <FragmentAsteroidPrefab>k__BackingField: {fileID: 8980806605422784256, guid: 0a58b4c23363b8945aa5a08a2cb07443, type: 3}
   <AsteroidPrefab>k__BackingField: {fileID: 8980806605422784256, guid: 332e3cdb502a4a44a889bda641980f91, type: 3}
   <UfoPrefab>k__BackingField: {fileID: 4679316564590342010, guid: 5bfe4a59da5cda4489fbb8f8d42d71c1, type: 3}
+  <DefaultPosOffset>k__BackingField: 0.5
+  <RotateOffset>k__BackingField: 30
+  <CreateFragmentRotate>k__BackingField: 50
+  <LowerFragmentRotate>k__BackingField: 20

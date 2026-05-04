@@ -14,7 +14,7 @@ namespace Project.System
         [SerializeField] private GameObject bulletPrefab = default;
         [SerializeField] private GameObject borderPrefab = default;
         [SerializeField] private Camera mainCamera = default;
-        [SerializeField] private EnemiesSpawnerData enemiesSpawnerData = default;
+        [SerializeField] private EnemiesControllerData enemiesControllerData = default;
         [SerializeField] private LaserData laserData = default;
         [SerializeField] private PlayerData playerData = default;
         [SerializeField] private GameObject[] prefabs;
@@ -22,7 +22,7 @@ namespace Project.System
         private readonly Type[] _singleBehaviours =
         {    
             typeof(PauseHandler),
-            typeof(EnemiesSpawner),
+            typeof(EnemiesController),
             typeof(HandlerInput),
             typeof(HandlerScore),
         };
@@ -34,7 +34,7 @@ namespace Project.System
             Container.Bind<RestartButton>().FromComponentInNewPrefab(transitionPrefab).AsSingle();
             Container.Bind<MainAudio>().FromComponentInNewPrefab(mainAudio).AsSingle();
 
-            Container.Bind<EnemiesSpawnerData>().FromInstance(enemiesSpawnerData);
+            Container.Bind<EnemiesControllerData>().FromInstance(enemiesControllerData);
             Container.Bind<LaserData>().FromInstance(laserData);
             Container.Bind<PlayerData>().FromInstance(playerData);
             
