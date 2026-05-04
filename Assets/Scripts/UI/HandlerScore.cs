@@ -18,10 +18,10 @@ namespace Project.UI
         }
 
         public void Initialize() => 
-            _playerController.OnHitPlayer += ResetCount;
+            _playerController.DeathHandler.OnHitPlayer += ResetCount;
 
         public void Dispose() =>
-            _playerController.OnHitPlayer -= ResetCount;        
+            _playerController.DeathHandler.OnHitPlayer -= ResetCount;        
 
 
         public void CountScoreDefeatedEnemy(int countDefeatedEnemy)

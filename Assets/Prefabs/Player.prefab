@@ -12,8 +12,10 @@ GameObject:
   - component: {fileID: 2642564410836653808}
   - component: {fileID: 9155788308537111372}
   - component: {fileID: 5719302002317865043}
-  - component: {fileID: 109552026019927316}
+  - component: {fileID: 8277908007779095546}
+  - component: {fileID: 308331620219794414}
   - component: {fileID: 4576282360889593265}
+  - component: {fileID: 109552026019927316}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -135,7 +137,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d582843a28feb364499225c578301fbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 34feac179934ba64cbb253009e7c079a, type: 2}
+--- !u!114 &8277908007779095546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5037804548135090899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f0713f006414ae1a252c61382ad650e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Project.Player.PlayerDeathHandler
+--- !u!114 &308331620219794414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5037804548135090899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d01cd05351224b2d9b58e2a12ab983cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Project.Player.PlayerMover
+--- !u!114 &4576282360889593265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5037804548135090899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1c83bbe5c4476043bab052fbcefb2fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Project.Player.BulletShoot
+  bulletShotClip: {fileID: 8300000, guid: 690982e4761760a42906fcc2dc5a2d2b, type: 3}
 --- !u!60 &109552026019927316
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -235,19 +273,6 @@ PolygonCollider2D:
       - {x: -0.15666667, y: -0.33555555}
       - {x: -0.11666667, y: -0.2777778}
   m_UseDelaunayMesh: 0
---- !u!114 &4576282360889593265
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5037804548135090899}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1c83bbe5c4476043bab052fbcefb2fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Project.Player.BulletShoot
-  bulletShotClip: {fileID: 8300000, guid: 690982e4761760a42906fcc2dc5a2d2b, type: 3}
 --- !u!1001 &7529915992298546324
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -28,7 +28,7 @@ namespace Project.System
     
         private void Awake()
         {
-            _playerController.OnHitPlayer += StartTransition;
+            _playerController.DeathHandler.OnHitPlayer += StartTransition;
             _restartButton.OnRestartGame += StartTransition;
             _mask = GetComponentInChildren<SpriteMask>();
             _showRestartUI = GetComponentInChildren<ShowRestartUI>();
@@ -38,7 +38,7 @@ namespace Project.System
 
         private void OnDestroy()
         {
-            _playerController.OnHitPlayer -= StartTransition;
+            _playerController.DeathHandler.OnHitPlayer -= StartTransition;
             _restartButton.OnRestartGame -= StartTransition;
         }
 

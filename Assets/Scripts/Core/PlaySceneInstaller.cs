@@ -16,6 +16,7 @@ namespace Project.System
         [SerializeField] private Camera mainCamera = default;
         [SerializeField] private EnemiesSpawnerData enemiesSpawnerData = default;
         [SerializeField] private LaserData laserData = default;
+        [SerializeField] private PlayerData playerData = default;
         [SerializeField] private GameObject[] prefabs;
         
         private readonly Type[] _singleBehaviours =
@@ -35,6 +36,8 @@ namespace Project.System
 
             Container.Bind<EnemiesSpawnerData>().FromInstance(enemiesSpawnerData);
             Container.Bind<LaserData>().FromInstance(laserData);
+            Container.Bind<PlayerData>().FromInstance(playerData);
+            
             Container.Bind<Transform>().FromInstance(transform).AsSingle();
             Container.BindInstance(new ObjectPool(bulletPrefab, Container, transform));
             Container.BindInterfacesAndSelfTo<ObjectPool>().WithArguments(bulletPrefab, transform).WhenInjectedInto<BulletShoot>();

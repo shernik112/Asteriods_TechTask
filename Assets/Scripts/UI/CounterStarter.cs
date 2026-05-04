@@ -26,12 +26,12 @@ namespace Project.UI
             _counterPresenter = new CounterPresenter(Model, _counterView);
             _counterPresenter.Awake();
             
-            PlayerController.OnHitPlayer += ResetCount;
+            PlayerController.DeathHandler.OnHitPlayer += ResetCount;
         }
 
         protected virtual void OnDestroy()
         {
-            PlayerController.OnHitPlayer -= ResetCount;
+            PlayerController.DeathHandler.OnHitPlayer -= ResetCount;
             
             _counterPresenter.OnDestroy();
         }

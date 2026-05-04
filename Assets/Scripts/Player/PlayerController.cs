@@ -1,105 +1,56 @@
-using System;
 using Project.System;
-using Project.Enemies;
 using Project.UI;
 using UnityEngine;
 using Zenject;
 
 namespace Project.Player
 {
-    [RequireComponent(typeof(Rigidbody2D), typeof(SpriteRenderer))]
     public class PlayerController : MonoBehaviour, ITeleportedReaction
-    {
-        public event Action OnHitPlayer;
-            
-        [SerializeField] private PlayerData data;
-
+    { 
+        private PlayerData _data;
         private RestartButton _restartButton;
         private MainAudio _mainAudio;
-        private PauseHandler _pauseHandler;
-        private SpriteRenderer _spriteRenderer;
-        private Vector2 _input;
 
-        public Rigidbody2D Rb { get; private set; }
+        public PlayerMover Mover { get; private set; }
+        public PlayerDeathHandler DeathHandler { get; private set; }
         public ShootLaser Laser { get; private set; }
         public BulletShoot BulletShoot { get; private set; }
 
-        
         [Inject]
         public void Construct(
+            PlayerData data,
             RestartButton restartButton,
-            PauseHandler pauseHandler,
             MainAudio mainAudio)
         {
+            _data = data;   
             _restartButton = restartButton;
-            _pauseHandler = pauseHandler;
-            _mainAudio = mainAudio;
+            _mainAudio = mainAudio; 
         }
-
+        
         private void Awake()
         {
-            Rb = GetComponent<Rigidbody2D>();
+            Mover = GetComponent<PlayerMover>();
+            DeathHandler = GetComponent<PlayerDeathHandler>();
+
             BulletShoot = GetComponent<BulletShoot>();
             Laser = GetComponentInChildren<ShootLaser>();
-            _spriteRenderer = GetComponent<SpriteRenderer>();
-            _restartButton.OnRestartGame += SetActive;
+
+            _restartButton.OnRestartGame += Restart;
         }
 
-        private void OnDestroy() =>
-            _restartButton.OnRestartGame -= SetActive;
+        private void OnDestroy() => 
+            _restartButton.OnRestartGame -= Restart;
 
-        public void SetInput(Vector2 input)
+        public void SetInput(Vector2 input) =>
+            Mover.SetInput(input);  
+        
+        public void TeleportReaction() =>
+            _mainAudio.PlaySfx(_data.DashClip);
+
+        private void Restart()
         {
-            _input = input.normalized;
+            DeathHandler.ResetState();
+            Mover.Stop();
         }
-
-        public void TeleportReaction()
-        {
-            _mainAudio.PlaySfx(data.DashClip);
-        }
-
-        private void FixedUpdate()
-        {
-            if (_pauseHandler.IsPause)
-                return;
-
-            Rb.angularVelocity = Mathf.MoveTowards(
-                Rb.angularVelocity,
-                -_input.x * data.RotateSpeed,
-                data.RotateAcceleration * Time.fixedDeltaTime);
-
-            Vector2 targetVelocity = transform.up * _input.y * data.MoveSpeed;
-
-            Rb.linearVelocity = Vector2.MoveTowards(
-                Rb.linearVelocity,
-                targetVelocity,
-                data.MoveAcceleration * Time.fixedDeltaTime);
-        }
-
-        private void OnCollisionEnter2D(Collision2D other)
-        {
-            if (other.gameObject.TryGetComponent<IEnemy>(out _))
-            {
-                Rb.linearVelocity = Vector2.zero;
-                Rb.angularVelocity = 0f;
-
-                _mainAudio.PlaySfx(data.DestructionClip);
-                OnHitPlayer?.Invoke();
-
-                SetDefaultValues();
-            }
-
-            Debug.Log($"{typeof(PlayerController)} OnCollisionEnter");
-        }
-
-        private void SetDefaultValues()
-        {
-            _spriteRenderer.enabled = false;
-            Rb.linearVelocity = Vector2.zero;
-            transform.SetPositionAndRotation(Vector2.zero, Quaternion.identity);
-        }
-
-        private void SetActive() =>
-            _spriteRenderer.enabled = true;
     }
 }

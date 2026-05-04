@@ -26,13 +26,13 @@ namespace Project.System
         public void Initialize()
         {
             _restartButton.OnRestartGame += TogglePause;
-            _playerController.OnHitPlayer += TogglePause;
+            _playerController.DeathHandler.OnHitPlayer += TogglePause;
         }
 
         public void Dispose()
         {
             _restartButton.OnRestartGame -= TogglePause;
-            _playerController.OnHitPlayer -= TogglePause;
+            _playerController.DeathHandler.OnHitPlayer -= TogglePause;
         }
 
         private void TogglePause()

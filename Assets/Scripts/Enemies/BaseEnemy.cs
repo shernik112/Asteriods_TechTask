@@ -51,10 +51,10 @@ namespace Project.Enemies
         }
         
         private void OnEnable() =>
-            PlayerController.OnHitPlayer += Deactivation;
+            PlayerController.DeathHandler.OnHitPlayer += Deactivation;
 
         private void OnDisable() =>
-            PlayerController.OnHitPlayer -= Deactivation;
+            PlayerController.DeathHandler.OnHitPlayer -= Deactivation;
         
         public virtual void OnReturnToPool(){}
 

@@ -150,12 +150,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 5719302002317865043, guid: 291270eb6b01bae42ba3fddef2e7df42, type: 3}
-  bulletPrefab: {fileID: 1061576356628838479, guid: 03167c7ca000e5e459ef335ed3caf741, type: 3}
   mainAudio: {fileID: 7014705364084509386, guid: c68d6fcf0495ae441ba51dec039cee92, type: 3}
   transitionPrefab: {fileID: 4701732250828865926, guid: 24d8b2b68611b3845bee0dd90499e033, type: 3}
+  bulletPrefab: {fileID: 1061576356628838479, guid: 03167c7ca000e5e459ef335ed3caf741, type: 3}
   borderPrefab: {fileID: 6914650507238123481, guid: 65f22abc5497de945a4cb4957dc0b77b, type: 3}
   mainCamera: {fileID: 878547605457886350}
   enemiesSpawnerData: {fileID: 11400000, guid: d4596b83bdecc6346af7230dee959583, type: 2}
+  laserData: {fileID: 11400000, guid: b36d758fa6f76cd4995c49da3c320cc1, type: 2}
+  playerData: {fileID: 11400000, guid: 34feac179934ba64cbb253009e7c079a, type: 2}
   prefabs:
   - {fileID: 3698066480869194213, guid: 3ae2f2e8503da0d48ac90113e855520c, type: 3}
   - {fileID: 5964213808735479061, guid: 498da90f143b7004b8c706acd05b1576, type: 3}
