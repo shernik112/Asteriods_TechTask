@@ -34,7 +34,7 @@ namespace Project.UI
         private void ResetCount()
         {
             IsFinalScore?.Invoke(_targetScore);
-            _targetScore = default;
+            _targetScore = 0;
         }
     }
 }

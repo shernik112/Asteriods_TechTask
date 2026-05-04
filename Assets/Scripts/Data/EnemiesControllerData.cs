@@ -1,3 +1,4 @@
+using Project.System;
 using UnityEngine;
 
 namespace Project
@@ -8,6 +9,10 @@ namespace Project
         [field: SerializeField] public GameObject FragmentAsteroidPrefab { get; private set; }
         [field: SerializeField] public GameObject AsteroidPrefab { get; private set; }
         [field: SerializeField] public GameObject UfoPrefab { get; private set; }
+        
+        [field: SerializeField] public int StartCountAsteroids {get; private set; }
+        [field: SerializeField] public FloatRange RangeTimeAsteroid {get; private set; }
+        [field: SerializeField] public FloatRange RangeTimeUfo {get; private set; }
         
         [field:SerializeField]  public float DefaultPosOffset { get;private set; }
         [field:SerializeField]  public float RotateOffset { get; private set; }

@@ -1,26 +1,18 @@
+using Random = UnityEngine.Random;
 using System;
 using Project.Enemies;
 using Project.UI;
 using UnityEngine;
 using Zenject;
-using Random = UnityEngine.Random;
 
 namespace Project.System
 {
     public class EnemiesController : IInitializable, ITickable, IDisposable
     {
-        private readonly FloatRange _rangeTimeAsteroid = new FloatRange(5f, 10f);
-        private readonly FloatRange _rangeTimeUfo = new FloatRange(5f, 15f);
-
-        private readonly int _startCountAsteroids = 2;
-        private readonly float _posOffset = 0.5f;
-
         private readonly EnemiesControllerData _data;
-        private readonly Camera _mainCamera;
         private readonly RestartButton _restartButton;
         private readonly PauseHandler _pauseHandler;
         private readonly EnemiesSpawnArea _enemiesSpawnArea;
-        private readonly EnemyPool _pools;
         private readonly EnemiesSpawner _enemiesSpawner;
 
         private float _lastTimeAsteroid;
@@ -37,13 +29,13 @@ namespace Project.System
             Transform poolsRoot)
         {
             _data = data;
-            _mainCamera = mainCamera;
             _restartButton = restartButton;
             _pauseHandler = pauseHandler;
 
             _enemiesSpawnArea = new EnemiesSpawnArea(data, mainCamera);
-            _pools = new EnemyPool(data, container, poolsRoot);
-            _enemiesSpawner = new EnemiesSpawner(_data, _pools);
+            
+            var pools = new EnemyPool(data, container, poolsRoot);
+            _enemiesSpawner = new EnemiesSpawner(data, pools);
         }
 
         public void Initialize()
@@ -64,16 +56,16 @@ namespace Project.System
             if (_lastTimeAsteroid >= _currentRangeAsteroid)
             {
                 _lastTimeAsteroid = 0f;
-                _currentRangeAsteroid = GetFloatRange(_rangeTimeAsteroid);
+                _currentRangeAsteroid = GetFloatRange(_data.RangeTimeAsteroid);
                 SpawnAsteroids(Random.Range(2, 4));
             }
 
-            if (_lastTimeUfo >= _currentRangeUfo)
-            {
-                _lastTimeUfo = 0f;
-                _currentRangeUfo = GetFloatRange(_rangeTimeUfo);
-                SpawnUfo();
-            }
+            if (!(_lastTimeUfo >= _currentRangeUfo)) 
+                return;
+            
+            _lastTimeUfo = 0f;
+            _currentRangeUfo = GetFloatRange(_data.RangeTimeUfo);
+            SpawnUfo();
         }
 
         public void Dispose()
@@ -83,12 +75,12 @@ namespace Project.System
 
         private void StartCreate()
         {
-            SpawnAsteroids(_startCountAsteroids);
+            SpawnAsteroids(_data.StartCountAsteroids);
 
             _lastTimeAsteroid = 0f;
             _lastTimeUfo = 0f;
-            _currentRangeAsteroid = GetFloatRange(_rangeTimeAsteroid);
-            _currentRangeUfo = GetFloatRange(_rangeTimeUfo);
+            _currentRangeAsteroid = GetFloatRange(_data.RangeTimeAsteroid);
+            _currentRangeUfo = GetFloatRange(_data.RangeTimeUfo);
         }
 
         private void SpawnAsteroids(int count)
@@ -106,7 +98,7 @@ namespace Project.System
 
             if (obj.TryGetComponent<AsteroidBehaviour>(out var asteroid))
             {
-                asteroid.OnHitAsteroid -= _enemiesSpawner.SpawnFragments;
+                asteroid.OnHitAsteroid -= _enemiesSpawner.SpawnFragments;   
                 asteroid.OnHitAsteroid += _enemiesSpawner.SpawnFragments;
             }
         }
@@ -118,6 +110,6 @@ namespace Project.System
         }
 
         private float GetFloatRange(FloatRange range) =>
-            Random.Range(range.Min, range.Max);
+            Random.Range(range.min, range.max);
     }
 }

@@ -95,7 +95,7 @@ namespace Project.Player
         private void Restart()
         {
             CurrentCountShоtLaser = _laserData.DefaultCountShotLaser;
-            LastRechargeTime = default;
+            LastRechargeTime = 0;
         }
     
         private void IncreaseCountShotLaser()

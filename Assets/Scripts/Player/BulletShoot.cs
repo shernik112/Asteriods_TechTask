@@ -7,7 +7,7 @@ namespace Project.Player
 {
     public class BulletShoot : MonoBehaviour
     {
-        [SerializeField] private AudioClip bulletShotClip = default;
+        [SerializeField] private AudioClip bulletShotClip = null;
         
         private readonly float _instantiateOffset = 0.5f;
         private float _cooldown = 0.2f;

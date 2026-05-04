@@ -15,6 +15,13 @@ MonoBehaviour:
   <FragmentAsteroidPrefab>k__BackingField: {fileID: 8980806605422784256, guid: 0a58b4c23363b8945aa5a08a2cb07443, type: 3}
   <AsteroidPrefab>k__BackingField: {fileID: 8980806605422784256, guid: 332e3cdb502a4a44a889bda641980f91, type: 3}
   <UfoPrefab>k__BackingField: {fileID: 4679316564590342010, guid: 5bfe4a59da5cda4489fbb8f8d42d71c1, type: 3}
+  <StartCountAsteroids>k__BackingField: 2
+  <RangeTimeAsteroid>k__BackingField:
+    min: 5
+    max: 10
+  <RangeTimeUfo>k__BackingField:
+    min: 5
+    max: 15
   <DefaultPosOffset>k__BackingField: 0.5
   <RotateOffset>k__BackingField: 30
   <CreateFragmentRotate>k__BackingField: 50

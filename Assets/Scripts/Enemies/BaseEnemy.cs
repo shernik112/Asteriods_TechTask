@@ -18,7 +18,7 @@ namespace Project.Enemies
     {
         public event Action<GameObject> OnDeactivation;
 
-        [SerializeField] protected EnemyDefinition enemyData = default;
+        [SerializeField] protected EnemyDefinition enemyData = null;
         
         protected SpriteRenderer SpriteRenderer;
         protected Rigidbody2D Rb;

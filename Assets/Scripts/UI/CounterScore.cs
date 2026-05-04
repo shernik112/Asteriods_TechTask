@@ -6,7 +6,7 @@ namespace Project.UI
 {
     public class CounterScore :  CounterStarter
     {
-        [SerializeField] private float counterSpeed = default;
+        [field: SerializeField] public float CounterSpeed { get; private set; }
         
         private HandlerScore _handlerScore;
         private Coroutine _currentCoroutine;
@@ -39,7 +39,7 @@ namespace Project.UI
         {
             while (Model.Count != targetScore)
             {
-                var value = Mathf.RoundToInt(Mathf.MoveTowards(Model.Count, targetScore, counterSpeed * Time.deltaTime));
+                var value = Mathf.RoundToInt(Mathf.MoveTowards(Model.Count, targetScore, CounterSpeed * Time.deltaTime));
                 Model.SetCount(value);
                 yield return null;
             }

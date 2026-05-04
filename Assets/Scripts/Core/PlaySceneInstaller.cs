@@ -8,15 +8,16 @@ namespace Project.System
 {
     public class PlaySceneInstaller : MonoInstaller
     {
-        [SerializeField] private PlayerController playerPrefab = default;
-        [SerializeField] private MainAudio mainAudio = default;
-        [SerializeField] private GameObject transitionPrefab = default;
-        [SerializeField] private GameObject bulletPrefab = default;
-        [SerializeField] private GameObject borderPrefab = default;
-        [SerializeField] private Camera mainCamera = default;
-        [SerializeField] private EnemiesControllerData enemiesControllerData = default;
-        [SerializeField] private LaserData laserData = default;
-        [SerializeField] private PlayerData playerData = default;
+        [SerializeField] private PlayerController playerPrefab = null;
+        [SerializeField] private MainAudio mainAudio = null;
+        [SerializeField] private GameObject transitionPrefab = null;
+        [SerializeField] private GameObject bulletPrefab = null;
+        [SerializeField] private GameObject borderPrefab = null;
+        [SerializeField] private Camera mainCamera = null;
+        [SerializeField] private EnemiesControllerData enemiesControllerData = null;
+        [SerializeField] private LaserData laserData = null;
+        [SerializeField] private PlayerData playerData = null;
+        
         [SerializeField] private GameObject[] prefabs;
         
         private readonly Type[] _singleBehaviours =

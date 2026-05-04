@@ -1,15 +1,17 @@
+using System;
 
 namespace Project.System
 {
+    [Serializable]
     public class FloatRange
     {
-        public float Min;
-        public float Max;
+        public float min;
+        public float max;
 
         public FloatRange(float min, float max)
         {
-            Min = min;
-            Max = max;
+            this.min = min;
+            this.max = max;
         }
     }
 }

@@ -164,6 +164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Project.UI.CounterScore
   counterSpeed: 700
+  <CounterSpeed>k__BackingField: 700
 --- !u!1 &1875957906698893538
 GameObject:
   m_ObjectHideFlags: 0
