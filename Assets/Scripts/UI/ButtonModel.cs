@@ -8,15 +8,10 @@ namespace Project.UI
         public event Action<bool> OnChangeInteractable;
         
         private bool _isInteractable;
-        
-        public ButtonModel(bool isInteractable)
-        {
-            _isInteractable = isInteractable;
-        }
 
-        public void ChangeInteractable()
+        public void SetInteractable(bool interactable)
         {
-            _isInteractable = !_isInteractable;
+            _isInteractable = interactable;
             OnChangeInteractable?.Invoke(_isInteractable);
         } 
     }

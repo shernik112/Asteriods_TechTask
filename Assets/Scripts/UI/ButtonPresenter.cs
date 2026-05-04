@@ -15,16 +15,21 @@ namespace Project.UI
             _view = view;
         }
 
-        public void Awake()
+        public void Initialize() 
         {
             _model.OnChangeInteractable += _view.ChangeInteractable;
-            _view.OnButtonClicked += () =>  { OnClicked?.Invoke(); };
+            _view.OnButtonClicked += HandleClick;
+            
+            _model.SetInteractable(true);
         }
 
         public void OnDestroy()
         {
             _model.OnChangeInteractable += _view.ChangeInteractable;
-            _view.OnButtonClicked += () =>  { OnClicked?.Invoke(); };
+            _view.OnButtonClicked -= HandleClick;
         }
+        
+        private void HandleClick() =>
+            OnClicked?.Invoke();
     }
 }

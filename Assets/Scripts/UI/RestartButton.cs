@@ -11,18 +11,19 @@ namespace Project.UI
         private ButtonPresenter _presenter;
         private ButtonModel _model;
         private IButtonView _view;
-        
+
         private void Awake()
         {
             _view = GetComponent<ButtonView>();
-            
-            _model = new ButtonModel(true);
-            _presenter = new ButtonPresenter(_model, _view); 
-            
+
+            _model = new ButtonModel();
+            _presenter = new ButtonPresenter(_model, _view);
+
             _presenter.OnClicked += HandleButtonClick;
-            
-            _presenter.Awake();
         }
+
+        private void Start() =>
+            _presenter.Initialize();
 
         private void OnDestroy()
         {
