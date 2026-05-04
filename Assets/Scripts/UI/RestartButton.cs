@@ -8,16 +8,27 @@ namespace Project.UI
     {
         public event Action OnRestartGame;
 
-        private ButtonView _view;
+        private ButtonPresenter _presenter;
+        private ButtonModel _model;
+        private IButtonView _view;
         
         private void Awake()
         {
             _view = GetComponent<ButtonView>();
-            _view.OnClicked += HandleButtonClick;
+            
+            _model = new ButtonModel(true);
+            _presenter = new ButtonPresenter(_model, _view); 
+            
+            _presenter.OnClicked += HandleButtonClick;
+            
+            _presenter.Awake();
         }
 
-        private void OnDestroy() =>
-            _view.OnClicked -= HandleButtonClick;
+        private void OnDestroy()
+        {
+            _presenter.OnClicked -= HandleButtonClick;
+            _presenter.OnDestroy();
+        }
 
         private void HandleButtonClick() =>
             OnRestartGame?.Invoke();

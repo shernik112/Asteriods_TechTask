@@ -4,9 +4,10 @@ using UnityEngine.UI;
 
 namespace Project.UI
 {
-    public class ButtonView : MonoBehaviour
+    public class ButtonView : MonoBehaviour, IButtonView
     {
-        public event Action OnClicked;
+        public event Action OnButtonClicked;
+        
         private Button _button;
 
         private void Awake()
@@ -17,8 +18,11 @@ namespace Project.UI
 
         private void OnDestroy() =>
             _button.onClick.RemoveListener(HandleClick);    
+        
+        public void ChangeInteractable(bool isInteractable) =>
+            _button.interactable = isInteractable;
 
         private void HandleClick() =>
-            OnClicked?.Invoke();
+            OnButtonClicked?.Invoke();
     }
 }

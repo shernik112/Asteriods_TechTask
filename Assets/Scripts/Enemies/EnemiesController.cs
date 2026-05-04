@@ -37,7 +37,7 @@ namespace Project.System
             var pools = new EnemyPool(data, container, poolsRoot);
             _enemiesSpawner = new EnemiesSpawner(data, pools);
         }
-
+        
         public void Initialize()
         {
             _restartButton.OnRestartGame += StartCreate;
@@ -57,6 +57,7 @@ namespace Project.System
             {
                 _lastTimeAsteroid = 0f;
                 _currentRangeAsteroid = GetFloatRange(_data.RangeTimeAsteroid);
+                
                 SpawnAsteroids(Random.Range(2, 4));
             }
 
