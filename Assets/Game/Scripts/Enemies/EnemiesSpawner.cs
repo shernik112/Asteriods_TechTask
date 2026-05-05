@@ -52,7 +52,6 @@ namespace Project.System
                 var fragmentRotation = asteroidTransform.rotation * spreadRotation;
 
                 var fragment = _pools.GetFragmentAsteroid();
-                PrepareEnemy(fragment);
                 fragment.transform.rotation = fragmentRotation;
                 
                 fragment.transform.position = asteroidTransform.position
