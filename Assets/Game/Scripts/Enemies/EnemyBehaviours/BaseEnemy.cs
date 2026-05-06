@@ -1,6 +1,6 @@
 using IPoolable = Project.System.IPoolable;
+using Cysharp.Threading.Tasks;
 using System;
-using System.Collections;
 using Project.Player;
 using Project.System;
 using Project.UI;
@@ -22,8 +22,6 @@ namespace Project.Enemies
         
         protected SpriteRenderer SpriteRenderer;
         protected Rigidbody2D Rb;
-        
-        private readonly WaitForSeconds _timeHitReaction = new WaitForSeconds(0.08f);
         
         private HandlerScore _handlerScore;
         private AudioHandler _audioHandler;
@@ -69,21 +67,21 @@ namespace Project.Enemies
         
         private void OnCollisionEnter2D(Collision2D other)
         {
-            if (other.gameObject.TryGetComponent<Bullet>(out var playerBullet))
-                StartCoroutine(PlayHitReaction(HitBullet));
+            if (other.gameObject.TryGetComponent<Bullet>(out var _))
+                PlayHitReaction(HitBullet).Forget();
         }
     
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.TryGetComponent<ShootLaser>(out var laser))
-                StartCoroutine(PlayHitReaction(HitLaser));
+            if (other.TryGetComponent<ShootLaser>(out var _))
+                PlayHitReaction(HitLaser).Forget();
         }
         
-        private IEnumerator PlayHitReaction(Action typeHit)
+        private async UniTask PlayHitReaction(Action typeHit)
         {
             SpriteRenderer.sprite = enemyData.HitSprite;
             _audioHandler.PlaySfx(enemyData.HitClip);
-            yield return _timeHitReaction;            
+            await UniTask.Delay(enemyData.TimeHitReactionMs);
 
             SpriteRenderer.sprite = enemyData.Sprite;
             _handlerScore.CountScoreDefeatedEnemy(enemyData.ScoreByHit);

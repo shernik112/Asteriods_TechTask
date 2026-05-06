@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: UfoData
   m_EditorClassIdentifier: Assembly-CSharp::Project.Enemies.EnemyDefinition
   <Speed>k__BackingField: 2
+  <TimeHitReactionMs>k__BackingField: 80
   <ScoreByHit>k__BackingField: 1500
   <Sprite>k__BackingField: {fileID: -1425229959082085284, guid: 5cbfe289cb78c224e8718d50266e9d2b, type: 3}
   <HitSprite>k__BackingField: {fileID: -555725859505105965, guid: 5cbfe289cb78c224e8718d50266e9d2b, type: 3}

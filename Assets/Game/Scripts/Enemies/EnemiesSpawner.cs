@@ -25,15 +25,13 @@ namespace Project.System
             return obj;
         }
 
-        public GameObject SpawnUfo(Vector2 position, Quaternion rotation)
+        public void SpawnUfo(Vector2 position, Quaternion rotation)
         {
             var obj = _pools.GetUfo();
             PrepareEnemy(obj);
 
             obj.transform.position = position;
             obj.transform.rotation = rotation;
-
-            return obj;
         }
 
         public void SpawnFragments(Transform asteroidTransform)
@@ -59,7 +57,7 @@ namespace Project.System
             }
         }
 
-        private static void PrepareEnemy(GameObject obj)
+        private void PrepareEnemy(GameObject obj)
         {
             if (obj.TryGetComponent<IEnemy>(out var enemy))
                 enemy.IsFirstEnterToTeleport = true;

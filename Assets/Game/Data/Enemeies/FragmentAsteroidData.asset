@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: FragmentAsteroidData
   m_EditorClassIdentifier: Assembly-CSharp::Project.Enemies.EnemyDefinition
   <Speed>k__BackingField: 3.5
+  <TimeHitReactionMs>k__BackingField: 80
   <ScoreByHit>k__BackingField: 1000
   <Sprite>k__BackingField: {fileID: 2792433196770277248, guid: 5cbfe289cb78c224e8718d50266e9d2b, type: 3}
   <HitSprite>k__BackingField: {fileID: -4939580502049857663, guid: 5cbfe289cb78c224e8718d50266e9d2b, type: 3}

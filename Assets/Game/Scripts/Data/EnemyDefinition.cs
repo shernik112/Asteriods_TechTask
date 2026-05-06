@@ -6,6 +6,7 @@ namespace Project.Enemies
     public class EnemyDefinition : ScriptableObject
     {
         [field: SerializeField] public float Speed { get; private set; }
+        [field: SerializeField] public int TimeHitReactionMs { get; private set; }
         [field: SerializeField] public int ScoreByHit { get; private set; }
         [field: SerializeField] public Sprite Sprite { get; private set; }
         [field: SerializeField] public Sprite HitSprite { get; private set; }
