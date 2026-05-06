@@ -33,11 +33,11 @@ namespace Project.System
             _pauseHandler = pauseHandler;
 
             _enemiesSpawnArea = new EnemiesSpawnArea(data, mainCamera);
-            
+
             var pools = new EnemyPool(data, container, poolsRoot);
             _enemiesSpawner = new EnemiesSpawner(data, pools);
         }
-        
+
         public void Initialize()
         {
             _restartButton.OnRestartGame += StartCreate;
@@ -57,13 +57,13 @@ namespace Project.System
             {
                 _lastTimeAsteroid = 0f;
                 _currentRangeAsteroid = GetFloatRange(_data.RangeTimeAsteroid);
-                
+
                 SpawnAsteroids(Random.Range(2, 4));
             }
 
-            if (!(_lastTimeUfo >= _currentRangeUfo)) 
+            if (!(_lastTimeUfo >= _currentRangeUfo))
                 return;
-            
+
             _lastTimeUfo = 0f;
             _currentRangeUfo = GetFloatRange(_data.RangeTimeUfo);
             SpawnUfo();
@@ -97,11 +97,16 @@ namespace Project.System
 
             var obj = _enemiesSpawner.SpawnAsteroid(pos, rot);
 
-            if (obj.TryGetComponent<AsteroidBehaviour>(out var asteroid))
+            if (!obj.TryGetComponent<AsteroidBehaviour>(out var asteroid))
+                return;
+            
+            void HandleHitAsteroid(Transform transform)
             {
-                asteroid.OnHitAsteroid -= _enemiesSpawner.SpawnFragments;   
-                asteroid.OnHitAsteroid += _enemiesSpawner.SpawnFragments;
+                asteroid.OnHitAsteroid -= HandleHitAsteroid;
+                _enemiesSpawner.SpawnFragments(transform);
             }
+            
+            asteroid.OnHitAsteroid += HandleHitAsteroid;
         }
 
         private void SpawnUfo()

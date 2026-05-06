@@ -30,7 +30,6 @@ namespace Project.Enemies
             Rb.linearVelocity = Vector2.zero;
             Rb.angularVelocity = 0f;
             transform.localRotation = Quaternion.identity;
-            OnHitAsteroid = null;
             SpriteRenderer.sprite = enemyData.Sprite;
         }
         

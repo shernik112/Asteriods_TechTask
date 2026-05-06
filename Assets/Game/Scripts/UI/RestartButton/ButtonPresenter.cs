@@ -25,7 +25,7 @@ namespace Project.UI
 
         public void OnDestroy()
         {
-            _model.OnChangeInteractable += _view.ChangeInteractable;
+            _model.OnChangeInteractable -= _view.ChangeInteractable;
             _view.OnButtonClicked -= HandleClick;
         }
         

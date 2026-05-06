@@ -40,7 +40,6 @@ namespace Project.System
             Container.Bind<PlayerData>().FromInstance(playerData);
             
             Container.Bind<Transform>().FromInstance(transform).AsSingle();
-            Container.BindInstance(new ObjectPool(bulletPrefab, Container, transform));
             Container.BindInterfacesAndSelfTo<ObjectPool>().WithArguments(bulletPrefab, transform).WhenInjectedInto<BulletShoot>();
   
             

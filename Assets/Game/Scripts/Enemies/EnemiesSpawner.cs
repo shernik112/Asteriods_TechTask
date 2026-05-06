@@ -40,7 +40,8 @@ namespace Project.System
         {
             var angleStep = _data.SpreadRange.angle / _data.CountFragments;
             var halfSpread = _data.SpreadRange.angle / 2f;
-            var startAngle = -halfSpread + angleStep * 0.5f;
+            var halfStep = angleStep / 2f;
+            var startAngle = -halfSpread + halfStep;
 
             for (var i = 0; i < _data.CountFragments; i++)
             {
@@ -53,7 +54,6 @@ namespace Project.System
 
                 var fragment = _pools.GetFragmentAsteroid();
                 fragment.transform.rotation = fragmentRotation;
-                
                 fragment.transform.position = asteroidTransform.position
                                               + fragmentRotation * Vector3.right * _data.SpawnOffset;
             }
