@@ -99,16 +99,14 @@ namespace Project.System
 
             if (!obj.TryGetComponent<AsteroidBehaviour>(out var asteroid))
                 return;
-            
-            void HandleHitAsteroid(Transform transform)
-            {
-                asteroid.OnHitAsteroid -= HandleHitAsteroid;
-                _enemiesSpawner.SpawnFragments(transform);
-            }
-            
+
+            asteroid.OnHitAsteroid -= HandleHitAsteroid;
             asteroid.OnHitAsteroid += HandleHitAsteroid;
         }
-
+        
+        private void HandleHitAsteroid(Transform transform) =>
+            _enemiesSpawner.SpawnFragments(transform);
+            
         private void SpawnUfo()
         {
             var pos = _enemiesSpawnArea.GetRandomEdgePosition();
