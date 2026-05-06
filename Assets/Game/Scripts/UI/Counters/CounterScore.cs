@@ -1,4 +1,5 @@
-using System.Collections;
+using Cysharp.Threading.Tasks;
+using System.Threading;
 using UnityEngine;
 using Zenject;
 
@@ -9,6 +10,7 @@ namespace Project.UI
         [field: SerializeField] public float CounterSpeed { get; private set; }
         
         private HandlerScore _handlerScore;
+        private CancellationTokenSource _counterCts;
         private Coroutine _currentCoroutine;
         
         [Inject]
@@ -25,25 +27,28 @@ namespace Project.UI
         {
             base.OnDestroy();
             _handlerScore.NewTargetScore -= StartCounterNewChange;
+            
+            _counterCts?.Cancel();
+            _counterCts?.Dispose();
         }
         
         private void StartCounterNewChange(int targetScore)
         {
-            if (_currentCoroutine != null)
-                StopCoroutine(_currentCoroutine);
+            _counterCts?.Cancel();
+            _counterCts?.Dispose();
+            _counterCts = new CancellationTokenSource();
             
-            _currentCoroutine = StartCoroutine(CounterNewChange(targetScore));
+            CountNewChange(targetScore, _counterCts.Token).Forget();
         }
         
-        private IEnumerator CounterNewChange(int targetScore)
+        private async UniTask CountNewChange(int targetScore, CancellationToken cts)
         {
             while (Model.Count != targetScore)
             {
                 var value = Mathf.RoundToInt(Mathf.MoveTowards(Model.Count, targetScore, CounterSpeed * Time.deltaTime));
                 Model.SetCount(value);
-                yield return null;
+                await UniTask.NextFrame(cts);
             }
-            _currentCoroutine = null;
         }
     }
 }
