@@ -1,4 +1,5 @@
-using System.Collections;
+using Cysharp.Threading.Tasks;
+using System.Threading;
 using Project.Player;
 using Project.UI;
 using UnityEngine;
@@ -15,8 +16,9 @@ namespace Project.System
         private ShowRestartUI _showRestartUI;
         private PlayerController _playerController;
         private RestartButton _restartButton;
-        private WaitForSeconds _waitHiding;
 
+        private CancellationTokenSource _transitionCts;
+        
         [Inject]
         public void Construct(
             PlayerController playerController,
@@ -32,7 +34,6 @@ namespace Project.System
             _restartButton.OnRestartGame += StartTransition;
             _mask = GetComponentInChildren<SpriteMask>();
             _showRestartUI = GetComponentInChildren<ShowRestartUI>();
-            _waitHiding = new WaitForSeconds(_showRestartUI.ShowTime);
             _transitionIn = true;
         }
 
@@ -40,48 +41,54 @@ namespace Project.System
         {
             _playerController.DeathHandler.OnHitPlayer -= StartTransition;
             _restartButton.OnRestartGame -= StartTransition;
+            
+            _transitionCts?.Cancel();
+            _transitionCts?.Dispose();
         }
 
         private void StartTransition()
         {
-            StopAllCoroutines();
-            StartCoroutine(Transition());
+            _transitionCts?.Cancel();
+            _transitionCts?.Dispose();
+            _transitionCts = new CancellationTokenSource();
+            
+            Transition(_transitionCts.Token).Forget();
         }
         
-        private IEnumerator Transition()
+        private async UniTask Transition(CancellationToken cts)
         {
             _transitionIn = !_transitionIn;
             
             if (_transitionIn)
             {
                 _showRestartUI.SmoothShow();
-                yield return _waitHiding;
-                StartCoroutine(_transitionIn ? FadeIn() : FadeOut());
+                await UniTask.Delay(_showRestartUI.ShowTimeMs, cancellationToken: cts);
+                await FadeIn(cts);
             }
             else
             {
-                yield return StartCoroutine(_transitionIn ? FadeIn() : FadeOut());
+                await FadeOut(cts);
                 _showRestartUI.SmoothShow();
             }
         }
 
-        private IEnumerator FadeOut()
+        private async UniTask FadeOut(CancellationToken cts)
         {
             while (_mask.alphaCutoff < 1f)
             {
                 _mask.alphaCutoff += Time.deltaTime * speed;
-                yield return null;
+                await UniTask.NextFrame(cts);
             }
             _mask.alphaCutoff = 1f;
         }
 
-        private IEnumerator FadeIn()
+        private async UniTask FadeIn(CancellationToken cts)
         {
             _mask.alphaCutoff = 1f;
             while (_mask.alphaCutoff > 0f)
             {
-                _mask.alphaCutoff -= Time.deltaTime * speed;
-                yield return null;
+                _mask.alphaCutoff -= Time.deltaTime * speed; 
+                await UniTask.NextFrame(cts);
             }
             _mask.alphaCutoff = 0f;
         }
