@@ -504,7 +504,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ecb3b7b9be12424994a18b4f2675c24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <ShowTime>k__BackingField: 300
+  <ShowTimeMs>k__BackingField: 0
 --- !u!225 &89163025352383857
 CanvasGroup:
   m_ObjectHideFlags: 0
