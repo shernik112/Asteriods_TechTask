@@ -7,6 +7,7 @@ namespace Project.UI
     public class HandlerScore : IInitializable, IDisposable
     {
         public event Action<int> IsFinalScore;
+        public event Action<int> IsRecordScore;
         public event Action<int> NewTargetScore;
         private PlayerController _playerController;
         private RecordScore _recordScore;
@@ -34,13 +35,12 @@ namespace Project.UI
 
             NewTargetScore?.Invoke(_targetScore);
         }
-
-        public int GetRecordScore() =>
-            _recordScore.Record;
-
+        
         private void ResetCount()
         {
             IsFinalScore?.Invoke(_targetScore);
+            _recordScore.Record =  _targetScore;
+            IsRecordScore?.Invoke(_recordScore.Record);
             _targetScore = 0;
             NewTargetScore?.Invoke(_targetScore);
         }
