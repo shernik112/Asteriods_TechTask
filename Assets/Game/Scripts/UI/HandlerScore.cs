@@ -9,6 +9,7 @@ namespace Project.UI
         public event Action<int> IsFinalScore;
         public event Action<int> NewTargetScore;
         private PlayerController _playerController;
+        private RecordScore _recordScore;
         private int _targetScore;
 
         [Inject]
@@ -17,8 +18,11 @@ namespace Project.UI
             _playerController = playerController;
         }
 
-        public void Initialize() => 
+        public void Initialize()
+        {
+            _recordScore = new RecordScore("record");
             _playerController.DeathHandler.OnHitPlayer += ResetCount;
+        }
 
         public void Dispose() =>
             _playerController.DeathHandler.OnHitPlayer -= ResetCount;        
@@ -30,6 +34,9 @@ namespace Project.UI
 
             NewTargetScore?.Invoke(_targetScore);
         }
+
+        public int GetRecordScore() =>
+            _recordScore.Record;
 
         private void ResetCount()
         {

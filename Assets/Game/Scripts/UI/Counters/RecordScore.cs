@@ -10,19 +10,19 @@ namespace Project.UI
         private string _jsonRecord;
         private readonly RecordData _recordData;
         
-        public RecordScore(string key,int record)
+        public RecordScore(string key)
         {
             _key = key;
-            _recordData = new RecordData(record);
+            _recordData = new RecordData();
+            
+            var json = PlayerPrefs.GetString(_key, JsonUtility.ToJson(_recordData));
+            _recordData.record = JsonUtility.FromJson<RecordData>(json).record;
         }
         
         public int Record
         {
-            get
-            {
-                var json = PlayerPrefs.GetString(_key, _recordData.record.ToString());
-                return JsonUtility.FromJson<RecordData>(json).record;
-            }
+            get => 
+                _recordData.record;
             set
             {
                 if (value <= _recordData.record) 
@@ -33,16 +33,12 @@ namespace Project.UI
                 PlayerPrefs.SetString(_key, _jsonRecord);
             }
         }
+
     }
 
     [Serializable]
     public class RecordData
     {
         public int record;
-        
-        public RecordData(int record)
-        {
-            this.record = record;
-        }
     }
 }

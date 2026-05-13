@@ -1,11 +1,9 @@
-using Project.System;
-using UnityEngine;
 using Zenject;
 using TMPro;
 
 namespace Project.UI
 {
-    public class FinalScore : MonoBehaviour
+    public class FinalScore : NumberStarter
     {
         private TMP_Text _text;
         private HandlerScore _handlerScore;
@@ -16,18 +14,19 @@ namespace Project.UI
             _handlerScore = handlerScore;
         }
         
-        private void Awake()
+        protected override void Awake()
         {
-            _text = GetComponent<TMP_Text>();
             _handlerScore.IsFinalScore += ShowFinalScore;
         }
 
-        private void OnDestroy() =>
+        protected override void OnDestroy()
+        {
             _handlerScore.IsFinalScore -= ShowFinalScore;
+        }
 
         private void ShowFinalScore(int count)
         {
-            _text.text = count.ToString();
+            Model.SetCount(count);
         }
     }
 }
