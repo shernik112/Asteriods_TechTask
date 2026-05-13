@@ -42,6 +42,7 @@ namespace Project.UI
         {
             IsFinalScore?.Invoke(_targetScore);
             _targetScore = 0;
+            NewTargetScore?.Invoke(_targetScore);
         }
     }
 }

@@ -1,11 +1,9 @@
 using Zenject;
-using TMPro;
 
 namespace Project.UI
 {
     public class FinalScore : NumberStarter
     {
-        private TMP_Text _text;
         private HandlerScore _handlerScore;
 
         [Inject]
@@ -13,9 +11,10 @@ namespace Project.UI
         {
             _handlerScore = handlerScore;
         }
-        
+
         protected override void Awake()
         {
+            base.Awake();
             _handlerScore.IsFinalScore += ShowFinalScore;
         }
 
