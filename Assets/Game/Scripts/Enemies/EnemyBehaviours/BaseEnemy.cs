@@ -63,7 +63,6 @@ namespace Project.Enemies
 
             _hitReactionCts?.Cancel();
             _hitReactionCts?.Dispose();
-            _hitReactionCts = null;
         }
         
         public virtual void OnReturnToPool(){}
