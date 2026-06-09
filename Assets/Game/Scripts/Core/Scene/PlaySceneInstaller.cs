@@ -2,7 +2,6 @@ using Project.Player;
 using Project.UI;
 using UnityEngine;
 using Zenject;
-using System;
 
 namespace Project.System
 {
@@ -19,15 +18,6 @@ namespace Project.System
         [SerializeField] private PlayerData playerData;
         
         [SerializeField] private GameObject[] prefabs;
-        
-        private readonly Type[] _singleBehaviours =
-        {    
-            typeof(PauseHandler),
-            typeof(EnemiesController),
-            typeof(HandlerInput),
-            typeof(HandlerScore),
-        };
-
     
         public override void InstallBindings()
         {
@@ -46,8 +36,10 @@ namespace Project.System
             Container.Bind<GameObject>().FromInstance(bulletPrefab).WhenInjectedInto<BulletShoot>();
             Container.Bind<GameObject>().FromInstance(borderPrefab).WhenInjectedInto<PlacementBorder>();
             
-            foreach (var singleBehaviour in _singleBehaviours)
-                Container.BindInterfacesAndSelfTo(singleBehaviour).AsSingle();
+            Container.BindInterfacesAndSelfTo<PauseHandler>().AsSingle();
+            Container.BindInterfacesAndSelfTo<EnemiesController>().AsSingle();
+            Container.BindInterfacesAndSelfTo<HandlerInput>().AsSingle();
+            Container.BindInterfacesAndSelfTo<HandlerScore>().AsSingle();
             
             Container.Bind<Camera>().FromInstance(mainCamera).AsSingle();
         }

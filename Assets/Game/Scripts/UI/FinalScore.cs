@@ -20,6 +20,7 @@ namespace Project.UI
 
         protected override void OnDestroy()
         {
+            base.OnDestroy();
             _handlerScore.IsFinalScore -= ShowFinalScore;
         }
 

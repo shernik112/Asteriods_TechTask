@@ -1,5 +1,3 @@
-using TMPro;
-using UnityEngine;
 using Zenject;
 
 namespace Project.UI
@@ -22,6 +20,7 @@ namespace Project.UI
 
         protected override void OnDestroy()
         {
+            base.OnDestroy();
             _handlerScore.IsRecordScore -= ShowRecordScore;
         }
 
