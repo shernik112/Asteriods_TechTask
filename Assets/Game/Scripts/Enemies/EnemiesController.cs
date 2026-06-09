@@ -25,7 +25,7 @@ namespace Project.System
             Camera mainCamera,
             RestartButton restartButton,
             PauseHandler pauseHandler,
-            DiContainer container,
+            IInstantiator  container,
             Transform poolsRoot)
         {
             _data = data;

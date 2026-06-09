@@ -21,8 +21,8 @@ namespace Project.UI
         private void Awake()
         {
             _view = GetComponent<IIndicatorsView>();
-            _model = new IndicatorsModel();
-            _presenter = new IndicatorsPresenter(_playerController, _model, _view);
+            _model = new IndicatorsModel(_playerController);
+            _presenter = new IndicatorsPresenter(_model, _view);
             _presenter.Awake();
         }
         

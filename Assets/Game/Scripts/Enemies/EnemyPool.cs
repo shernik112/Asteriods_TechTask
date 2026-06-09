@@ -11,7 +11,7 @@ namespace Project.System
 
         public EnemyPool(
             EnemiesControllerData data,
-            DiContainer container,
+            IInstantiator container,
             Transform poolsRoot)
         {
             _asteroidPool = new ObjectPool(data.AsteroidPrefab, container, poolsRoot);

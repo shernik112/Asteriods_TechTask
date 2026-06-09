@@ -1,13 +1,16 @@
+using System;
 using Project.Player;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Zenject;
 
 namespace Project.System
 {
-    public class HandlerInput : ITickable
+    public class HandlerInput : ITickable,IDisposable
     {
         private PlayerController _playerController;
         private PauseHandler _pauseHandler;
+        private InputActions _inputActions;
 
         [Inject]
         public void Construct(
@@ -16,23 +19,39 @@ namespace Project.System
         {
             _playerController = playerController;
             _pauseHandler = pauseHandler;
+            
+            _inputActions = new InputActions();
+            _inputActions.Enable();
+            
+            _inputActions.Player.Laser.performed += OnShootLaser;
         }
         
         public void Tick()
         {
             if (_pauseHandler.IsPause) 
-                return;
+                return; 
             
-            var input = new Vector2(Input.GetAxisRaw("Horizontal"), Mathf.Clamp01(Input.GetAxisRaw("Vertical")));
-            _playerController.SetInput(input);
+            var moveDir = _inputActions.Player.Move.ReadValue<Vector2>();
+            _playerController.SetInput(moveDir);
         
-            if (Input.GetMouseButtonDown(1))
-            {
-                Debug.Log($"{typeof(HandlerInput)} Laser Shoot");
-                _playerController.Laser.TryShoot();
-            }
-            else if (Input.GetMouseButtonDown(0) || Input.GetMouseButton(0)) 
+            if (_inputActions.Player.Shoot.IsPressed()) 
                 _playerController.BulletShoot.TryShoot();
+        }
+
+        public void Dispose()
+        {
+            _inputActions.Player.Laser.performed -= OnShootLaser;
+            _inputActions.Disable();
+            _inputActions.Dispose();
+        }
+
+        private void OnShootLaser(InputAction.CallbackContext ctx) 
+            => ShootLaser();
+        
+        private void ShootLaser()
+        {
+            Debug.Log($"{typeof(HandlerInput)} Laser Shoot");
+            _playerController.Laser.TryShoot();
         }
     }
 }

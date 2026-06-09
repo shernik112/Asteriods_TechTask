@@ -7,13 +7,13 @@ namespace Project.System
     public class ObjectPool
     { 
         private readonly GameObject _poolPrefab;
-        private readonly DiContainer _container;
+        private readonly IInstantiator _container;
         private readonly Transform _parentTransform;
         private readonly Queue<GameObject> _pool = new Queue<GameObject>();
         
         public ObjectPool(
             GameObject poolPrefab, 
-            DiContainer container, 
+            IInstantiator container, 
             Transform parentTransform)
         {
             _poolPrefab = poolPrefab;
