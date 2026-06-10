@@ -1,43 +1,32 @@
-    using Project.Player;
-using UnityEngine;
-using Zenject;
-
-namespace Project.UI
-{
-    [RequireComponent(typeof(CounterView))]
-    public class CounterStarter : MonoBehaviour
-    {
-        protected PlayerController PlayerController;
-        protected CounterModel Model;
-
-        private CounterPresenter _counterPresenter;
-        private CounterView _counterView;
-
-        [Inject]
-        public void Construct(PlayerController playerController)
-        {
-            PlayerController = playerController;
+using Project.Player;  
+using Zenject;  
+  
+namespace Project.UI  
+{  
+    public class CounterStarter : NumberStarter  
+    {  
+        protected PlayerController PlayerController;  
+  
+        [Inject]  
+        public void Construct(PlayerController playerController)  
+        {  
+            PlayerController = playerController;  
         }
 
-        protected virtual void Awake()
+        protected override void Awake()
         {
-            _counterView = GetComponent<CounterView>();
-            Model = new CounterModel();
-            _counterPresenter = new CounterPresenter(Model, _counterView);
-            _counterPresenter.Awake();
-            
-            PlayerController.DeathHandler.OnHitPlayer += ResetCount;
+            base.Awake();
+            PlayerController.DeathHandler.OnHitPlayer += ResetCount;  
         }
 
-        protected virtual void OnDestroy()
+        protected override void OnDestroy()
         {
-            PlayerController.DeathHandler.OnHitPlayer -= ResetCount;
-            
-            _counterPresenter.OnDestroy();
+            base.OnDestroy();
+            PlayerController.DeathHandler.OnHitPlayer -= ResetCount;  
         }
-
-        private void ResetCount() =>
-            Model.Reset();
-    }
+  
+        private void ResetCount() =>  
+            Model.Reset();  
+    }  
 }
 
