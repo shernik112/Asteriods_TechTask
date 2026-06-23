@@ -7,21 +7,23 @@ namespace Project.UI
     [RequireComponent(typeof(IndicatorsView))]
     public class IndicatorsStarter : MonoBehaviour
     {
-        private PlayerController _playerController;
+        private PlayerMover _mover;
+        private ShootLaser _laser;
         private IndicatorsModel _model;
         private IndicatorsPresenter _presenter;
         private IIndicatorsView _view;
 
         [Inject]
-        public void Construct(PlayerController playerController)
+        public void Construct(PlayerMover mover, ShootLaser laser)
         {
-            _playerController = playerController;
+            _mover = mover;
+            _laser = laser;
         }
 
         private void Awake()
         {
             _view = GetComponent<IIndicatorsView>();
-            _model = new IndicatorsModel(_playerController);
+            _model = new IndicatorsModel(_mover, _laser);
             _presenter = new IndicatorsPresenter(_model, _view);
             _presenter.Awake();
         }

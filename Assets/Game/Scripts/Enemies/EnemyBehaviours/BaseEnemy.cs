@@ -21,24 +21,23 @@ namespace Project.Enemies
 
         [SerializeField] protected EnemyDefinition enemyData;
         
+        public bool IsFirstEnterToTeleport { get; set; } = false;
+        
         protected SpriteRenderer SpriteRenderer;
         protected Rigidbody2D Rb;
         
         private HandlerScore _handlerScore;
         private AudioHandler _audioHandler;
         private CancellationTokenSource _hitReactionCts;
+        private PlayerDeathHandler _playerDeathHandler;
 
-        public bool IsFirstEnterToTeleport { get; set; } = false;
-        
-        protected PlayerController PlayerController { get; private set; }
-        
         [Inject]
         public void Construct(
-            PlayerController playerController,
+            PlayerDeathHandler playerDeathHandler,
             HandlerScore handlerScore,
             AudioHandler audioHandler)
         {
-            PlayerController = playerController;
+            _playerDeathHandler = playerDeathHandler;
             _handlerScore = handlerScore;
             _audioHandler = audioHandler;
         }
@@ -52,14 +51,14 @@ namespace Project.Enemies
         
         private void OnEnable()
         {
-            PlayerController.DeathHandler.OnHitPlayer += Deactivation;
+            _playerDeathHandler.OnHitPlayer += Deactivation;
 
             _hitReactionCts = new CancellationTokenSource();
         }
 
         private void OnDisable()
         {
-            PlayerController.DeathHandler.OnHitPlayer -= Deactivation;
+            _playerDeathHandler.OnHitPlayer -= Deactivation;
 
             _hitReactionCts?.Cancel();
             _hitReactionCts?.Dispose();

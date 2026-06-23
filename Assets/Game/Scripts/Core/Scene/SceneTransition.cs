@@ -14,23 +14,23 @@ namespace Project.System
         private bool _transitionIn;
         private SpriteMask _mask;
         private ShowRestartUI _showRestartUI;
-        private PlayerController _playerController;
+        private PlayerDeathHandler _deathHandler;
         private RestartButton _restartButton;
 
         private CancellationTokenSource _transitionCts;
-        
+
         [Inject]
         public void Construct(
-            PlayerController playerController,
+            PlayerDeathHandler deathHandler,
             RestartButton restartButton)
         {
-            _playerController = playerController;
+            _deathHandler = deathHandler;
             _restartButton = restartButton;
         }
-    
+
         private void Awake()
         {
-            _playerController.DeathHandler.OnHitPlayer += StartTransition;
+            _deathHandler.OnHitPlayer += StartTransition;
             _restartButton.OnRestartGame += StartTransition;
             _mask = GetComponentInChildren<SpriteMask>();
             _showRestartUI = GetComponentInChildren<ShowRestartUI>();
@@ -39,7 +39,7 @@ namespace Project.System
 
         private void OnDestroy()
         {
-            _playerController.DeathHandler.OnHitPlayer -= StartTransition;
+            _deathHandler.OnHitPlayer -= StartTransition;
             _restartButton.OnRestartGame -= StartTransition;
             
             _transitionCts?.Cancel();

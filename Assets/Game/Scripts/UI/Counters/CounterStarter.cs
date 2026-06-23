@@ -1,32 +1,31 @@
-using Project.Player;  
-using Zenject;  
-  
-namespace Project.UI  
-{  
-    public class CounterStarter : NumberStarter  
-    {  
-        protected PlayerController PlayerController;  
-  
-        [Inject]  
-        public void Construct(PlayerController playerController)  
-        {  
-            PlayerController = playerController;  
+using Project.Player;
+using Zenject;
+
+namespace Project.UI
+{
+    public class CounterStarter : NumberStarter
+    {
+        protected PlayerDeathHandler DeathHandler;
+
+        [Inject]
+        public void Construct(PlayerDeathHandler deathHandler)
+        {
+            DeathHandler = deathHandler;
         }
 
         protected override void Awake()
         {
             base.Awake();
-            PlayerController.DeathHandler.OnHitPlayer += ResetCount;  
+            DeathHandler.OnHitPlayer += ResetCount;
         }
 
         protected override void OnDestroy()
         {
             base.OnDestroy();
-            PlayerController.DeathHandler.OnHitPlayer -= ResetCount;  
+            DeathHandler.OnHitPlayer -= ResetCount;
         }
-  
-        private void ResetCount() =>  
-            Model.Reset();  
-    }  
-}
 
+        private void ResetCount() =>
+            Model.Reset();
+    }
+}

@@ -13,24 +13,24 @@ namespace Project.UI
         private const string RecordKey = "record";
         private readonly SaveService _saveService = new ();
 
-        private PlayerController _playerController;
+        private PlayerDeathHandler _deathHandler;
         private int _record;
         private int _targetScore;
 
         [Inject]
-        public void Construct(PlayerController playerController)
+        public void Construct(PlayerDeathHandler deathHandler)
         {
-            _playerController = playerController;
+            _deathHandler = deathHandler;
         }
 
         public void Initialize()
         {
             _record = _saveService.Load(RecordKey);
-            _playerController.DeathHandler.OnHitPlayer += ResetCount;
+            _deathHandler.OnHitPlayer += ResetCount;
         }
 
         public void Dispose() =>
-            _playerController.DeathHandler.OnHitPlayer -= ResetCount;
+            _deathHandler.OnHitPlayer -= ResetCount;
 
         public void CountScoreDefeatedEnemy(int countDefeatedEnemy)
         {

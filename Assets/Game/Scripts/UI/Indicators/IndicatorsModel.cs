@@ -8,20 +8,22 @@ namespace Project.UI
     {
         public event Action OnNewText;
         public string Text { get; private set; }
-        public Vector2 PlayerPosition => _player.transform.position;
-        public Quaternion PlayerRotation => _player.transform.rotation;
-        public Rigidbody2D PlayerRigidbody => _player.Mover.Rb;
-        public ShootLaser PlayerLaser => _player.Laser;
-        
-        private readonly PlayerController _player;
+        public Vector2 PlayerPosition => _mover.transform.position;
+        public Quaternion PlayerRotation => _mover.transform.rotation;
+        public Rigidbody2D PlayerRigidbody => _mover.Rb;
+        public ShootLaser PlayerLaser => _laser;
 
-        public IndicatorsModel(PlayerController player)
+        private readonly PlayerMover _mover;
+        private readonly ShootLaser _laser;
+
+        public IndicatorsModel(PlayerMover mover, ShootLaser laser)
         {
-            _player = player;
+            _mover = mover;
+            _laser = laser;
         }
-        
-        public float LaserRechargeLeft => 
-            Mathf.Max(0, _player.Laser.RechargeDuration - _player.Laser.LastRechargeTime);
+
+        public float LaserRechargeLeft =>
+            Mathf.Max(0, _laser.RechargeDuration - _laser.LastRechargeTime);
 
         public void SetText(string text)
         {
