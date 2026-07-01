@@ -21,9 +21,11 @@ namespace Project.System
     
         public override void InstallBindings()
         {
-            Container.Bind(typeof(PlayerController), typeof(PlayerMover),
+            Container.
+                Bind(typeof(PlayerController), typeof(PlayerMover),
                     typeof(PlayerDeathHandler), typeof(BulletShoot), typeof(ShootLaser))
                 .FromComponentInNewPrefab(playerPrefab).AsSingle();
+            
             Container.Bind<RestartButton>().FromComponentInNewPrefab(transitionPrefab).AsSingle();
             Container.Bind<AudioHandler>().FromComponentInNewPrefab(audioHandler).AsSingle();
 

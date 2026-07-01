@@ -30,6 +30,7 @@ namespace Project.Enemies
         private AudioHandler _audioHandler;
         private CancellationTokenSource _hitReactionCts;
         private PlayerDeathHandler _playerDeathHandler;
+        private EnemyHitReaction  _hitReaction;
 
         [Inject]
         public void Construct(
@@ -47,6 +48,7 @@ namespace Project.Enemies
             SpriteRenderer = GetComponentInChildren<SpriteRenderer>();
             SpriteRenderer.sprite = enemyData.Sprite;
             Rb = GetComponent<Rigidbody2D>();
+            _hitReaction = new EnemyHitReaction(_handlerScore, _audioHandler,SpriteRenderer, enemyData);
         }
         
         private void OnEnable()
@@ -75,26 +77,49 @@ namespace Project.Enemies
         protected void Deactivation() =>
             OnDeactivation?.Invoke(gameObject);
         
-        private void OnCollisionEnter2D(Collision2D other)
+        private void OnCollisionEnter2D(Collision2D other)  
         {
             if (other.gameObject.TryGetComponent<Bullet>(out var _))
-                PlayHitReaction(HitBullet, _hitReactionCts.Token).Forget();
+                _hitReaction.PlayReaction(HitBullet, _hitReactionCts.Token).Forget();
         }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.TryGetComponent<ShootLaser>(out var _))
-                PlayHitReaction(HitLaser, _hitReactionCts.Token).Forget();
+                _hitReaction.PlayReaction(HitLaser, _hitReactionCts.Token).Forget();
+        }
+    }
+
+    public class EnemyHitReaction 
+    {
+        private readonly HandlerScore _score;
+        private readonly AudioHandler _audio;
+        private readonly SpriteRenderer _spriteRenderer;
+        private readonly EnemyDefinition _enemyData;
+
+        public EnemyHitReaction(
+            HandlerScore score,
+            AudioHandler audio,
+            SpriteRenderer spriteRenderer,
+            EnemyDefinition enemyData)
+        {
+            _score = score;
+            _audio = audio;
+            _spriteRenderer = spriteRenderer;
+            _enemyData = enemyData;
         }
 
-        private async UniTask PlayHitReaction(Action typeHit, CancellationToken cts)
+        public async UniTask PlayReaction(
+            Action typeHit,
+            CancellationToken ct)
         {
-            SpriteRenderer.sprite = enemyData.HitSprite;
-            _audioHandler.PlaySfx(enemyData.HitClip);
-            await UniTask.Delay(enemyData.TimeHitReactionMs, cancellationToken: cts);
+            _spriteRenderer.sprite = _enemyData.HitSprite;
+            _audio.PlaySfx(_enemyData.HitClip);
 
-            SpriteRenderer.sprite = enemyData.Sprite;
-            _handlerScore.CountScoreDefeatedEnemy(enemyData.ScoreByHit);
+            await UniTask.Delay(_enemyData.TimeHitReactionMs, cancellationToken: ct);
+
+            _spriteRenderer.sprite = _enemyData.Sprite;
+            _score.CountScoreDefeatedEnemy(_enemyData.ScoreByHit);
             typeHit?.Invoke();
         }
     }
