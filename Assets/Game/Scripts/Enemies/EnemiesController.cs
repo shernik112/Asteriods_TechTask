@@ -1,6 +1,7 @@
 using Random = UnityEngine.Random;
 using System;
 using Project.Enemies;
+using Project.System.Analytics;
 using Project.UI;
 using UnityEngine;
 using Zenject;
@@ -14,6 +15,7 @@ namespace Project.System
         private readonly PauseHandler _pauseHandler;
         private readonly EnemiesSpawnArea _enemiesSpawnArea;
         private readonly EnemiesSpawner _enemiesSpawner;
+        private readonly AnalyticsHandler _analyticsHandler;
 
         private float _lastTimeAsteroid;
         private float _lastTimeUfo;
@@ -26,11 +28,13 @@ namespace Project.System
             RestartButton restartButton,
             PauseHandler pauseHandler,
             IInstantiator  container,
-            Transform poolsRoot)
+            Transform poolsRoot,
+            AnalyticsHandler analyticsHandler)
         {
             _data = data;
             _restartButton = restartButton;
             _pauseHandler = pauseHandler;
+            _analyticsHandler = analyticsHandler;
 
             _enemiesSpawnArea = new EnemiesSpawnArea(data, mainCamera);
 
@@ -104,13 +108,22 @@ namespace Project.System
             asteroid.OnHitAsteroid += HandleHitAsteroid;
         }
         
-        private void HandleHitAsteroid(Transform transform) =>
+        private void HandleHitAsteroid(Transform transform)
+        {
             _enemiesSpawner.SpawnFragments(transform);
-            
+            _analyticsHandler.RegisterAsteroidDestroyed();
+        }
+
         private void SpawnUfo()
         {
             var pos = _enemiesSpawnArea.GetRandomEdgePosition();
-            _enemiesSpawner.SpawnUfo(pos, Quaternion.identity);
+            var obj = _enemiesSpawner.SpawnUfo(pos, Quaternion.identity);
+
+            if (!obj.TryGetComponent<UfoBehaviour>(out var ufo))
+                return;
+
+            ufo.OnHitUfo -= _analyticsHandler.RegisterUfoDestroyed;
+            ufo.OnHitUfo += _analyticsHandler.RegisterUfoDestroyed;
         }
 
         private float GetFloatRange(FloatRange range) =>

@@ -13,6 +13,7 @@ namespace Project.Player
         [field:SerializeField] public float RechargeDuration { get; private set; }
         
         public event Action<int> NewCountShotLaser;
+        public event Action OnLaserUsed;
         
         private int _currentCountShotLaser;
         private float _lastShootTime;
@@ -91,6 +92,7 @@ namespace Project.Player
             _audioHandler.PlaySfx(_laserData.ShootLaser);
             ChangeVisibility(true);
             TurnLaser();
+            OnLaserUsed?.Invoke();
         }
     
         private void Restart()

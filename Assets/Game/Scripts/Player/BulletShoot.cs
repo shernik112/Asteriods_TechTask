@@ -1,3 +1,4 @@
+using System;
 using Random = UnityEngine.Random;
 using Project.System;
 using UnityEngine;
@@ -7,6 +8,8 @@ namespace Project.Player
 {
     public class BulletShoot : MonoBehaviour
     {
+        public event Action OnShoot;
+
         [SerializeField] private AudioClip bulletShotClip;
         [SerializeField] private float instantiateOffset;
         [SerializeField] private float cooldown;
@@ -53,6 +56,7 @@ namespace Project.Player
             var spawnPos = (Vector2)transform.position + (Vector2)transform.up * instantiateOffset;
             obj.transform.position = spawnPos;
             obj.transform.rotation = transform.localRotation;
+            OnShoot?.Invoke();
         }
     }
 }

@@ -1,4 +1,6 @@
 using Project.Player;
+using Project.System.Analytics;
+using Project.System.Analytics.Firebase;
 using Project.UI;
 using UnityEngine;
 using Zenject;
@@ -44,6 +46,8 @@ namespace Project.System
             Container.BindInterfacesAndSelfTo<EnemiesController>().AsSingle();
             Container.BindInterfacesAndSelfTo<HandlerInput>().AsSingle();
             Container.BindInterfacesAndSelfTo<HandlerScore>().AsSingle();
+            Container.BindInterfacesAndSelfTo<FirebaseAnalyticsService>().AsSingle();
+            Container.BindInterfacesAndSelfTo<AnalyticsHandler>().AsSingle();
             
             Container.Bind<Camera>().FromInstance(mainCamera).AsSingle();
         }

@@ -1,3 +1,4 @@
+using System;
 using Project.Player;
 using UnityEngine;
 using Zenject;
@@ -6,6 +7,8 @@ namespace Project.Enemies
 {
     public class UfoBehaviour : BaseEnemy
     {
+        public event Action OnHitUfo;
+
         private PlayerMover _playerMover;
         private Vector2 _targetDir;
 
@@ -25,6 +28,12 @@ namespace Project.Enemies
         private void FixedUpdate()
         {
             Rb.linearVelocity = _targetDir * enemyData.Speed;
+        }
+
+        protected override void HitBullet()
+        {
+            OnHitUfo?.Invoke();
+            Deactivation();
         }
     }
 }

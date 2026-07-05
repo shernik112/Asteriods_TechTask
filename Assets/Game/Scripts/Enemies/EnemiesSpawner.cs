@@ -25,13 +25,15 @@ namespace Project.System
             return obj;
         }
 
-        public void SpawnUfo(Vector2 position, Quaternion rotation)
+        public GameObject SpawnUfo(Vector2 position, Quaternion rotation)
         {
             var obj = _pools.GetUfo();
             PrepareEnemy(obj);
 
             obj.transform.position = position;
             obj.transform.rotation = rotation;
+
+            return obj;
         }
 
         public void SpawnFragments(Transform asteroidTransform)
