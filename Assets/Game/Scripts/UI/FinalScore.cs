@@ -15,16 +15,16 @@ namespace Project.UI
         protected override void Awake()
         {
             base.Awake();
-            _handlerScore.IsFinalScore += ShowFinalScore;
+            _handlerScore.FinalScoreReceived += ShowFinalScoreReceived;
         }
 
         protected override void OnDestroy()
         {
             base.OnDestroy();
-            _handlerScore.IsFinalScore -= ShowFinalScore;
+            _handlerScore.FinalScoreReceived -= ShowFinalScoreReceived;
         }
 
-        private void ShowFinalScore(int count)
+        private void ShowFinalScoreReceived(int count)
         {
             Model.SetCount(count);
         }

@@ -1,5 +1,6 @@
 using Random = UnityEngine.Random;
 using System;
+using System.Collections.Generic;
 using Project.Enemies;
 using Project.System.Analytics;
 using Project.UI;
@@ -10,6 +11,7 @@ namespace Project.System
 {
     public class EnemiesController : IInitializable, ITickable, IDisposable
     {
+        private readonly Dictionary<GameObject, AsteroidBehaviour> _activeAsteroids = new();
         private readonly EnemiesControllerData _data;
         private readonly RestartButton _restartButton;
         private readonly PauseHandler _pauseHandler;
@@ -76,6 +78,12 @@ namespace Project.System
         public void Dispose()
         {
             _restartButton.OnRestartGame -= StartCreate;
+
+            foreach (var asteroid in _activeAsteroids.Values)
+            {
+                asteroid.OnHitAsteroid -= HandleHitAsteroid;
+                asteroid.OnDeactivation -= HandleDeactivationAsteroid;
+            }
         }
 
         private void StartCreate()
@@ -103,9 +111,11 @@ namespace Project.System
 
             if (!obj.TryGetComponent<AsteroidBehaviour>(out var asteroid))
                 return;
+            
+            _activeAsteroids.Add(obj, asteroid);
 
-            asteroid.OnHitAsteroid -= HandleHitAsteroid;
             asteroid.OnHitAsteroid += HandleHitAsteroid;
+            asteroid.OnDeactivation += HandleDeactivationAsteroid;
         }
         
         private void HandleHitAsteroid(Transform transform)
@@ -114,6 +124,14 @@ namespace Project.System
             _analyticsHandler.RegisterAsteroidDestroyed();
         }
 
+        private void HandleDeactivationAsteroid(GameObject obj)
+        {
+            if (!_activeAsteroids.Remove(obj, out var asteroid))
+                return;
+            
+            asteroid.OnHitAsteroid -= HandleHitAsteroid;
+            asteroid.OnDeactivation -= HandleDeactivationAsteroid;
+        }
         private void SpawnUfo()
         {
             var pos = _enemiesSpawnArea.GetRandomEdgePosition();

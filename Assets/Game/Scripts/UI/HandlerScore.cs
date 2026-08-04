@@ -1,12 +1,14 @@
 using Zenject;
 using System;
+using JetBrains.Annotations;
 using Project.Player;
 
 namespace Project.UI
 {
+    [UsedImplicitly]
     public class HandlerScore : IInitializable, IDisposable
     {
-        public event Action<int> IsFinalScore;
+        public event Action<int> FinalScoreReceived;
         public event Action<int> IsRecordScore;
         public event Action<int> NewTargetScore;
 
@@ -40,7 +42,7 @@ namespace Project.UI
 
         private void ResetCount()
         {
-            IsFinalScore?.Invoke(_targetScore);
+            FinalScoreReceived?.Invoke(_targetScore);
 
             if (_targetScore > _record)
             {

@@ -11,7 +11,6 @@ namespace Project.UI
         
         private HandlerScore _handlerScore;
         private CancellationTokenSource _counterCts;
-        private Coroutine _currentCoroutine;
         
         [Inject]
         public void Init(HandlerScore handlerScore) =>

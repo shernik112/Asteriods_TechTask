@@ -9,16 +9,16 @@ namespace Project.System
 
     public class HandlerGameCondition
     {
-        private GameCondition _currenGameCondition = GameCondition.Game;
-        private BlockCursor _blockCursor = new BlockCursor();
+        private GameCondition _currentGameCondition = GameCondition.Game;
+        private readonly BlockCursor _blockCursor = new BlockCursor();
 
         public GameCondition GameCondition
         {
             set
             {
-                if (_currenGameCondition == value) 
+                if (_currentGameCondition == value) 
                     return;
-                _currenGameCondition = value;
+                _currentGameCondition = value;
                 HandleNewCondition();
             }
         }
@@ -27,6 +27,6 @@ namespace Project.System
             HandleNewCondition();
 
         private void HandleNewCondition() =>
-            _blockCursor.SetCursorCondition(_currenGameCondition == GameCondition.Game);
+            _blockCursor.SetCursorCondition(_currentGameCondition == GameCondition.Game);
     }
 }
