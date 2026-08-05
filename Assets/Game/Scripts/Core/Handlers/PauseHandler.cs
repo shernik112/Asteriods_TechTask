@@ -10,23 +10,27 @@ namespace Project.System
     {
         public bool IsPause { get; private set; }
 
-        private PlayerDeathHandler _deathHandler;
-        private RestartButton _restartButton;
-
-        [Inject]
-        public void Construct(
+        private readonly PlayerDeathHandler _deathHandler;
+        private readonly RestartButton _restartButton;
+        private readonly BlockCursor _blockCursor;
+        
+        public PauseHandler(
             PlayerDeathHandler deathHandler,
-            RestartButton restartButton
+            RestartButton restartButton,
+            BlockCursor blockCursor
         )
         {
             _deathHandler = deathHandler;
             _restartButton = restartButton;
+            _blockCursor = blockCursor;
         }
 
         public void Initialize()
         {
             _restartButton.OnRestartGame += TogglePause;
             _deathHandler.OnHitPlayer += TogglePause;
+            
+            _blockCursor.SetLocked(!IsPause);
         }
 
         public void Dispose()
@@ -37,8 +41,11 @@ namespace Project.System
 
         private void TogglePause()
         {
-                IsPause = !IsPause;
+            IsPause = !IsPause;
+            
+            _blockCursor.SetLocked(!IsPause);
             Debug.Log($"{typeof(PauseHandler)} {IsPause}");
         }
+        
     }
 }

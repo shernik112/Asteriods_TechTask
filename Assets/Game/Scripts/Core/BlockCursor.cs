@@ -4,18 +4,12 @@ namespace Project.System
 {
     public class BlockCursor
     {
-        public void SetCursorCondition(bool isLock)
+        public void SetLocked(bool isLocked)
         {
-            if (isLock)
-            {
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-            }
-            else
-            {
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-            }
+            Cursor.lockState = isLocked 
+                ? CursorLockMode.Locked 
+                : CursorLockMode.None;
+            Cursor.visible = !isLocked;
         }
     }
 }

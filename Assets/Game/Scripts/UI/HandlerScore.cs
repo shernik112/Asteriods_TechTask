@@ -2,6 +2,7 @@ using Zenject;
 using System;
 using JetBrains.Annotations;
 using Project.Player;
+using Project.System;
 
 namespace Project.UI
 {
@@ -13,16 +14,16 @@ namespace Project.UI
         public event Action<int> NewTargetScore;
 
         private const string RecordKey = "record";
-        private readonly SaveService _saveService = new ();
-
-        private PlayerDeathHandler _deathHandler;
+        private readonly ISaveService _saveService;
+        private readonly PlayerDeathHandler _deathHandler;
+        
         private int _record;
         private int _targetScore;
 
-        [Inject]
-        public void Construct(PlayerDeathHandler deathHandler)
+        public HandlerScore(PlayerDeathHandler deathHandler, ISaveService saveService)
         {
             _deathHandler = deathHandler;
+            _saveService = saveService;
         }
 
         public void Initialize()

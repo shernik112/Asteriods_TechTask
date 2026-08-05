@@ -1,9 +1,10 @@
 using System;
+using Project.System;
 using UnityEngine;
 
 namespace Project.UI
 {
-    public class SaveService
+    public class SaveService : ISaveService
     {
         public void Save(string key, int value)
         {

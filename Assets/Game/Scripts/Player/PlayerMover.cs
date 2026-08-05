@@ -10,8 +10,9 @@ namespace Project.Player
         private PlayerData _data;
         private PauseHandler _pauseHandler;
         private Vector2 _input;
-
-        public Rigidbody2D Rb { get; private set; }
+        private Rigidbody2D _rb;
+        
+        public Vector2 GetLinearVelocity() => _rb.linearVelocity;
 
         [Inject]
         public void Construct(PlayerData data, PauseHandler pauseHandler)
@@ -22,7 +23,7 @@ namespace Project.Player
         
         private void Awake()
         {
-            Rb = GetComponent<Rigidbody2D>();
+            _rb = GetComponent<Rigidbody2D>();
         }
 
         public void SetInput(Vector2 input) => 
@@ -33,15 +34,15 @@ namespace Project.Player
             if (_pauseHandler.IsPause)
                 return;
 
-            Rb.angularVelocity = Mathf.MoveTowards(
-                Rb.angularVelocity,
+            _rb.angularVelocity = Mathf.MoveTowards(
+                _rb.angularVelocity,
                 -_input.x * _data.RotateSpeed,
                 _data.RotateAcceleration * Time.fixedDeltaTime);
 
             Vector2 targetVelocity = transform.up * _input.y * _data.MoveSpeed;
 
-            Rb.linearVelocity = Vector2.MoveTowards(
-                Rb.linearVelocity,
+            _rb.linearVelocity = Vector2.MoveTowards(
+                _rb.linearVelocity,
                 targetVelocity,
                 _data.MoveAcceleration * Time.fixedDeltaTime);
         }
@@ -49,8 +50,8 @@ namespace Project.Player
         public void Stop()
         {
             _input = Vector2.zero;
-            Rb.linearVelocity = Vector2.zero;
-            Rb.angularVelocity = 0f;
+            _rb.linearVelocity = Vector2.zero;
+            _rb.angularVelocity = 0f;
         }
     }
 }

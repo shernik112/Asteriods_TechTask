@@ -8,14 +8,12 @@ namespace Project.UI
     {
         [field:SerializeField] public int ShowTimeMs { get; private set; }
         
-        private HandlerGameCondition _handlerGameCondition;
         private CanvasGroup _cg;
         private bool _isShowNow;
         
         private void Awake()
         {
             _cg = GetComponent<CanvasGroup>();
-            _handlerGameCondition = new HandlerGameCondition();
         }
         
         public void SmoothShow()
@@ -26,7 +24,6 @@ namespace Project.UI
             var targetAlpha = _isShowNow ? 1f : 0f;
             _cg.interactable = _isShowNow;
             _cg.blocksRaycasts = _isShowNow;
-            _handlerGameCondition.GameCondition = _isShowNow ? GameCondition.Menu : GameCondition.Game;
             Tween.CanvasGroupAlpha(_cg, startAlpha, targetAlpha, ShowTimeMs, 0f,Tween.EaseInOut);
         }
     }

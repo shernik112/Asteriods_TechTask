@@ -10,7 +10,7 @@ namespace Project.UI
         public string Text { get; private set; }
         public Vector2 PlayerPosition => _mover.transform.position;
         public Quaternion PlayerRotation => _mover.transform.rotation;
-        public Rigidbody2D PlayerRigidbody => _mover.Rb;
+        public Vector2 PlayerLinearVelocity => _mover.GetLinearVelocity();
         public ShootLaser PlayerLaser => _laser;
 
         private readonly PlayerMover _mover;

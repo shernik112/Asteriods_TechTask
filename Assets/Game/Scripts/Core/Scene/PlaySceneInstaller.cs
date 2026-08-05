@@ -14,12 +14,11 @@ namespace Project.System
         [SerializeField] private GameObject transitionPrefab;
         [SerializeField] private GameObject bulletPrefab;
         [SerializeField] private GameObject borderPrefab;
+        [SerializeField] private PlacementBorder placementBorderPrefab;
         [SerializeField] private Camera mainCamera;
         [SerializeField] private EnemiesControllerData enemiesControllerData;
         [SerializeField] private LaserData laserData;
         [SerializeField] private PlayerData playerData;
-        
-        [SerializeField] private GameObject[] prefabs;
     
         public override void InstallBindings()
         {
@@ -35,13 +34,15 @@ namespace Project.System
             Container.Bind<LaserData>().FromInstance(laserData);
             Container.Bind<PlayerData>().FromInstance(playerData);
             
-            Container.Bind<Transform>().FromInstance(transform).AsSingle();
-            Container.BindInterfacesAndSelfTo<ObjectPool>().WithArguments(bulletPrefab, transform).WhenInjectedInto<BulletShoot>();
+            Container.Bind<Transform>().FromInstance(transform).WhenInjectedInto<EnemiesController>();
+            Container.BindInterfacesAndSelfTo<ObjectPool>().AsSingle().WithArguments(bulletPrefab, transform).WhenInjectedInto<BulletShoot>();
   
             
             Container.Bind<GameObject>().FromInstance(bulletPrefab).WhenInjectedInto<BulletShoot>();
             Container.Bind<GameObject>().FromInstance(borderPrefab).WhenInjectedInto<PlacementBorder>();
-            
+
+            Container.Bind<ISaveService>().To<SaveService>().AsTransient();
+            Container.Bind<BlockCursor>().AsTransient();
             Container.BindInterfacesAndSelfTo<PauseHandler>().AsSingle();
             Container.BindInterfacesAndSelfTo<EnemiesController>().AsSingle();
             Container.BindInterfacesAndSelfTo<HandlerInput>().AsSingle();
@@ -50,14 +51,8 @@ namespace Project.System
             Container.BindInterfacesAndSelfTo<AnalyticsHandler>().AsSingle();
             
             Container.Bind<Camera>().FromInstance(mainCamera).AsSingle();
-        }
 
-        public override void Start()
-        {
-            foreach (var prefab in prefabs)
-            {
-                Container.InstantiatePrefab(prefab);
-            }
+            Container.Bind<PlacementBorder>().FromComponentInNewPrefab(placementBorderPrefab).AsSingle().NonLazy();
         }
     }
 }

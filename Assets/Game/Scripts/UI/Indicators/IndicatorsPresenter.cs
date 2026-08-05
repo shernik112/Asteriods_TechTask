@@ -29,7 +29,7 @@ namespace Project.UI
             _sb.Clear();
             _sb.AppendLine($"Position(X:{_model.PlayerPosition.x:F2}  Y:{_model.PlayerPosition.y:F2})");
             _sb.AppendLine($"Rotation({_model.PlayerRotation.eulerAngles.z:F2})");
-            _sb.AppendLine($"Velocity(X:{_model.PlayerRigidbody.linearVelocity.x:F2}  Y:{_model.PlayerRigidbody.linearVelocity.y:F2})");
+            _sb.AppendLine($"Velocity(X:{_model.PlayerLinearVelocity.x:F2}  Y:{_model.PlayerLinearVelocity.y:F2})");
             _sb.AppendLine($"Count Laser Shots({_model.PlayerLaser.CurrentCountShotLaser})");
             _sb.AppendLine($"Recharge Time({_model.LaserRechargeLeft:F2})");
 
