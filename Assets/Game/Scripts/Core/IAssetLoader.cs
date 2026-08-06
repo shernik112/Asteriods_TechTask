@@ -9,7 +9,7 @@ namespace Project.System
     {
         UniTask<GameObject> LoadAssetAsync(
             AssetReferenceGameObject assetReference,
-            CancellationToken token);
+            CancellationToken cancellationToken);
 
         void ReleaseAll();
     }
