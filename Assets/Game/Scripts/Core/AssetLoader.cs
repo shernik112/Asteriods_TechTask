@@ -8,7 +8,7 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace Project.System
 {
-    public class AssetLoader : IAssetLoader
+    public class AssetLoader : IAssetLoader, IDisposable
     {
         private readonly List<AsyncOperationHandle> _handles = new();
         
@@ -25,6 +25,9 @@ namespace Project.System
             return prefab;
         }
 
+        public void Dispose() 
+            => ReleaseAll();
+        
         public void ReleaseAll()
         {
             foreach (var handle in _handles)

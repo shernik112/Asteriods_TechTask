@@ -10,8 +10,8 @@ namespace Project.System
         
         [Header("Player")]
         [field: SerializeField] private AssetReferenceGameObject player;
-        [field: SerializeField] private AssetReferenceGameObject playerBullet;
-        [field: SerializeField] private AssetReferenceGameObject playerLaser;
+        [field: SerializeField] private AssetReferenceGameObject bullet;
+        [field: SerializeField] private AssetReferenceGameObject laser;
 
         [Header("Enemies")]
         [field: SerializeField] private AssetReferenceGameObject asteroidPrefab;
@@ -23,14 +23,17 @@ namespace Project.System
         [field: SerializeField] private AssetReferenceGameObject border;
         [field: SerializeField] private AssetReferenceGameObject placementBorder;
         [field: SerializeField] private AssetReferenceGameObject transition;
+        
+        [Header("PlayScene")]
+        [field: SerializeField] public AssetReference PlayScene { get; private set;}
 
         public IEnumerable<AssetReferenceInfo> GetAllAssetReferences()
         {
             return new AssetReferenceInfo[]
             {
                 new(AssetId.Player, player),
-                new(AssetId.PlayerBullet, playerBullet),
-                new(AssetId.PlayerLaser, playerLaser),
+                new(AssetId.Bullet, bullet),
+                new(AssetId.Laser, laser),
 
                 new(AssetId.Asteroid, asteroidPrefab),
                 new(AssetId.FragmentAsteroid, fragmentAsteroidPrefab),
@@ -41,15 +44,14 @@ namespace Project.System
                 new(AssetId.PlacementBorder, placementBorder),
                 new(AssetId.Transition, transition)
             };
-            
         }
     }
     
     public enum AssetId
     {
         Player,
-        PlayerBullet,
-        PlayerLaser,
+        Bullet,
+        Laser,
 
         Asteroid,
         FragmentAsteroid,
