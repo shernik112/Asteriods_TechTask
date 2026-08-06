@@ -13,61 +13,67 @@ MonoBehaviour:
   m_Name: AssetConfig
   m_EditorClassIdentifier: Assembly-CSharp::Project.System.AssetConfig
   player:
-    m_AssetGUID: 
+    m_AssetGUID: 291270eb6b01bae42ba3fddef2e7df42
     m_SubObjectName: 
     m_SubObjectType: 
     m_SubObjectGUID: 
     m_EditorAssetChanged: 0
-  playerBullet:
-    m_AssetGUID: 
+  bullet:
+    m_AssetGUID: 03167c7ca000e5e459ef335ed3caf741
     m_SubObjectName: 
     m_SubObjectType: 
     m_SubObjectGUID: 
     m_EditorAssetChanged: 0
-  playerLaser:
-    m_AssetGUID: 
+  laser:
+    m_AssetGUID: dcbe943058ab0ac47b17f57ea858d7e0
     m_SubObjectName: 
     m_SubObjectType: 
     m_SubObjectGUID: 
     m_EditorAssetChanged: 0
   asteroidPrefab:
-    m_AssetGUID: 
+    m_AssetGUID: 332e3cdb502a4a44a889bda641980f91
     m_SubObjectName: 
     m_SubObjectType: 
     m_SubObjectGUID: 
     m_EditorAssetChanged: 0
   fragmentAsteroidPrefab:
-    m_AssetGUID: 
+    m_AssetGUID: 0a58b4c23363b8945aa5a08a2cb07443
     m_SubObjectName: 
     m_SubObjectType: 
     m_SubObjectGUID: 
     m_EditorAssetChanged: 0
   ufoPrefab:
-    m_AssetGUID: 
+    m_AssetGUID: 5bfe4a59da5cda4489fbb8f8d42d71c1
     m_SubObjectName: 
     m_SubObjectType: 
     m_SubObjectGUID: 
     m_EditorAssetChanged: 0
   audioHandler:
-    m_AssetGUID: 
+    m_AssetGUID: c68d6fcf0495ae441ba51dec039cee92
     m_SubObjectName: 
     m_SubObjectType: 
     m_SubObjectGUID: 
     m_EditorAssetChanged: 0
   border:
-    m_AssetGUID: 
+    m_AssetGUID: 65f22abc5497de945a4cb4957dc0b77b
     m_SubObjectName: 
     m_SubObjectType: 
     m_SubObjectGUID: 
     m_EditorAssetChanged: 0
   placementBorder:
-    m_AssetGUID: 
+    m_AssetGUID: 498da90f143b7004b8c706acd05b1576
     m_SubObjectName: 
     m_SubObjectType: 
     m_SubObjectGUID: 
     m_EditorAssetChanged: 0
   transition:
-    m_AssetGUID: 
+    m_AssetGUID: 24d8b2b68611b3845bee0dd90499e033
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  <PlayScene>k__BackingField:
+    m_AssetGUID: 8c9cfa26abfee488c85f1582747f6a02
     m_SubObjectName: 
     m_SubObjectType: 
     m_SubObjectGUID: 

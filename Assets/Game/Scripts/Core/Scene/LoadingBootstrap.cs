@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Zenject;
 
 namespace Project.System
@@ -11,21 +12,31 @@ namespace Project.System
         private AssetConfig _assetConfig;
         private IAssetLoader _assetLoader;
         private AssetProvider _assetProvider;
+        private ISceneLoader _sceneLoader;
 
         [Inject]
         public void Construct(
             AssetConfig assetConfig,
             IAssetLoader assetLoader,
+            ISceneLoader sceneLoader,
             AssetProvider assetProvider)
         {
             _assetConfig = assetConfig;
             _assetLoader = assetLoader;
+            _sceneLoader = sceneLoader;
             _assetProvider = assetProvider;
         }
         
         private void Start()
         {
-            LoadAllAssetsAsync(destroyCancellationToken).Forget();
+            BootstrapAsync(destroyCancellationToken).Forget();
+        }
+
+        private async UniTask BootstrapAsync(CancellationToken ct)
+        {
+            await LoadAllAssetsAsync(ct);
+
+            await _sceneLoader.LoadSceneAsync(_assetConfig.PlayScene, LoadSceneMode.Single, ct);
         }
 
         private async UniTask LoadAllAssetsAsync(CancellationToken ct)

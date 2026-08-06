@@ -18,7 +18,7 @@ namespace Project.System
             if (assetReference.Asset == null)
                 throw new NullReferenceException("Asset reference is null");
             
-            var handle = Addressables.LoadAssetAsync<GameObject>(assetReference.RuntimeKey);
+            var handle = Addressables.LoadAssetAsync<GameObject>(assetReference);
             var prefab = await handle.ToUniTask(cancellationToken: cancellationToken);
 
             _handles.Add(handle);
