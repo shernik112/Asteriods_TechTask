@@ -15,7 +15,7 @@ namespace Project.System
         public async UniTask<GameObject> LoadAssetAsync(AssetReferenceGameObject assetReference,
             CancellationToken cancellationToken)
         {
-            if (assetReference.Asset == null)
+            if (assetReference == null)
                 throw new NullReferenceException("Asset reference is null");
             
             var handle = Addressables.LoadAssetAsync<GameObject>(assetReference);
