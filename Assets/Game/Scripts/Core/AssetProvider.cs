@@ -10,13 +10,13 @@ namespace Project.System
     {
         private readonly Dictionary<AssetId, GameObject> _prefabs = new();
 
-        public void  AddPrefab(AssetId assetId, GameObject prefab)
+        public void  AddPrefab(LoadedAsset loadedAsset)
         {
-            if (prefab == null)
+            if (loadedAsset.Prefab == null)
                 return;
             
-            if (!_prefabs.TryAdd(assetId, prefab))
-                throw new InvalidOperationException($"Asset {assetId} already saved.");
+            if (!_prefabs.TryAdd(loadedAsset.Id, loadedAsset.Prefab))
+                throw new InvalidOperationException($"Asset {loadedAsset.Id} already saved.");
         }
 
         public GameObject GetPrefab(AssetId assetId)
